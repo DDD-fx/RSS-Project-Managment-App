@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-content>
+    <form (submit)="onSignUp()" [formGroup]="regForm">
+      <h2>Sign Up</h2>
+      <mat-form-field class="login-block">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="!regForm.get('name')?.value">
+          Please enter your name
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="login-block">
+        <mat-label>Login</mat-label>
+        <input matInput formControlName="login">
+        <mat-error *ngIf="!regForm.get('login')?.value">
+          Please enter a login
+        </mat-error>
+        <mat-error *ngIf="regForm.get('login')?.invalid && regForm.get('login')?.value">
+          The login must contain at least 3 symbols
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="password-block">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password">
+        <mat-error *ngIf="!regForm.get('password')?.value">
+          Please enter a password
+        </mat-error>
+        <mat-error *ngIf="regForm.get('password')?.value">
+          <div *ngIf="checkErrorsLength(regForm.get('password')?.errors) > 0">
+            Your password isn't strong enough:
+            <ul>
+              <li *ngIf="regForm.get('password')?.errors?.['invalidLength']">
+                has to contain at least 8 characters
+              </li>
+              <li *ngIf="regForm.get('password')?.errors?.['invalidUpperLower']">
+                has to be a mixture of both uppercase and lowercase letters
+              </li>
+              <li *ngIf="regForm.get('password')?.errors?.['invalidSpecialSymbol']">
+                has to contain at least one special character, e.g., ! @ # ? $
+              </li>
+              <li *ngIf="regForm.get('password')?.errors?.['invalidNums']">
+                has to contain at least one number
+              </li>
+            </ul>
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="login-block">
+        <mat-label>Repeat Password</mat-label>
+        <input matInput formControlName="confirmPassword">
+        <mat-error *ngIf="!regForm.get('confirmPassword')?.value">
+          Please repeat password
+        </mat-error>
+        <mat-error *ngIf="regForm.get('confirmPassword')?.errors?.['invalidMatch'] && regForm.get('confirmPassword')?.value">
+          Passwords do not match
+        </mat-error>
+      </mat-form-field>
+
+      <div class="login-btn-wrapper">
+<!--        <a class="registration-link" href="#">Registration</a>-->
+        <button mat-raised-button color="primary" [disabled]="regForm.invalid">Sign Up</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
