@@ -25,7 +25,7 @@ export class RegFormComponent extends ValidationAbstract {
     super();
   }
 
-  onSignIn() {
+  onSignUp() {
     if (this.regForm.valid) {
       // localStorage.setItem('token', 'test-token');
       // this.authService.onLogIn();
