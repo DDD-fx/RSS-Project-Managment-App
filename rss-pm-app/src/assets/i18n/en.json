@@ -1,0 +1,36 @@
+{
+  "header": {
+    "signIn-btn": "Sign In",
+    "signUp-btn": "Sign Up"
+  },
+  "signIn-form": {
+    "title": "Log In",
+    "login": "Login",
+    "login-errors": {
+      "empty-login": "Please enter a login",
+      "short-login": "The login must contain at least 3 symbols"
+    },
+    "password": "Password",
+    "password-errors": {
+      "empty-password": "Please enter a password",
+      "not-strong": "Your password isn't strong enough:",
+      "8-chars": "has to contain at least 8 characters",
+      "mixture": "has to be a mixture of both uppercase and lowercase letters",
+      "special-chars": "has to contain at least one special character, e.g., ! @ # ? $",
+      "nums": "has to contain at least one number"
+    },
+    "registration-btn": "Registration",
+    "login-btn": "Sign In"
+  },
+  "signUp-form": {
+    "title": "Sign Up",
+    "name": "Name",
+    "no-name-error": "Please enter your name",
+    "repeat-password": "Repeat Password",
+    "password-errors": {
+      "repeat-password": "Please repeat password",
+      "no-match":"Passwords do not match"
+    },
+    "signUp-btn": "Sign Up"
+  }
+}
