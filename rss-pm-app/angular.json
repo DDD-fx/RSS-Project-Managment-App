@@ -118,6 +118,7 @@
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "analytics": "da3f3f63-986e-4a78-93a7-874e82c0fe86"
   }
 }

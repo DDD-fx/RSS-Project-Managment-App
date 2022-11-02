@@ -1,0 +1,14 @@
+footer {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(0, 128, 64);
+    img{
+        width: 150px;
+    }
+    a{
+        color: antiquewhite;
+        text-decoration: none;
+    }
+}
