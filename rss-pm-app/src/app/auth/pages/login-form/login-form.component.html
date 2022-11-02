@@ -1,39 +1,41 @@
 <mat-card>
   <mat-card-content>
     <form (submit)="onLogIn()" [formGroup]="loginForm">
-      <h2>Log In</h2>
-      <mat-form-field class="login-block">
-        <mat-label>Login</mat-label>
+      <h2>{{'signIn-form.title' | translate}}</h2>
+      <mat-form-field>
+        <mat-label>{{'signIn-form.login' | translate}}</mat-label>
         <input matInput formControlName="login">
         <mat-error *ngIf="!loginForm.get('login')?.value">
-          Please enter a login
+          {{'signIn-form.login-errors.empty-login' | translate}}
         </mat-error>
         <mat-error *ngIf="loginForm.get('login')?.invalid && loginForm.get('login')?.value">
-          The login must contain at least 3 symbols
+          {{'signIn-form.login-errors.short-login' | translate}}
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="password-block">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password">
+      <mat-form-field>
+        <mat-label>{{'signIn-form.password' | translate}}</mat-label>
+        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
         <mat-error *ngIf="!loginForm.get('password')?.value">
-          Please enter a password
+          {{'signIn-form.password-errors.empty-password' | translate}}
         </mat-error>
         <mat-error *ngIf="loginForm.get('password')?.value">
           <div *ngIf="checkErrorsLength(loginForm.get('password')?.errors) > 0">
-            Your password isn't strong enough:
+            {{'signIn-form.password-errors.not-strong' | translate}}
             <ul>
               <li *ngIf="loginForm.get('password')?.errors?.['invalidLength']">
-                has to contain at least 8 characters
+                {{'signIn-form.password-errors.8-chars' | translate}}
               </li>
               <li *ngIf="loginForm.get('password')?.errors?.['invalidUpperLower']">
-                has to be a mixture of both uppercase and lowercase letters
+                {{'signIn-form.password-errors.mixture' | translate}}
               </li>
               <li *ngIf="loginForm.get('password')?.errors?.['invalidSpecialSymbol']">
-                has to contain at least one special character, e.g., ! @ # ? $
+                {{'signIn-form.password-errors.special-chars' | translate}}
               </li>
               <li *ngIf="loginForm.get('password')?.errors?.['invalidNums']">
-                has to contain at least one number
+                {{'signIn-form.password-errors.nums' | translate}}
               </li>
             </ul>
           </div>
@@ -41,8 +43,8 @@
       </mat-form-field>
 
       <div class="login-btn-wrapper">
-        <a class="registration-link" href="#">Registration</a>
-        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+        <a [routerLink]="['/signUp']" class="registration-link">{{'signIn-form.registration-btn' | translate}}</a>
+        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">{{'signIn-form.login-btn' | translate}}</button>
       </div>
     </form>
   </mat-card-content>

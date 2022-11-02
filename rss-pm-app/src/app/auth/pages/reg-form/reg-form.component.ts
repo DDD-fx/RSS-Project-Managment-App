@@ -11,6 +11,8 @@ import { ValidationAbstract } from '../../validation-abstract';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegFormComponent extends ValidationAbstract {
+  public hide = true;
+
   public regForm = new FormGroup(
     {
       name: new FormControl('', Validators.required),
