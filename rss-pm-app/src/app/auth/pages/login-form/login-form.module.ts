@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginFormComponent } from './login-form.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [LoginFormComponent],
@@ -18,6 +20,8 @@ import { LoginFormComponent } from './login-form.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    TranslateModule,
+    MatIconModule,
   ],
 })
 export class LoginFormModule {}

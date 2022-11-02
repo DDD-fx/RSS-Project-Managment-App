@@ -11,6 +11,8 @@ import { ValidationAbstract } from '../../validation-abstract';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent extends ValidationAbstract {
+  public hide = true;
+
   public loginForm = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.minLength(3)]),
     password: new FormControl('', [Validators.required, this.passwordValidator]),
