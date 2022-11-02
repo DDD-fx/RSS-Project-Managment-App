@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.background {
+  background-color: $green;
+}
+
+.about-container{
+  max-width: 1440px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.img-container {
+  width: 50%;
+  img {
+    width: 100%;
+  }
+}
+
+.left-container{
+  width: 50%;
+  @include flex-center();
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  list-style-type: none;
+  gap: 20px;
+  color: $blue;
+}
+
+li {
+  animation-name: bubbly;
+  animation-duration: calc(var(--i) * 1s);
+  animation-fill-mode:forwards;
+  animation-timing-function:ease-in-out;  
+}
+
+/* keyframes for titles*/
+@keyframes bubbly {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.text-container p {
+  line-height: 1.2;
+  font-size: 1.5rem;
+  text-indent: 1.5em;
+  padding: 5px;
+  text-align: justify;
+}
+
+/* rss school style*/
+.rss-content {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  flex-direction: column; 
+  padding: 1rem;
+  color: $white;
+  font-size: 20px;
+  .rss-title {
+    font-size: 25px;
+    margin: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    a {
+      text-decoration: none;
+      color: $white;
+      &:hover {
+        font-weight: bold;
+        transform: scale(1.2);
+      }    
+    }
+  } 
+  p {    
+    color: $black;
+  }  
+}
+
+.animation-box {
+  @include flex-center();
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* keyframes for rss-school*/
+@keyframes fadeInUp {
+  from {
+      transform: translate3d(0,40px,0)
+  }
+  to {
+      transform: translate3d(0,0,0);
+      opacity: 1
+  }
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+      transform: translate3d(0,40px,0)
+  }
+  to {
+      transform: translate3d(0,0,0);
+      opacity: 1
+  }
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+  opacity: 0
+}
+
+.fadeInUp {
+  opacity: 0;
+  animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
+}
+
+/* uor team styles*/
+.team-container {
+  max-width: 1440px;
+  margin: auto;
+}
+
+.container.our-team {
+  font-size: 2rem;
+}
+
+.about-team {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1440px;
+  margin: 2rem auto;
+}
