@@ -1,6 +1,6 @@
 export interface IMember {
   name: string;
   git: string;
-  discription: string;
+  description: string;
   img: string;
 }

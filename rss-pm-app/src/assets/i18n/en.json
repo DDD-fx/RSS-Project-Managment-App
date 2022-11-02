@@ -32,5 +32,45 @@
       "no-match":"Passwords do not match"
     },
     "signUp-btn": "Sign Up"
+  },
+  "welcome": {
+    "aboutTitle": "is an application that helps people achieve their goals.
+                  RSS PM is great for organizing your to-do lists, ideas, and is very easy to use.
+                  You can create several boards to use for various projects.",
+    "button": "Try it",
+    "rssTitle": "Online Angular Course from the community ",
+    "rssAbout": {
+      "1": "RS School is free-of-charge and community-based education program conducted by The Rolling Scopes developer community since 2013.",
+      "2": "Required before the start:",
+      "3": "understanding the concept of "    
+      },
+    "rssBenefits": {
+      "1": "Free-of-charge learning",
+      "2": "Open to everyone",
+      "3": "Certificate"
+    },
+    "team": {
+      "1": "O",
+      "2": "U",
+      "3": "R",
+      "4": " ",
+      "5": " ",
+      "6": "T",
+      "7": "E",
+      "8": "A",
+      "9": "M",
+    },
+    "memberDescription": {
+      "d": "Team lead, front-end web developer",
+      "a": "Team member, front-end web developer",
+      "i": "Team member, front-end web developer"
+    }
+  },
+  "footer": {
+    "names": {
+      "d": "Dmitry Khoroshkin",
+      "a": "Aleksandra Smirnova",
+      "i": "Iryna Kolhanova"
+    }
   }
 }

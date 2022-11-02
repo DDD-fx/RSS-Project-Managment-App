@@ -7,21 +7,29 @@ export const nums = /[1234567890]/;
 // export const urlValidationRegex = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 export const team: IMember[] = [
   {
-    name: 'Dmitry Khoroshkin',
+    name: 'd',
     git: 'https://github.com/DDD-fx',
-    discription: 'Team lead, front-end web developer',
-    img: '../../../../assets/img/dima.png',
+    description: 'd',
+    img: 'dima.png',
   },
   {
-    name: 'Smirnova Aleksandra',
+    name: 'a',
     git: 'https://github.com/alexsmirnova13',
-    discription: 'Team member, front-end web developer',
-    img: '../../../../assets/img/sasha.png',
+    description: 'a',
+    img: 'sasha.png',
   },
   {
-    name: 'Iryna Kolhanova',
+    name: 'i',
     git: 'https://github.com/IrynaKolh',
-    discription: 'Team member, front-end web developer',
-    img: '../../../../assets/img/ira.png',
+    description: 'i',
+    img: 'ira.png',
   },
-];
+].map((member:IMember) => {
+  const assetsPath: string = '../../../../assets/img/';
+  return {
+    ...member,
+    img: `${assetsPath}${member.img}`,
+    description: `welcome.memberDescription.${member.description}`,
+    name: `footer.names.${member.name}`,   
+  };
+});
