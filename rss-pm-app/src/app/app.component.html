@@ -1,11 +1,4 @@
-<p>works</p>
-
-<a [routerLink]="['signIn']" class="">
-  <button mat-raised-button color="primary" class="">{{'header.signIn-btn' | translate}}</button>
-</a>
-<a [routerLink]="['signUp']" class="">
-  <button mat-raised-button color="primary" class="">{{'header.signUp-btn' | translate}}</button>
-</a>
-
-<span class="">EN</span><mat-slide-toggle color="primary" (click)="changeLang()">RU</mat-slide-toggle>
+<app-header></app-header>
 <router-outlet></router-outlet>
+<app-footer></app-footer>
+
