@@ -18,7 +18,6 @@ import { CoreModule } from './core/core.module';
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
