@@ -3,8 +3,8 @@ export enum EHttpStatus {
   'Created' = 201,
   'NoContent' = 204,
   'Unauthorized' = 401,
-  'NotFound ' = 404,
-  'UserExists ' = 409,
+  'NotFound' = 404,
+  'UserExists' = 409,
 }
 
 export enum EUrls {
