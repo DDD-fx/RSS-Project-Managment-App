@@ -14,8 +14,6 @@ export class AppComponent {
     translate.use('en');
   }
 
-  title = 'rss-pm-app';
-
   changeLang(): void {
     if (this.translate.currentLang === 'en') {
       this.translate.use('ru');

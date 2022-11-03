@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidationAbstract } from '../../validation-abstract';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',
@@ -23,10 +24,21 @@ export class LoginFormComponent extends ValidationAbstract {
   }
 
   onLogIn() {
-    if (this.loginForm.valid) {
-      // localStorage.setItem('token', 'test-token');
-      // this.authService.onLogIn();
-      void this.router.navigate(['']);
-    }
+    this.authService
+      .onSignIn({
+        login: this.loginForm.get('login')!.value!,
+        password: this.loginForm.get('password')!.value!,
+      })
+      .pipe(
+        tap((resp) => localStorage.setItem('token', resp.token)),
+        tap(() => void this.router.navigate(['']))
+      )
+      .subscribe();
+
+    // if (this.loginForm.valid) {
+    //   localStorage.setItem('token', 'test-token');
+    //   this.authService.onLogIn();
+    //   void this.router.navigate(['']);
+    // }
   }
 }
