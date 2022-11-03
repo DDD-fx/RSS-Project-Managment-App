@@ -24,12 +24,12 @@ export const team: IMember[] = [
     description: 'i',
     img: 'ira.png',
   },
-].map((member:IMember) => {
+].map((member: IMember) => {
   const assetsPath: string = '../../../../assets/img/';
   return {
     ...member,
     img: `${assetsPath}${member.img}`,
     description: `welcome.memberDescription.${member.description}`,
-    name: `footer.names.${member.name}`,   
+    name: `footer.names.${member.name}`,
   };
 });
