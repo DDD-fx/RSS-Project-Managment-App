@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (!request.url.includes('assets')) {
-      console.log(request);
+      // console.log(request);
       const newReq = request.clone({
         url: `${environment.API_URL}/${request.url}`,
       });

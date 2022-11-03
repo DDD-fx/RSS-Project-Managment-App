@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidationAbstract } from '../../validation-abstract';
-import { tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
+import { NotificationService } from '../../../api/notification.service';
+import { ENotificationSources } from '../../../shared/shared.enums';
+import { IHttpErrors } from '../../../api/models/api-models';
 
 @Component({
   selector: 'app-login-form',
@@ -19,7 +22,11 @@ export class LoginFormComponent extends ValidationAbstract {
     password: new FormControl('', [Validators.required, this.passwordValidator]),
   });
 
-  constructor(private readonly router: Router, private readonly authService: AuthService) {
+  constructor(
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly notificationService: NotificationService
+  ) {
     super();
   }
 
@@ -30,15 +37,17 @@ export class LoginFormComponent extends ValidationAbstract {
         password: this.loginForm.get('password')!.value!,
       })
       .pipe(
-        tap((resp) => localStorage.setItem('token', resp.token)),
-        tap(() => void this.router.navigate(['']))
+        tap((resp) => {
+          localStorage.setItem('token', resp.token);
+          this.notificationService.showSuccess(ENotificationSources.signIn);
+          void this.router.navigate(['']);
+        }),
+        catchError((err: IHttpErrors) => {
+          console.log(err);
+          this.notificationService.showError(ENotificationSources.signIn, err);
+          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+        })
       )
       .subscribe();
-
-    // if (this.loginForm.valid) {
-    //   localStorage.setItem('token', 'test-token');
-    //   this.authService.onLogIn();
-    //   void this.router.navigate(['']);
-    // }
   }
 }

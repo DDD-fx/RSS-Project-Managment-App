@@ -11,3 +11,8 @@ export enum EUrls {
   'signin' = 'signin',
   'signup' = 'signup',
 }
+
+export enum ENotificationSources {
+  'signIn',
+  'signUp',
+}
