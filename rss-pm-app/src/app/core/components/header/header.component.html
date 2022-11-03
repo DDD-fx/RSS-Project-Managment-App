@@ -1,0 +1,26 @@
+<header class="header">
+    <a>
+        <img class="header__logo" src="https://cdn-icons-png.flaticon.com/512/567/567014.png">
+    </a>
+    <div class="header__controls">
+        <div class="header__toggle">
+            <span class="">EN</span><mat-slide-toggle color="primary" (click)="changeLang()">RU</mat-slide-toggle>
+        </div>
+        
+        <div>
+            <a [routerLink]="['signIn']" class="">
+                <button mat-raised-button color="primary" class="">{{'header.signIn-btn' | translate}}</button>
+            </a>
+            <a [routerLink]="['signUp']" class="">
+                <button mat-raised-button color="primary" class="">{{'header.signUp-btn' | translate}}</button>
+            </a>
+        </div>
+    </div>
+    
+    
+    
+      
+      
+</header>
+
+
