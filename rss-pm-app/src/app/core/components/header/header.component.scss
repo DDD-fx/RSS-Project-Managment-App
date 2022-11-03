@@ -1,0 +1,21 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(0, 128, 64);
+    &__logo{
+        width: 50px;
+        margin: 10px 20px 10px 20px ;
+    }
+    &__controls{
+        display: flex;
+        flex-direction: row; 
+        width: 300px;
+        justify-content: space-between;
+    }
+    &__toggle{
+        display: flex;
+        align-items: center;
+    }
+}
