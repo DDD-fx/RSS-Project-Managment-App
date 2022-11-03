@@ -40,9 +40,10 @@ export class RegFormComponent extends ValidationAbstract {
           localStorage.setItem('user-id', resp.id);
           localStorage.setItem('user-name', resp.name);
         }),
-        switchMap((resp) => this.authService.onSignIn({ login: resp.login, password: this.authService.password })),
+        switchMap((resp) =>
+          this.authService.onSignIn({ login: resp.login, password: this.regForm.get('password')!.value! })
+        ),
         tap((resp) => {
-          this.authService.password = '';
           localStorage.setItem('token', resp.token);
           void this.router.navigate(['']);
         })

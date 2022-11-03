@@ -10,8 +10,6 @@ import { EUrls } from '../../shared/shared.enums';
 export class AuthService {
   public isLogOut$ = new BehaviorSubject<boolean>(true);
 
-  public password = ''; ////////////
-
   // public userName$ = new BehaviorSubject<string>('Log in');
 
   constructor(private httpClient: HttpClient) {}
@@ -23,7 +21,6 @@ export class AuthService {
 
   onSignUp(data: ISignUpReq): Observable<ISignUpResp> {
     this.isLogOut$.next(false);
-    this.password = data.password; /////////////
     return this.httpClient.post<ISignUpResp>(EUrls.signup, data);
   }
 
