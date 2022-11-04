@@ -10,9 +10,16 @@ export enum EHttpStatus {
 export enum EUrls {
   'signin' = 'signin',
   'signup' = 'signup',
+  'users' = 'users',
 }
 
 export enum ENotificationSources {
   'signIn',
   'signUp',
+}
+
+export enum ELocalStorage {
+  'token' = 'token',
+  'userName' = 'userName',
+  'userId' = 'userId',
 }

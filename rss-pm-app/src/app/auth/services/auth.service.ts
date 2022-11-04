@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ISignInReq, ISignInResp, ISignUpReq, ISignUpResp } from '../../api/models/api-models';
+import { ISignInReq, ISignInResp, ISignUpReq, ISignUpResp } from '../models/auth.model';
 import { HttpClient } from '@angular/common/http';
 import { EUrls } from '../../shared/shared.enums';
 

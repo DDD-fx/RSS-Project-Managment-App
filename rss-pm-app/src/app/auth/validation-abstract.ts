@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { IPassValidationErrors } from './models/validation-errors';
+import { IPassValidationErrors } from './models/validation-errors.model';
 import { lowerCaseSymbols, nums, specialSymbols, upperCaseSymbols } from '../shared/shared.consts';
 
 export abstract class ValidationAbstract {
