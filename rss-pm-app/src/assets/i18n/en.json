@@ -70,5 +70,18 @@
       "a": "Aleksandra Smirnova",
       "i": "Iryna Kolhanova"
     }
+  },
+  "board": {
+    "title": "BOARDS",
+    "label": "Enter board name",
+    "description": "Description",
+    "createBoard": "Create new board",
+    "boardErrors": {
+      "no-name-error": "Board name can't be empty"
+    },
+    "btn": {
+      "create": "Create",
+      "cancel": "Cancel"
+    }
   }
 }
