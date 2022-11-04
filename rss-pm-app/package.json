@@ -27,6 +27,7 @@
     "@ngrx/store-devtools": "^14.3.2",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "ngx-toastr": "^15.2.1",
     "normalize.css": "^8.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

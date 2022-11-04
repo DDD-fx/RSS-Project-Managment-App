@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ISignInReq, ISignInResp, ISignUpReq, ISignUpResp } from '../../api/models/api-models';
+import { HttpClient } from '@angular/common/http';
+import { EUrls } from '../../shared/shared.enums';
 
 @Injectable({
   providedIn: 'root',
@@ -7,16 +10,21 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   public isLogOut$ = new BehaviorSubject<boolean>(true);
 
-  public userName$ = new BehaviorSubject<string>('Log in');
+  // public userName$ = new BehaviorSubject<string>('Log in');
 
-  onLogIn(): void {
+  constructor(private httpClient: HttpClient) {}
+
+  onSignIn(data: ISignInReq): Observable<ISignInResp> {
     this.isLogOut$.next(false);
-    this.userName$.next('Log out');
+    return this.httpClient.post<ISignInResp>(EUrls.signin, data);
+  }
+
+  onSignUp(data: ISignUpReq): Observable<ISignUpResp> {
+    this.isLogOut$.next(false);
+    return this.httpClient.post<ISignUpResp>(EUrls.signup, data);
   }
 
   onLogOut(): void {
-    localStorage.removeItem('token');
-    this.userName$.next('Log in');
     this.isLogOut$.next(true);
   }
 }

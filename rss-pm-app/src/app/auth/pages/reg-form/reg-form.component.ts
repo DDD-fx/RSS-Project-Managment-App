@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ValidationAbstract } from '../../validation-abstract';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-reg-form',
@@ -28,10 +29,25 @@ export class RegFormComponent extends ValidationAbstract {
   }
 
   onSignUp() {
-    if (this.regForm.valid) {
-      // localStorage.setItem('token', 'test-token');
-      // this.authService.onLogIn();
-      void this.router.navigate(['']);
-    }
+    this.authService
+      .onSignUp({
+        name: this.regForm.get('name')!.value!,
+        login: this.regForm.get('login')!.value!,
+        password: this.regForm.get('password')!.value!,
+      })
+      .pipe(
+        tap((resp) => {
+          localStorage.setItem('user-id', resp.id);
+          localStorage.setItem('user-name', resp.name);
+        }),
+        switchMap((resp) =>
+          this.authService.onSignIn({ login: resp.login, password: this.regForm.get('password')!.value! })
+        ),
+        tap((resp) => {
+          localStorage.setItem('token', resp.token);
+          void this.router.navigate(['']);
+        })
+      )
+      .subscribe();
   }
 }

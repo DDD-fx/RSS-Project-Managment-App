@@ -14,6 +14,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CoreModule } from './core/core.module';
+import { interceptorProviders } from './api/interceptors/interceptors';
+import { ToastrModule } from 'ngx-toastr';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -30,7 +32,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     BrowserAnimationsModule,
-    // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -40,8 +41,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
     }),
     CoreModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
-  providers: [],
+  providers: [interceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

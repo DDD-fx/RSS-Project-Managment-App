@@ -64,7 +64,11 @@
       </mat-form-field>
 
       <div class="login-btn-wrapper">
-        <button mat-raised-button color="primary" [disabled]="regForm.invalid">{{'signUp-form.signUp-btn' | translate}}</button>
+        <button mat-raised-button color="primary"
+                type="submit"
+                [disabled]="regForm.invalid">
+          {{'signUp-form.signUp-btn' | translate}}
+        </button>
       </div>
     </form>
   </mat-card-content>

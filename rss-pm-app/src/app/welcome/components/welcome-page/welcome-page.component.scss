@@ -41,7 +41,7 @@ li {
   animation-name: bubbly;
   animation-duration: calc(var(--i) * 1s);
   animation-fill-mode:forwards;
-  animation-timing-function:ease-in-out;  
+  animation-timing-function:ease-in-out;
 }
 
 /* keyframes for titles*/
@@ -73,27 +73,30 @@ li {
   max-width: 1440px;
   margin: auto;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   padding: 1rem;
   color: $white;
   font-size: 20px;
+
   .rss-title {
     font-size: 25px;
-    margin: 1rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 1rem 1rem 2rem;
+
     a {
       text-decoration: none;
       color: $white;
+
       &:hover {
         font-weight: bold;
         transform: scale(1.2);
-      }    
+      }
     }
-  } 
-  p {    
+  }
+
+  p {
     color: $black;
-  }  
+  }
 }
 
 .animation-box {

@@ -44,7 +44,11 @@
 
       <div class="login-btn-wrapper">
         <a [routerLink]="['/signUp']" class="registration-link">{{'signIn-form.registration-btn' | translate}}</a>
-        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">{{'signIn-form.login-btn' | translate}}</button>
+        <button mat-raised-button color="primary"
+                type="submit"
+                [disabled]="loginForm.invalid">
+          {{'signIn-form.login-btn' | translate}}
+        </button>
       </div>
     </form>
   </mat-card-content>
