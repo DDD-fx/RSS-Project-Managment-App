@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidationAbstract } from '../../validation-abstract';
-import { catchError, tap } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs';
 import { NotificationService } from '../../../api/notification.service';
-import { ENotificationSources } from '../../../shared/shared.enums';
-import { IHttpErrors } from '../../../api/models/api-models';
+import { ELocalStorage, ENotificationSources } from '../../../shared/shared.enums';
+import { IHttpErrors } from '../../../api/models/errors.model';
+import { ApiUserService } from '../../../api/services/api-user.service';
+import { findUserByLogin } from '../../../shared/shared.utils';
 
 @Component({
   selector: 'app-login-form',
@@ -25,7 +27,8 @@ export class LoginFormComponent extends ValidationAbstract {
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly apiUserService: ApiUserService
   ) {
     super();
   }
@@ -38,12 +41,17 @@ export class LoginFormComponent extends ValidationAbstract {
       })
       .pipe(
         tap((resp) => {
-          localStorage.setItem('token', resp.token);
+          localStorage.setItem(ELocalStorage.token, resp.token);
           this.notificationService.showSuccess(ENotificationSources.signIn);
           void this.router.navigate(['']);
         }),
+        switchMap(() => this.apiUserService.getAllUsers()),
+        tap((resp) => {
+          const userData = findUserByLogin(resp, this.loginForm.get('login')!.value!);
+          localStorage.setItem(ELocalStorage.userName, userData.name);
+          localStorage.setItem(ELocalStorage.userId, userData.id);
+        }),
         catchError((err: IHttpErrors) => {
-          console.log(err);
           this.notificationService.showError(ENotificationSources.signIn, err);
           throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })

@@ -18,10 +18,3 @@ export interface ISignInReq {
 export interface ISignInResp {
   token: string;
 }
-
-export interface IHttpErrors {
-  error: {
-    message: string;
-    statusCode: number;
-  };
-}

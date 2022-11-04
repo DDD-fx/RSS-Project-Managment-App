@@ -3,7 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ValidationAbstract } from '../../validation-abstract';
-import { switchMap, tap } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs';
+import { IHttpErrors } from '../../../api/models/errors.model';
+import { ELocalStorage, ENotificationSources } from '../../../shared/shared.enums';
+import { NotificationService } from '../../../api/notification.service';
 
 @Component({
   selector: 'app-reg-form',
@@ -24,7 +27,11 @@ export class RegFormComponent extends ValidationAbstract {
     [this.matchValidator('password', 'confirmPassword')]
   );
 
-  constructor(private readonly router: Router, private readonly authService: AuthService) {
+  constructor(
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly notificationService: NotificationService
+  ) {
     super();
   }
 
@@ -37,15 +44,19 @@ export class RegFormComponent extends ValidationAbstract {
       })
       .pipe(
         tap((resp) => {
-          localStorage.setItem('user-id', resp.id);
-          localStorage.setItem('user-name', resp.name);
+          localStorage.setItem(ELocalStorage.userId, resp.id);
+          localStorage.setItem(ELocalStorage.userName, resp.name);
         }),
         switchMap((resp) =>
           this.authService.onSignIn({ login: resp.login, password: this.regForm.get('password')!.value! })
         ),
         tap((resp) => {
-          localStorage.setItem('token', resp.token);
+          localStorage.setItem(ELocalStorage.token, resp.token);
           void this.router.navigate(['']);
+        }),
+        catchError((err: IHttpErrors) => {
+          this.notificationService.showError(ENotificationSources.signUp, err);
+          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe();
