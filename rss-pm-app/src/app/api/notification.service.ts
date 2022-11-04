@@ -33,8 +33,16 @@ export class NotificationService {
     const currLang = this.translate.currentLang;
     switch (notificationSource) {
       case ENotificationSources.signIn:
-        if (currLang === 'en') this.toastr.error('Wrong login or password', `Error code: ${err.error.statusCode}`);
-        else this.toastr.error('Неверное имя пользователя или пароль', `Error code: ${err.error.statusCode}`);
+        if (currLang === 'en')
+          this.toastr.error(
+            'Wrong login or password. Or user with such login does not exist',
+            `Error code: ${err.error.statusCode}`
+          );
+        else
+          this.toastr.error(
+            'Неверное имя пользователя или пароль. Или пользователя с таким логином не существует',
+            `Error code: ${err.error.statusCode}`
+          );
         break;
 
       case ENotificationSources.signUp:
