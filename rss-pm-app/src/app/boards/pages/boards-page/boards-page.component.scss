@@ -1,0 +1,17 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.main-container {
+  height: 100vh;
+  @include margin-center();
+  .title {
+    text-align: center;
+    color: $blue;
+    border-bottom: 2px solid $blue;
+  }
+  .boards-list {
+    @include flex-full-screen();
+    overflow-y: scroll;
+  }
+}
+

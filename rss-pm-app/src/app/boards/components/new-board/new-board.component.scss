@@ -1,0 +1,20 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.toggle{
+  width: 200px;
+  height: 180px;
+}
+
+.create-form {
+  border: 1px solid $lightgrey;
+  padding: 5px;
+}
+
+.board-btn-wrapper {
+  @include flex-center();
+  gap: 10px;
+  .mat-button:hover {
+    border: 1px solid $black;
+  }
+}
