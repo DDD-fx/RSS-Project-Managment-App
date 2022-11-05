@@ -1,6 +1,6 @@
 import { IGetAllUsersResp } from '../api/models/api-user.model';
 import { ISignUpResp } from '../auth/models/auth.model';
-import { ELocalStorage } from './shared.enums';
+import { EHttpParams, ELocalStorage } from './shared.enums';
 import { HttpParams } from '@angular/common/http';
 
 export function findUserByLogin(users: IGetAllUsersResp, login: string): ISignUpResp {
@@ -14,10 +14,14 @@ export function getUserId(): string {
 }
 
 export function createHttpParams(param: string) {
-  if (param === 'id') {
-    return new HttpParams({
-      fromObject: { id: getUserId() },
-    });
+  switch (param) {
+    case EHttpParams.userId:
+      return new HttpParams({ fromObject: { id: getUserId() } });
+
+    case EHttpParams.boardId:
+      return new HttpParams({ fromObject: { id: getUserId() } }); //getBoardId
+
+    default:
+      return new HttpParams({});
   }
-  return new HttpParams({});
 }
