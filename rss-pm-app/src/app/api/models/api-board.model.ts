@@ -24,4 +24,10 @@ export interface ITask {
   order: number;
   description: string;
   userId: string;
+  files: IFile[];
+}
+
+export interface IFile {
+  filename: string;
+  fileSize: number;
 }
