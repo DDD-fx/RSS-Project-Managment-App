@@ -1,14 +1,15 @@
+@import "src/styles/variables";
 .footer {
     display:flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-color: rgb(0, 128, 64);
+    background-color: $green;
     &__logo{
         width: 150px;
     }
     &__link{
-        color: antiquewhite;
+        color: $antiquewhite;
         text-decoration: none;
     }
 }

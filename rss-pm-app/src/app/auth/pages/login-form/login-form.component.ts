@@ -9,6 +9,9 @@ import { ELocalStorage, ENotificationSources } from '../../../shared/shared.enum
 import { IHttpErrors } from '../../../api/models/errors.model';
 import { ApiUserService } from '../../../api/services/api-user.service';
 import { findUserByLogin } from '../../../shared/shared.utils';
+import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
+import { Store } from '@ngrx/store';
+import { IStore } from 'src/app/NgRx/interfaces/store.interface';
 
 @Component({
   selector: 'app-login-form',
@@ -28,7 +31,8 @@ export class LoginFormComponent extends ValidationAbstract {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
-    private readonly apiUserService: ApiUserService
+    private readonly apiUserService: ApiUserService,
+    private store: Store<IStore>
   ) {
     super();
   }
@@ -44,6 +48,8 @@ export class LoginFormComponent extends ValidationAbstract {
           localStorage.setItem(ELocalStorage.token, resp.token);
           this.notificationService.showSuccess(ENotificationSources.signIn);
           void this.router.navigate(['']);
+          this.store.dispatch(makeIsloggedTrue());
+          this.store.dispatch(addUserName());
         }),
         switchMap(() => this.apiUserService.getAllUsers()),
         tap((resp) => {
