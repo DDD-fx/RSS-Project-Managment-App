@@ -2,8 +2,8 @@
   <h2 class="title">{{'board.title' | translate}}</h2>
   <section class="boards-list">
     <app-new-board></app-new-board>
-    <div class="all-boards" *ngFor="let board of boards">
-
+    <div *ngFor="let board of boards">
+      <app-board [board]="board"></app-board>
     </div>
   </section>
 </div>

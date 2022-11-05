@@ -1,14 +1,17 @@
 @import "src/styles/variables";
 @import "src/styles/mixins";
 
-.toggle{
-  width: 200px;
-  height: 180px;
+.create-board-btn {
+  width: 210px;
+  height: 190px;
 }
 
 .create-form {
-  border: 1px solid $lightgrey;
+  width: 196px;
+  height: 176px;
+  border: 2px solid $lightgrey;
   padding: 5px;
+  border-radius: 5px
 }
 
 .board-btn-wrapper {
@@ -18,3 +21,4 @@
     border: 1px solid $black;
   }
 }
+

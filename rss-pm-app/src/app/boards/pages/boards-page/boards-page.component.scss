@@ -2,7 +2,7 @@
 @import "src/styles/variables";
 
 .main-container {
-  height: 100vh;
+  height: 80vh;
   @include margin-center();
   .title {
     text-align: center;
@@ -11,7 +11,10 @@
   }
   .boards-list {
     @include flex-full-screen();
-    overflow-y: scroll;
+    height: 90%;
+    gap: 1rem;
+    overflow-y: auto;
+    // посторить грид сетку
   }
 }
 
