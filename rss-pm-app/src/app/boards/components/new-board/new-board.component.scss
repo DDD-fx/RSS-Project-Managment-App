@@ -17,6 +17,7 @@
 .board-btn-wrapper {
   @include flex-center();
   gap: 10px;
+
   .mat-button:hover {
     border: 1px solid $black;
   }

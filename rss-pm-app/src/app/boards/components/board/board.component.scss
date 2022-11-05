@@ -10,13 +10,16 @@
   justify-content: space-between;
   align-items: center;
   padding: 5px;
+
   .mat-card-title {
     text-align: center;
   }
+
   .settings {
     align-self: flex-end;
     width: 30px;
   }
+
   .mat-card-actions:last-child {
     margin-bottom: 0;
   }
