@@ -1,0 +1,18 @@
+<mat-card class="board" [style.background-color]="'{{customColor}}'">
+  <input class="settings" type="color" #color (click)="onClick(color.value)" />
+  <!-- <button class="settings" mat-stroked-button color="primary" type="submit">
+    <mat-icon>settings</mat-icon>
+  </button> -->
+  <mat-card-title>{{ board.title }}</mat-card-title>
+  <mat-card-content>
+    <p>{{ board.description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="primary" type="submit">
+      <mat-icon> border_color</mat-icon>
+    </button>
+    <button mat-stroked-button color="primary" type="submit">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

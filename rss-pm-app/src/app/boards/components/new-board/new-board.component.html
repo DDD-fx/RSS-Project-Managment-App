@@ -1,0 +1,25 @@
+<div class="create-board">
+  <button class="create-board-btn" *ngIf="!isFormActive" (click)="toggleForm()">
+    + <br> {{'board.createBoard' | translate}}
+  </button>
+  <form class="create-form" *ngIf="isFormActive" [formGroup]="boardForm">
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'board.label' | translate}}</mat-label>
+      <input matInput autocomplete="off" type="text" formControlName="name">
+      <mat-error *ngIf="boardForm.invalid">{{'board.boardErrors.no-name-error' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'board.description' | translate}}</mat-label>
+      <input matInput autocomplete="off" type="text" formControlName="description">
+    </mat-form-field>
+
+    <div class="board-btn-wrapper">
+      <button mat-button type="submit" (click)="toggleForm()">
+        {{'board.btn.cancel' | translate}}
+      </button>
+      <button mat-raised-button color="primary" type="submit" (click)="createBoard()">
+        {{'board.btn.create' | translate}}
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.create-board-btn {
+  width: 210px;
+  height: 190px;
+}
+
+.create-form {
+  width: 196px;
+  height: 176px;
+  border: 2px solid $lightgrey;
+  padding: 5px;
+  border-radius: 5px
+}
+
+.board-btn-wrapper {
+  @include flex-center();
+  gap: 10px;
+  .mat-button:hover {
+    border: 1px solid $black;
+  }
+}
+
