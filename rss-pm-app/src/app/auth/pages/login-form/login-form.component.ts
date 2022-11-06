@@ -11,7 +11,6 @@ import { ApiUserService } from '../../../api/services/api-user.service';
 import { findUserByLogin } from '../../../shared/shared.utils';
 import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
 import { Store } from '@ngrx/store';
-import { IStore } from 'src/app/NgRx/interfaces/store.interface';
 
 @Component({
   selector: 'app-login-form',
@@ -32,7 +31,7 @@ export class LoginFormComponent extends ValidationAbstract {
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
     private readonly apiUserService: ApiUserService,
-    private store: Store<IStore>
+    private store: Store
   ) {
     super();
   }
