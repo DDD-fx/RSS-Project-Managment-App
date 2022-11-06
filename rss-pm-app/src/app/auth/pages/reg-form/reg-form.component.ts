@@ -9,7 +9,6 @@ import { ELocalStorage, ENotificationSources } from '../../../shared/shared.enum
 import { NotificationService } from '../../../api/notification.service';
 import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
 import { Store } from '@ngrx/store';
-import { IStore } from 'src/app/NgRx/interfaces/store.interface';
 
 @Component({
   selector: 'app-reg-form',
@@ -34,7 +33,7 @@ export class RegFormComponent extends ValidationAbstract {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
-    private store: Store<IStore>
+    private store: Store
   ) {
     super();
   }

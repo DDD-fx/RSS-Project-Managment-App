@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { makeIsloggedFalse, removeUserName } from 'src/app/NgRx/actions/storeActions';
-import { IStore } from 'src/app/NgRx/interfaces/store.interface';
 import { selectIsLogged, selectUserName } from 'src/app/NgRx/selectors/storeSelectors';
 
 @Component({
@@ -18,7 +17,7 @@ export class HeaderComponent {
 
   userName$: Observable<string | null> | undefined;
 
-  constructor(private translate: TranslateService, private store: Store<IStore>, private router: Router) {
+  constructor(private translate: TranslateService, private store: Store, private router: Router) {
     translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');
     translate.use('en');
