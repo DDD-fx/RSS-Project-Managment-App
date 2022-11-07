@@ -5,10 +5,20 @@ import { AppRoutingModule } from '../app-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { storeReducer } from '../NgRx/reducers';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
-  imports: [AppRoutingModule, TranslateModule, MatSlideToggleModule, MatButtonModule],
+  imports: [
+    AppRoutingModule,
+    TranslateModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    CommonModule,
+    StoreModule.forFeature('store', storeReducer),
+  ],
   providers: [],
   bootstrap: [],
   exports: [HeaderComponent, FooterComponent],

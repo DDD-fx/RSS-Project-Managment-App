@@ -8,6 +8,8 @@ import { IHttpErrors } from '../../../api/models/errors.model';
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { saveUserDataToLS } from '../../../shared/shared.utils';
+import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-reg-form',
@@ -31,7 +33,8 @@ export class RegFormComponent extends ValidationAbstract {
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private store: Store
   ) {
     super();
   }
@@ -53,6 +56,8 @@ export class RegFormComponent extends ValidationAbstract {
         tap((resp) => {
           localStorage.setItem(ELocalStorage.token, resp.token);
           void this.router.navigate(['']);
+          this.store.dispatch(addUserName());
+          this.store.dispatch(makeIsloggedTrue());
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.signUp, err);

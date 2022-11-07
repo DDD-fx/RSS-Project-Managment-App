@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './NgRx/reducers';
+// import { reducers, metaReducers } from './NgRx/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './NgRx/app.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -25,10 +25,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-    }),
+    // StoreModule.forRoot(reducers, {
+    //   metaReducers,
+    // }),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([AppEffects]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
@@ -41,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient],
       },
     }),
+    CoreModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       preventDuplicates: true,
