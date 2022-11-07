@@ -4,11 +4,13 @@
 .main-container {
   height: 80vh;
   @include margin-center();
+
   .title {
     text-align: center;
     color: $blue;
     border-bottom: 2px solid $blue;
   }
+
   .boards-list {
     @include flex-full-screen();
     height: 90%;

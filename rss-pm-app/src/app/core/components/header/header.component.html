@@ -9,9 +9,9 @@
         <div class="header__toggle">
             <span class="">EN</span><mat-slide-toggle color="primary" (click)="changeLang()">RU</mat-slide-toggle>
         </div>
-        
+
         <ng-container *ngIf="(isLoggedStore$ | async ); then thenBlock else elseBlock">
-            
+
         </ng-container>
         <ng-template class="header__buttons" #elseBlock >
             <a [routerLink]="['signIn']" class="">
@@ -30,15 +30,15 @@
                 </a>
                 <div class="dropdown-content">
                   <a (click)="deleteUser()" href="#">Delete User</a>
-                  <a href="#">Link 2</a>
+                  <a [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>
                   <a href="#">Link 3</a>
                 </div>
-            </div> 
-            
+            </div>
+
             <button mat-raised-button color="primary" (click)="logout()">Exit</button>
-            
+
         </ng-template>
-        
+
     </div>
 </header>
 

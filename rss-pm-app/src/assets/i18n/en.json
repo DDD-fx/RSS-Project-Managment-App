@@ -1,7 +1,8 @@
 {
   "header": {
     "signIn-btn": "Sign In",
-    "signUp-btn": "Sign Up"
+    "signUp-btn": "Sign Up",
+    "edit-profile": "Edit profile"
   },
   "signIn-form": {
     "title": "Log In",
@@ -28,10 +29,20 @@
     "no-name-error": "Please enter your name",
     "repeat-password": "Repeat Password",
     "password-errors": {
-      "repeat-password": "Please repeat password",
+      "repeat-password": "Please repeat the password",
       "no-match":"Passwords do not match"
     },
     "signUp-btn": "Sign Up"
+  },
+  "userEdit-form": {
+    "title": "Edit User",
+    "new-pw": "New Password",
+    "repeat-new-pw": "Repeat New Password",
+    "current-pw": "Current Password",
+    "password-errors": {
+      "empty-password": "Please enter the current password"
+    },
+    "save-btn": "Save Changes"
   },
   "welcome": {
     "aboutTitle": "is an application that helps people achieve their goals. RSS PM is great for organizing your to-do lists, ideas, and is very easy to use. You can create several boards to use for various projects.",

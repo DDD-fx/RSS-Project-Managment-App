@@ -6,10 +6,13 @@ export abstract class ValidationAbstract {
   passwordValidator(pw: AbstractControl): IPassValidationErrors | null {
     const validationErrors = {} as IPassValidationErrors;
 
-    if (pw.value.length < 8) validationErrors.invalidLength = true;
-    if (!upperCaseSymbols.test(pw.value) || !lowerCaseSymbols.test(pw.value)) validationErrors.invalidUpperLower = true;
-    if (!specialSymbols.test(pw.value)) validationErrors.invalidSpecialSymbol = true;
-    if (!nums.test(pw.value)) validationErrors.invalidNums = true;
+    if (pw.value.length) {
+      if (pw.value.length < 8) validationErrors.invalidLength = true;
+      if (!upperCaseSymbols.test(pw.value) || !lowerCaseSymbols.test(pw.value))
+        validationErrors.invalidUpperLower = true;
+      if (!specialSymbols.test(pw.value)) validationErrors.invalidSpecialSymbol = true;
+      if (!nums.test(pw.value)) validationErrors.invalidNums = true;
+    }
 
     if (Object.keys(validationErrors).length) return validationErrors;
     return null;
