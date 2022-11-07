@@ -1,7 +1,8 @@
 {
   "header": {
     "signIn-btn": "Sign In",
-    "signUp-btn": "Sign Up"
+    "signUp-btn": "Sign Up",
+    "edit-profile": "Edit profile"
   },
   "signIn-form": {
     "title": "Log In",

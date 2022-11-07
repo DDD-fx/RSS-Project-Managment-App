@@ -1,7 +1,8 @@
 {
   "header": {
     "signIn-btn": "Войти",
-    "signUp-btn": "Регистрация"
+    "signUp-btn": "Регистрация",
+    "edit-profile": "Редактировать профиль"
   },
   "signIn-form": {
     "title": "Вход",
