@@ -11,8 +11,8 @@ import { createHttpParams } from '../../shared/shared.utils';
 export class ApiBoardService {
   constructor(private httpClient: HttpClient) {}
 
-  createBoard(data: ICreateBoardReq): Observable<ICreateBoardResp> {
-    return this.httpClient.post<ICreateBoardResp>(EUrls.boards, data);
+  createBoard({ title, description }: ICreateBoardReq): Observable<any> {
+    return this.httpClient.post<ICreateBoardResp>(EUrls.boards, { title, description });
   }
 
   getBoard(): Observable<IGetBoardResp> {
@@ -20,6 +20,13 @@ export class ApiBoardService {
     return this.httpClient.get<IGetBoardResp>(EUrls.boards, { params });
   }
 
-  // deleteBoard()
+  getBoards(): Observable<ICreateBoardResp[]> {
+    return this.httpClient.get(EUrls.boards) as Observable<ICreateBoardResp[]>;
+  }
+
+  deleteBoard(id: string): void {
+    this.httpClient.delete(EUrls.boards + `/${id}`).subscribe();
+  }
+
   // updateBoard()
 }

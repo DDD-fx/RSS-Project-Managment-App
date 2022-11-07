@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IBoard } from '../../models/boards.models';
-import { BoardsService } from '../../services/boards.service';
+import { ApiBoardService } from 'src/app/api/services/api-board.service';
 
 @Component({
   selector: 'app-new-board',
@@ -10,27 +9,26 @@ import { BoardsService } from '../../services/boards.service';
 })
 export class NewBoardComponent {
   public boardForm: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    title: new FormControl('', [Validators.required]),
     description: new FormControl(''),
   });
 
   isFormActive = false;
 
-  boards: IBoard[] = [];
+  // boards: IBoard[] = [];
 
   toggleForm() {
     this.isFormActive = !this.isFormActive;
   }
 
-  constructor(private boardsService: BoardsService) {}
+  constructor(private apiBoardService: ApiBoardService) {}
 
   createBoard() {
     if (this.boardForm.valid) {
-      this.boardsService.createBoard(this.boardForm.value).subscribe((value: IBoard) => {
-        this.boards.push(value);
-        console.log(this.boards);
-        this.toggleForm();
-      });
+      this.apiBoardService.createBoard(this.boardForm.value).subscribe();
+      // this.boards.push(value);
+      // console.log(this.boards);
+      this.toggleForm();
     }
   }
 }
