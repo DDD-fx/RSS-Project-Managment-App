@@ -25,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
@@ -40,7 +41,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient],
       },
     }),
-    CoreModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       preventDuplicates: true,

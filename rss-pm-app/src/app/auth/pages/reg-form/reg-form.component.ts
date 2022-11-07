@@ -5,8 +5,9 @@ import { AuthService } from '../../services/auth.service';
 import { ValidationAbstract } from '../../validation-abstract';
 import { catchError, switchMap, tap } from 'rxjs';
 import { IHttpErrors } from '../../../api/models/errors.model';
-import { ELocalStorage, ENotificationSources } from '../../../shared/shared.enums';
+import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
+import { saveUserDataToLS } from '../../../shared/shared.utils';
 
 @Component({
   selector: 'app-reg-form',
@@ -22,9 +23,9 @@ export class RegFormComponent extends ValidationAbstract {
       name: new FormControl('', Validators.required),
       login: new FormControl('', [Validators.required, Validators.minLength(3)]),
       password: new FormControl('', [Validators.required, this.passwordValidator]),
-      confirmPassword: new FormControl('', Validators.required),
+      repeatPassword: new FormControl('', Validators.required),
     },
-    [this.matchValidator('password', 'confirmPassword')]
+    [this.matchValidator('password', 'repeatPassword')]
   );
 
   constructor(
@@ -44,8 +45,7 @@ export class RegFormComponent extends ValidationAbstract {
       })
       .pipe(
         tap((resp) => {
-          localStorage.setItem(ELocalStorage.userId, resp.id);
-          localStorage.setItem(ELocalStorage.userName, resp.name);
+          saveUserDataToLS(resp);
         }),
         switchMap((resp) =>
           this.authService.onSignIn({ login: resp.login, password: this.regForm.get('password')!.value! })
@@ -55,7 +55,7 @@ export class RegFormComponent extends ValidationAbstract {
           void this.router.navigate(['']);
         }),
         catchError((err: IHttpErrors) => {
-          this.notificationService.showError(ENotificationSources.signUp, err);
+          this.notificationService.showError(ESiteUrls.signUp, err);
           throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
       )

@@ -5,10 +5,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidationAbstract } from '../../validation-abstract';
 import { catchError, switchMap, tap } from 'rxjs';
 import { NotificationService } from '../../../api/notification.service';
-import { ELocalStorage, ENotificationSources } from '../../../shared/shared.enums';
+import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { IHttpErrors } from '../../../api/models/errors.model';
 import { ApiUserService } from '../../../api/services/api-user.service';
-import { findUserByLogin } from '../../../shared/shared.utils';
+import { saveUserDataToLS, setUserIdToLs } from '../../../shared/shared.utils';
 
 @Component({
   selector: 'app-login-form',
@@ -42,17 +42,14 @@ export class LoginFormComponent extends ValidationAbstract {
       .pipe(
         tap((resp) => {
           localStorage.setItem(ELocalStorage.token, resp.token);
-          this.notificationService.showSuccess(ENotificationSources.signIn);
+          this.notificationService.showSuccess(ESiteUrls.signIn);
           void this.router.navigate(['']);
+          setUserIdToLs();
         }),
-        switchMap(() => this.apiUserService.getAllUsers()),
-        tap((resp) => {
-          const userData = findUserByLogin(resp, this.loginForm.get('login')!.value!);
-          localStorage.setItem(ELocalStorage.userName, userData.name);
-          localStorage.setItem(ELocalStorage.userId, userData.id);
-        }),
+        switchMap(() => this.apiUserService.getUser()),
+        tap((resp) => saveUserDataToLS(resp)),
         catchError((err: IHttpErrors) => {
-          this.notificationService.showError(ENotificationSources.signIn, err);
+          this.notificationService.showError(ESiteUrls.signIn, err);
           throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
       )
