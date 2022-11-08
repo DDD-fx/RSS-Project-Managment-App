@@ -16,12 +16,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CoreModule } from './core/core.module';
 import { interceptorProviders } from './api/interceptors/interceptors';
 import { ToastrModule } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeletingPopupComponent } from './shared/components/deleting-popup/deleting-popup.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DeletingPopupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    MatDialogModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],

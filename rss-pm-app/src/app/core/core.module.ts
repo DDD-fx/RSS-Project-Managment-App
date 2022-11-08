@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { storeReducer } from '../NgRx/reducers';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -18,6 +19,7 @@ import { storeReducer } from '../NgRx/reducers';
     MatButtonModule,
     CommonModule,
     StoreModule.forFeature('store', storeReducer),
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [],

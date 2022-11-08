@@ -5,6 +5,7 @@
     <a>
         <img class="header__home" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/1688/1688109.png" alt="home">
     </a>
+    <button mat-raised-button color="primary">Create new board</button>
     <div class="header__controls">
         <div class="header__toggle">
             <span class="">EN</span><mat-slide-toggle color="primary" (click)="changeLang()">RU</mat-slide-toggle>
@@ -32,6 +33,7 @@
                   <a (click)="deleteUser()" href="#">Delete User</a>
                   <a [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>
                   <a href="#">Link 3</a>
+                  <a href="#">Edit profile</a>
                 </div>
             </div>
 

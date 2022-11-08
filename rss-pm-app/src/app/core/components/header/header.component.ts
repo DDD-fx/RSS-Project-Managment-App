@@ -1,10 +1,14 @@
+/* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { ApiUserService } from 'src/app/api/services/api-user.service';
 import { makeIsloggedFalse, removeUserName } from 'src/app/NgRx/actions/storeActions';
 import { selectIsLogged, selectUserName } from 'src/app/NgRx/selectors/storeSelectors';
+import { MatDialog } from '@angular/material/dialog';
+import { DeletingPopupComponent } from 'src/app/shared/components/deleting-popup/deleting-popup.component';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +21,13 @@ export class HeaderComponent {
 
   userName$: Observable<string | null> | undefined;
 
-  constructor(private translate: TranslateService, private store: Store, private router: Router) {
+  constructor(
+    private translate: TranslateService,
+    private store: Store,
+    private router: Router,
+    private apiService: ApiUserService,
+    private dialogRef: MatDialog
+  ) {
     translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');
     translate.use('en');
@@ -42,7 +52,9 @@ export class HeaderComponent {
   }
 
   deleteUser() {
-    console.log('Удаляем пользователя');
+    console.log('тут будет попап');
+    // this.apiService.deleteUser();
+    this.dialogRef.open(DeletingPopupComponent);
   }
 
   onLogoClick() {
