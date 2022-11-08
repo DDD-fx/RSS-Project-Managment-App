@@ -68,6 +68,10 @@
       </mat-form-field>
 
       <div class="login-btn-wrapper">
+        <button mat-raised-button color="accent"
+                (click)="goBack()">
+          {{'userEdit-form.back-btn' | translate}}
+        </button>
         <button mat-raised-button color="primary"
                 type="submit"
                 [disabled]="userEditForm.invalid">

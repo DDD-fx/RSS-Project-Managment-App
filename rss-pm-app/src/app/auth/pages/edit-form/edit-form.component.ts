@@ -8,6 +8,7 @@ import { IHttpErrors } from '../../../api/models/errors.model';
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { ApiUserService } from '../../../api/services/api-user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-reg-form',
@@ -41,7 +42,8 @@ export class EditFormComponent extends ValidationAbstract {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly apiUserService: ApiUserService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly location: Location
   ) {
     super();
   }
@@ -104,5 +106,9 @@ export class EditFormComponent extends ValidationAbstract {
   enablePwInput() {
     this.userEditForm.controls.newPassword.enable();
     this.userEditForm.controls.repeatNewPassword.enable();
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
