@@ -3,7 +3,7 @@
   <section class="boards-list">
     <app-new-board></app-new-board>
     <div *ngFor="let board of boards$ | async">
-      <app-board [board]="board"></app-board>
+      <app-board-item [routerLink]="['/boards', board.id]" [board]="board"></app-board-item>
     </div>
   </section>
 </div>

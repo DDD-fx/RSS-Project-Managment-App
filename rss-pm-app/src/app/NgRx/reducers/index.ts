@@ -8,6 +8,7 @@ import {
   removeUserName,
   getAllBoards,
   deleteBoardById,
+  getCurrentBoard,
 } from '../actions/storeActions';
 import { IStore } from '../interfaces/store.interface';
 
@@ -21,6 +22,7 @@ export const Store: IStore = {
   isLogged: false,
   userName: null,
   boards: [],
+  currentBoard: { title: 'Board', description: '', id: '' },
 };
 
 export const storeReducer = createReducer(
@@ -36,6 +38,7 @@ export const storeReducer = createReducer(
       ...state,
       boards: state.boards.filter((el) => el.id !== boardId),
     })
-  )
+  ),
   // on(createNewBoard, (state: any, { board }): IStore => ({ ...state, boards: [...state.boards, board] }))
+  on(getCurrentBoard, (state: any, { currentBoard }): IStore => ({ ...state, currentBoard: currentBoard }))
 );
