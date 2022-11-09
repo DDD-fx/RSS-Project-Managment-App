@@ -10,13 +10,8 @@ import { EApiUrls } from '../../shared/shared.enums';
 export class ApiBoardService {
   constructor(private httpClient: HttpClient) {}
 
-<<<<<<< HEAD
-  createBoard({ title, description }: ICreateBoardReq): Observable<any> {
-    return this.httpClient.post<ICreateBoardResp>(EUrls.boards, { title, description });
-=======
-  createBoard(data: ICreateBoardReq): Observable<ICreateBoardResp> {
-    return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards, data);
->>>>>>> origin/develop
+  createBoard({ title, description }: ICreateBoardReq): Observable<ICreateBoardResp> {
+    return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards, { title, description });
   }
 
   getBoard(): Observable<IGetBoardResp> {
@@ -24,12 +19,14 @@ export class ApiBoardService {
   }
 
   getBoards(): Observable<ICreateBoardResp[]> {
-    return this.httpClient.get(EUrls.boards) as Observable<ICreateBoardResp[]>;
+    return this.httpClient.get(EApiUrls.boards) as Observable<ICreateBoardResp[]>;
   }
 
   deleteBoard(id: string): void {
-    this.httpClient.delete(EUrls.boards + `/${id}`).subscribe();
+    this.httpClient.delete(EApiUrls.boards + `/${id}`).subscribe();
   }
 
-  // updateBoard()
+  updateBoard(id: string, { title, description }: ICreateBoardReq): Observable<ICreateBoardResp> {
+    return this.httpClient.put<ICreateBoardResp>(EApiUrls.boards + '/' + `${id}`, { title, description });
+  }
 }

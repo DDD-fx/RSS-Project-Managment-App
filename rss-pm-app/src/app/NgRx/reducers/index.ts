@@ -37,4 +37,5 @@ export const storeReducer = createReducer(
       boards: state.boards.filter((el) => el.id !== boardId),
     })
   )
+  // on(createNewBoard, (state: any, { board }): IStore => ({ ...state, boards: [...state.boards, board] }))
 );
