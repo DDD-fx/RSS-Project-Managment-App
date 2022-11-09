@@ -52,13 +52,13 @@
 
       <mat-form-field>
         <mat-label>{{'signUp-form.repeat-password' | translate}}</mat-label>
-        <input matInput formControlName="confirmPassword" [type]="hide ? 'password' : 'text'">
+        <input matInput formControlName="repeatPassword" [type]="hide ? 'password' : 'text'">
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 
-        <mat-error *ngIf="!regForm.get('confirmPassword')?.value">
+        <mat-error *ngIf="!regForm.get('repeatPassword')?.value">
           {{'signUp-form.password-errors.repeat-password' | translate}}
         </mat-error>
-        <mat-error *ngIf="regForm.get('confirmPassword')?.errors?.['invalidMatch'] && regForm.get('confirmPassword')?.value">
+        <mat-error *ngIf="regForm.get('repeatPassword')?.errors?.['invalidMatch'] && regForm.get('repeatPassword')?.value">
           {{'signUp-form.password-errors.no-match' | translate}}
         </mat-error>
       </mat-form-field>

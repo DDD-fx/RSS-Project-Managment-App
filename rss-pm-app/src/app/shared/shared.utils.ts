@@ -1,27 +1,45 @@
-import { IGetAllUsersResp } from '../api/models/api-user.model';
 import { ISignUpResp } from '../auth/models/auth.model';
-import { EHttpParams, ELocalStorage } from './shared.enums';
-import { HttpParams } from '@angular/common/http';
+import { ELocalStorage } from './shared.enums';
 
-export function findUserByLogin(users: IGetAllUsersResp, login: string): ISignUpResp {
-  return users.find((item) => item.login === login)!;
+interface IParseJWT {
+  iat: number;
+  login: string;
+  userId: string;
 }
 
-export function getUserId(): string {
-  const id = localStorage.getItem(ELocalStorage.userId);
-  if (id) return id;
-  else throw new Error('User not found');
+function parseJwt(token: string): IParseJWT {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split('')
+      .map((item) => '%' + ('00' + item.charCodeAt(0).toString(16)).slice(-2))
+      .join('')
+  );
+  return JSON.parse(jsonPayload);
 }
 
-export function createHttpParams(param: string) {
-  switch (param) {
-    case EHttpParams.userId:
-      return new HttpParams({ fromObject: { id: getUserId() } });
-
-    case EHttpParams.boardId:
-      return new HttpParams({ fromObject: { id: getUserId() } }); //getBoardId
-
-    default:
-      return new HttpParams({});
-  }
+export function setUserIdToLs(): void {
+  const token = localStorage.getItem(ELocalStorage.token);
+  if (token) {
+    const userId = parseJwt(token).userId;
+    localStorage.setItem(ELocalStorage.userId, userId);
+  } else throw new Error('User not found');
 }
+
+export function getUserIdFromLs(): string {
+  const userId = localStorage.getItem(ELocalStorage.userId);
+  if (userId) return userId;
+  else throw new Error('User ID not found');
+}
+
+export function saveUserDataToLS(data: ISignUpResp) {
+  localStorage.setItem(ELocalStorage.login, data.login);
+  localStorage.setItem(ELocalStorage.userName, data.name);
+  localStorage.setItem(ELocalStorage.userId, data.id);
+}
+
+// export function findUserByLogin(users: IGetAllUsersResp, login: string): ISignUpResp {
+//   return users.find((item) => item.login === login)!;
+// }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { ESiteUrls } from './shared/shared.enums';
 
 const routes: Routes = [
   {
@@ -8,15 +9,19 @@ const routes: Routes = [
     loadChildren: () => import('./welcome/welcome.module').then((a) => a.WelcomeModule),
   },
   {
-    path: 'signIn',
+    path: ESiteUrls.signIn,
     loadChildren: () => import('./auth/pages/login-form/login-form.module').then((m) => m.LoginFormModule),
   },
   {
-    path: 'signUp',
+    path: ESiteUrls.signUp,
     loadChildren: () => import('./auth/pages/reg-form/reg-form.module').then((m) => m.RegFormModule),
   },
   {
-    path: 'boards',
+    path: ESiteUrls.userEdit,
+    loadChildren: () => import('./auth/pages/edit-form/edit-form.module').then((m) => m.EditFormModule),
+  },
+  {
+    path: ESiteUrls.boards,
     loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
     canActivate: [AuthGuard],
   },

@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-content>
+    <form (submit)="onUserUpdate()" [formGroup]="regForm">
+      <h2>{{'userEdit-form.title' | translate}}</h2>
+      <mat-form-field (click)="enableNameInput()">
+        <mat-label>{{'signUp-form.name' | translate}}</mat-label>
+        <input matInput formControlName="newName">
+        <mat-error *ngIf="!regForm.get('newName')?.value">
+          {{'signUp-form.no-name-error' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field (click)="enableLoginInput()">
+        <mat-label>{{'signIn-form.login' | translate}}</mat-label>
+        <input matInput formControlName="newLogin">
+        <mat-error *ngIf="!regForm.get('newLogin')?.value">
+          {{'signIn-form.login-errors.empty-login' | translate}}
+        </mat-error>
+        <mat-error *ngIf="regForm.get('newLogin')?.invalid && regForm.get('newLogin')?.value">
+          {{'signIn-form.login-errors.short-login' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field (click)="enablePwInput()">
+        <mat-label>{{'userEdit-form.new-pw' | translate}}</mat-label>
+        <input matInput formControlName="newPassword" [type]="hideNewPw ? 'password' : 'text'" autocomplete="new-password">
+        <mat-icon matSuffix (click)="hideNewPw = !hideNewPw">{{hideNewPw ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="regForm.get('newPassword')?.value">
+          <div *ngIf="checkErrorsLength(regForm.get('newPassword')?.errors) > 0">
+            {{'signIn-form.password-errors.not-strong' | translate}}
+            <ul>
+              <li *ngIf="regForm.get('newPassword')?.errors?.['invalidLength']">
+                {{'signIn-form.password-errors.8-chars' | translate}}
+              </li>
+              <li *ngIf="regForm.get('newPassword')?.errors?.['invalidUpperLower']">
+                {{'signIn-form.password-errors.mixture' | translate}}
+              </li>
+              <li *ngIf="regForm.get('newPassword')?.errors?.['invalidSpecialSymbol']">
+                {{'signIn-form.password-errors.special-chars' | translate}}
+              </li>
+              <li *ngIf="regForm.get('newPassword')?.errors?.['invalidNums']">
+                {{'signIn-form.password-errors.nums' | translate}}
+              </li>
+            </ul>
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{'userEdit-form.repeat-new-pw' | translate}}</mat-label>
+        <input matInput formControlName="repeatNewPassword" [type]="hideNewPw ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hideNewPw = !hideNewPw">{{hideNewPw ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="regForm.get('repeatNewPassword')?.errors?.['invalidMatch'] && regForm.get('repeatNewPassword')?.value">
+          {{'signUp-form.password-errors.no-match' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{'userEdit-form.current-pw' | translate}}</mat-label>
+        <input matInput formControlName="currentPassword" [type]="hideCurrPw ? 'password' : 'text'" autocomplete="new-password">
+        <mat-icon matSuffix (click)="hideCurrPw = !hideCurrPw">{{hideCurrPw ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="!regForm.get('currentPassword')?.value">
+          {{'userEdit-form.password-errors.empty-password' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="login-btn-wrapper">
+        <button mat-raised-button color="primary"
+                type="submit"
+                [disabled]="regForm.invalid">
+          {{'userEdit-form.save-btn' | translate}}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

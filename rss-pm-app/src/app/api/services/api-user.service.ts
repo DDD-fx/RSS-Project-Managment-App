@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EHttpParams, EUrls } from '../../shared/shared.enums';
+import { EApiUrls } from '../../shared/shared.enums';
 import { Observable } from 'rxjs';
 import { IGetAllUsersResp } from '../models/api-user.model';
-import { createHttpParams } from '../../shared/shared.utils';
-import { ISignUpResp } from '../../auth/models/auth.model';
+import { ISignUpReq, ISignUpResp } from '../../auth/models/auth.model';
+import { getUserIdFromLs } from '../../shared/shared.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -13,22 +13,20 @@ export class ApiUserService {
   constructor(private httpClient: HttpClient) {}
 
   getAllUsers(): Observable<IGetAllUsersResp> {
-    return this.httpClient.get<IGetAllUsersResp>(EUrls.users);
+    return this.httpClient.get<IGetAllUsersResp>(EApiUrls.users);
   }
 
   getUser(): Observable<ISignUpResp> {
-    const params = createHttpParams(EHttpParams.userId);
-    return this.httpClient.get<ISignUpResp>(EUrls.users, { params });
+    const userId = getUserIdFromLs();
+    return this.httpClient.get<ISignUpResp>(EApiUrls.users + '/' + `${userId}`);
   }
 
   deleteUser(): void {
-    const params = createHttpParams(EHttpParams.userId);
-    this.httpClient.delete(EUrls.users, { params });
+    this.httpClient.delete(EApiUrls.users);
   }
 
-  updateUser(body: any): void {
-    /////////////
-    const params = createHttpParams(EHttpParams.userId);
-    this.httpClient.put(EUrls.users, { body }, { params });
+  updateUser(body: ISignUpReq): Observable<ISignUpResp> {
+    const userId = getUserIdFromLs();
+    return this.httpClient.put<ISignUpResp>(EApiUrls.users + '/' + `${userId}`, body);
   }
 }

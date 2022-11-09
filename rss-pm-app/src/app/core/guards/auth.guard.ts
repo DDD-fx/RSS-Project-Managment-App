@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { ELocalStorage, EUrls } from '../../shared/shared.enums';
+import { ELocalStorage, EApiUrls } from '../../shared/shared.enums';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     if (localStorage.getItem(ELocalStorage.userId)) {
       return true;
     }
-    void this.router.navigate([EUrls.signin]);
+    void this.router.navigate([EApiUrls.signin]);
     return false;
   }
 }
