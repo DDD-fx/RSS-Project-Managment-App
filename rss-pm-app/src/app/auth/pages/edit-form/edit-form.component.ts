@@ -9,6 +9,7 @@ import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { ApiUserService } from '../../../api/services/api-user.service';
 import { Location } from '@angular/common';
+import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-reg-form',
@@ -23,16 +24,13 @@ export class EditFormComponent extends ValidationAbstract {
 
   public userEditForm = new FormGroup(
     {
-      newName: new FormControl(
-        { value: localStorage.getItem(ELocalStorage.userName), disabled: true },
-        Validators.required
-      ),
-      newLogin: new FormControl({ value: localStorage.getItem(ELocalStorage.login), disabled: true }, [
+      newName: new FormControl(localStorage.getItem(ELocalStorage.userName), Validators.required),
+      newLogin: new FormControl(localStorage.getItem(ELocalStorage.login), [
         Validators.required,
         Validators.minLength(3),
       ]),
-      newPassword: new FormControl({ value: '', disabled: true }, this.passwordValidator),
-      repeatNewPassword: new FormControl({ value: '', disabled: true }),
+      newPassword: new FormControl('', this.passwordValidator),
+      repeatNewPassword: new FormControl(''),
       currentPassword: new FormControl('', Validators.required),
     },
     [this.matchValidator('newPassword', 'repeatNewPassword')]
@@ -43,7 +41,8 @@ export class EditFormComponent extends ValidationAbstract {
     private readonly authService: AuthService,
     private readonly apiUserService: ApiUserService,
     private readonly notificationService: NotificationService,
-    private readonly location: Location
+    private readonly location: Location,
+    private readonly loaderService: LoaderService
   ) {
     super();
   }
@@ -56,11 +55,8 @@ export class EditFormComponent extends ValidationAbstract {
       newPassword: '',
       repeatNewPassword: '',
     });
-    this.userEditForm.controls.newName.disable();
-    this.userEditForm.controls.newLogin.disable();
-    this.userEditForm.controls.newPassword.disable();
-    this.userEditForm.controls.repeatNewPassword.disable();
     this.userEditForm.controls.currentPassword.setErrors(null);
+    this.hidePw();
   }
 
   onUserUpdate() {
@@ -86,8 +82,10 @@ export class EditFormComponent extends ValidationAbstract {
           localStorage.setItem(ELocalStorage.login, resp.login);
           localStorage.setItem(ELocalStorage.userName, resp.name);
           this.setForm();
+          this.loaderService.disableLoader();
         }),
         catchError((err: IHttpErrors) => {
+          this.setForm();
           this.notificationService.showError(ESiteUrls.userEdit, err);
           throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
@@ -95,20 +93,25 @@ export class EditFormComponent extends ValidationAbstract {
       .subscribe();
   }
 
-  enableNameInput() {
+  enableNameInput(): void {
     this.userEditForm.controls.newName.enable();
   }
 
-  enableLoginInput() {
+  enableLoginInput(): void {
     this.userEditForm.controls.newLogin.enable();
   }
 
-  enablePwInput() {
+  enablePwInput(): void {
     this.userEditForm.controls.newPassword.enable();
     this.userEditForm.controls.repeatNewPassword.enable();
   }
 
-  goBack() {
+  hidePw(): void {
+    this.hideCurrPw = true;
+    this.hideNewPw = true;
+  }
+
+  goBack(): void {
     this.location.back();
   }
 }

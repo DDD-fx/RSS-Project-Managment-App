@@ -10,8 +10,8 @@ import { EApiUrls } from '../../shared/shared.enums';
 export class ApiBoardService {
   constructor(private httpClient: HttpClient) {}
 
-  createBoard({ title, description }: ICreateBoardReq): Observable<ICreateBoardResp> {
-    return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards, { title, description });
+  createBoard(data: ICreateBoardReq): Observable<ICreateBoardResp> {
+    return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards, data);
   }
 
   getBoard(): Observable<IGetBoardResp> {
