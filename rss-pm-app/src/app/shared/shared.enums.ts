@@ -6,6 +6,7 @@ export enum EHttpStatus {
   'Forbidden' = 403,
   'NotFound' = 404,
   'UserExists' = 409,
+  'InternalServerError' = 500,
 }
 
 export enum EApiUrls {
