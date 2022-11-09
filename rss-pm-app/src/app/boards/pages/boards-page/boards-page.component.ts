@@ -14,7 +14,7 @@ import { selectAllBoards } from 'src/app/NgRx/selectors/storeSelectors';
 export class BoardsPageComponent implements OnInit {
   constructor(private apiBoardService: ApiBoardService, private store: Store) {}
 
-  boards$: Observable<ICreateBoardResp[]> | undefined;
+  boards$!: Observable<ICreateBoardResp[] | []>;
 
   ngOnInit(): void {
     this.apiBoardService.getBoards().subscribe((boards: ICreateBoardResp[]) => {
