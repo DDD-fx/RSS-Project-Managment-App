@@ -1,3 +1,9 @@
-<h2> Вы действительно хотите удалить аккаунт? </h2>
-<button>да</button>
-<button>нет</button>
+<h2 mat-dialog-title> {{'deleting-popup.question' | translate}} {{ data.name| translate}}? </h2>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" mat-button mat-dialog-close mat-dialog-close="true" >
+    {{'deleting-popup.yes-option' | translate}}
+  </button>
+  <button mat-raised-button color="primary" mat-button mat-dialog-close mat-dialog-close="false" cdkFocusInitial>
+    {{'deleting-popup.no-option' | translate}}
+  </button>
+</div>

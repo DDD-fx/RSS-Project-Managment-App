@@ -2,7 +2,16 @@
   "header": {
     "signIn-btn": "Войти",
     "signUp-btn": "Регистрация",
-    "edit-profile": "Редактировать профиль"
+    "edit-profile": "Редактировать профиль",
+    "create-board-button": "Создать новую доску",
+    "exit-button": "Выйти",
+    "delete-user": "Удалить аккаунт"
+  },
+  "deleting-popup": {
+    "yes-option": "Да",
+    "no-option": "Нет",
+    "question": "Вы действительно хотите удалить ",
+    "del-acc": "аккаунт"
   },
   "signIn-form": {
     "title": "Вход",

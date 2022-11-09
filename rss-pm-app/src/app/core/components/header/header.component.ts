@@ -8,7 +8,7 @@ import { ApiUserService } from 'src/app/api/services/api-user.service';
 import { makeIsloggedFalse, removeUserName } from 'src/app/NgRx/actions/storeActions';
 import { selectIsLogged, selectUserName } from 'src/app/NgRx/selectors/storeSelectors';
 import { MatDialog } from '@angular/material/dialog';
-import { DeletingPopupComponent } from 'src/app/shared/components/deleting-popup/deleting-popup.component';
+import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 
 @Component({
   selector: 'app-header',
@@ -52,9 +52,12 @@ export class HeaderComponent {
   }
 
   deleteUser() {
-    console.log('тут будет попап');
-    // this.apiService.deleteUser();
-    this.dialogRef.open(DeletingPopupComponent);
+    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-acc' } });
+    dialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.apiService.deleteUser();
+      }
+    });
   }
 
   onLogoClick() {

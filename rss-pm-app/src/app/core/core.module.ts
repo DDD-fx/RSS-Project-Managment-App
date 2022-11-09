@@ -7,8 +7,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { storeReducer } from '../NgRx/reducers';
+import { storeReducer } from '../NgRx/reducers/reducer';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -24,5 +25,6 @@ import { MatDialogModule } from '@angular/material/dialog';
   providers: [],
   bootstrap: [],
   exports: [HeaderComponent, FooterComponent],
+  entryComponents: [DeletingPopupComponent],
 })
 export class CoreModule {}

@@ -18,6 +18,7 @@ import { interceptorProviders } from './api/interceptors/interceptors';
 import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from './shared/components/deleting-popup/deleting-popup.component';
+import { MatButtonModule } from '@angular/material/button';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -49,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       preventDuplicates: true,
     }),
     MatDialogModule,
+    MatButtonModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],
