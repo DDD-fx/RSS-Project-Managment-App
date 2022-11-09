@@ -42,7 +42,8 @@
     "password-errors": {
       "empty-password": "Please enter the current password"
     },
-    "save-btn": "Save Changes"
+    "save-btn": "Save Changes",
+    "back-btn": "Back"
   },
   "welcome": {
     "aboutTitle": "is an application that helps people achieve their goals. RSS PM is great for organizing your to-do lists, ideas, and is very easy to use. You can create several boards to use for various projects.",

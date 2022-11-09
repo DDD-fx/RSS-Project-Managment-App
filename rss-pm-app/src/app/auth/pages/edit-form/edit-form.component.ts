@@ -8,6 +8,7 @@ import { IHttpErrors } from '../../../api/models/errors.model';
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { ApiUserService } from '../../../api/services/api-user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-reg-form',
@@ -20,7 +21,7 @@ export class EditFormComponent extends ValidationAbstract {
 
   public hideCurrPw = true;
 
-  public regForm = new FormGroup(
+  public userEditForm = new FormGroup(
     {
       newName: new FormControl(
         { value: localStorage.getItem(ELocalStorage.userName), disabled: true },
@@ -41,28 +42,50 @@ export class EditFormComponent extends ValidationAbstract {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly apiUserService: ApiUserService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly location: Location
   ) {
     super();
+  }
+
+  setForm() {
+    this.userEditForm.setValue({
+      newName: localStorage.getItem(ELocalStorage.userName),
+      newLogin: localStorage.getItem(ELocalStorage.login),
+      currentPassword: '',
+      newPassword: '',
+      repeatNewPassword: '',
+    });
+    this.userEditForm.controls.newName.disable();
+    this.userEditForm.controls.newLogin.disable();
+    this.userEditForm.controls.newPassword.disable();
+    this.userEditForm.controls.repeatNewPassword.disable();
+    this.userEditForm.controls.currentPassword.setErrors(null);
   }
 
   onUserUpdate() {
     this.authService
       .onSignIn({
         login: localStorage.getItem(ELocalStorage.login)!,
-        password: this.regForm.get('currentPassword')!.value!,
+        password: this.userEditForm.get('currentPassword')!.value!,
       })
       .pipe(
-        switchMap(() =>
-          this.apiUserService.updateUser({
-            name: this.regForm.get('newName')!.value!,
-            login: this.regForm.get('newLogin')!.value!,
-            password: this.regForm.get('currentPassword')!.value!,
-          })
-        ),
+        switchMap(() => {
+          const pwToSend = this.userEditForm.get('newPassword')?.value
+            ? this.userEditForm.get('newPassword')?.value!
+            : this.userEditForm.get('currentPassword')?.value!;
+
+          return this.apiUserService.updateUser({
+            name: this.userEditForm.get('newName')!.value!,
+            login: this.userEditForm.get('newLogin')!.value!,
+            password: pwToSend,
+          });
+        }),
         tap((resp) => {
+          this.notificationService.showSuccess(ESiteUrls.userEdit);
           localStorage.setItem(ELocalStorage.login, resp.login);
           localStorage.setItem(ELocalStorage.userName, resp.name);
+          this.setForm();
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.userEdit, err);
@@ -70,22 +93,22 @@ export class EditFormComponent extends ValidationAbstract {
         })
       )
       .subscribe();
-
-    // if (resp$) {
-    //
-    // }
   }
 
   enableNameInput() {
-    this.regForm.controls.newName.enable();
+    this.userEditForm.controls.newName.enable();
   }
 
   enableLoginInput() {
-    this.regForm.controls.newLogin.enable();
+    this.userEditForm.controls.newLogin.enable();
   }
 
   enablePwInput() {
-    this.regForm.controls.newPassword.enable();
-    this.regForm.controls.repeatNewPassword.enable();
+    this.userEditForm.controls.newPassword.enable();
+    this.userEditForm.controls.repeatNewPassword.enable();
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

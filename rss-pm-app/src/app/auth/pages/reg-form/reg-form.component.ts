@@ -47,9 +47,7 @@ export class RegFormComponent extends ValidationAbstract {
         password: this.regForm.get('password')!.value!,
       })
       .pipe(
-        tap((resp) => {
-          saveUserDataToLS(resp);
-        }),
+        tap((resp) => saveUserDataToLS(resp)),
         switchMap((resp) =>
           this.authService.onSignIn({ login: resp.login, password: this.regForm.get('password')!.value! })
         ),
