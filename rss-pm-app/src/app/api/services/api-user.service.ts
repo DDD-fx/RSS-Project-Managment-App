@@ -17,16 +17,14 @@ export class ApiUserService {
   }
 
   getUser(): Observable<ISignUpResp> {
-    const userId = getUserIdFromLs();
-    return this.httpClient.get<ISignUpResp>(EApiUrls.users + '/' + `${userId}`);
+    return this.httpClient.get<ISignUpResp>(EApiUrls.users + `/${getUserIdFromLs()}`);
   }
 
   deleteUser(): void {
-    this.httpClient.delete(EApiUrls.users);
+    this.httpClient.delete(EApiUrls.users + `/${getUserIdFromLs()}`);
   }
 
   updateUser(body: ISignUpReq): Observable<ISignUpResp> {
-    const userId = getUserIdFromLs();
-    return this.httpClient.put<ISignUpResp>(EApiUrls.users + '/' + `${userId}`, body);
+    return this.httpClient.put<ISignUpResp>(EApiUrls.users + `/${getUserIdFromLs()}`, body);
   }
 }
