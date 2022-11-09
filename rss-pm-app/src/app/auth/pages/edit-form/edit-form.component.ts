@@ -9,6 +9,7 @@ import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { ApiUserService } from '../../../api/services/api-user.service';
 import { Location } from '@angular/common';
+import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-reg-form',
@@ -40,7 +41,8 @@ export class EditFormComponent extends ValidationAbstract {
     private readonly authService: AuthService,
     private readonly apiUserService: ApiUserService,
     private readonly notificationService: NotificationService,
-    private readonly location: Location
+    private readonly location: Location,
+    private readonly loaderService: LoaderService
   ) {
     super();
   }
@@ -80,6 +82,7 @@ export class EditFormComponent extends ValidationAbstract {
           localStorage.setItem(ELocalStorage.login, resp.login);
           localStorage.setItem(ELocalStorage.userName, resp.name);
           this.setForm();
+          this.loaderService.disableLoader();
         }),
         catchError((err: IHttpErrors) => {
           this.setForm();

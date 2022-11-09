@@ -7,7 +7,11 @@ import { BehaviorSubject } from 'rxjs';
 export class LoaderService {
   isLoading$ = new BehaviorSubject(false);
 
-  toggleIsLoading(): void {
-    this.isLoading$.next(!this.isLoading$.value);
+  enableLoader(): void {
+    this.isLoading$.next(true);
+  }
+
+  disableLoader(): void {
+    this.isLoading$.next(false);
   }
 }
