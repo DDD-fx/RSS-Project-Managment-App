@@ -17,7 +17,7 @@ export class BoardsPageComponent implements OnInit, AfterViewInit {
 
   @ViewChild(CdkVirtualScrollViewport) scroller!: CdkVirtualScrollViewport;
 
-  boards$: Observable<ICreateBoardResp[]> | undefined;
+  boards$!: Observable<ICreateBoardResp[] | []>;
 
   fetchData() {
     this.apiBoardService.getBoards().subscribe((boards: ICreateBoardResp[]) => {
