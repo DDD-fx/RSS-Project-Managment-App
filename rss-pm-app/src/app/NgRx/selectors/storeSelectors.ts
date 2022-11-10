@@ -5,3 +5,4 @@ const selectFeature = createFeatureSelector<IStore>('store');
 export const selectIsLogged = createSelector(selectFeature, (state) => state.isLogged);
 export const selectUserName = createSelector(selectFeature, (state) => state.userName);
 export const selectAllBoards = createSelector(selectFeature, (state) => state.boards);
+export const selectCurrentBoard = createSelector(selectFeature, (state) => state.currentBoard);
