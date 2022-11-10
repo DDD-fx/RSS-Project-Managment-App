@@ -16,13 +16,16 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CoreModule } from './core/core.module';
 import { interceptorProviders } from './api/interceptors/interceptors';
 import { ToastrModule } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeletingPopupComponent } from './shared/components/deleting-popup/deleting-popup.component';
+import { MatButtonModule } from '@angular/material/button';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [AppComponent, LoaderComponent],
+  declarations: [AppComponent, DeletingPopupComponent, LoaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,6 +50,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],
