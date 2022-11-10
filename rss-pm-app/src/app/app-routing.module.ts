@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ESiteUrls } from './shared/shared.enums';
+import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,12 @@ const routes: Routes = [
     loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: ESiteUrls.boards,
+    loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
+    canActivate: [AuthGuard],
+  },
+  { path: '**', component: WrongAddressPageComponent },
 ];
 
 @NgModule({
