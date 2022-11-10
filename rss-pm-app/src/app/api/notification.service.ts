@@ -19,6 +19,11 @@ export class NotificationService {
         else this.toastr.success('Успешная авторизация');
         break;
 
+      case ESiteUrls.userEdit:
+        if (currLang === 'en') this.toastr.success('Your profile was updated');
+        else this.toastr.success('Данные профиля успешно обновлены');
+        break;
+
       default:
         this.toastr.success('Success');
     }
@@ -52,8 +57,11 @@ export class NotificationService {
 
       case ESiteUrls.userEdit:
         if (err.error.statusCode === EHttpStatus.Forbidden) {
-          if (currLang === 'en') this.toastr.error('Invalid password', `Error code: ${err.error.statusCode}`);
+          if (currLang === 'en') this.toastr.error('Wrong password', `Error code: ${err.error.statusCode}`);
           else this.toastr.error('Неверный пароль', `Error code: ${err.error.statusCode}`);
+        } else if (err.error.statusCode === EHttpStatus.InternalServerError) {
+          if (currLang === 'en') this.toastr.error('User login already exists!', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Пользователь с данным логином уже существует', `Error code: ${err.error.statusCode}`);
         }
         break;
 

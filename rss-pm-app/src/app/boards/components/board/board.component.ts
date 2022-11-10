@@ -1,5 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { IBoard } from '../../models/boards.models';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { getCurrentBoard } from 'src/app/NgRx/actions/storeActions';
+import { selectCurrentBoard } from 'src/app/NgRx/selectors/storeSelectors';
 
 @Component({
   selector: 'app-board',
@@ -7,17 +10,12 @@ import { IBoard } from '../../models/boards.models';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent {
-  @Input() board!: IBoard;
+  public constructor(private store: Store, private router: Router) {}
 
-  private customColor: string = '#ffffff';
+  board$ = this.store.select(selectCurrentBoard);
 
-  onClick(color: string) {
-    this.customColor = color;
+  onBack() {
+    this.router.navigate(['boards']);
+    this.store.dispatch(getCurrentBoard({ currentBoard: { title: '', description: '', id: '' } }));
   }
-
-  // board: IBoard = {
-  //   id: '9a111e19-24ec-43e1-b8c4-13776842b8d5',
-  //   title: 'Homework tasks',
-  //   description: 'My board tasks',
-  // };
 }

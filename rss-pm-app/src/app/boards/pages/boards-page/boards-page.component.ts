@@ -1,102 +1,25 @@
-import { Component } from '@angular/core';
-import { IBoard } from '../../models/boards.models';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
+import { ApiBoardService } from 'src/app/api/services/api-board.service';
+import { getAllBoards } from 'src/app/NgRx/actions/storeActions';
+import { selectAllBoards } from 'src/app/NgRx/selectors/storeSelectors';
 
 @Component({
   selector: 'app-boards-page',
   templateUrl: './boards-page.component.html',
   styleUrls: ['./boards-page.component.scss'],
 })
-export class BoardsPageComponent {
-  boards: IBoard[] = [
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d5',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d6',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d7',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d8',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d9',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d0',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d5',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d6',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d7',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d8',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d9',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d0',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d5',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d6',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d7',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d8',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d9',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-    {
-      id: '9a111e19-24ec-43e1-b8c4-13776842b8d0',
-      title: 'Homework tasks',
-      description: 'My board tasks',
-    },
-  ];
+export class BoardsPageComponent implements OnInit {
+  constructor(private apiBoardService: ApiBoardService, private store: Store) {}
+
+  boards$!: Observable<ICreateBoardResp[] | []>;
+
+  ngOnInit(): void {
+    this.apiBoardService.getBoards().subscribe((boards: ICreateBoardResp[]) => {
+      this.store.dispatch(getAllBoards({ boards }));
+      this.boards$ = this.store.select(selectAllBoards);
+    });
+  }
 }

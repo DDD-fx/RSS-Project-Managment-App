@@ -1,0 +1,26 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.board {
+  width: 196px;
+  height: 176px;
+  border: 2px solid $lightgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+
+  .mat-card-title {
+    text-align: center;
+  }
+
+  .settings {
+    align-self: flex-end;
+    width: 30px;
+  }
+
+  .mat-card-actions:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -11,6 +11,7 @@ import { NotificationService } from '../../../api/notification.service';
 import { saveUserDataToLS } from '../../../shared/shared.utils';
 import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
 import { Store } from '@ngrx/store';
+import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-reg-form',
@@ -35,7 +36,8 @@ export class RegFormComponent extends ValidationAbstract {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
-    private store: Store
+    private store: Store,
+    private readonly loaderService: LoaderService
   ) {
     super();
   }
@@ -48,9 +50,7 @@ export class RegFormComponent extends ValidationAbstract {
         password: this.regForm.get('password')!.value!,
       })
       .pipe(
-        tap((resp) => {
-          saveUserDataToLS(resp);
-        }),
+        tap((resp) => saveUserDataToLS(resp)),
         switchMap((resp) =>
           this.authService.onSignIn({ login: resp.login, password: this.regForm.get('password')!.value! })
         ),
@@ -59,6 +59,7 @@ export class RegFormComponent extends ValidationAbstract {
           void this.router.navigate(['']);
           this.store.dispatch(addUserName());
           this.store.dispatch(makeIsloggedTrue());
+          this.loaderService.disableLoader();
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.signUp, err);

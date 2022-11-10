@@ -1,26 +1,18 @@
-@import "src/styles/variables";
 @import "src/styles/mixins";
+@import "src/styles/variables";
 
-.board {
-  width: 196px;
-  height: 176px;
-  border: 2px solid $lightgrey;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
+.main-container {
+  height: 80vh;
+  @include margin-center();
 
-  .mat-card-title {
+  .title {
     text-align: center;
+    color: $blue;
+    border-bottom: 2px solid $blue;
+  }
+  .arrow {
+    position: absolute;
+    left: 10%;
   }
 
-  .settings {
-    align-self: flex-end;
-    width: 30px;
-  }
-
-  .mat-card-actions:last-child {
-    margin-bottom: 0;
-  }
 }

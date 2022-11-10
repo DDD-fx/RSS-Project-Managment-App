@@ -19,11 +19,13 @@ export abstract class ValidationAbstract {
   }
 
   matchValidator(source: string, target: string): ValidatorFn {
-    return (control: AbstractControl): null => {
+    return (control: AbstractControl) => {
       const sourceCtrl = control.get(source);
       const targetCtrl = control.get(target);
       if (sourceCtrl && targetCtrl && sourceCtrl.value !== targetCtrl.value) {
         targetCtrl?.setErrors({ invalidMatch: true });
+      } else if (sourceCtrl?.value === targetCtrl?.value) {
+        targetCtrl?.setErrors(null);
       }
       return null;
     };

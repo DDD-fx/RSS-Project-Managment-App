@@ -12,6 +12,7 @@ import { ApiUserService } from '../../../api/services/api-user.service';
 import { saveUserDataToLS, setUserIdToLs } from '../../../shared/shared.utils';
 import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
 import { Store } from '@ngrx/store';
+import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-login-form',
@@ -32,7 +33,8 @@ export class LoginFormComponent extends ValidationAbstract {
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
     private readonly apiUserService: ApiUserService,
-    private store: Store
+    private store: Store,
+    public loaderService: LoaderService
   ) {
     super();
   }
@@ -53,7 +55,10 @@ export class LoginFormComponent extends ValidationAbstract {
           setUserIdToLs();
         }),
         switchMap(() => this.apiUserService.getUser()),
-        tap((resp) => saveUserDataToLS(resp)),
+        tap((resp) => {
+          saveUserDataToLS(resp);
+          this.loaderService.disableLoader();
+        }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.signIn, err);
           throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);

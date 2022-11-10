@@ -18,6 +18,15 @@ export class ApiBoardService {
     return this.httpClient.get<IGetBoardResp>(EApiUrls.boards);
   }
 
-  // deleteBoard()
-  // updateBoard()
+  getBoards(): Observable<ICreateBoardResp[]> {
+    return this.httpClient.get(EApiUrls.boards) as Observable<ICreateBoardResp[]>;
+  }
+
+  deleteBoard(id: string): void {
+    this.httpClient.delete(EApiUrls.boards + `/${id}`).subscribe();
+  }
+
+  updateBoard(id: string, { title, description }: ICreateBoardReq): Observable<ICreateBoardResp> {
+    return this.httpClient.put<ICreateBoardResp>(EApiUrls.boards + '/' + `${id}`, { title, description });
+  }
 }
