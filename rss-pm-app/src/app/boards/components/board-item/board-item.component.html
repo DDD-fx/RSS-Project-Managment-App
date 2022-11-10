@@ -8,7 +8,7 @@
     <p>{{ board.description }}</p>
   </mat-card-content>
   <mat-card-actions class="board-btn-wrapper">
-    <button mat-stroked-button color="primary" type="button" (click)="onDeleteClick(board.id)">
+    <button mat-stroked-button color="primary" type="button" (click)="deleteBoard(board.id)">
       <mat-icon>delete</mat-icon>
     </button>
     <button mat-stroked-button color="primary" type="button" (click)="toggleUpdateForm()">

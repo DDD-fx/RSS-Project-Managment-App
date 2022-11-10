@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EApiUrls, ELocalStorage } from '../../shared/shared.enums';
+import { EApiUrls } from '../../shared/shared.enums';
 import { Observable } from 'rxjs';
 import { IGetAllUsersResp } from '../models/api-user.model';
 import { ISignUpReq, ISignUpResp } from '../../auth/models/auth.model';
@@ -25,7 +25,7 @@ export class ApiUserService {
 
   deleteUser(): void {
     this.loaderService.enableLoader();
-    this.httpClient.delete(EApiUrls.users + `/${getUserIdFromLs()}`);
+    this.httpClient.delete(EApiUrls.users + `/${getUserIdFromLs()}`).subscribe();
   }
 
   updateUser(body: ISignUpReq): Observable<ISignUpResp> {

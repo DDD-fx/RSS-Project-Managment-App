@@ -16,6 +16,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { BoardComponent } from './components/board/board.component';
 import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { EditBoardComponent } from './components/edit-board/edit-board.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { EditBoardComponent } from './components/edit-board/edit-board.component
     MatIconModule,
     MatGridListModule,
     ScrollingModule,
+    MatDialogModule,
   ],
+  entryComponents: [DeletingPopupComponent],
 })
 export class BoardsModule {}

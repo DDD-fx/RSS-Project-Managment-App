@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { deleteBoardById, getCurrentBoard, updateBoard } from 'src/app/NgRx/actions/storeActions';
+import { MatDialog } from '@angular/material/dialog';
+import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 
 @Component({
   selector: 'app-board-item',
@@ -29,7 +31,7 @@ export class BoardItemComponent {
     this.updateForm.markAsUntouched();
   }
 
-  constructor(private apiBoardService: ApiBoardService, private store: Store) {}
+  constructor(private apiBoardService: ApiBoardService, private store: Store, private dialogRef: MatDialog) {}
 
   onClick(color: string) {
     this.customColor = color;
@@ -39,9 +41,20 @@ export class BoardItemComponent {
     this.store.dispatch(getCurrentBoard({ currentBoard: this.board }));
   }
 
-  onDeleteClick(boardId: string): void {
-    this.apiBoardService.deleteBoard(boardId);
-    this.store.dispatch(deleteBoardById({ boardId }));
+  // onDeleteClick(boardId: string): void {
+  //   this.apiBoardService.deleteBoard(boardId);
+  //   this.store.dispatch(deleteBoardById({ boardId }));
+  // }
+
+  deleteBoard(boardId: string) {
+    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-acc' } });
+    dialog.afterClosed().subscribe((result) => {
+      console.log(result);
+      if (result === 'true') {
+        this.apiBoardService.deleteBoard(boardId);
+        this.store.dispatch(deleteBoardById({ boardId }));
+      }
+    });
   }
 
   updateBoard(boardId: string) {
