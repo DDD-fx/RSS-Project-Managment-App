@@ -1,9 +1,20 @@
 <div class="main-container">
   <h2 class="title">{{'board.title' | translate}}</h2>
-  <section class="boards-list">
-    <app-new-board></app-new-board>
-    <div *ngFor="let board of boards$ | async">
-      <app-board-item [routerLink]="['/boards', board.id]" [board]="board"></app-board-item>
-    </div>
-  </section>
+  <cdk-virtual-scroll-viewport #scroller appendOnly itemSize="30" class="content">
+    <mat-grid-list class="boards-list"
+      rowHeight="1:1"
+      cols="4"
+    >
+      <mat-grid-tile [rowspan]="1.25" class="tile">
+        <app-new-board></app-new-board>
+      </mat-grid-tile>
+      <mat-grid-tile
+          [rowspan]="1.25"
+          *cdkVirtualFor="let board of boards$ | async"
+          class="tile"
+      >
+        <app-board-item [board]="board"></app-board-item>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </cdk-virtual-scroll-viewport>
 </div>

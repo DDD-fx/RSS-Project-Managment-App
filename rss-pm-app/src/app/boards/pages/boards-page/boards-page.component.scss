@@ -4,19 +4,25 @@
 .main-container {
   height: 80vh;
   @include margin-center();
+  // .boards-list {
+  //   padding: 0;
+  // }
 
   .title {
     text-align: center;
     color: $blue;
     border-bottom: 2px solid $blue;
   }
-
-  .boards-list {
-    @include flex-full-screen();
-    height: 90%;
-    gap: 1rem;
+  .content {
+    height: calc(100% - 50px);
     overflow-y: auto;
-    // посторить грид сетку
   }
+  // .tile {
+  //   padding: 0;
+  // }
+  // .mat-grid-tile {
+  //   border-radius: 5px
+  // }
+
 }
 

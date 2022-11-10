@@ -93,7 +93,11 @@
     },
     "btn": {
       "create": "Create",
-      "cancel": "Cancel"
-    }
+      "cancel": "Cancel",
+      "update": "Update"
+    },
+    "updateBoard": "Update board",
+    "newLabal": "Enter new board name",
+    "newDescription": "Enter new description"
   }
 }
