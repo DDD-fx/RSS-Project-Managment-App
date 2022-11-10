@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
-import { deleteBoardById, getCurrentBoard } from 'src/app/NgRx/actions/storeActions';
+import { deleteBoardById, getCurrentBoard, updateBoard } from 'src/app/NgRx/actions/storeActions';
 
 @Component({
   selector: 'app-board-item',
@@ -17,13 +17,16 @@ export class BoardItemComponent {
 
   public updateForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
+    description: new FormControl('', [Validators.required]),
   });
 
   isUpdateFormActive = false;
 
   toggleUpdateForm() {
     this.isUpdateFormActive = !this.isUpdateFormActive;
+    this.updateForm.controls['title'].setValue('');
+    this.updateForm.controls['description'].setValue('');
+    this.updateForm.markAsUntouched();
   }
 
   constructor(private apiBoardService: ApiBoardService, private store: Store) {}
@@ -42,7 +45,13 @@ export class BoardItemComponent {
   }
 
   updateBoard(boardId: string) {
-    this.apiBoardService.updateBoard(boardId, this.updateForm.value);
+    const board: ICreateBoardResp = {
+      id: boardId,
+      title: this.updateForm.controls['title'].value,
+      description: this.updateForm.controls['description'].value,
+    };
+    this.store.dispatch(updateBoard({ board: board }));
+    this.apiBoardService.updateBoard(boardId, this.updateForm.value).subscribe();
     this.toggleUpdateForm();
   }
 }

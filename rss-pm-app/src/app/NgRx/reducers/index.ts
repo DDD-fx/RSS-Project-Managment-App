@@ -9,6 +9,7 @@ import {
   getAllBoards,
   deleteBoardById,
   getCurrentBoard,
+  updateBoard,
 } from '../actions/storeActions';
 import { IStore } from '../interfaces/store.interface';
 
@@ -22,7 +23,7 @@ export const Store: IStore = {
   isLogged: false,
   userName: null,
   boards: [],
-  currentBoard: { title: 'Board', description: '', id: '' },
+  currentBoard: { title: '', description: '', id: '' },
 };
 
 export const storeReducer = createReducer(
@@ -40,5 +41,14 @@ export const storeReducer = createReducer(
     })
   ),
   // on(createNewBoard, (state: any, { board }): IStore => ({ ...state, boards: [...state.boards, board] }))
-  on(getCurrentBoard, (state: any, { currentBoard }): IStore => ({ ...state, currentBoard: currentBoard }))
+  on(getCurrentBoard, (state: any, { currentBoard }): IStore => ({ ...state, currentBoard: currentBoard })),
+  on(updateBoard, (state, { board }): IStore => {
+    const boardIndex = state.boards.findIndex((item) => item.id === board.id);
+    const updateBoards = [...state.boards];
+    updateBoards[boardIndex] = board;
+    return {
+      ...state,
+      boards: updateBoards,
+    };
+  })
 );

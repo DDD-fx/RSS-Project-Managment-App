@@ -1,18 +1,18 @@
-<mat-card class="board" *ngIf="!isUpdateFormActive" [style.background-color]="'{{customColor}}'" (click)="saveCurrentBoard() ">
+<mat-card class="board" *ngIf="!isUpdateFormActive" [style.background-color]="'{{customColor}}'">
     <input class="settings" type="color" #color (click)="onClick(color.value)" />
     <!-- <button class="settings" mat-stroked-button color="primary" type="submit">
       <mat-icon>settings</mat-icon>
     </button> -->
-  <mat-card-title [routerLink]="['/boards', board.id]">{{ board.title }}</mat-card-title>
+  <mat-card-title [routerLink]="['/boards', board.id]" (click)="saveCurrentBoard()">{{ board.title }}</mat-card-title>
   <mat-card-content>
     <p>{{ board.description }}</p>
   </mat-card-content>
   <mat-card-actions class="board-btn-wrapper">
-    <button mat-stroked-button color="primary" type="submit" (click)="toggleUpdateForm()">
-      <mat-icon> border_color</mat-icon>
-    </button>
-    <button mat-stroked-button color="primary" type="submit" (click)="onDeleteClick(board.id)">
+    <button mat-stroked-button color="primary" type="button" (click)="onDeleteClick(board.id)">
       <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-stroked-button color="primary" type="button" (click)="toggleUpdateForm()">
+      <mat-icon> border_color</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
@@ -32,10 +32,10 @@
       </mat-form-field>
 
       <div class="board-btn-wrapper">
-        <button mat-button type="submit" (click)="toggleUpdateForm()">
+        <button mat-button type="button" (click)="toggleUpdateForm()">
           {{'board.btn.cancel' | translate}}
         </button>
-        <button mat-raised-button color="primary" type="submit" (click)="updateBoard(board.id)">
+        <button mat-raised-button color="primary" type="button" (click)="updateBoard(board.id)" [disabled]="updateForm.invalid">
           {{'board.btn.update' | translate}}
         </button>
       </div>

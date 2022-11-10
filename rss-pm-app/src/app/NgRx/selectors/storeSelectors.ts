@@ -6,3 +6,5 @@ export const selectIsLogged = createSelector(selectFeature, (state) => state.isL
 export const selectUserName = createSelector(selectFeature, (state) => state.userName);
 export const selectAllBoards = createSelector(selectFeature, (state) => state.boards);
 export const selectCurrentBoard = createSelector(selectFeature, (state) => state.currentBoard);
+export const selectUpdateBoard = (props: { boardId: string }) =>
+  createSelector(selectAllBoards, (boards) => boards.find((board) => board.id === props.boardId));
