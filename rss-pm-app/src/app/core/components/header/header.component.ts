@@ -1,5 +1,5 @@
 /* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import { DeletingPopupComponent } from '../../../shared/components/deleting-popu
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isLoggedStore$: Observable<boolean> | undefined;
 
   userName$: Observable<string | null> | undefined;
@@ -34,6 +34,7 @@ export class HeaderComponent {
     this.isLoggedStore$ = this.store.select(selectIsLogged);
     this.userName$ = this.store.select(selectUserName);
   }
+  ngOnInit() {}
 
   title = 'rss-pm-app';
 
