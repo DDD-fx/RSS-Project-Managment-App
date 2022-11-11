@@ -26,11 +26,6 @@ const routes: Routes = [
     loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
     canActivate: [AuthGuard],
   },
-  {
-    path: ESiteUrls.boards,
-    loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
-    canActivate: [AuthGuard],
-  },
   { path: '**', component: WrongAddressPageComponent },
 ];
 
