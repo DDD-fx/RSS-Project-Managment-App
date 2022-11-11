@@ -9,6 +9,7 @@ import { makeIsloggedFalse, removeUserName } from 'src/app/NgRx/actions/storeAct
 import { selectIsLogged, selectUserName } from 'src/app/NgRx/selectors/storeSelectors';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
+import { ESiteUrls } from '../../../shared/shared.enums';
 
 @Component({
   selector: 'app-header',
@@ -55,8 +56,11 @@ export class HeaderComponent implements OnInit {
   deleteUser() {
     let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-acc' } });
     dialog.afterClosed().subscribe((result) => {
-      if (result) {
+      if (result.toString() === 'true') {
         this.apiService.deleteUser();
+        localStorage.clear();
+        this.store.dispatch(makeIsloggedFalse());
+        this.router.navigate([ESiteUrls.signUp]);
       }
     });
   }
