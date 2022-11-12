@@ -5,7 +5,7 @@ import { filter, map, Observable, pairwise, throttleTime } from 'rxjs';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { getAllBoards } from 'src/app/NgRx/actions/storeActions';
-import { selectAllBoards } from 'src/app/NgRx/selectors/storeSelectors';
+import { selectAllBoards, selectAllBoardsFailure, selectAllBoardsSuccess } from 'src/app/NgRx/selectors/storeSelectors';
 
 @Component({
   selector: 'app-boards-page',
@@ -13,17 +13,24 @@ import { selectAllBoards } from 'src/app/NgRx/selectors/storeSelectors';
   styleUrls: ['./boards-page.component.scss'],
 })
 export class BoardsPageComponent implements OnInit, AfterViewInit {
-  constructor(private apiBoardService: ApiBoardService, private store: Store, private ngZone: NgZone) {}
+  isLoading$: Observable<boolean>;
+
+  boards$: Observable<ICreateBoardResp[] | []>;
+
+  error$: Observable<string | null>;
+
+  constructor(private apiBoardService: ApiBoardService, private store: Store, private ngZone: NgZone) {
+    this.isLoading$ = this.store.select(selectAllBoards);
+    this.boards$ = this.store.select(selectAllBoardsSuccess);
+    this.error$ = this.store.select(selectAllBoardsFailure);
+  }
 
   @ViewChild(CdkVirtualScrollViewport) scroller!: CdkVirtualScrollViewport;
 
-  boards$!: Observable<ICreateBoardResp[] | []>;
+  order: string = 'asc';
 
   fetchData() {
-    this.apiBoardService.getBoards().subscribe((boards: ICreateBoardResp[]) => {
-      this.store.dispatch(getAllBoards({ boards }));
-      this.boards$ = this.store.select(selectAllBoards);
-    });
+    this.store.dispatch(getAllBoards());
   }
 
   ngOnInit(): void {
@@ -44,5 +51,15 @@ export class BoardsPageComponent implements OnInit, AfterViewInit {
           this.fetchData();
         });
       });
+  }
+
+  sortBoards() {
+    if (this.order === 'desc') {
+      this.order = 'asc';
+      console.log(this.order);
+    } else {
+      this.order = 'desc';
+      console.log(this.order);
+    }
   }
 }

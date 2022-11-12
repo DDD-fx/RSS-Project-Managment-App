@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { storeReducer } from '../NgRx/reducers/reducer';
+import { AppEffects } from '../NgRx/app.effects';
+import { EffectsModule } from '@ngrx/effects';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 
@@ -20,6 +22,7 @@ import { DeletingPopupComponent } from '../shared/components/deleting-popup/dele
     MatButtonModule,
     CommonModule,
     StoreModule.forFeature('store', storeReducer),
+    EffectsModule.forFeature([AppEffects]),
     MatDialogModule,
   ],
   providers: [],

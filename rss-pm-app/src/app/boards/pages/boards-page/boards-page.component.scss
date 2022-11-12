@@ -4,25 +4,22 @@
 .main-container {
   height: 80vh;
   @include margin-center();
-  // .boards-list {
-  //   padding: 0;
-  // }
-
   .title {
     text-align: center;
     color: $blue;
     border-bottom: 2px solid $blue;
+    .sort {
+      position: absolute;
+      right: 10%;
+      color: $black;
+      &:hover {
+        color: $blue;
+      }
+    }
   }
   .content {
     height: calc(100% - 50px);
     overflow-y: auto;
   }
-  // .tile {
-  //   padding: 0;
-  // }
-  // .mat-grid-tile {
-  //   border-radius: 5px
-  // }
-
 }
 

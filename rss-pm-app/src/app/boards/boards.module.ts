@@ -18,6 +18,7 @@ import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { EditBoardComponent } from './components/edit-board/edit-board.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
+import { SortPipe } from './pipes/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { DeletingPopupComponent } from '../shared/components/deleting-popup/dele
     BoardPageComponent,
     BoardComponent,
     EditBoardComponent,
+    SortPipe,
   ],
   imports: [
     CommonModule,
