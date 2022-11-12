@@ -108,5 +108,10 @@
     "updateBoard": "Update board",
     "newLabal": "Enter new board name",
     "newDescription": "Enter new description"
+  },
+  "page404": {
+    "home": "Home",
+    "title": "UH OH! You're lost.",
+    "text": "The page you are looking for does not exist.\nHow you got here is a mystery. But you can click the button below\nto go back to the homepage."
   }
 }

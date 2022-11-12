@@ -18,7 +18,7 @@
         <p><b>RSS PM</b> {{ 'welcome.aboutTitle' | translate }}</p>
       </div>
       <a [routerLink]="['/boards']" class="">
-        <button mat-raised-button color="primary" class="">{{ 'welcome.button' | translate }}</button>
+        <button mat-raised-button color="primary" class="btn-16">{{ 'welcome.button' | translate }}</button>
       </a>
     </div>
 
@@ -28,14 +28,27 @@
   </div>
   <div class="background">
     <div class="rss-content">
-      <h3 class="rss-title">{{ 'welcome.rssTitle' | translate }} <a href="https://rs.school/index.html">	&lt;The Rolling Scopes&gt;</a></h3>
+      <h3 class="rss-title">{{ 'welcome.rssTitle' | translate }}
+        <a class="rss__link" href="https://rs.school/index.html">
+          The Rolling Scopes
+        </a>
+      </h3>
       <p>{{ 'welcome.rssAbout.1' | translate }}</p>
       <p>{{ 'welcome.rssAbout.2' | translate }} JavaScript, Typescript, Git, GitHub (clone, add, commit, push, pull, merge, rebase, work with Pull Request),
           npm, webpack, CSS3 / HTML5, Chrome DevTools, Figma, {{ 'welcome.rssAbout.3' | translate }} REST API</p>
-        <div class="animation-box">
-          <div class="animated animated-fade-in-up fade-in-up">{{ 'welcome.rssBenefits.1' | translate }}</div>
-          <div class="animated animated-fade-in-up fade-in-up">{{ 'welcome.rssBenefits.2' | translate }}</div>
-          <div class="animated animated-fade-in-up fade-in-up">{{ 'welcome.rssBenefits.3' | translate }}</div>
+        <div class="animated-box-container">
+          <div class="animation-box">
+            <div class="animated animated-fade-in-up fade-in-up">
+              <img alt="галочка" class="check-mark" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Check_mark.svg/800px-Check_mark.svg.png">
+              {{ 'welcome.rssBenefits.1' | translate }}</div>
+            <div class="animated animated-fade-in-up fade-in-up">
+              <img alt="галочка" class="check-mark" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Check_mark.svg/800px-Check_mark.svg.png">
+              {{ 'welcome.rssBenefits.2' | translate }}</div>
+            <div class="animated animated-fade-in-up fade-in-up">
+              <img alt="галочка" class="check-mark" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Check_mark.svg/800px-Check_mark.svg.png">
+              {{ 'welcome.rssBenefits.3' | translate }}
+            </div>
+          </div>
         </div>
     </div>
   </div>

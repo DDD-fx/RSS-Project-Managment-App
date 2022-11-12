@@ -1,0 +1,34 @@
+.page{
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__cosmo {
+    width: 70%;
+  }
+
+  &__info {
+    margin-top: 8%;
+    width: 400px;
+  }
+
+  &__404 {
+    font-size: 7.5em;
+    margin: 15px 0px;
+    font-weight:bold;
+    padding-bottom: 20px;
+    font-family: cursive;
+  }
+
+  &__emotion {
+    font-weight:bold;
+    font-family: cursive;
+  }
+
+  &__text {
+    font-family: cursive;
+    font-size: 1.2em;
+  }
+}

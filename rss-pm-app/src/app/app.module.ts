@@ -19,12 +19,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from './shared/components/deleting-popup/deleting-popup.component';
 import { MatButtonModule } from '@angular/material/button';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [AppComponent, DeletingPopupComponent, LoaderComponent],
+  declarations: [AppComponent, DeletingPopupComponent, LoaderComponent, WrongAddressPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
