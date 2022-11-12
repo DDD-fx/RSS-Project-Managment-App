@@ -2,17 +2,21 @@
 @import "src/styles/mixins";
 
 .create-board-btn {
-  width: 210px;
-  height: 190px;
+  border: 2px solid $lightgrey;
+  border-radius: 4px;
 }
 
-.create-form {
-  width: 196px;
-  height: 176px;
+.board {
   border: 2px solid $lightgrey;
-  padding: 5px;
-  border-radius: 5px
+  box-shadow: none;
+  padding: 21px 0px;
+  text-align: center;
 }
+
+.mat-card-title {
+  text-align: center;
+}
+
 
 .board-btn-wrapper {
   @include flex-center();
