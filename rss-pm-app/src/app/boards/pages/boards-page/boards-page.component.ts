@@ -12,14 +12,14 @@ import { selectAllBoards } from 'src/app/NgRx/selectors/storeSelectors';
   styleUrls: ['./boards-page.component.scss'],
 })
 export class BoardsPageComponent implements OnInit {
-  constructor(private apiBoardService: ApiBoardService, private store: Store) {}
-
-  boards$!: Observable<ICreateBoardResp[] | []>;
-
-  ngOnInit(): void {
+  constructor(private apiBoardService: ApiBoardService, private store: Store) {
     this.apiBoardService.getBoards().subscribe((boards: ICreateBoardResp[]) => {
       this.store.dispatch(getAllBoards({ boards }));
       this.boards$ = this.store.select(selectAllBoards);
     });
   }
+
+  boards$: Observable<ICreateBoardResp[]> | undefined;
+
+  ngOnInit(): void {}
 }

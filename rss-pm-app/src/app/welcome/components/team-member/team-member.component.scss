@@ -26,3 +26,21 @@
     color: $black;
   }
 }
+
+.link {
+  @include link();
+  color: $white;
+  font-weight: bold;
+}
+
+.link::after {
+  @include link-after();
+}
+
+.link:hover::after {
+  @include link-hover-after();
+}
+
+.link:hover {
+  @include link-hover
+}

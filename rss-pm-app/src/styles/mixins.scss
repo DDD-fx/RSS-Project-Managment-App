@@ -15,3 +15,60 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+@mixin link {
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+}
+
+@mixin link-after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: $green-text;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+@mixin link-hover-after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+@mixin link-hover {
+  transform: scaleX(1)
+}
+
+@mixin button-hover-after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+@mixin button-after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  z-index: -1;
+  box-shadow:
+    -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
+  transition: all 0.3s ease;
+}
+
+@mixin button-active {
+  top: 2px;
+}
+
+
