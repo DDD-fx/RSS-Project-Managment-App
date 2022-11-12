@@ -2,13 +2,13 @@ import { ActionReducerMap, createReducer, MetaReducer, on } from '@ngrx/store';
 import { ELocalStorage } from 'src/app/shared/shared.enums';
 import { environment } from '../../../environments/environment';
 import {
+  addUserName,
+  deleteBoardById,
+  getAllBoards,
+  getCurrentBoard,
   makeIsloggedFalse,
   makeIsloggedTrue,
-  addUserName,
   removeUserName,
-  getAllBoards,
-  deleteBoardById,
-  getCurrentBoard,
 } from '../actions/storeActions';
 import { IStore } from '../interfaces/store.interface';
 
@@ -21,7 +21,7 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [] :
 export const Store: IStore = {
   isLogged: false,
   userName: null,
-  boards: [],
+  boards: [{ title: '23123', description: '123123', id: '123123' }],
   currentBoard: { title: 'Board', description: '', id: '' },
 };
 
