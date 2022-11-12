@@ -4,19 +4,22 @@
 .main-container {
   height: 80vh;
   @include margin-center();
-
   .title {
     text-align: center;
     color: $blue;
     border-bottom: 2px solid $blue;
+    .sort {
+      position: absolute;
+      right: 10%;
+      color: $black;
+      &:hover {
+        color: $blue;
+      }
+    }
   }
-
-  .boards-list {
-    @include flex-full-screen();
-    height: 90%;
-    gap: 1rem;
+  .content {
+    height: calc(100% - 50px);
     overflow-y: auto;
-    // посторить грид сетку
   }
 }
 

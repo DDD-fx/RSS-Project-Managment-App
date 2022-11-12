@@ -1,15 +1,41 @@
 @import "src/styles/variables";
+@import "src/styles/mixins";
+
 .footer {
     display:flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     background-color: $green;
-    &__logo{
+
+    &__logo {
         width: 150px;
+        padding-top: 20px;
+        padding-bottom: 10px;
     }
-    &__link{
-        color: $antiquewhite;
-        text-decoration: none;
+
+    &__link {
+        @include link();
+        color: $green-text;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    &__link::after {
+      @include link-after();
+    }
+
+    &__link:hover::after {
+      @include link-hover-after();
+    }
+
+    &__link:hover{
+      @include link-hover
+    }
+
+    &__year {
+      color: $green;
+      text-decoration: none;
+      margin-bottom: 0;
     }
 }

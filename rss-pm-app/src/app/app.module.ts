@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 // import { reducers, metaReducers } from './NgRx/reducers';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './NgRx/app.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
@@ -16,13 +15,17 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CoreModule } from './core/core.module';
 import { interceptorProviders } from './api/interceptors/interceptors';
 import { ToastrModule } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeletingPopupComponent } from './shared/components/deleting-popup/deleting-popup.component';
+import { MatButtonModule } from '@angular/material/button';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [AppComponent, LoaderComponent],
+  declarations: [AppComponent, DeletingPopupComponent, LoaderComponent, WrongAddressPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,7 +33,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     //   metaReducers,
     // }),
     StoreModule.forRoot({}),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     BrowserAnimationsModule,
@@ -47,6 +50,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],

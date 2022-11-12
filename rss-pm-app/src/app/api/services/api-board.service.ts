@@ -14,8 +14,8 @@ export class ApiBoardService {
     return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards, data);
   }
 
-  getBoard(): Observable<IGetBoardResp> {
-    return this.httpClient.get<IGetBoardResp>(EApiUrls.boards);
+  getBoard(id: string): Observable<IGetBoardResp> {
+    return this.httpClient.get<IGetBoardResp>(EApiUrls.boards + `/${id}`);
   }
 
   getBoards(): Observable<ICreateBoardResp[]> {
@@ -26,7 +26,7 @@ export class ApiBoardService {
     this.httpClient.delete(EApiUrls.boards + `/${id}`).subscribe();
   }
 
-  updateBoard(id: string, { title, description }: ICreateBoardReq): Observable<ICreateBoardResp> {
-    return this.httpClient.put<ICreateBoardResp>(EApiUrls.boards + '/' + `${id}`, { title, description });
+  updateBoard(id: string, body: ICreateBoardReq): Observable<ICreateBoardResp> {
+    return this.httpClient.put<ICreateBoardResp>(EApiUrls.boards + `/${id}`, body);
   }
 }

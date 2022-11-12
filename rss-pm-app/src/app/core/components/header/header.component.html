@@ -5,6 +5,7 @@
     <a>
         <img class="header__home" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/1688/1688109.png" alt="home">
     </a>
+    <button mat-raised-button color="primary" class="btn">{{'header.create-board-button' | translate}}</button>
     <div class="header__controls">
         <div class="header__toggle">
             <span class="">EN</span><mat-slide-toggle color="primary" (click)="changeLang()">RU</mat-slide-toggle>
@@ -15,10 +16,10 @@
         </ng-container>
         <ng-template class="header__buttons" #elseBlock >
             <a [routerLink]="['signIn']" class="">
-                <button mat-raised-button color="primary" class="">{{'header.signIn-btn' | translate}}</button>
+                <button  mat-raised-button color="primary" class="btn">{{'header.signIn-btn' | translate}}</button>
             </a>
             <a [routerLink]="['signUp']" class="">
-                <button mat-raised-button color="primary" class="">{{'header.signUp-btn' | translate}}</button>
+                <button mat-raised-button color="primary" class="btn">{{'header.signUp-btn' | translate}}</button>
             </a>
         </ng-template>
 
@@ -29,13 +30,12 @@
                     <img class="header__settings" alt="settings" src="https://cdn-icons-png.flaticon.com/512/54/54512.png">
                 </a>
                 <div class="dropdown-content">
-                  <a (click)="deleteUser()" href="#">Delete User</a>
-                  <a [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>
-                  <a href="#">Link 3</a>
+                  <a mat-raised-button (click)="deleteUser()">{{'header.delete-user' | translate}}</a>
+                  <a mat-raised-button [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>
                 </div>
             </div>
 
-            <button mat-raised-button color="primary" (click)="logout()">Exit</button>
+            <button mat-raised-button color="primary" (click)="logout()" class="btn">{{'header.exit-button' | translate}}</button>
 
         </ng-template>
 

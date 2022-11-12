@@ -1,0 +1,51 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+
+.form-input {
+  padding: 0;
+}
+
+.board {
+  border: 2px solid $lightgrey;
+  width: 240px;
+  height: 216px;
+  box-shadow: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  .settings {
+    align-self: flex-end;
+    width: 30px;
+  }
+}
+
+.update-board {
+  border: 2px solid $lightgrey;
+  height: 100%;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.mat-card-actions:last-child {
+  margin-bottom: 0;
+}
+
+.update-form {
+  padding: 5px;
+  border-radius: 5px
+}
+
+.board-btn-wrapper {
+  @include flex-center();
+  gap: 10px;
+
+  .mat-button:hover {
+    border: 1px solid $black;
+  }
+}

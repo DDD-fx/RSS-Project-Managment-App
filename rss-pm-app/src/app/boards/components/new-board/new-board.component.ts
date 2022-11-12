@@ -11,7 +11,7 @@ import { ApiBoardService } from 'src/app/api/services/api-board.service';
 export class NewBoardComponent {
   public boardForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
+    description: new FormControl('', [Validators.required]),
   });
 
   isFormActive = false;

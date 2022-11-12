@@ -25,7 +25,8 @@ export class ApiUserService {
 
   deleteUser(): void {
     this.loaderService.enableLoader();
-    this.httpClient.delete(EApiUrls.users + `/${getUserIdFromLs()}`);
+    this.httpClient.delete(EApiUrls.users + `/${getUserIdFromLs()}`).subscribe();
+    this.loaderService.disableLoader();
   }
 
   updateUser(body: ISignUpReq): Observable<ISignUpResp> {

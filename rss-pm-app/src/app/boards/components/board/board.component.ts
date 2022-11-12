@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
-import { ApiBoardService } from 'src/app/api/services/api-board.service';
-import { deleteBoardById } from 'src/app/NgRx/actions/storeActions';
+import { getCurrentBoard } from 'src/app/NgRx/actions/storeActions';
+import { selectCurrentBoard } from 'src/app/NgRx/selectors/storeSelectors';
 
 @Component({
   selector: 'app-board',
@@ -10,18 +10,12 @@ import { deleteBoardById } from 'src/app/NgRx/actions/storeActions';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent {
-  @Input() board!: ICreateBoardResp;
+  public constructor(private store: Store, private router: Router) {}
 
-  private customColor: string = '#ffffff';
+  board$ = this.store.select(selectCurrentBoard);
 
-  constructor(private apiBoardService: ApiBoardService, private store: Store) {}
-
-  onClick(color: string) {
-    this.customColor = color;
-  }
-
-  onDeleteClick(boardId: string): void {
-    this.apiBoardService.deleteBoard(boardId);
-    this.store.dispatch(deleteBoardById({ boardId }));
+  onBack() {
+    this.router.navigate(['boards']);
+    this.store.dispatch(getCurrentBoard({ currentBoard: { title: '', description: '', id: '' } }));
   }
 }
