@@ -13,7 +13,7 @@
       </mat-grid-tile>
       <mat-grid-tile
           [rowspan]="1.25"
-          *cdkVirtualFor="let board of boards$ | async"
+          *cdkVirtualFor="let board of boards$ | async | sort: order"
           class="tile"
       >
         <app-board-item [board]="board"></app-board-item>
