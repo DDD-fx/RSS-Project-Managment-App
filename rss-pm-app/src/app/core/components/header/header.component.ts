@@ -48,6 +48,7 @@ export class HeaderComponent {
 
   logout() {
     localStorage.clear();
+    this.router.navigate(['']);
     this.store.dispatch(makeIsloggedFalse());
     this.store.dispatch(removeUserName());
   }

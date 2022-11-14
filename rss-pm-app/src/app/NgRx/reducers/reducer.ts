@@ -21,22 +21,22 @@ export const Store: IStore = {
 
 export const storeReducer = createReducer(
   Store,
-  on(StoreActions.makeIsloggedTrue, (state: any): IStore => ({ ...state, isLogged: true })),
-  on(StoreActions.makeIsloggedFalse, (state: any): IStore => ({ ...state, isLogged: false })),
+  on(StoreActions.makeIsloggedTrue, (state): IStore => ({ ...state, isLogged: true })),
+  on(StoreActions.makeIsloggedFalse, (state): IStore => ({ ...state, isLogged: false })),
   on(
     StoreActions.addUserName,
-    (state: any): IStore => ({ ...state, userName: localStorage.getItem(ELocalStorage.userName) })
+    (state): IStore => ({ ...state, userName: localStorage.getItem(ELocalStorage.userName) })
   ),
-  on(StoreActions.removeUserName, (state: any): IStore => ({ ...state, userName: null })),
+  on(StoreActions.removeUserName, (state): IStore => ({ ...state, userName: null })),
 
-  on(StoreActions.getAllBoards, (state: any): IStore => ({ ...state, isLoading: true })),
+  on(StoreActions.getAllBoards, (state): IStore => ({ ...state, isLoading: true })),
   on(
     StoreActions.getAllBoardsSuccess,
-    (state: any, action): IStore => ({ ...state, isLoading: false, boards: action.boards })
+    (state, action): IStore => ({ ...state, isLoading: false, boards: action.boards })
   ),
   on(
     StoreActions.getAllBoardsFailure,
-    (state: any, action): IStore => ({ ...state, isLoading: false, error: action.error })
+    (state, action): IStore => ({ ...state, isLoading: false, error: action.error })
   ),
 
   on(
@@ -47,10 +47,7 @@ export const storeReducer = createReducer(
     })
   ),
   // on(createNewBoard, (state: any, { board }): IStore => ({ ...state, boards: [...state.boards, board] }))
-  on(
-    StoreActions.getCurrentBoard,
-    (state: any, { currentBoard }): IStore => ({ ...state, currentBoard: currentBoard })
-  ),
+  on(StoreActions.getCurrentBoard, (state, { currentBoard }): IStore => ({ ...state, currentBoard: currentBoard })),
   on(StoreActions.updateBoard, (state, { board }): IStore => {
     const boardIndex = state.boards.findIndex((item) => item.id === board.id);
     const updateBoards = [...state.boards];
