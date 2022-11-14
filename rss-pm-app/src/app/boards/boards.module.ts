@@ -19,6 +19,7 @@ import { EditBoardComponent } from './components/edit-board/edit-board.component
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 import { SortPipe } from './pipes/sort.pipe';
+import { ColumnsPageModule } from '../columns/columns-page.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SortPipe } from './pipes/sort.pipe';
     MatGridListModule,
     ScrollingModule,
     MatDialogModule,
+    ColumnsPageModule,
   ],
   entryComponents: [DeletingPopupComponent],
 })
