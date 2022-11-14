@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
+import { getAllBoards } from 'src/app/NgRx/actions/storeActions';
 
 @Component({
   selector: 'app-new-board',
@@ -30,6 +31,7 @@ export class NewBoardComponent {
   createBoard() {
     if (this.boardForm.valid) {
       this.apiBoardService.createBoard(this.boardForm.value).subscribe();
+      this.store.dispatch(getAllBoards());
       // this.store.dispatch(createNewBoard(this.boardForm.value));
       this.toggleForm();
     }

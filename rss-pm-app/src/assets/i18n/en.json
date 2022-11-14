@@ -11,7 +11,8 @@
     "yes-option": "Yes",
     "no-option": "No",
     "question": "Are you sure you want to delete ",
-    "del-acc": "account"
+    "del-acc": "account",
+    "del-board": "board"
   },
   "signIn-form": {
     "title": "Log In",

@@ -11,7 +11,8 @@
     "yes-option": "Да",
     "no-option": "Нет",
     "question": "Вы действительно хотите удалить ",
-    "del-acc": "аккаунт"
+    "del-acc": "аккаунт",
+    "del-board": "board"
   },
   "signIn-form": {
     "title": "Вход",

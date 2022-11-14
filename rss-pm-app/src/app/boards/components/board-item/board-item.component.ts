@@ -47,9 +47,8 @@ export class BoardItemComponent {
   // }
 
   deleteBoard(boardId: string) {
-    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-acc' } });
+    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-board' } });
     dialog.afterClosed().subscribe((result) => {
-      console.log(result);
       if (result === 'true') {
         this.apiBoardService.deleteBoard(boardId);
         this.store.dispatch(deleteBoardById({ boardId }));
