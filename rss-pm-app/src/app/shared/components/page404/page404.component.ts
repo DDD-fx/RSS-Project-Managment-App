@@ -14,6 +14,7 @@ export class WrongAddressPageComponent implements OnInit {
     translate.setDefaultLang('en');
     translate.use('en');
   }
+
   ngOnInit() {
     gsap.set('svg', { visibility: 'visible' });
     gsap.to('#headStripe', {
@@ -95,7 +96,8 @@ export class WrongAddressPageComponent implements OnInit {
       delay: 2,
     });
   }
+
   onButtonClick() {
-    this.router.navigate(['']);
+    void this.router.navigate(['']);
   }
 }
