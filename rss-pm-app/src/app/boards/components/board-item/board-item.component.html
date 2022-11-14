@@ -22,7 +22,7 @@
   <mat-card-title>{{'board.updateBoard' | translate}}</mat-card-title>
     <form class="update-form" [formGroup]="updateForm">
       <mat-form-field class="form-input" appearance="fill">
-        <mat-label>{{'board.newLabal' | translate}}</mat-label>
+        <mat-label>{{'board.newLabel' | translate}}</mat-label>
         <input matInput autocomplete="off" type="text" formControlName="title" placeholder="{{ board.title }}">
         <mat-error *ngIf="updateForm.invalid">{{'board.boardErrors.no-name-error' | translate}}</mat-error>
       </mat-form-field>

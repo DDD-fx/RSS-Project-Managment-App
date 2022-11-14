@@ -15,7 +15,7 @@ export class BoardComponent {
   board$ = this.store.select(selectCurrentBoard);
 
   onBack() {
-    this.router.navigate(['boards']);
+    void this.router.navigate(['boards']);
     this.store.dispatch(getCurrentBoard({ currentBoard: { title: '', description: '', id: '' } }));
   }
 }
