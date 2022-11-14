@@ -34,7 +34,7 @@ export class LoginFormComponent extends ValidationAbstract {
     private readonly notificationService: NotificationService,
     private readonly apiUserService: ApiUserService,
     private store: Store,
-    public loaderService: LoaderService
+    private readonly loaderService: LoaderService
   ) {
     super();
   }
