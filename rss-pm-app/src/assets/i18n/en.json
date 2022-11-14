@@ -1,6 +1,6 @@
 {
   "header": {
-    "signIn-btn": "Sign In",
+    "signIn-btn": "Log In",
     "signUp-btn": "Sign Up",
     "edit-profile": "Edit profile",
     "create-board-button": "Create new board",
@@ -107,7 +107,7 @@
       "update": "Update"
     },
     "updateBoard": "Update board",
-    "newLabal": "Enter new board name",
+    "newLabel": "Enter new board name",
     "newDescription": "Enter new description"
   },
   "page404": {

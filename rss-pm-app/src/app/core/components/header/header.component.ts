@@ -36,8 +36,6 @@ export class HeaderComponent {
     this.userName$ = this.store.select(selectUserName);
   }
 
-  title = 'rss-pm-app';
-
   changeLang(): void {
     if (this.translate.currentLang === 'en') {
       this.translate.use('ru');
@@ -60,12 +58,13 @@ export class HeaderComponent {
         this.apiService.deleteUser();
         localStorage.clear();
         this.store.dispatch(makeIsloggedFalse());
-        this.router.navigate([ESiteUrls.signUp]);
+        this.store.dispatch(removeUserName());
+        void this.router.navigate([ESiteUrls.signUp]);
       }
     });
   }
 
   onLogoClick() {
-    this.router.navigate(['']);
+    void this.router.navigate(['']);
   }
 }

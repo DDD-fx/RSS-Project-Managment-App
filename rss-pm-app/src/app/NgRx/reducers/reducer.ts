@@ -1,14 +1,13 @@
-import { ActionReducerMap, createReducer, MetaReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { ELocalStorage } from 'src/app/shared/shared.enums';
-import { environment } from '../../../environments/environment';
 import * as StoreActions from '../actions/storeActions';
 import { IStore } from '../interfaces/store.interface';
 
-export interface State {}
-
-export const reducers: ActionReducerMap<State> = {};
-
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+// export interface State {}
+//
+// export const reducers: ActionReducerMap<State> = {};
+//
+// export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
 
 export const Store: IStore = {
   isLogged: false,
