@@ -3,12 +3,14 @@
         <img class="header__logo" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/567/567014.png" alt="logo">
     </a>
     <a>
-        <img class="header__home" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/1688/1688109.png" alt="home">
+        <img class="header__home" (click)="onModal()" src="https://cdn-icons-png.flaticon.com/512/1688/1688109.png" alt="home">
     </a>
-    <button mat-raised-button color="primary" class="btn">{{'header.create-board-button' | translate}}</button>
     <div class="header__controls">
         <div class="header__toggle">
-            <span class="">EN</span><mat-slide-toggle color="primary" (click)="changeLang()">RU</mat-slide-toggle>
+            <span class="lang">EN</span>
+            <mat-slide-toggle color="primary" class="toggle" (click)="changeLang()">
+            <span class="lang">RU</span>
+            </mat-slide-toggle>
         </div>
 
         <ng-container *ngIf="(isLoggedStore$ | async ); then thenBlock else elseBlock">
