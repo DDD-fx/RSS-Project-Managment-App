@@ -6,6 +6,7 @@ import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { getAllBoards } from 'src/app/NgRx/actions/storeActions';
 import { selectAllBoards, selectAllBoardsFailure, selectAllBoardsSuccess } from 'src/app/NgRx/selectors/storeSelectors';
+import { ELocalStorage } from 'src/app/shared/shared.enums';
 
 @Component({
   selector: 'app-boards-page',
@@ -34,7 +35,9 @@ export class BoardsPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    if (localStorage.getItem(ELocalStorage.token)) {
+      this.fetchData();
+    }
   }
 
   ngAfterViewInit() {
