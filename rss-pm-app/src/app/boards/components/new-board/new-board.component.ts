@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { getAllBoards } from 'src/app/NgRx/actions/storeActions';
+import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-new-board',
@@ -26,13 +27,17 @@ export class NewBoardComponent {
     this.boardForm.markAsUntouched();
   }
 
-  constructor(private apiBoardService: ApiBoardService, private store: Store) {}
+  constructor(
+    private apiBoardService: ApiBoardService,
+    private store: Store,
+    private readonly loaderService: LoaderService
+  ) {}
 
   createBoard() {
     if (this.boardForm.valid) {
       this.apiBoardService.createBoard(this.boardForm.value).subscribe();
       this.store.dispatch(getAllBoards());
-      // this.store.dispatch(createNewBoard(this.boardForm.value));
+      this.loaderService.disableLoader();
       this.toggleForm();
     }
   }

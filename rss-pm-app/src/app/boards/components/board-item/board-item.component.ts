@@ -6,6 +6,7 @@ import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { deleteBoardById, getCurrentBoard, updateBoard } from 'src/app/NgRx/actions/storeActions';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
+import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-board-item',
@@ -31,7 +32,12 @@ export class BoardItemComponent {
     this.updateForm.markAsUntouched();
   }
 
-  constructor(private apiBoardService: ApiBoardService, private store: Store, private dialogRef: MatDialog) {}
+  constructor(
+    private apiBoardService: ApiBoardService,
+    private store: Store,
+    private dialogRef: MatDialog,
+    private readonly loaderService: LoaderService
+  ) {}
 
   onClick(color: string) {
     this.customColor = color;
@@ -40,11 +46,6 @@ export class BoardItemComponent {
   saveCurrentBoard() {
     this.store.dispatch(getCurrentBoard({ currentBoard: this.board }));
   }
-
-  // onDeleteClick(boardId: string): void {
-  //   this.apiBoardService.deleteBoard(boardId);
-  //   this.store.dispatch(deleteBoardById({ boardId }));
-  // }
 
   deleteBoard(boardId: string) {
     let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-board' } });
@@ -65,5 +66,6 @@ export class BoardItemComponent {
     this.store.dispatch(updateBoard({ board: board }));
     this.apiBoardService.updateBoard(boardId, this.updateForm.value).subscribe();
     this.toggleUpdateForm();
+    this.loaderService.disableLoader();
   }
 }

@@ -4,10 +4,14 @@
 .create-board-btn {
   border: 2px solid $lightgrey;
   border-radius: 4px;
+  width: 240px;
+  height: 216px;
 }
 
 .board {
   border: 2px solid $lightgrey;
+  width: 240px;
+  height: 216px;
   box-shadow: none;
   padding: 21px 0px;
   text-align: center;
