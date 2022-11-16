@@ -17,9 +17,11 @@ export const deleteBoardById = createAction('[Store] Delete board by id', props<
 
 export const createNewBoard = createAction('[Store] Create new board');
 
-export const getCurrentBoard = createAction('[Store] Get current board');
-export const getCurrentBoardSuccess = createAction('[Store] Get current board success', props<{ boardId: string }>());
+export const getCurrentBoard = createAction('[Store] Get current board', props<{ boardId: string }>());
+export const getCurrentBoardSuccess = createAction(
+  '[Store] Get current board success',
+  props<{ board: IGetBoardResp }>()
+);
 export const getCurrentBoardFailure = createAction('[Store] Get current board failure', props<{ error: string }>());
-export const setCurrentBoard = createAction('[Store] Set current board', props<{ board: IGetBoardResp }>());
 
 export const updateBoard = createAction('[Store] Update board', props<{ board: ICreateBoardResp }>());

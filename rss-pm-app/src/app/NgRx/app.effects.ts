@@ -21,9 +21,9 @@ export class AppEffects {
   getBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(StoreActions.getCurrentBoard),
-      mergeMap((boardId) => {
-        return this.apiBoardService.getBoard(boardId).pipe(
-          map((board: any) => StoreActions.setCurrentBoard({ board })),
+      mergeMap((actions) => {
+        return this.apiBoardService.getBoard(actions.boardId).pipe(
+          map((board: any) => StoreActions.getCurrentBoardSuccess({ board })),
           catchError((error) => of(StoreActions.getAllBoardsFailure({ error: error.message })))
         );
       })
