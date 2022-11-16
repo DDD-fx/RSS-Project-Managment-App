@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{'board.createBoard'|translate}}?</h2>
+<mat-card class="board">
+  <form class="create-form" [formGroup]="boardForm">
+    <div class="inputs">
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>{{'board.label' | translate}}</mat-label>
+        <input matInput autocomplete="off" type="text" formControlName="title">
+        <mat-error *ngIf="boardForm.invalid">{{'board.boardErrors.no-name-error' | translate}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-input" appearance="fill">
+        <mat-label>{{'board.description' | translate}}</mat-label>
+        <input matInput autocomplete="off" type="text" formControlName="description">
+      </mat-form-field>
+    </div>
+
+
+    <div class="board-btn-wrapper">
+      <button mat-button type="submit" (click)="onCancelClick()">
+        {{'board.btn.cancel' | translate}}
+      </button>
+      <button mat-raised-button color="primary" type="button" (click)="createBoard()" [disabled]="boardForm.invalid">
+        {{'board.btn.create' | translate}}
+      </button>
+    </div>
+  </form>
+</mat-card>
+
