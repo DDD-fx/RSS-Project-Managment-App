@@ -6,12 +6,24 @@ import * as StoreActions from './../NgRx/actions/storeActions';
 
 @Injectable()
 export class AppEffects {
-  getBoards$$ = createEffect(() => {
+  getBoards$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(StoreActions.getAllBoards),
       mergeMap(() => {
         return this.apiBoardService.getBoards().pipe(
           map((boards: any) => StoreActions.getAllBoardsSuccess({ boards })),
+          catchError((error) => of(StoreActions.getAllBoardsFailure({ error: error.message })))
+        );
+      })
+    );
+  });
+
+  getBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StoreActions.getCurrentBoard),
+      mergeMap((boardId) => {
+        return this.apiBoardService.getBoard(boardId).pipe(
+          map((board: any) => StoreActions.setCurrentBoard({ board })),
           catchError((error) => of(StoreActions.getAllBoardsFailure({ error: error.message })))
         );
       })

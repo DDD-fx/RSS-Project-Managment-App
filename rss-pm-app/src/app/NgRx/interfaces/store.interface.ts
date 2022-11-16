@@ -6,5 +6,7 @@ export interface IStore {
   isLoading: boolean;
   error: string | null;
   boards: ICreateBoardResp[];
+  isOpenBoard: boolean;
+  boardId: string;
   currentBoard: ICreateBoardResp;
 }

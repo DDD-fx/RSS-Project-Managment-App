@@ -15,6 +15,8 @@ export const Store: IStore = {
   isLoading: false,
   error: null,
   boards: [],
+  isOpenBoard: false,
+  boardId: '',
   currentBoard: { title: '', description: '', id: '' },
 };
 
@@ -28,6 +30,7 @@ export const storeReducer = createReducer(
   ),
   on(StoreActions.removeUserName, (state): IStore => ({ ...state, userName: null })),
 
+  // all boards redusers
   on(StoreActions.getAllBoards, (state): IStore => ({ ...state, isLoading: true })),
   on(
     StoreActions.getAllBoardsSuccess,
@@ -37,7 +40,9 @@ export const storeReducer = createReducer(
     StoreActions.getAllBoardsFailure,
     (state, action): IStore => ({ ...state, isLoading: false, error: action.error })
   ),
+  on(StoreActions.setCurrentBoard, (state, action): IStore => ({ ...state, currentBoard: action.board })),
 
+  // detete board reduser
   on(
     StoreActions.deleteBoardById,
     (state, { boardId }): IStore => ({
@@ -46,7 +51,18 @@ export const storeReducer = createReducer(
     })
   ),
   // on(createNewBoard, (state: any, { board }): IStore => ({ ...state, boards: [...state.boards, board] }))
-  on(StoreActions.getCurrentBoard, (state, { currentBoard }): IStore => ({ ...state, currentBoard: currentBoard })),
+  // current board redusers
+  on(StoreActions.getCurrentBoard, (state): IStore => ({ ...state, isOpenBoard: true })),
+  on(
+    StoreActions.getCurrentBoardSuccess,
+    (state, action): IStore => ({ ...state, isOpenBoard: false, boardId: action.boardId })
+  ),
+  on(
+    StoreActions.getCurrentBoardFailure,
+    (state, action): IStore => ({ ...state, isLoading: false, error: action.error })
+  ),
+
+  // update board redusers
   on(StoreActions.updateBoard, (state, { board }): IStore => {
     const boardIndex = state.boards.findIndex((item) => item.id === board.id);
     const updateBoards = [...state.boards];
