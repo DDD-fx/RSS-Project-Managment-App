@@ -25,4 +25,8 @@ export class ApiColumnsService {
       body
     );
   }
+
+  deleteColumn(boardId: string, columnId: string): void {
+    this.httpClient.delete(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}` + `/${columnId}`).subscribe();
+  }
 }

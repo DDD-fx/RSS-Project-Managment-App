@@ -15,7 +15,10 @@
     <input matInput autocomplete="off" class="add-column-input" formControlName="columnName">
   </mat-form-field>
   <button *ngIf="addColumn" mat-flat-button color="primary"
-          class="add-column-btn" type="submit">{{'columns.add-new-column' | translate}}</button>
+          class="add-column-btn" type="submit"
+          [disabled]="newColumnForm.invalid">
+    {{'columns.add-new-column' | translate}}
+  </button>
   <button *ngIf="addColumn" mat-stroked-button (click)="onCancelAddColumn()" class="delete-column-btn">X</button>
 </form>
 

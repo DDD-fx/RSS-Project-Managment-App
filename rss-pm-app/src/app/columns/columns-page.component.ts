@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ApiColumnsService } from '../api/services/api-colomns.service';
@@ -20,19 +20,21 @@ export class ColumnsPageComponent implements OnInit {
 
   public columns$ = new BehaviorSubject<ICreateColumnResp[]>([]);
 
+  private readonly currBoardId = this.router.url.split('/').pop();
+
   constructor(
     private readonly store: Store,
     private readonly apiColumnsService: ApiColumnsService,
     private readonly router: Router,
-    private readonly loaderService: LoaderService
+    private readonly loaderService: LoaderService,
+    private readonly elRef: ElementRef
   ) {}
 
   ngOnInit() {
-    const boardId = this.router.url.split('/').pop();
-    if (boardId) {
+    if (this.currBoardId) {
       this.loaderService.enableLoader();
       this.apiColumnsService
-        .getAllColumns(boardId)
+        .getAllColumns(this.currBoardId)
         .pipe(map((columns) => columns.sort((a, b) => a.order - b.order)))
         .subscribe((res) => {
           this.columns$.next(res);
@@ -43,6 +45,7 @@ export class ColumnsPageComponent implements OnInit {
 
   onAddColumn() {
     this.addColumn = true;
+    this.elRef.nativeElement.scroll(9999, 0);
   }
 
   onCancelAddColumn() {
@@ -51,13 +54,12 @@ export class ColumnsPageComponent implements OnInit {
 
   onCreateColumn() {
     const title = this.newColumnForm.controls.columnName.value!;
-    const boardId = this.router.url.split('/').pop();
-    if (boardId) {
+    if (this.currBoardId) {
       this.loaderService.enableLoader();
       this.apiColumnsService
-        .createNewColumn(boardId, title)
+        .createNewColumn(this.currBoardId, title)
         .pipe(
-          switchMap(() => this.apiColumnsService.getAllColumns(boardId)),
+          switchMap(() => this.apiColumnsService.getAllColumns(this.currBoardId!)),
           tap((columns) => {
             this.columns$.next(columns);
             this.loaderService.disableLoader();
@@ -72,13 +74,12 @@ export class ColumnsPageComponent implements OnInit {
     moveItemInArray(columns, event.previousIndex, event.currentIndex);
     this.columns$.next(columns);
     for (let i = 0; i <= columns.length; i += 1) {
-      const boardId = this.router.url.split('/').pop();
-      if (boardId) {
+      if (this.currBoardId) {
         const body = {
           title: columns[i].title,
           order: i + 1,
         };
-        this.apiColumnsService.updateColumn(boardId, columns[i].id, body).subscribe();
+        this.apiColumnsService.updateColumn(this.currBoardId, columns[i].id, body).subscribe();
       }
     }
   }
