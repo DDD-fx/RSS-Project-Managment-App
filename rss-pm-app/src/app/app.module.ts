@@ -20,12 +20,23 @@ import { DeletingPopupComponent } from './shared/components/deleting-popup/delet
 import { MatButtonModule } from '@angular/material/button';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
+import { CreatingBoardPopupComponent } from './shared/components/creating-board-popup/creating-board-popup.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [AppComponent, DeletingPopupComponent, LoaderComponent, WrongAddressPageComponent],
+  declarations: [
+    AppComponent,
+    DeletingPopupComponent,
+    LoaderComponent,
+    WrongAddressPageComponent,
+    CreatingBoardPopupComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,6 +63,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     MatDialogModule,
     MatButtonModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatCardModule,
+    ReactiveFormsModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],
