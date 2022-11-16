@@ -38,7 +38,6 @@ export class ColumnsPageComponent implements OnInit {
       .subscribe((res) => {
         this.columns$.next(res);
       });
-
     this.loaderService.disableLoader();
   }
 
@@ -50,8 +49,6 @@ export class ColumnsPageComponent implements OnInit {
   onCancelAddColumn() {
     this.addColumn = false;
   }
-
-  getColumns() {}
 
   onCreateColumn() {
     const title = this.newColumnForm.controls.columnName.value!;
@@ -86,7 +83,7 @@ export class ColumnsPageComponent implements OnInit {
     const columns = this.columns$.value;
     moveItemInArray(columns, event.previousIndex, event.currentIndex);
     this.columns$.next(columns);
-    for (let i = 0; i <= columns.length; i += 1) {
+    for (let i = 0; i < columns.length; i += 1) {
       const body = {
         title: columns[i].title,
         order: i + 1,
