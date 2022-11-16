@@ -1,1 +1,21 @@
-<p>columns-page works!</p>
+<ng-container *ngIf="columns$ | async as columns">
+  <div cdkDropList cdkDropListOrientation="horizontal" class="columns" (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let column of columns" class="column" cdkDrag>
+      <div>{{column.title}}</div>
+    </div>
+  </div>
+</ng-container>
+
+<button *ngIf="!addColumn" mat-stroked-button (click)="onAddColumn()" class="create-column-btn">
+  + {{'columns.create-btn' | translate}}</button>
+
+<form (submit)="onCreateColumn()" [formGroup]="newColumnForm">
+  <mat-form-field *ngIf="addColumn" appearance="standard" class="add-column-form">
+    <mat-label>{{'columns.input-title' | translate}}</mat-label>
+    <input matInput autocomplete="off" class="add-column-input" formControlName="columnName">
+  </mat-form-field>
+  <button *ngIf="addColumn" mat-flat-button color="primary"
+          class="add-column-btn" type="submit">{{'columns.add-new-column' | translate}}</button>
+  <button *ngIf="addColumn" mat-stroked-button (click)="onCancelAddColumn()" class="delete-column-btn">X</button>
+</form>
+

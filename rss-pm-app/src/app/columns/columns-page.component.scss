@@ -1,0 +1,41 @@
+@import "src/styles/variables";
+
+:host {
+  display: flex;
+  gap: 10px;
+  overflow: auto;
+  padding-bottom: 20px;
+}
+
+.columns {
+  display: flex;
+  gap: 10px;
+}
+
+mat-form-field {
+  display: block;
+  width: 200px;
+}
+
+.add-column-btn {
+  margin-right: 10px;
+}
+
+.create-column-btn {
+  width: 200px;
+  height: 45px;
+}
+
+.add-column-btn,
+.delete-column-btn {
+  top: -10px;
+}
+
+.column {
+  width: 200px;
+  min-height: 150px;
+  padding: 5px 0 20px 5px;
+  background-color: $column-background;
+  border-radius: $columns-border-radius;
+}
+
