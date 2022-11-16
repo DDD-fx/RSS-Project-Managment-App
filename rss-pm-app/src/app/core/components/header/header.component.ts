@@ -10,7 +10,6 @@ import { selectIsLogged, selectUserName } from 'src/app/NgRx/selectors/storeSele
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 import { ESiteUrls } from '../../../shared/shared.enums';
-import { CreatingBoardPopupComponent } from '../../../shared/components/creating-board-popup/creating-board-popup.component';
 
 @Component({
   selector: 'app-header',
@@ -50,7 +49,6 @@ export class HeaderComponent {
     this.router.navigate(['']);
     this.store.dispatch(makeIsloggedFalse());
     this.store.dispatch(removeUserName());
-    // navigate('welcome')
   }
 
   deleteUser() {
@@ -68,9 +66,5 @@ export class HeaderComponent {
 
   onLogoClick() {
     void this.router.navigate(['']);
-  }
-
-  onModal() {
-    this.dialogRef.open(CreatingBoardPopupComponent);
   }
 }
