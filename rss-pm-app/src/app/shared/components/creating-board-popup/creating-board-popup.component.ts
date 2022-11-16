@@ -23,7 +23,7 @@ export class CreatingBoardPopupComponent {
     private store: Store
   ) {}
 
-  onCanselClick(): void {
+  onCancelClick(): void {
     this.dialogRef.close();
   }
 
