@@ -11,6 +11,20 @@ export interface IGetBoardResp extends ICreateBoardResp {
   columns: IColumn[];
 }
 
+export interface ICreateColumnReq {
+  title: string;
+}
+
+export interface ICreateColumnResp extends ICreateColumnReq {
+  id: string;
+  order: number;
+}
+
+export interface IUpdateColumnReq {
+  title: string;
+  order: number;
+}
+
 export interface IColumn {
   id: string;
   title: string;

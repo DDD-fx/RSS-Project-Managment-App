@@ -1,1 +1,30 @@
-<p>columns-page works!</p>
+<ng-container *ngIf="columns$ | async as columns">
+  <div cdkDropList cdkDropListOrientation="horizontal" class="columns" (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let column of columns" class="column" cdkDrag>
+      <div class="column-header">
+        <span class="column-title">{{column.title}}</span>
+        <mat-icon (click)="onDeleteColumn(column.id)">delete</mat-icon>
+      </div>
+      <button mat-stroked-button color="primary" class="add-task-btn">
+        <mat-icon>add</mat-icon> {{'columns.add-new-task' | translate}}
+      </button>
+    </div>
+  </div>
+</ng-container>
+
+<button *ngIf="!addColumn" mat-stroked-button (click)="onAddColumn()" class="create-column-btn">
+  <mat-icon>add</mat-icon> {{'columns.create-btn' | translate}}</button>
+
+<form (submit)="onCreateColumn()" [formGroup]="newColumnForm">
+  <mat-form-field *ngIf="addColumn" appearance="standard" class="add-column-form">
+    <mat-label>{{'columns.input-title' | translate}}</mat-label>
+    <input matInput autocomplete="off" class="add-column-input" formControlName="columnName" maxlength="50">
+  </mat-form-field>
+  <button *ngIf="addColumn" mat-flat-button color="primary"
+          class="add-column-btn" type="submit"
+          [disabled]="newColumnForm.invalid">
+    {{'columns.add-new-column' | translate}}
+  </button>
+  <button *ngIf="addColumn" mat-stroked-button (click)="onCancelAddColumn()" class="delete-column-btn"><mat-icon>clear</mat-icon></button>
+</form>
+

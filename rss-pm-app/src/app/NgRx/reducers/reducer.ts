@@ -16,6 +16,7 @@ export const Store: IStore = {
   error: null,
   boards: [],
   currentBoard: { title: '', description: '', id: '' },
+  columns: [],
 };
 
 export const storeReducer = createReducer(

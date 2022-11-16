@@ -110,6 +110,12 @@
     "newLabel": "Enter new board name",
     "newDescription": "Enter new description"
   },
+  "columns": {
+    "create-btn": "Create new column",
+    "input-title": "Column title",
+    "add-new-column": "Add new column",
+    "add-new-task": "Add new task"
+  },
   "page404": {
     "home": "Home",
     "title": "UH OH! You're lost.",
