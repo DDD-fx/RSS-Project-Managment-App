@@ -7,7 +7,7 @@
 
   <cdk-virtual-scroll-viewport #scroller appendOnly itemSize="30" class="content">
     <section class="boards-list">
-      <!-- <app-new-board></app-new-board> -->
+      <app-new-board></app-new-board>
       <div  *cdkVirtualFor="let board of boards$ | async | sort: order">
         <app-board-item [board]="board"></app-board-item>
       </div>
