@@ -20,7 +20,7 @@ export class ColumnsPageComponent implements OnInit {
 
   public columns$ = new BehaviorSubject<ICreateColumnResp[]>([]);
 
-  private readonly currBoardId = this.router.url.split('/').pop();
+  private readonly currBoardId = this.router.url.split('/').pop()!;
 
   constructor(
     private readonly store: Store,
@@ -31,15 +31,14 @@ export class ColumnsPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.currBoardId) {
-      this.loaderService.enableLoader();
-      this.apiColumnsService
-        .getAllColumns(this.currBoardId)
-        .pipe(map((columns) => columns.sort((a, b) => a.order - b.order)))
-        .subscribe((res) => {
-          this.columns$.next(res);
-        });
-    }
+    this.loaderService.enableLoader();
+    this.apiColumnsService
+      .getAllColumns(this.currBoardId)
+      .pipe(map((columns) => columns.sort((a, b) => a.order - b.order)))
+      .subscribe((res) => {
+        this.columns$.next(res);
+      });
+
     this.loaderService.disableLoader();
   }
 
@@ -52,21 +51,35 @@ export class ColumnsPageComponent implements OnInit {
     this.addColumn = false;
   }
 
+  getColumns() {}
+
   onCreateColumn() {
     const title = this.newColumnForm.controls.columnName.value!;
-    if (this.currBoardId) {
-      this.loaderService.enableLoader();
-      this.apiColumnsService
-        .createNewColumn(this.currBoardId, title)
-        .pipe(
-          switchMap(() => this.apiColumnsService.getAllColumns(this.currBoardId!)),
-          tap((columns) => {
-            this.columns$.next(columns);
-            this.loaderService.disableLoader();
-          })
-        )
-        .subscribe();
-    }
+    this.loaderService.enableLoader();
+    this.apiColumnsService
+      .createNewColumn(this.currBoardId, title)
+      .pipe(
+        switchMap(() => this.apiColumnsService.getAllColumns(this.currBoardId!)),
+        tap((columns) => {
+          this.columns$.next(columns);
+          this.loaderService.disableLoader();
+        })
+      )
+      .subscribe();
+  }
+
+  onDeleteColumn(columnId: string) {
+    this.loaderService.enableLoader();
+    this.apiColumnsService.deleteColumn(this.currBoardId, columnId).subscribe();
+    this.apiColumnsService
+      .getAllColumns(this.currBoardId!)
+      .pipe(
+        tap((columns) => {
+          this.columns$.next(columns);
+          this.loaderService.disableLoader();
+        })
+      )
+      .subscribe();
   }
 
   drop(event: CdkDragDrop<ICreateColumnResp[]>) {
@@ -74,13 +87,11 @@ export class ColumnsPageComponent implements OnInit {
     moveItemInArray(columns, event.previousIndex, event.currentIndex);
     this.columns$.next(columns);
     for (let i = 0; i <= columns.length; i += 1) {
-      if (this.currBoardId) {
-        const body = {
-          title: columns[i].title,
-          order: i + 1,
-        };
-        this.apiColumnsService.updateColumn(this.currBoardId, columns[i].id, body).subscribe();
-      }
+      const body = {
+        title: columns[i].title,
+        order: i + 1,
+      };
+      this.apiColumnsService.updateColumn(this.currBoardId, columns[i].id, body).subscribe();
     }
   }
 }

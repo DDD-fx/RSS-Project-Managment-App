@@ -1,7 +1,10 @@
 <ng-container *ngIf="columns$ | async as columns">
   <div cdkDropList cdkDropListOrientation="horizontal" class="columns" (cdkDropListDropped)="drop($event)">
     <div *ngFor="let column of columns" class="column" cdkDrag>
-      <div>{{column.title}}</div>
+      <div class="column-header">
+        <span>{{column.title}}</span>
+        <mat-icon (click)="onDeleteColumn(column.id)">delete</mat-icon>
+      </div>
     </div>
   </div>
 </ng-container>

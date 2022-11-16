@@ -14,6 +14,12 @@
   gap: 10px;
 }
 
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
 mat-form-field {
   display: block;
   width: 215px;

@@ -26,7 +26,7 @@ export class ApiColumnsService {
     );
   }
 
-  deleteColumn(boardId: string, columnId: string): void {
-    this.httpClient.delete(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}` + `/${columnId}`).subscribe();
+  deleteColumn(boardId: string, columnId: string): Observable<Object> {
+    return this.httpClient.delete(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}` + `/${columnId}`);
   }
 }
