@@ -2,13 +2,17 @@
 @import "src/styles/mixins";
 @import "src/styles/variables";
 
+:host {
+  padding-top: 70px;
+}
+
 .background {
   background-color: $green;
   border-radius: 20px;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
 }
 
 .about-container{
@@ -26,7 +30,7 @@
   img {
     width: 100%;
     border-radius: 20px;
-    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
     position: absolute;
     left: 0;
     top: 0;
@@ -49,7 +53,7 @@
   font-size: 3rem;
   list-style-type: none;
   gap: 20px;
-  color: $blue;
+  color: $dark-grey;
 }
 
 li {
@@ -91,7 +95,7 @@ li {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  color: $white;
+  color: $almost-white;
   font-size: 20px;
 
   .rss-title {
@@ -102,7 +106,7 @@ li {
   }
 
   p {
-    color: $black;
+    color: $almost-black;
     line-height: 1.5;
     text-align: justify;
     text-indent: 1.5em;
@@ -166,7 +170,6 @@ li {
 .team-container {
   padding-top: 30px;
   height: 400px;
-  max-width: 1440px;
   margin: auto;
   background-color: $background;
 }
@@ -189,7 +192,7 @@ li {
 
 .rss__link {
   @include link();
-  color: $white;
+  color: $almost-white;
   font-weight: bold;
 }
 
@@ -209,12 +212,20 @@ li {
   width: 30px;
 }
 
-//.btn-16:after {
-// @include button-after();
-//}
-//.btn-16:hover:after {
-//  @include button-hover-after();
-//}
-//.btn-16:active {
-//  @include button-active();
-//}
+.btn {
+  background-color: $blue;
+}
+
+.btn:hover {
+  background-color: transparent;
+  border: $blue 1px solid;
+  color: $darkest-grey;
+}
+
+.main-text {
+  color: $darkest-grey;
+}
+
+.button-container {
+  height: 50px;
+}
