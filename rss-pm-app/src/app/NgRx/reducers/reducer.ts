@@ -18,6 +18,7 @@ export const Store: IStore = {
   isOpenBoard: false,
   boardId: '',
   currentBoard: { title: '', description: '', id: '' },
+  columns: [],
 };
 
 export const storeReducer = createReducer(
