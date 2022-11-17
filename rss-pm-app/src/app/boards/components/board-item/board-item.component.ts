@@ -44,7 +44,7 @@ export class BoardItemComponent {
   }
 
   saveCurrentBoard() {
-    this.store.dispatch(getCurrentBoard({ currentBoard: this.board }));
+    this.store.dispatch(getCurrentBoard({ boardId: this.board.id }));
   }
 
   deleteBoard(boardId: string) {

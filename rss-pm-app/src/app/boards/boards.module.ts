@@ -18,7 +18,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 import { SortPipe } from './pipes/sort.pipe';
 import { ColumnsPageModule } from '../columns/columns-page.module';
-import { LoaderComponent } from '../shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { LoaderComponent } from '../shared/components/loader/loader.component';
     BoardPageComponent,
     BoardComponent,
     SortPipe,
-    LoaderComponent,
   ],
   imports: [
     CommonModule,

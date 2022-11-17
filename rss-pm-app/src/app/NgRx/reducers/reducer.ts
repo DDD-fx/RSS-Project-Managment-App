@@ -40,7 +40,6 @@ export const storeReducer = createReducer(
     StoreActions.getAllBoardsFailure,
     (state, action): IStore => ({ ...state, isLoading: false, error: action.error })
   ),
-  on(StoreActions.setCurrentBoard, (state, action): IStore => ({ ...state, currentBoard: action.board })),
 
   // detete board reduser
   on(
@@ -54,12 +53,12 @@ export const storeReducer = createReducer(
   // current board redusers
   on(StoreActions.getCurrentBoard, (state): IStore => ({ ...state, isOpenBoard: true })),
   on(
-    StoreActions.getCurrentBoardSuccess,
-    (state, action): IStore => ({ ...state, isOpenBoard: false, boardId: action.boardId })
-  ),
-  on(
     StoreActions.getCurrentBoardFailure,
     (state, action): IStore => ({ ...state, isLoading: false, error: action.error })
+  ),
+  on(
+    StoreActions.getCurrentBoardSuccess,
+    (state, action): IStore => ({ ...state, isOpenBoard: false, currentBoard: action.board })
   ),
 
   // update board redusers
