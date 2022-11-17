@@ -2,42 +2,58 @@
     <a>
         <img class="header__logo" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/567/567014.png" alt="logo">
     </a>
-    <a>
-        <img class="header__home" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/1688/1688109.png" alt="home">
-    </a>
+<!--    <a>-->
+<!--        <img class="header__home" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/1688/1688109.png" alt="home">-->
+<!--    </a>-->
+    <div class="header__create-button-area">
+      <a>
+        <button mat-raised-button color="primary" class="btn">
+          {{'header.create-board-button' | translate}}
+        </button>
+      </a>
+    </div>
+
     <div class="header__controls">
         <div class="header__toggle">
-            <span class="lang">EN</span>
-            <mat-slide-toggle color="primary" class="toggle" (click)="changeLang()">
-            <span class="lang">RU</span>
-            </mat-slide-toggle>
+          <span class="lang">RU</span>
+          <label class="switch" >
+            <input type="checkbox" (click)="changeLang()" checked>
+            <span class="slider round"></span>
+          </label>
+            <span class="lang" >EN</span>
         </div>
+
 
         <ng-container *ngIf="(isLoggedStore$ | async ); then thenBlock else elseBlock">
 
         </ng-container>
-        <ng-template class="header__buttons" #elseBlock >
+        <ng-template  #elseBlock >
+          <div class="header__buttons">
             <a [routerLink]="['signIn']" class="">
-                <button  mat-raised-button color="primary" class="btn">{{'header.signIn-btn' | translate}}</button>
+              <button  mat-raised-button color="primary" class="btn">{{'header.signIn-btn' | translate}}</button>
             </a>
             <a [routerLink]="['signUp']" class="">
-                <button mat-raised-button color="primary" class="btn">{{'header.signUp-btn' | translate}}</button>
+              <button mat-raised-button color="primary" class="btn">{{'header.signUp-btn' | translate}}</button>
             </a>
+          </div>
+
         </ng-template>
 
         <ng-template #thenBlock class="header__exit">
             <p class="header__user-name">{{userName$ | async}}</p>
-            <div class="dropdown">
+            <div class="header__exit-buttons">
+              <div class="dropdown">
                 <a>
-                    <img class="header__settings" alt="settings" src="https://cdn-icons-png.flaticon.com/512/54/54512.png">
+                  <img class="header__settings" alt="settings" src="https://cdn-icons-png.flaticon.com/512/54/54512.png">
                 </a>
                 <div class="dropdown-content">
                   <a mat-raised-button (click)="deleteUser()">{{'header.delete-user' | translate}}</a>
                   <a mat-raised-button [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>
                 </div>
+              </div>
+              <button mat-raised-button color="primary" (click)="logout()" class="btn">{{'header.exit-button' | translate}}</button>
             </div>
 
-            <button mat-raised-button color="primary" (click)="logout()" class="btn">{{'header.exit-button' | translate}}</button>
 
         </ng-template>
 

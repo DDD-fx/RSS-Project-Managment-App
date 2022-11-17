@@ -17,9 +17,12 @@
       <div class="text-container">
         <p><b>RSS PM</b> {{ 'welcome.aboutTitle' | translate }}</p>
       </div>
-      <a [routerLink]="['/boards']" class="">
-        <button mat-raised-button color="primary" class="btn-16">{{ 'welcome.button' | translate }}</button>
-      </a>
+      <div class="button-container">
+        <a [routerLink]="['/boards']" class="">
+          <button mat-raised-button color="primary" class="btn">{{ 'welcome.button' | translate }}</button>
+        </a>
+      </div>
+
     </div>
 
     <div class="img-container">
@@ -64,10 +67,11 @@
       <li style="--i:3.1">{{ 'welcome.team.8' | translate }}</li>
       <li style="--i:3.4">{{ 'welcome.team.9' | translate }}</li>
     </ul>
-  <div class="about-team">
-    <div  *ngFor="let member of team">
-      <app-team-member [member] = 'member'></app-team-member>
+
+    <div class="about-team">
+      <div  *ngFor="let member of team">
+        <app-team-member [member] = 'member'></app-team-member>
+      </div>
     </div>
-  </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 @import "src/styles/variables";
-:host{
+
+:host {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -7,4 +8,13 @@
     height: 100vh;
     font-family: cursive;
     font-size: 1.2em;
+    position: relative;
+
 }
+
+.header {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+}
+
