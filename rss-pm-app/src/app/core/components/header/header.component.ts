@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem(ELocalStorage.token) !== null) {
+    if (localStorage.getItem(ELocalStorage.token)) {
       this.store.dispatch(makeIsloggedTrue());
       this.store.dispatch(addUserName());
     }
