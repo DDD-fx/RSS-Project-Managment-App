@@ -1,4 +1,4 @@
-import { ICreateBoardResp, ICreateColumnResp } from 'src/app/api/models/api-board.model';
+import { ICreateBoardResp, IGetBoardResp } from 'src/app/api/models/api-board.model';
 
 export interface IStore {
   isLogged: boolean;
@@ -8,6 +8,5 @@ export interface IStore {
   boards: ICreateBoardResp[];
   isOpenBoard: boolean;
   boardId: string;
-  currentBoard: ICreateBoardResp;
-  columns: ICreateColumnResp[];
+  currentBoard: IGetBoardResp;
 }

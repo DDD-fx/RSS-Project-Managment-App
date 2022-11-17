@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
-import { deleteBoardById, getCurrentBoard, updateBoard } from 'src/app/NgRx/actions/storeActions';
+import { deleteBoardById, getCurrentBoard, updateBoardSuccess } from 'src/app/NgRx/actions/storeActions';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
@@ -44,10 +44,13 @@ export class BoardItemComponent {
   }
 
   saveCurrentBoard() {
+    this.loaderService.enableLoader();
     this.store.dispatch(getCurrentBoard({ boardId: this.board.id }));
+    this.loaderService.disableLoader();
   }
 
   deleteBoard(boardId: string) {
+    this.loaderService.enableLoader();
     let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-board' } });
     dialog.afterClosed().subscribe((result) => {
       if (result === 'true') {
@@ -55,16 +58,18 @@ export class BoardItemComponent {
         this.store.dispatch(deleteBoardById({ boardId }));
       }
     });
+    this.loaderService.disableLoader();
   }
 
   updateBoard(boardId: string) {
+    this.loaderService.enableLoader();
     const board: ICreateBoardResp = {
       id: boardId,
       title: this.updateForm.controls['title'].value,
       description: this.updateForm.controls['description'].value,
     };
-    this.store.dispatch(updateBoard({ board: board }));
-    this.apiBoardService.updateBoard(boardId, this.updateForm.value).subscribe();
+    this.store.dispatch(updateBoardSuccess({ board: board }));
+    this.apiBoardService.updateBoard(this.updateForm.value, boardId).subscribe();
     this.toggleUpdateForm();
     this.loaderService.disableLoader();
   }

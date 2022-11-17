@@ -17,8 +17,7 @@ export const Store: IStore = {
   boards: [],
   isOpenBoard: false,
   boardId: '',
-  currentBoard: { title: '', description: '', id: '' },
-  columns: [],
+  currentBoard: { title: '', description: '', id: '', columns: [] },
 };
 
 export const storeReducer = createReducer(
@@ -50,12 +49,18 @@ export const storeReducer = createReducer(
       boards: state.boards.filter((el) => el.id !== boardId),
     })
   ),
-  // on(createNewBoard, (state: any, { board }): IStore => ({ ...state, boards: [...state.boards, board] }))
+  on(StoreActions.createBoardSuccess, (state, { board }): IStore => {
+    const newBoards = [...state.boards.concat(board)];
+    return {
+      ...state,
+      boards: newBoards,
+    };
+  }),
   // current board redusers
   on(StoreActions.getCurrentBoard, (state): IStore => ({ ...state, isOpenBoard: true })),
   on(
     StoreActions.getCurrentBoardFailure,
-    (state, action): IStore => ({ ...state, isLoading: false, error: action.error })
+    (state, action): IStore => ({ ...state, isOpenBoard: false, error: action.error })
   ),
   on(
     StoreActions.getCurrentBoardSuccess,
@@ -63,7 +68,7 @@ export const storeReducer = createReducer(
   ),
 
   // update board redusers
-  on(StoreActions.updateBoard, (state, { board }): IStore => {
+  on(StoreActions.updateBoardSuccess, (state, { board }): IStore => {
     const boardIndex = state.boards.findIndex((item) => item.id === board.id);
     const updateBoards = [...state.boards];
     updateBoards[boardIndex] = board;

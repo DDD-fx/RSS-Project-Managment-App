@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiBoardService } from '../../../api/services/api-board.service';
 import { Store } from '@ngrx/store';
 import { getAllBoards } from '../../../NgRx/actions/storeActions';
+import { LoaderService } from '../loader/loader.service';
 
 export interface DialogData {
   title: string;
@@ -20,7 +21,8 @@ export class CreatingBoardPopupComponent {
     private dialogRef: MatDialogRef<CreatingBoardPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private apiBoardService: ApiBoardService,
-    private store: Store
+    private store: Store,
+    private loaderService: LoaderService
   ) {}
 
   onCancelClick(): void {
@@ -34,9 +36,11 @@ export class CreatingBoardPopupComponent {
 
   createBoard() {
     if (this.boardForm.valid) {
+      this.loaderService.enableLoader();
       this.apiBoardService.createBoard(this.boardForm.value).subscribe();
       this.store.dispatch(getAllBoards());
       this.dialogRef.close();
+      this.loaderService.disableLoader();
     }
   }
 }

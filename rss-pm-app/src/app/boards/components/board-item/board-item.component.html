@@ -1,17 +1,22 @@
-<mat-card class="board" *ngIf="!isUpdateFormActive" [style.background-color]="'{{customColor}}'">
+<mat-card  [routerLink]="['/boards', board.id]"
+          (click)="saveCurrentBoard()"
+          class="board"
+          *ngIf="!isUpdateFormActive"
+          [style.background-color]="'{{customColor}}'"
+>
     <input class="settings" type="color" #color (click)="onClick(color.value)" />
     <!-- <button class="settings" mat-stroked-button color="primary" type="submit">
       <mat-icon>settings</mat-icon>
     </button> -->
-  <mat-card-title [routerLink]="['/boards', board.id]" (click)="saveCurrentBoard()">{{ board.title }}</mat-card-title>
+  <mat-card-title>{{ board.title }}</mat-card-title>
   <mat-card-content>
     <p>{{ board.description }}</p>
   </mat-card-content>
   <mat-card-actions class="board-btn-wrapper">
-    <button mat-stroked-button color="primary" type="button" (click)="deleteBoard(board.id)">
+    <button mat-stroked-button color="primary" type="button" (click)="deleteBoard(board.id); $event.stopPropagation()">
       <mat-icon>delete</mat-icon>
     </button>
-    <button mat-stroked-button color="primary" type="button" (click)="toggleUpdateForm()">
+    <button mat-stroked-button color="primary" type="button" (click)="toggleUpdateForm(); $event.stopPropagation()">
       <mat-icon> border_color</mat-icon>
     </button>
   </mat-card-actions>
