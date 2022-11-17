@@ -51,13 +51,13 @@ export class LoginFormComponent extends ValidationAbstract {
           this.notificationService.showSuccess(ESiteUrls.signIn);
           void this.router.navigate(['']);
           this.store.dispatch(makeIsloggedTrue());
-          this.store.dispatch(addUserName());
           setUserIdToLs();
         }),
         switchMap(() => this.apiUserService.getUser()),
         tap((resp) => {
           saveUserDataToLS(resp);
           this.loaderService.disableLoader();
+          this.store.dispatch(addUserName());
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.signIn, err);
