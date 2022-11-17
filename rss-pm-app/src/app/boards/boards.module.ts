@@ -11,11 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { NewBoardComponent } from './components/new-board/new-board.component';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { BoardComponent } from './components/board/board.component';
 import { BoardPageComponent } from './pages/board-page/board-page.component';
-import { EditBoardComponent } from './components/edit-board/edit-board.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 import { SortPipe } from './pipes/sort.pipe';
@@ -28,7 +26,6 @@ import { ColumnsPageModule } from '../columns/columns-page.module';
     NewBoardComponent,
     BoardPageComponent,
     BoardComponent,
-    EditBoardComponent,
     SortPipe,
   ],
   imports: [
@@ -42,7 +39,6 @@ import { ColumnsPageModule } from '../columns/columns-page.module';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatGridListModule,
     ScrollingModule,
     MatDialogModule,
     ColumnsPageModule,
