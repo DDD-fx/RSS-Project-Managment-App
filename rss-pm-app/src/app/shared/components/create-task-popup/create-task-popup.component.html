@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{'tasks.add-task'|translate}}?</h2>
+<form class="create-form" [formGroup]="taskForm">
+  <div class="inputs">
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'tasks.task-label' | translate}}</mat-label>
+      <input matInput autocomplete="off" type="text" formControlName="title" maxlength="100">
+      <mat-error *ngIf="!taskForm.get('title')?.value">{{'tasks.errors.empty-title' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'tasks.task-description' | translate}}</mat-label>
+      <textarea matInput autocomplete="off" type="text" formControlName="description"></textarea>
+      <mat-error
+        *ngIf="!taskForm.get('description')?.value">{{'tasks.errors.empty-description' | translate}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="board-btn-wrapper">
+    <button class="popup-add-btn" mat-raised-button color="primary" type="button" (click)="createNewTask()" [disabled]="taskForm.invalid">
+      {{'board.btn.create' | translate}}
+    </button>
+    <button mat-button type="submit" (click)="onCancelClick()">
+      {{'board.btn.cancel' | translate}}
+    </button>
+  </div>
+</form>
+
+

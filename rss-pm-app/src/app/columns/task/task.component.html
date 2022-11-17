@@ -1,0 +1,10 @@
+<ng-container *ngFor="let task of tasks">
+  <mat-card class="task-card">
+    <div class="task-card__title">{{task.title}}</div>
+    <div class="task-card__subtitle">{{task.description}}</div>
+    <div class="task-card__icons">
+      <mat-icon class="task-card__edit-btn" title="Edit">create</mat-icon>
+      <mat-icon class="task-card__delete-btn" title="Delete">delete</mat-icon>
+    </div>
+  </mat-card>
+</ng-container>

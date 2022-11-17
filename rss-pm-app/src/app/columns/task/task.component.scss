@@ -1,0 +1,35 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+:host {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.task-card {
+  width: 185px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 5px;
+  background-color: $task-background;
+
+  &__subtitle {
+    font-size: 0.9em;
+    color: $grey;
+  }
+
+  &__icons {
+    display: flex;
+    gap: 15px;
+    align-self: flex-end;
+  }
+
+  &__delete-btn,
+  &__edit-btn {
+    cursor: pointer;
+  }
+}

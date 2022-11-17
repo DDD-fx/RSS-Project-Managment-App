@@ -2,11 +2,15 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ApiColumnsService } from '../api/services/api-colomns.service';
-import { BehaviorSubject, map, switchMap, tap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ICreateColumnResp } from '../api/models/api-board.model';
 import { LoaderService } from '../shared/components/loader/loader.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateTaskPopupComponent } from '../shared/components/create-task-popup/create-task-popup.component';
+import { ColumnsService } from './columns.service';
+import { ApiBoardService } from '../api/services/api-board.service';
 
 @Component({
   selector: 'app-columns-page',
@@ -18,26 +22,38 @@ export class ColumnsPageComponent implements OnInit {
 
   public newColumnForm = new FormGroup({ columnName: new FormControl('', Validators.required) });
 
-  public columns$ = new BehaviorSubject<ICreateColumnResp[]>([]);
+  public board$ = this.columnsService.board$;
 
-  private readonly currBoardId = this.router.url.split('/').pop()!;
+  public columns$ = this.board$.pipe(map((board) => board.columns));
+
+  private readonly currBoardId = this.columnsService.currBoardId;
 
   constructor(
     private readonly store: Store,
     private readonly apiColumnsService: ApiColumnsService,
     private readonly router: Router,
     private readonly loaderService: LoaderService,
-    private readonly elRef: ElementRef
+    private readonly elRef: ElementRef,
+    private readonly dialogRef: MatDialog,
+    private readonly columnsService: ColumnsService,
+    private readonly apiBoardService: ApiBoardService
   ) {}
 
   ngOnInit() {
     this.loaderService.enableLoader();
-    this.apiColumnsService
-      .getAllColumns(this.currBoardId)
-      .pipe(map((columns) => columns.sort((a, b) => a.order - b.order)))
-      .subscribe((res) => {
-        this.columns$.next(res);
-      });
+    this.apiBoardService
+      .getBoard(this.currBoardId)
+      .pipe(
+        tap((board) => this.columnsService.board$.next(board)),
+        tap(() => console.log(this.board$.value)),
+
+        map((board) => ({
+          ...board,
+          columns: board.columns.sort((a, b) => a.order - b.order),
+        })),
+        tap((board) => this.columnsService.board$.next(board))
+      )
+      .subscribe();
     this.loaderService.disableLoader();
   }
 
@@ -56,9 +72,9 @@ export class ColumnsPageComponent implements OnInit {
     this.apiColumnsService
       .createNewColumn(this.currBoardId, title)
       .pipe(
-        switchMap(() => this.apiColumnsService.getAllColumns(this.currBoardId!)),
-        tap((columns) => {
-          this.columns$.next(columns);
+        switchMap(() => this.apiBoardService.getBoard(this.currBoardId)),
+        tap((board) => {
+          this.columnsService.board$.next(board);
           this.loaderService.disableLoader();
         })
       )
@@ -68,11 +84,11 @@ export class ColumnsPageComponent implements OnInit {
   onDeleteColumn(columnId: string) {
     this.loaderService.enableLoader();
     this.apiColumnsService.deleteColumn(this.currBoardId, columnId).subscribe();
-    this.apiColumnsService
-      .getAllColumns(this.currBoardId!)
+    this.apiBoardService
+      .getBoard(this.currBoardId)
       .pipe(
-        tap((columns) => {
-          this.columns$.next(columns);
+        tap((board) => {
+          this.columnsService.board$.next(board);
           this.loaderService.disableLoader();
         })
       )
@@ -80,9 +96,10 @@ export class ColumnsPageComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<ICreateColumnResp[]>) {
-    const columns = this.columns$.value;
+    const columns = this.columnsService.board$.value.columns;
     moveItemInArray(columns, event.previousIndex, event.currentIndex);
-    this.columns$.next(columns);
+    const board = this.board$.value;
+    this.columnsService.board$.next({ ...board, columns: columns });
     for (let i = 0; i < columns.length; i += 1) {
       const body = {
         title: columns[i].title,
@@ -90,5 +107,9 @@ export class ColumnsPageComponent implements OnInit {
       };
       this.apiColumnsService.updateColumn(this.currBoardId, columns[i].id, body).subscribe();
     }
+  }
+
+  createTaskPopup(columnId: string) {
+    this.dialogRef.open(CreateTaskPopupComponent, { data: columnId });
   }
 }
