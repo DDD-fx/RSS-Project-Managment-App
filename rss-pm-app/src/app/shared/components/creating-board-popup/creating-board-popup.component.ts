@@ -37,8 +37,7 @@ export class CreatingBoardPopupComponent {
   createBoard() {
     if (this.boardForm.valid) {
       this.loaderService.enableLoader();
-      this.apiBoardService.createBoard(this.boardForm.value).subscribe();
-      this.store.dispatch(getAllBoards());
+      this.apiBoardService.createBoard(this.boardForm.value).subscribe(() => this.store.dispatch(getAllBoards()));
       this.dialogRef.close();
       this.loaderService.disableLoader();
     }
