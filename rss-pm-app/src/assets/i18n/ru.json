@@ -12,7 +12,7 @@
     "no-option": "Нет",
     "question": "Вы действительно хотите удалить ",
     "del-acc": "аккаунт",
-    "del-board": "board"
+    "del-board": "доску"
   },
   "signIn-form": {
     "title": "Вход",

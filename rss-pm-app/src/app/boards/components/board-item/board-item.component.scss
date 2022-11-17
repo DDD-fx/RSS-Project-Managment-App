@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  cursor: pointer;
   .settings {
     align-self: flex-end;
     width: 30px;
@@ -51,4 +52,8 @@
   .mat-button:hover {
     border: 1px solid $black;
   }
+}
+
+.btn-bg {
+  color: $blue;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectCurrentBoard } from 'src/app/NgRx/selectors/storeSelectors';
@@ -8,10 +8,14 @@ import { selectCurrentBoard } from 'src/app/NgRx/selectors/storeSelectors';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
   public constructor(private store: Store, private router: Router) {}
 
   board$ = this.store.select(selectCurrentBoard);
+
+  ngOnInit() {
+    console.log(this.board$);
+  }
 
   onBack() {
     void this.router.navigate(['boards']);
