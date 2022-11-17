@@ -49,7 +49,7 @@ export class LoginFormComponent extends ValidationAbstract {
         tap((resp) => {
           localStorage.setItem(ELocalStorage.token, resp.token);
           this.notificationService.showSuccess(ESiteUrls.signIn);
-          void this.router.navigate(['']);
+          void this.router.navigate([ESiteUrls.boards]);
           this.store.dispatch(makeIsloggedTrue());
           setUserIdToLs();
         }),

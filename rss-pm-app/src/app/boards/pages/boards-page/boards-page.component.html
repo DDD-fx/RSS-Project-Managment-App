@@ -4,20 +4,11 @@
   </h2>
 
   <cdk-virtual-scroll-viewport #scroller appendOnly itemSize="30" class="content">
-    <mat-grid-list class="boards-list"
-      rowHeight="1:1"
-      cols="4"
-    >
-      <mat-grid-tile [rowspan]="1.25" class="tile">
-        <app-new-board></app-new-board>
-      </mat-grid-tile>
-      <mat-grid-tile
-          [rowspan]="1.25"
-          *cdkVirtualFor="let board of boards$ | async | sort: order"
-          class="tile"
-      >
+    <section class="boards-list">
+      <app-new-board></app-new-board>
+      <div  *cdkVirtualFor="let board of boards$ | async | sort: order">
         <app-board-item [board]="board"></app-board-item>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </div>
+    </section>
   </cdk-virtual-scroll-viewport>
 </div>

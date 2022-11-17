@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { getCurrentBoard } from 'src/app/NgRx/actions/storeActions';
 import { selectCurrentBoard } from 'src/app/NgRx/selectors/storeSelectors';
 
 @Component({
@@ -16,6 +15,5 @@ export class BoardComponent {
 
   onBack() {
     void this.router.navigate(['boards']);
-    this.store.dispatch(getCurrentBoard({ currentBoard: { title: '', description: '', id: '' } }));
   }
 }

@@ -6,6 +6,8 @@ import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { getAllBoards } from 'src/app/NgRx/actions/storeActions';
 import { selectAllBoards, selectAllBoardsFailure, selectAllBoardsSuccess } from 'src/app/NgRx/selectors/storeSelectors';
+import { ELocalStorage } from 'src/app/shared/shared.enums';
+import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-boards-page',
@@ -13,14 +15,21 @@ import { selectAllBoards, selectAllBoardsFailure, selectAllBoardsSuccess } from 
   styleUrls: ['./boards-page.component.scss'],
 })
 export class BoardsPageComponent implements OnInit, AfterViewInit {
-  isLoading$: Observable<boolean>;
+  isLoadingBoard$: Observable<boolean>;
 
   boards$: Observable<ICreateBoardResp[] | []>;
 
   error$: Observable<string | null>;
 
-  constructor(private apiBoardService: ApiBoardService, private store: Store, private ngZone: NgZone) {
-    this.isLoading$ = this.store.select(selectAllBoards);
+  isLoading$ = this.loaderService.isLoading$;
+
+  constructor(
+    private apiBoardService: ApiBoardService,
+    private store: Store,
+    private ngZone: NgZone,
+    private readonly loaderService: LoaderService
+  ) {
+    this.isLoadingBoard$ = this.store.select(selectAllBoards);
     this.boards$ = this.store.select(selectAllBoardsSuccess);
     this.error$ = this.store.select(selectAllBoardsFailure);
   }
@@ -34,7 +43,10 @@ export class BoardsPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    if (localStorage.getItem(ELocalStorage.token)) {
+      this.fetchData();
+      this.loaderService.disableLoader();
+    }
   }
 
   ngAfterViewInit() {

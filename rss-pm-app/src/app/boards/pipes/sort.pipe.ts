@@ -14,9 +14,9 @@ export class SortPipe implements PipeTransform {
 
     return data.sort((a, b) => {
       if (args === 'asc') {
-        return a.title > b.title ? 1 : -1;
+        return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
       } else {
-        return a.title > b.title ? -1 : 1;
+        return a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1;
       }
     });
   }
