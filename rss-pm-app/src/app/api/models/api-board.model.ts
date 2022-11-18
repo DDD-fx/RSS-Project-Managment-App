@@ -32,6 +32,19 @@ export interface IColumn {
   tasks: ITask[];
 }
 
+export interface ICreateTaskReq {
+  title: string;
+  description: string;
+  userId: string;
+}
+
+export interface ICreateTaskResp extends ICreateTaskReq {
+  order: number;
+  boardId: string;
+  columnId: string;
+  id: string;
+}
+
 export interface ITask {
   id: string;
   title: string;

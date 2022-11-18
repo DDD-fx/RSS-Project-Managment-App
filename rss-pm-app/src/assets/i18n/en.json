@@ -116,6 +116,16 @@
     "add-new-column": "Add new column",
     "add-new-task": "Add new task"
   },
+  "tasks": {
+    "add-task": "Add new task",
+    "task-title": "Task title",
+    "task-label": "Enter task title",
+    "task-description": "Enter task description",
+    "errors": {
+      "empty-title": "Task title can't be empty",
+      "empty-description": "Task description can't be empty"
+    }
+  },
   "page404": {
     "home": "Home",
     "title": "UH OH! You're lost.",

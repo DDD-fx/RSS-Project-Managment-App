@@ -15,6 +15,7 @@ export enum EApiUrls {
   'users' = 'users',
   'boards' = 'boards',
   'columns' = 'columns',
+  'tasks' = 'tasks',
 }
 
 export enum ESiteUrls {
