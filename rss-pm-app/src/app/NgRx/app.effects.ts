@@ -1,15 +1,30 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { ICreateBoardResp, IGetBoardResp } from '../api/models/api-board.model';
 import { ApiBoardService } from '../api/services/api-board.service';
+import { AuthService } from '../auth/services/auth.service';
+import { ELocalStorage } from '../shared/shared.enums';
 import * as StoreActions from './../NgRx/actions/storeActions';
 
 @Injectable()
 export class AppEffects {
-  constructor(private actions$: Actions, private apiBoardService: ApiBoardService) {}
+  constructor(
+    private actions$: Actions,
+    private apiBoardService: ApiBoardService,
+    private authService: AuthService,
+    private store: Store,
+    private router: Router
+  ) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.store.dispatch(StoreActions.saveToken({ token }));
+    }
+  }
 
-  getBoards$$ = createEffect(() => {
+  getBoards$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(StoreActions.getAllBoards),
       mergeMap(() => {
@@ -49,6 +64,17 @@ export class AppEffects {
           map((board: IGetBoardResp) => StoreActions.getCurrentBoardSuccess({ board })),
           catchError((error) => of(StoreActions.getAllBoardsFailure({ error: error.message })))
         );
+      })
+    );
+  });
+
+  redirectIfTokenExpired$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StoreActions.tokenExpired),
+      tap(() => {
+        localStorage.removeItem(ELocalStorage.token);
+        this.authService.onLogOut();
+        this.router.navigate(['']);
       })
     );
   });

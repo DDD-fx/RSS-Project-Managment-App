@@ -12,14 +12,21 @@ export class ApiBoardService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   createBoard(data: ICreateBoardReq): Observable<ICreateBoardResp> {
-    return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards, data);
+    return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards, data).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (!err.ok) {
+          this.router.navigateByUrl('');
+        }
+        return [];
+      })
+    );
   }
 
   getBoard(id: string): Observable<IGetBoardResp> {
     return this.httpClient.get<IGetBoardResp>(EApiUrls.boards + `/${id}`).pipe(
       catchError((err: HttpErrorResponse) => {
         if (!err.ok) {
-          this.router.navigateByUrl('/404');
+          this.router.navigateByUrl('');
         }
         return [];
       })
@@ -31,10 +38,27 @@ export class ApiBoardService {
   }
 
   deleteBoard(id: string): void {
-    this.httpClient.delete(EApiUrls.boards + `/${id}`).subscribe();
+    this.httpClient
+      .delete(EApiUrls.boards + `/${id}`)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (!err.ok) {
+            this.router.navigateByUrl('');
+          }
+          return [];
+        })
+      )
+      .subscribe();
   }
 
   updateBoard(body: ICreateBoardReq, id: string): Observable<ICreateBoardResp> {
-    return this.httpClient.put<ICreateBoardResp>(EApiUrls.boards + `/${id}`, body);
+    return this.httpClient.put<ICreateBoardResp>(EApiUrls.boards + `/${id}`, body).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (!err.ok) {
+          this.router.navigateByUrl('');
+        }
+        return [];
+      })
+    );
   }
 }

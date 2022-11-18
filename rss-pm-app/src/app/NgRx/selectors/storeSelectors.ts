@@ -5,6 +5,8 @@ const selectFeature = createFeatureSelector<IStore>('store');
 export const selectIsLogged = createSelector(selectFeature, (state) => state.isLogged);
 export const selectUserName = createSelector(selectFeature, (state) => state.userName);
 
+export const selectToken = createSelector(selectFeature, (state) => state.token);
+
 export const selectAllBoards = createSelector(selectFeature, (state) => state.isLoading);
 export const selectAllBoardsSuccess = createSelector(selectFeature, (state) => state.boards);
 export const selectAllBoardsFailure = createSelector(selectFeature, (state) => state.error);

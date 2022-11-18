@@ -13,6 +13,7 @@ export const Store: IStore = {
   isLogged: false,
   userName: null,
   isLoading: false,
+  token: '',
   error: null,
   boards: [],
   isOpenBoard: false,
@@ -29,6 +30,10 @@ export const storeReducer = createReducer(
     (state): IStore => ({ ...state, userName: localStorage.getItem(ELocalStorage.userName) })
   ),
   on(StoreActions.removeUserName, (state): IStore => ({ ...state, userName: null })),
+
+  // token expired
+  on(StoreActions.saveToken, (state, action): IStore => ({ ...state, token: action.token })),
+  on(StoreActions.tokenExpired, (state): IStore => ({ ...state, userName: null })),
 
   // all boards redusers
   on(StoreActions.getAllBoards, (state): IStore => ({ ...state, isLoading: true })),
