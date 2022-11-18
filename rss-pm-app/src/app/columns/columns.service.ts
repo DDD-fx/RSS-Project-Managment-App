@@ -22,16 +22,15 @@ export class ColumnsService {
   ) {}
 
   createNewTask(columnId: string, body: ICreateTaskReq) {
-    // this.loaderService.enableLoader();
+    this.loaderService.enableLoader();
     this.apiTasksService
       .createNewTask(columnId, body)
       .pipe(
         switchMap(() => this.apiBoardService.getBoard(this.currBoardId)),
         tap((board) => {
           this.board$.next(board);
-          // this.loaderService.disableLoader();
         })
       )
-      .subscribe();
+      .subscribe(() => this.loaderService.disableLoader());
   }
 }

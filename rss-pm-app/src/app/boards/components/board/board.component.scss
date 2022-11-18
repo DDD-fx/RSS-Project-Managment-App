@@ -2,8 +2,9 @@
 @import "src/styles/variables";
 
 .main-container {
-  height: 60vh;
-  @include margin-center();
+  height: 80vh;
+  //@include margin-center();
+  margin: 1rem 2%;
 
   .title {
     text-align: center;

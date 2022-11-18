@@ -58,3 +58,16 @@ export interface IFile {
   filename: string;
   fileSize: number;
 }
+
+export interface IUpdateTaskReq {
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+  boardId: string;
+  columnId: string;
+}
+
+export interface IUpdateTaskResp extends IUpdateTaskReq {
+  id: string;
+}

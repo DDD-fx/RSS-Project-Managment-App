@@ -39,7 +39,3 @@ export function saveUserDataToLS(data: ISignUpResp) {
   localStorage.setItem(ELocalStorage.userName, data.name);
   localStorage.setItem(ELocalStorage.userId, data.id);
 }
-
-// export function findUserByLogin(users: IGetAllUsersResp, login: string): ISignUpResp {
-//   return users.find((item) => item.login === login)!;
-// }
