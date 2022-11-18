@@ -19,11 +19,9 @@ export class AuthGuard implements CanActivate {
         .select(selectToken)
         .pipe()
         .subscribe((resp) => (this.token = resp));
-      console.log(this.token);
       const tokenFromLS = getTokenFromLS();
       console.log(tokenFromLS);
       if (this.token === tokenFromLS) {
-        console.log(111);
         return true;
       } else {
         return false;
