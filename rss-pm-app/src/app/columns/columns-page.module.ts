@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TaskComponent } from './task/task.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [ColumnsPageComponent, TaskComponent],
@@ -23,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     DragDropModule,
     MatCardModule,
+    MatDialogModule,
   ],
   exports: [ColumnsPageComponent],
 })

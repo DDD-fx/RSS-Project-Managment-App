@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskPopupComponent } from '../shared/components/create-task-popup/create-task-popup.component';
 import { ColumnsService } from './columns.service';
 import { ApiBoardService } from '../api/services/api-board.service';
+import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 
 @Component({
   selector: 'app-columns-page',
@@ -83,16 +84,21 @@ export class ColumnsPageComponent implements OnInit {
 
   onDeleteColumn(columnId: string) {
     this.loaderService.enableLoader();
-    this.apiColumnsService.deleteColumn(this.currBoardId, columnId).subscribe();
-    this.apiBoardService
-      .getBoard(this.currBoardId)
-      .pipe(
-        tap((board) => {
-          this.columnsService.board$.next(board);
-          this.loaderService.disableLoader();
-        })
-      )
-      .subscribe();
+    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-column' } });
+    dialog.afterClosed().subscribe((result) => {
+      if (result === 'true') {
+        this.apiColumnsService.deleteColumn(this.currBoardId, columnId).subscribe();
+        this.apiBoardService
+          .getBoard(this.currBoardId)
+          .pipe(
+            tap((board) => {
+              this.columnsService.board$.next(board);
+            })
+          )
+          .subscribe();
+      }
+    });
+    this.loaderService.disableLoader();
   }
 
   drop(event: CdkDragDrop<ICreateColumnResp[]>) {
