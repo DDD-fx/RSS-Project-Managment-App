@@ -19,7 +19,7 @@ export class ApiBoardService {
     return this.httpClient.get<IGetBoardResp>(EApiUrls.boards + `/${id}`).pipe(
       catchError((err: HttpErrorResponse) => {
         if (!err.ok) {
-          this.router.navigateByUrl('/404');
+          this.router.navigateByUrl('');
         }
         return [];
       })

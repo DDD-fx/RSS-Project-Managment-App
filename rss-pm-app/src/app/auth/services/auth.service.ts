@@ -1,15 +1,24 @@
+/* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ISignInReq, ISignInResp, ISignUpReq, ISignUpResp } from '../models/auth.model';
 import { HttpClient } from '@angular/common/http';
 import { EApiUrls } from '../../shared/shared.enums';
 import { LoaderService } from '../../shared/components/loader/loader.service';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { makeIsloggedFalse, removeUserName } from 'src/app/NgRx/actions/storeActions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient, private readonly loaderService: LoaderService) {}
+  constructor(
+    private httpClient: HttpClient,
+    private readonly loaderService: LoaderService,
+    private store: Store,
+    private router: Router
+  ) {}
 
   onSignIn(data: ISignInReq): Observable<ISignInResp> {
     this.loaderService.enableLoader();
@@ -22,6 +31,8 @@ export class AuthService {
   }
 
   onLogOut(): void {
-    // this.isLogOut$.next(true);
+    localStorage.clear();
+    this.store.dispatch(removeUserName());
+    this.store.dispatch(makeIsloggedFalse());
   }
 }

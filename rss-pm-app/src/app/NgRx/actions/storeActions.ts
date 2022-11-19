@@ -6,6 +6,9 @@ export const makeIsloggedFalse = createAction('[Store] Make isLogged false');
 export const addUserName = createAction('[Store] Add User Name');
 export const removeUserName = createAction('[Store] Remove User Name');
 
+export const saveToken = createAction('[Store] Load Token', props<{ token: string }>());
+export const tokenExpired = createAction('[Store] Token Expired');
+
 export const getAllBoards = createAction('[Store] Get all boards');
 export const getAllBoardsSuccess = createAction(
   '[Store] Get all boards success',
