@@ -12,7 +12,7 @@ import { LoaderService } from '../shared/components/loader/loader.service';
 export class ColumnsService {
   public board$ = new BehaviorSubject<IGetBoardResp>({} as IGetBoardResp);
 
-  readonly currBoardId = this.router.url.split('/').pop()!;
+  readonly currBoardId$ = new BehaviorSubject('');
 
   constructor(
     private readonly apiTasksService: ApiTasksService,
@@ -26,7 +26,7 @@ export class ColumnsService {
     this.apiTasksService
       .createNewTask(columnId, body)
       .pipe(
-        switchMap(() => this.apiBoardService.getBoard(this.currBoardId)),
+        switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
         tap((board) => {
           this.board$.next(board);
         })
