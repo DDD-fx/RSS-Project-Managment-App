@@ -26,7 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     DragDropModule,
     MatCardModule,
-    MatDialogModule,
+    MatDialogModule, // вроде не нужно
   ],
   exports: [ColumnsPageComponent],
 })
