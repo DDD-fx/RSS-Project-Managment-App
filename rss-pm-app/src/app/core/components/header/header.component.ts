@@ -5,11 +5,12 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { ApiUserService } from 'src/app/api/services/api-user.service';
-import { addUserName, makeIsloggedFalse, makeIsloggedTrue, removeUserName } from 'src/app/NgRx/actions/storeActions';
+import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
 import { selectIsLogged, selectUserName } from 'src/app/NgRx/selectors/storeSelectors';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit {
     private store: Store,
     private router: Router,
     private apiService: ApiUserService,
+    private authService: AuthService,
     private dialogRef: MatDialog
   ) {
     translate.addLangs(['en', 'ru']);
@@ -52,10 +54,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    localStorage.clear();
+    this.authService.onLogOut();
     this.router.navigate(['']);
-    this.store.dispatch(makeIsloggedFalse());
-    this.store.dispatch(removeUserName());
   }
 
   deleteUser() {
@@ -63,9 +63,7 @@ export class HeaderComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.toString() === 'true') {
         this.apiService.deleteUser();
-        localStorage.clear();
-        this.store.dispatch(makeIsloggedFalse());
-        this.store.dispatch(removeUserName());
+        this.authService.onLogOut();
         void this.router.navigate([ESiteUrls.signUp]);
       }
     });

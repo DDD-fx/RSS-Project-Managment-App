@@ -4,6 +4,7 @@ export interface IStore {
   isLogged: boolean;
   userName: string | null;
   isLoading: boolean;
+  token: string;
   error: string | null;
   boards: ICreateBoardResp[];
   isOpenBoard: boolean;

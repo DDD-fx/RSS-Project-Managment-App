@@ -12,6 +12,7 @@ import { TaskComponent } from './task/task.component';
 import { MatCardModule } from '@angular/material/card';
 import { ColumnOrderSortingPipe } from './pipes/column-order-sorting.pipe';
 import { TaskOrderSortingPipe } from './pipes/task-order-sorting.pipe';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [ColumnsPageComponent, TaskComponent, ColumnOrderSortingPipe, TaskOrderSortingPipe],
@@ -25,6 +26,7 @@ import { TaskOrderSortingPipe } from './pipes/task-order-sorting.pipe';
     ReactiveFormsModule,
     DragDropModule,
     MatCardModule,
+    MatDialogModule,
   ],
   exports: [ColumnsPageComponent],
 })

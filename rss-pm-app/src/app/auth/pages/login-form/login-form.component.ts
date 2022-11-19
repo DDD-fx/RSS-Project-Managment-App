@@ -10,7 +10,7 @@ import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { IHttpErrors } from '../../../api/models/errors.model';
 import { ApiUserService } from '../../../api/services/api-user.service';
 import { saveUserDataToLS, setUserIdToLs } from '../../../shared/shared.utils';
-import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
+import { addUserName, makeIsloggedTrue, saveToken } from 'src/app/NgRx/actions/storeActions';
 import { Store } from '@ngrx/store';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
 
@@ -48,6 +48,7 @@ export class LoginFormComponent extends ValidationAbstract {
       .pipe(
         tap((resp) => {
           localStorage.setItem(ELocalStorage.token, resp.token);
+          this.store.dispatch(saveToken({ token: resp.token }));
           this.notificationService.showSuccess(ESiteUrls.signIn);
           void this.router.navigate([ESiteUrls.boards]);
           this.store.dispatch(makeIsloggedTrue());
