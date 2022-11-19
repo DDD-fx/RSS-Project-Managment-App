@@ -53,13 +53,11 @@ export class NotificationService {
             'Неверное имя пользователя или пароль. Или пользователя с таким логином не существует',
             `Error code: ${err.error.statusCode}`
           );
-        this.loaderService.disableLoader();
         break;
 
       case ESiteUrls.signUp:
         if (currLang === 'en') this.toastr.error('User login already exists!', `Error code: ${err.error.statusCode}`);
         else this.toastr.error('Пользователь с данным логином уже существует', `Error code: ${err.error.statusCode}`);
-        this.loaderService.disableLoader();
         break;
 
       case ESiteUrls.userEdit:
@@ -70,19 +68,17 @@ export class NotificationService {
           if (currLang === 'en') this.toastr.error('User login already exists!', `Error code: ${err.error.statusCode}`);
           else this.toastr.error('Пользователь с данным логином уже существует', `Error code: ${err.error.statusCode}`);
         }
-        this.loaderService.disableLoader();
         break;
 
       case ESiteUrls.boards:
         if (currLang === 'en') this.toastr.error('Board was not found!', `Error code: ${err.error.statusCode}`);
         else this.toastr.error('Доска не найдена', `Error code: ${err.error.statusCode}`);
-        this.loaderService.disableLoader();
         break;
 
       default:
         if (currLang === 'en') this.toastr.error('Something went wrong', 'Error');
         else this.toastr.error('Что-то пошло не так', 'Ошибка');
-        this.loaderService.disableLoader();
     }
+    this.loaderService.disableLoader();
   }
 }

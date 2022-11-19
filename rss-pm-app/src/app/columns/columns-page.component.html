@@ -1,21 +1,33 @@
 <ng-container *ngIf="columns$ | async as columns">
-  <div cdkDropList cdkDropListOrientation="horizontal" class="columns" (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let column of columns" class="column" cdkDrag>
-      <div class="column-header">
-        <span class="column-title">{{column.title}}</span>
-        <mat-icon (click)="onDeleteColumn(column.id)" title="Delete">delete</mat-icon>
+
+    <div cdkDropList
+         cdkDropListOrientation="horizontal"
+         [cdkDropListData]="columns"
+         (cdkDropListDropped)="dropColumn($event)"
+         class="columns">
+      <div cdkDrag *ngFor="let column of columns | columnOrderSorting" class="column">
+        <div class="column-header">
+          <span class="column-title">{{column.title}}</span>
+          <mat-icon (click)="onDeleteColumn(column.id)" title="Delete">delete</mat-icon>
+        </div>
+
+        <ng-container *ngIf="column.tasks.length > 0">
+          <app-task
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            [tasks]="column.tasks"
+            [cdkDropListConnectedTo]="connectedLists"
+            (cdkDropListDropped)="dropTask($event, column.id)"
+            id="{{column.id}}"></app-task>
+        </ng-container>
+
+        <button mat-stroked-button color="primary" class="add-task-btn" (click)="createTaskPopup(column.id)">
+          <mat-icon>add</mat-icon>
+          {{'columns.add-new-task' | translate}}
+        </button>
       </div>
-
-      <ng-container *ngIf="column.tasks.length > 0">
-        <app-task [tasks]="column.tasks"></app-task>
-      </ng-container>
-
-      <button mat-stroked-button color="primary" class="add-task-btn" (click)="createTaskPopup(column.id)">
-        <mat-icon>add</mat-icon>
-        {{'columns.add-new-task' | translate}}
-      </button>
     </div>
-  </div>
+
 </ng-container>
 
 <button *ngIf="!addColumn" mat-stroked-button (click)="onAddColumn()" class="create-column-btn">
