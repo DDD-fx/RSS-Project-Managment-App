@@ -33,7 +33,7 @@ export const storeReducer = createReducer(
 
   // token expired
   on(StoreActions.saveToken, (state, action): IStore => ({ ...state, token: action.token })),
-  on(StoreActions.tokenExpired, (state): IStore => ({ ...state, userName: null })),
+  on(StoreActions.tokenExpired, (state): IStore => ({ ...state, userName: null, isLogged: false, token: '' })),
 
   // all boards redusers
   on(StoreActions.getAllBoards, (state): IStore => ({ ...state, isLoading: true })),

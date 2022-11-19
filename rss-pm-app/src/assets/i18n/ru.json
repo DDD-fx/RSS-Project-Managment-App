@@ -12,7 +12,9 @@
     "no-option": "Нет",
     "question": "Вы действительно хотите удалить ",
     "del-acc": "аккаунт",
-    "del-board": "доску"
+    "del-board": "доску",
+    "del-column": "колонку",
+    "del-task": "задание"
   },
   "signIn-form": {
     "title": "Вход",
