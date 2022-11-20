@@ -28,7 +28,7 @@ export class UpdateBoardPopupComponent {
 
   public updateForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.maxLength(15)]),
-    description: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    description: new FormControl('', [Validators.required]),
   });
 
   closeUpdateForm() {

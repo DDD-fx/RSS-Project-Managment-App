@@ -6,7 +6,7 @@
     <input class="settings" type="color" #color (click)="onClick(color.value)" />
   <mat-card-title>{{ board.title }}</mat-card-title>
   <mat-card-content>
-    <p>{{ board.description }}</p>
+    <p>{{ board.description.slice(0, 50) }}</p>
   </mat-card-content>
   <mat-card-actions class="board-btn-wrapper">
     <button mat-stroked-button color="primary" type="button" class="btn-bg" (click)="deleteBoard(board.id); $event.stopPropagation()">

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { IGetBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
@@ -12,7 +11,6 @@ import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 })
 export class BoardComponent implements OnInit {
   public constructor(
-    private store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private apiBoardService: ApiBoardService,
