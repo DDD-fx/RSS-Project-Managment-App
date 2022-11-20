@@ -1,7 +1,6 @@
 <mat-card  [routerLink]="['/boards', board.id]"
           (click)="saveCurrentBoard()"
           class="board"
-          *ngIf="!isUpdateFormActive"
           [style.background-color]="'{{customColor}}'"
 >
     <input class="settings" type="color" #color (click)="onClick(color.value)" />
@@ -13,36 +12,12 @@
     <button mat-stroked-button color="primary" type="button" class="btn-bg" (click)="deleteBoard(board.id); $event.stopPropagation()">
       <mat-icon>delete</mat-icon>
     </button>
-    <button mat-stroked-button color="primary" type="button" class="btn-bg" (click)="toggleUpdateForm(); $event.stopPropagation()">
+    <button mat-stroked-button color="primary" type="button" class="btn-bg" (click)="openUpdateForm(); $event.stopPropagation()">
       <mat-icon> border_color</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
 
-
-<mat-card class="update-board" *ngIf="isUpdateFormActive">
-  <mat-card-title>{{'board.updateBoard' | translate}}</mat-card-title>
-    <form class="update-form" [formGroup]="updateForm">
-      <mat-form-field class="form-input" appearance="fill">
-        <mat-label>{{'board.newLabel' | translate}}</mat-label>
-        <input matInput autocomplete="off" type="text" formControlName="title" placeholder="{{ board.title }}">
-        <mat-error *ngIf="updateForm.invalid">{{'board.boardErrors.no-name-error' | translate}}</mat-error>
-      </mat-form-field>
-      <mat-form-field class="form-input" appearance="fill">
-        <mat-label>{{'board.newDescription' | translate}}</mat-label>
-        <input matInput autocomplete="off" type="text" formControlName="description" placeholder="{{ board.description }}">
-      </mat-form-field>
-
-      <div class="board-btn-wrapper">
-        <button mat-button type="button" (click)="toggleUpdateForm()">
-          {{'board.btn.cancel' | translate}}
-        </button>
-        <button mat-raised-button color="primary" type="button" (click)="updateBoard(board.id)" [disabled]="updateForm.invalid">
-          {{'board.btn.update' | translate}}
-        </button>
-      </div>
-    </form>
-</mat-card>
 
 
 

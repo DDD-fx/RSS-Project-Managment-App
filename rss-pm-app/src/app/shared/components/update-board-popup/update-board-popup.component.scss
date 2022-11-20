@@ -1,20 +1,13 @@
 @import "src/styles/variables";
 @import "src/styles/mixins";
 
-.board {
-  border: 2px solid $lightgrey;
-  width: 200px;
-  height: 200px;
-  box-shadow: none;
-  text-align: center;
+mat-form-field {
+  padding-bottom: 10px;
+}
+
+.inputs {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  cursor: pointer;
-  .settings {
-    align-self: flex-end;
-    width: 30px;
-  }
 }
 
 .board-btn-wrapper {
@@ -29,3 +22,4 @@
 .btn-bg {
   color: $blue;
 }
+
