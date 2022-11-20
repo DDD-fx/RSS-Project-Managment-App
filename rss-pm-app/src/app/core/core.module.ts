@@ -12,6 +12,8 @@ import { AppEffects } from '../NgRx/app.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -24,6 +26,8 @@ import { DeletingPopupComponent } from '../shared/components/deleting-popup/dele
     StoreModule.forFeature('store', storeReducer),
     EffectsModule.forFeature([AppEffects]),
     MatDialogModule,
+    MatIconModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [],

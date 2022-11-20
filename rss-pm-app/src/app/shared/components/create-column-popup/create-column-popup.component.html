@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{'columns.add-column'|translate}}?</h2>
+<h2 class="title" mat-dialog-title>{{'columns.add-column'|translate}}?</h2>
 <form class="create-form" [formGroup]="newColumnForm">
   <div class="inputs">
     <mat-form-field class="form-input" appearance="fill">
@@ -9,11 +9,15 @@
   </div>
 
   <div class="board-btn-wrapper">
-    <button class="popup-add-btn" mat-raised-button color="primary" type="button" (click)="createNewColumn()" [disabled]="newColumnForm.invalid">
-      {{'board.btn.create' | translate}}
-    </button>
-    <button mat-button type="submit" (click)="onCancelClick()">
-      {{'board.btn.cancel' | translate}}
-    </button>
+    <div class="button-area">
+      <button class="popup-add-btn" mat-raised-button color="primary" type="button" (click)="createNewColumn()" [disabled]="newColumnForm.invalid">
+        {{'board.btn.create' | translate}}
+      </button>
+    </div>
+    <div class="button-area">
+      <button mat-button type="submit" (click)="onCancelClick()">
+        {{'board.btn.cancel' | translate}}
+      </button>
+    </div>
   </div>
 </form>

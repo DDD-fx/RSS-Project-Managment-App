@@ -1,86 +1,131 @@
 @import "src/styles/variables";
 
-.lds-roller {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  margin: auto;
+:host {
+  background: $background;
+  color: var(--fg);
+  font: 1em/1.5 sans-serif;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  transition:
+    background-color var(--trans-dur),
+    color var(--trans-dur);
 }
-.lds-roller div {
-  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  transform-origin: 40px 40px;
+:root {
+  --hue: 223;
+  --bg: hsl(var(--hue),10%,90%);
+  --fg: hsl(var(--hue),10%,10%);
+  --trans-dur: 0.3s;
+  font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
 }
-.lds-roller div:after {
-  content: " ";
+
+.pl {
   display: block;
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: $blue;
-  margin: -4px 0 0 -4px;
+  width: 5em;
+  height: 5em;
 }
-.lds-roller div:nth-child(1) {
-  animation-delay: -0.036s;
+
+.pl__ring,
+.pl__ball1,
+.pl__ball2 {
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  transform-origin: 32px 32px;
 }
-.lds-roller div:nth-child(1):after {
-  top: 63px;
-  left: 63px;
+
+.pl__ring {
+  animation-name: ring;
 }
-.lds-roller div:nth-child(2) {
-  animation-delay: -0.072s;
+
+.pl__ball1 {
+  animation-name: ball1;
 }
-.lds-roller div:nth-child(2):after {
-  top: 68px;
-  left: 56px;
+
+.pl__ball2 {
+  animation-name: ball2;
 }
-.lds-roller div:nth-child(3) {
-  animation-delay: -0.108s;
-}
-.lds-roller div:nth-child(3):after {
-  top: 71px;
-  left: 48px;
-}
-.lds-roller div:nth-child(4) {
-  animation-delay: -0.144s;
-}
-.lds-roller div:nth-child(4):after {
-  top: 72px;
-  left: 40px;
-}
-.lds-roller div:nth-child(5) {
-  animation-delay: -0.18s;
-}
-.lds-roller div:nth-child(5):after {
-  top: 71px;
-  left: 32px;
-}
-.lds-roller div:nth-child(6) {
-  animation-delay: -0.216s;
-}
-.lds-roller div:nth-child(6):after {
-  top: 68px;
-  left: 24px;
-}
-.lds-roller div:nth-child(7) {
-  animation-delay: -0.252s;
-}
-.lds-roller div:nth-child(7):after {
-  top: 63px;
-  left: 17px;
-}
-.lds-roller div:nth-child(8) {
-  animation-delay: -0.288s;
-}
-.lds-roller div:nth-child(8):after {
-  top: 56px;
-  left: 12px;
-}
-@keyframes lds-roller {
-  0% {
-    transform: rotate(0deg);
+
+/* Animation */
+@keyframes ring {
+  from {
+    animation-timing-function: ease-in-out;
+    stroke-dashoffset: -122.52;
+    transform: rotate(135deg);
   }
-  100% {
-    transform: rotate(360deg);
+
+  15% {
+    animation-timing-function: ease-in;
+    stroke-dashoffset: -122.52;
+    transform: rotate(90deg);
+  }
+
+  35% {
+    animation-timing-function: ease-out;
+    stroke-dashoffset: -65.34;
+    transform: rotate(297.5deg);
+  }
+
+  55% {
+    animation-timing-function: ease-in-out;
+    stroke-dashoffset: -122.52;
+    transform: rotate(505deg);
+  }
+
+  70% {
+    animation-timing-function: ease-in-out;
+    stroke-dashoffset: -122.52;
+    transform: rotate(490deg);
+  }
+
+  85%,
+  to {
+    stroke-dashoffset: -122.52;
+    transform: rotate(497.5deg);
+  }
+}
+
+@keyframes ball1 {
+  from {
+    transform: rotate(14deg);
+  }
+
+  20% {
+    transform: rotate(-7deg);
+  }
+
+  60% {
+    transform: rotate(399deg);
+  }
+
+  75% {
+    transform: rotate(361deg);
+  }
+
+  90%,
+  to {
+    transform: rotate(374deg);
+  }
+}
+@keyframes ball2 {
+  from {
+    transform: rotate(-21deg);
+  }
+
+  25% {
+    transform: rotate(-47deg);
+  }
+
+  60% {
+    transform: rotate(364deg);
+  }
+
+  75% {
+    transform: rotate(326deg);
+  }
+
+  90%,
+  to {
+    transform: rotate(339deg);
   }
 }
