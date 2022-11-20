@@ -15,7 +15,6 @@ export class ApiColumnsService {
   }
 
   createNewColumn(boardId: string, body: ICreateColumnReq): Observable<ICreateColumnResp> {
-    // const payload = { title: `${title}` };
     return this.httpClient.post<ICreateColumnResp>(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}`, body);
   }
 
