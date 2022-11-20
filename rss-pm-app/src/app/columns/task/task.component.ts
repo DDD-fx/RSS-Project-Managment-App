@@ -37,7 +37,7 @@ export class TaskComponent {
           .deleteTask(this.currBoardId$.value, this.elRef.nativeElement.id, taskId)
           .pipe(
             switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
-            tap((board) => this.columnsService.board$.next(board))
+            tap((board) => this.columnsService.updatedBoard(board))
           )
           .subscribe(() => this.loaderService.disableLoader());
       }

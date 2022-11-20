@@ -113,14 +113,15 @@
     "newDescription": "Enter new description"
   },
   "columns": {
-    "create-btn": "Create new column",
-    "input-title": "Column title",
+    "add-column": "Create new column",
+    "column-label": "Column title",
     "add-new-column": "Add new column",
-    "add-new-task": "Add new task"
+    "errors": {
+      "empty-title": "Column title can't be empty"
+    }
   },
   "tasks": {
     "add-task": "Add new task",
-    "task-title": "Task title",
     "task-label": "Enter task title",
     "task-description": "Enter task description",
     "errors": {
