@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EApiUrls } from '../../shared/shared.enums';
 import { Observable } from 'rxjs';
-import { ICreateBoardResp, ICreateColumnResp, IUpdateColumnReq } from '../models/api-board.model';
+import { ICreateColumnReq, ICreateColumnResp, IUpdateColumnReq } from '../models/api-board.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +14,8 @@ export class ApiColumnsService {
     return this.httpClient.get<ICreateColumnResp[]>(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}`);
   }
 
-  createNewColumn(boardId: string, title: string): Observable<ICreateBoardResp> {
-    const payload = { title: `${title}` };
-    return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}`, payload);
+  createNewColumn(boardId: string, body: ICreateColumnReq): Observable<ICreateColumnResp> {
+    return this.httpClient.post<ICreateColumnResp>(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}`, body);
   }
 
   updateColumn(boardId: string, columnId: string, body: IUpdateColumnReq): Observable<ICreateColumnResp> {

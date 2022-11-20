@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ApiColumnsService } from '../api/services/api-colomns.service';
-import { map, switchMap, tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { IColumn, IGetBoardResp, ITask, IUpdateColumnReq, IUpdateTaskReq } from '../api/models/api-board.model';
 import { LoaderService } from '../shared/components/loader/loader.service';
@@ -13,6 +12,7 @@ import { ColumnsService } from './columns.service';
 import { ApiBoardService } from '../api/services/api-board.service';
 import { ApiTasksService } from '../api/services/api-tasks.service';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
+import { CreateColumnPopupComponent } from '../shared/components/create-column-popup/create-column-popup.component';
 
 @Component({
   selector: 'app-columns-page',
@@ -21,17 +21,13 @@ import { DeletingPopupComponent } from '../shared/components/deleting-popup/dele
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnsPageComponent implements OnInit {
-  public addColumn = false;
-
-  public newColumnForm = new FormGroup({ columnName: new FormControl('', Validators.required) });
-
   public board$ = this.columnsService.board$;
 
   public columns$ = this.board$.pipe(map((board) => board.columns));
 
   private readonly currBoardId$ = this.columnsService.currBoardId$;
 
-  public connectedLists: string[] = [];
+  public connectedLists$ = this.columnsService.connectedLists$;
 
   constructor(
     private readonly store: Store,
@@ -46,47 +42,28 @@ export class ColumnsPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.columnsService.board$.next({} as IGetBoardResp);
-    this.columnsService.currBoardId$.next(this.router.url.split('/').pop()!);
+    this.columnsService.updatedBoard({} as IGetBoardResp);
+    this.columnsService.getBoardId(this.router.url.split('/').pop()!);
     this.apiBoardService
       .getBoard(this.currBoardId$.value)
       .pipe(
         tap((board) => {
+          const connectedLists = [];
           for (let column of board.columns) {
-            this.connectedLists.push(column.id);
+            connectedLists.push(column.id);
           }
-          this.columnsService.board$.next(board);
+          this.columnsService.updateConnectedLists(connectedLists);
+          this.columnsService.updatedBoard(board);
         })
       )
       .subscribe();
   }
 
-  onAddColumn() {
-    this.addColumn = true;
-    this.elRef.nativeElement.scroll(9999, 0);
-  }
-
-  onCancelAddColumn() {
-    this.addColumn = false;
-  }
-
-  onCreateColumn() {
-    this.loaderService.enableLoader();
-    const title = this.newColumnForm.controls.columnName.value!;
-    this.apiColumnsService
-      .createNewColumn(this.currBoardId$.value, title)
-      .pipe(
-        tap((resp) => this.connectedLists.push(resp.id)),
-        switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
-        tap((board) => {
-          this.columnsService.board$.next(board);
-        })
-      )
-      .subscribe(() => this.loaderService.disableLoader());
-  }
-
   onDeleteColumn(columnId: string) {
-    this.connectedLists = this.connectedLists.filter((id) => id !== columnId);
+    let connectedLists = this.connectedLists$.value;
+    connectedLists = connectedLists.filter((id) => id !== columnId);
+    this.columnsService.updateConnectedLists(connectedLists);
+
     let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-column' } });
     dialog.afterClosed().subscribe((result) => {
       if (result === 'true') {
@@ -96,7 +73,7 @@ export class ColumnsPageComponent implements OnInit {
           .getBoard(this.currBoardId$.value)
           .pipe(
             tap((board) => {
-              this.columnsService.board$.next(board);
+              this.columnsService.updatedBoard(board);
             })
           )
           .subscribe(() => this.loaderService.disableLoader());
@@ -147,6 +124,11 @@ export class ColumnsPageComponent implements OnInit {
       };
       this.apiTasksService.updateTransferredTask(prevColumnId, movedTask.id, body).subscribe();
     }
+  }
+
+  createColumnPopup() {
+    this.elRef.nativeElement.scroll(9999, 0);
+    this.dialogRef.open(CreateColumnPopupComponent);
   }
 
   createTaskPopup(columnId: string) {

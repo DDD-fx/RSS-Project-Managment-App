@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { CreateTaskPopupComponent } from './shared/components/create-task-popup/create-task-popup.component';
+import { CreateColumnPopupComponent } from './shared/components/create-column-popup/create-column-popup.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     WrongAddressPageComponent,
     CreatingBoardPopupComponent,
     CreateTaskPopupComponent,
+    CreateColumnPopupComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,14 @@
   gap: 10px;
 }
 
+.empty-task-box {
+  width: 185px;
+  height: 50px;
+  @include flex-center();
+  border: 1px dashed $grey;
+  color: $grey;
+}
+
 .task-card {
   width: 185px;
   display: flex;
