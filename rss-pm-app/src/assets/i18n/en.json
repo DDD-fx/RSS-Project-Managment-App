@@ -101,7 +101,10 @@
     "description": "Description",
     "createBoard": "Create new board",
     "boardErrors": {
-      "no-name-error": "Board name can't be empty"
+      "empty-title": "Board name can't be empty",
+      "long-title": "The title is too long",
+      "empty-description": "Please enter a short description",
+      "long-description": "The title is too long"
     },
     "btn": {
       "create": "Create",

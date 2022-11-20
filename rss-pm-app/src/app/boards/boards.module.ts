@@ -13,21 +13,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { NewBoardComponent } from './components/new-board/new-board.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { BoardComponent } from './components/board/board.component';
-import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 import { SortPipe } from './pipes/sort.pipe';
 import { ColumnsPageModule } from '../columns/columns-page.module';
 
 @NgModule({
-  declarations: [
-    BoardItemComponent,
-    BoardsPageComponent,
-    NewBoardComponent,
-    BoardPageComponent,
-    BoardComponent,
-    SortPipe,
-  ],
+  declarations: [BoardItemComponent, BoardsPageComponent, NewBoardComponent, BoardComponent, SortPipe],
   imports: [
     CommonModule,
     BoardsRoutingModule,

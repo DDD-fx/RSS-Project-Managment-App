@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
-import { deleteBoardById, getCurrentBoard, updateBoardSuccess } from 'src/app/NgRx/actions/storeActions';
+import { deleteBoardById, getCurrentBoard } from 'src/app/NgRx/actions/storeActions';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
+import { UpdateBoardPopupComponent } from 'src/app/shared/components/update-board-popup/update-board-popup.component';
 
 @Component({
   selector: 'app-board-item',
@@ -18,18 +18,10 @@ export class BoardItemComponent {
 
   private customColor: string = '#ffffff';
 
-  public updateForm: FormGroup = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-  });
-
-  isUpdateFormActive = false;
-
-  toggleUpdateForm() {
-    this.isUpdateFormActive = !this.isUpdateFormActive;
-    this.updateForm.controls['title'].setValue('');
-    this.updateForm.controls['description'].setValue('');
-    this.updateForm.markAsUntouched();
+  openUpdateForm() {
+    this.dialogRef.open(UpdateBoardPopupComponent, {
+      data: { id: this.board.id },
+    });
   }
 
   constructor(
@@ -58,19 +50,6 @@ export class BoardItemComponent {
         this.store.dispatch(deleteBoardById({ boardId }));
       }
     });
-    this.loaderService.disableLoader();
-  }
-
-  updateBoard(boardId: string) {
-    this.loaderService.enableLoader();
-    const board: ICreateBoardResp = {
-      id: boardId,
-      title: this.updateForm.controls['title'].value,
-      description: this.updateForm.controls['description'].value,
-    };
-    this.store.dispatch(updateBoardSuccess({ board: board }));
-    this.apiBoardService.updateBoard(this.updateForm.value, boardId).subscribe();
-    this.toggleUpdateForm();
     this.loaderService.disableLoader();
   }
 }
