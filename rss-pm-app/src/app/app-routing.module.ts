@@ -3,8 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ESiteUrls } from './shared/shared.enums';
 import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
+import { getTokenFromLS } from './shared/shared.utils';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: getTokenFromLS() ? ESiteUrls.boards : ESiteUrls.welcome,
+    pathMatch: 'full',
+  },
   {
     path: ESiteUrls.welcome,
     loadChildren: () => import('./welcome/welcome.module').then((a) => a.WelcomeModule),
