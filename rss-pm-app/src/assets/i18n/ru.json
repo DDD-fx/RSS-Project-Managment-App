@@ -5,7 +5,9 @@
     "edit-profile": "Редактировать профиль",
     "create-board-button": "Создать новую доску",
     "exit-button": "Выйти",
-    "delete-user": "Удалить аккаунт"
+    "delete-user": "Удалить аккаунт",
+    "hi-stranger": "Привет, незнакомец",
+    "hi": "Привет, "
   },
   "deleting-popup": {
     "yes-option": "Да",

@@ -1,14 +1,15 @@
 @import "src/styles/mixins";
+@import "src/styles/variables";
 
 :host {
-  margin-bottom: 100px;
+  background-color: $background;
+  height: 100%;
 }
 
 mat-card {
   max-width: 400px;
-  margin: 2em auto;
+  margin: 4em auto;
   text-align: center;
-
   ::ng-deep {
     .mat-form-field-underline,
     .mat-form-field-subscript-wrapper {
@@ -24,4 +25,97 @@ mat-card {
 .login-btn-wrapper {
   @include flex-center;
   gap: 20px;
+  height: 50px;
 }
+
+.card {
+  @include card();
+}
+
+.form {
+  font-family: cursive;
+}
+
+.title {
+  font-family: cursive;
+}
+
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: $blue;
+    font-family: cursive;
+    height: 20px;
+  }
+  .mat-form-field-ripple {
+    background-color: $blue;
+    font-family: cursive;
+  }
+  .mat-form-field-required-marker {
+    color: $blue;
+    font-family: cursive;
+  }
+  .mat-input-element {
+    color: $blue;
+  }
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid {
+  .mat-input-element {
+    color: red;
+    font-family: cursive;
+  }
+  .mat-form-field-label {
+    color: red;
+    font-family: cursive;
+    height: 17px;
+    .mat-form-field-required-marker {
+      color: red;
+      font-family: cursive;
+    }
+  }
+  .mat-form-field-ripple {
+    color: red;
+    font-family: cursive;
+  }
+}
+
+.mat-label {
+  font-family: cursive;
+}
+
+.mat-error {
+  font-family: cursive;
+  height: 17px;
+}
+
+a {
+  color: $green;
+}
+
+a:hover {
+  color: $blue;
+}
+
+.label {
+  font-family: cursive;
+  height: 17px;
+}
+
+.mat-raised-button {
+  background-color: $blue;
+}
+
+button:disabled {
+  pointer-events: none;
+}
+
+.mat-raised-button:hover{
+  @include button-hover();
+  cursor: pointer;
+}
+
+.button-area {
+  width: 100px;
+}
+
+

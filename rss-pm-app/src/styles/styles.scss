@@ -1,4 +1,6 @@
 @import "../../node_modules/normalize.css/normalize.css";
+@import "src/styles/mixins";
+@import "src/styles/variables";
 
 html,
 body {
@@ -8,4 +10,61 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.custom .mat-dialog-container {
+  border-radius: 20px;
+}
+
+.custom .title {
+  font-family: cursive;
+}
+
+.custom .mat-label {
+  font-family: cursive;
+}
+
+.custom .mat-error {
+  font-family: cursive;
+  height: 17px;
+}
+
+.custom a {
+  color: $green;
+}
+
+.custom a:hover {
+  color: $blue;
+}
+
+.custom .label {
+  font-family: cursive;
+  height: 17px;
+}
+
+.custom .mat-raised-button {
+  background-color: $blue;
+}
+
+.custom button:disabled {
+  pointer-events: none;
+}
+
+.custom .mat-raised-button:hover{
+  @include button-hover();
+  cursor: pointer;
+}
+
+.custom .button-area {
+  width: 100px;
+}
+
+.custom .board-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+}
+
+.custom .mat-form-field-flex {
+  font-family: cursive;
 }

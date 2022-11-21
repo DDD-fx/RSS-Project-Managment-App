@@ -1,10 +1,10 @@
-<mat-card>
+<mat-card class="card">
   <mat-card-content>
-    <form (submit)="onLogIn()" [formGroup]="loginForm">
-      <h2>{{'signIn-form.title' | translate}}</h2>
+    <form (submit)="onLogIn()" [formGroup]="loginForm" class="form">
+      <h2 class="title">{{'signIn-form.title' | translate}}</h2>
       <mat-form-field>
-        <mat-label>{{'signIn-form.login' | translate}}</mat-label>
-        <input matInput formControlName="login">
+        <mat-label class="label">{{'signIn-form.login' | translate}}</mat-label>
+        <input class="input" matInput formControlName="login">
         <mat-error *ngIf="!loginForm.get('login')?.value">
           {{'signIn-form.login-errors.empty-login' | translate}}
         </mat-error>
@@ -14,7 +14,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>{{'signIn-form.password' | translate}}</mat-label>
+        <mat-label class="label">{{'signIn-form.password' | translate}}</mat-label>
         <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 
@@ -44,11 +44,14 @@
 
       <div class="login-btn-wrapper">
         <a [routerLink]="['/signUp']" class="registration-link">{{'signIn-form.registration-btn' | translate}}</a>
-        <button mat-raised-button color="primary"
-                type="submit"
-                [disabled]="loginForm.invalid">
-          {{'signIn-form.login-btn' | translate}}
-        </button>
+        <div class="button-area">
+          <button mat-raised-button color="primary"
+                  type="submit"
+                  [disabled]="loginForm.invalid">
+            {{'signIn-form.login-btn' | translate}}
+          </button>
+        </div>
+
       </div>
     </form>
   </mat-card-content>

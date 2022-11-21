@@ -134,10 +134,10 @@ export class ColumnsPageComponent implements OnInit {
 
   createColumnPopup() {
     this.elRef.nativeElement.scroll(9999, 0);
-    this.dialogRef.open(CreateColumnPopupComponent);
+    this.dialogRef.open(CreateColumnPopupComponent, { panelClass: 'custom' });
   }
 
   createTaskPopup(columnId: string) {
-    this.dialogRef.open(CreateTaskPopupComponent, { data: columnId, width: '350px' });
+    this.dialogRef.open(CreateTaskPopupComponent, { data: columnId, width: '350px', panelClass: 'custom' });
   }
 }

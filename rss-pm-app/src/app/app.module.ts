@@ -24,12 +24,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 import { UpdateBoardPopupComponent } from './shared/components/update-board-popup/update-board-popup.component';
 import { ColumnsPageModule } from './columns/columns-page.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
+const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,9 +71,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatInputModule,
     MatCardModule,
     ReactiveFormsModule,
+    uiModules,
     ColumnsPageModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],
+  exports: [uiModules],
 })
 export class AppModule {}

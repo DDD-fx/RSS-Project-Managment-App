@@ -5,7 +5,9 @@
     "edit-profile": "Edit profile",
     "create-board-button": "Create new board",
     "exit-button": "Exit",
-    "delete-user": "Delete user"
+    "delete-user": "Delete user",
+    "hi-stranger": "Hi, stranger",
+    "hi": "Hi, "
   },
   "deleting-popup": {
     "yes-option": "Yes",
