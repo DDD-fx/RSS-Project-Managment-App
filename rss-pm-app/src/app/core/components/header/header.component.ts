@@ -10,6 +10,7 @@ import { selectIsLogged, selectUserName } from 'src/app/NgRx/selectors/storeSele
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
+import { CreatingBoardPopupComponent } from '../../../shared/components/creating-board-popup/creating-board-popup.component';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -19,6 +20,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
+  isMenuOpen: boolean = false;
+
   isLoggedStore$: Observable<boolean> | undefined;
 
   userName$: Observable<string | null> | undefined;
@@ -71,5 +74,13 @@ export class HeaderComponent implements OnInit {
 
   onLogoClick() {
     void this.router.navigate(['']);
+  }
+
+  createBoard() {
+    this.dialogRef.open(CreatingBoardPopupComponent, { panelClass: 'custom' });
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }

@@ -9,12 +9,11 @@
     font-family: cursive;
     font-size: 1.2em;
     position: relative;
+    overflow-x: hidden;
 
 }
 
 .header {
-    //position: fixed;
     width: 100%;
     z-index: 99999;
 }
-

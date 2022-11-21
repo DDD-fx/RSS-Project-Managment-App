@@ -1,10 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 @import "src/styles/mixins";
 @import "src/styles/variables";
-
-:host {
-  padding-top: 70px;
-}
 
 .background {
   background-color: $green;
@@ -21,6 +16,10 @@
   flex-direction: row;
   gap: 1rem;
   background-color: $background;
+}
+
+.img-container-phone {
+  display: none;
 }
 
 .img-container {
@@ -82,7 +81,6 @@ li {
 }
 
 .text-container p {
-  height: 200px;
   line-height: 1.2;
   font-size: 1.5rem;
   padding: 5px;
@@ -167,27 +165,39 @@ li {
 }
 
 /* uor team styles*/
+
 .team-container {
-  padding-top: 30px;
-  height: 400px;
+  padding-top: 60px;
+  padding-bottom: 30px;
   margin: auto;
   background-color: $background;
+
+  &__title {
+    height: 100px;
+  }
 }
 
-.container.our-team {
-  font-size: 2rem;
-}
-
-.our-team {
-  margin: 0;
+.about-team-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80%;
 }
 
 .about-team {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 2rem;
-  @include margin-center();
+  align-items: center;
+  justify-content: space-around;
+}
+
+.container .our-team {
+  font-size: 2rem;
+  padding: 0;
+}
+
+.our-team {
+  margin: 0;
+  padding: 0;
 }
 
 .rss__link {
@@ -217,9 +227,7 @@ li {
 }
 
 .btn:hover {
-  background-color: transparent;
-  border: $blue 1px solid;
-  color: $darkest-grey;
+  @include button-hover();
 }
 
 .main-text {
@@ -229,3 +237,56 @@ li {
 .button-container {
   height: 50px;
 }
+
+@media (min-width:768px) and (max-width: 1279px) {
+  .background {
+    background-color: yellow;
+  }
+}
+
+@media (max-width: 767px) {
+  .background {
+    width: 100%;
+    background-color: green;
+  }
+
+  .rss-content {
+    margin: 2rem;
+  }
+
+  .about-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .left-container {
+    width: 100%;
+  }
+
+  .img-container {
+    display: none;
+  }
+
+  .img-container-phone {
+    display: block;
+    margin: 0 auto;
+    img {
+      width: 100%;
+      border-radius: 20px;
+    }
+  }
+
+  .container {
+    gap: 10px;
+  }
+
+  .our-team {
+    font-size: 2rem;
+  }
+
+  .about-team {
+    flex-direction: column;
+  }
+}
+
+

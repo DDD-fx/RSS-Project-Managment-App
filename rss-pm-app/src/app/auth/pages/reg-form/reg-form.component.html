@@ -1,9 +1,9 @@
-<mat-card>
+<mat-card class="card">
   <mat-card-content>
-    <form (submit)="onSignUp()" [formGroup]="regForm">
-      <h2>{{'signUp-form.title' | translate}}</h2>
+    <form class="form" (submit)="onSignUp()" [formGroup]="regForm">
+      <h2 class="title">{{'signUp-form.title' | translate}}</h2>
       <mat-form-field>
-        <mat-label>{{'signUp-form.name' | translate}}</mat-label>
+        <mat-label class="label">{{'signUp-form.name' | translate}}</mat-label>
         <input matInput formControlName="name">
         <mat-error *ngIf="!regForm.get('name')?.value">
           {{'signUp-form.no-name-error' | translate}}
@@ -11,7 +11,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>{{'signIn-form.login' | translate}}</mat-label>
+        <mat-label class="label">{{'signIn-form.login' | translate}}</mat-label>
         <input matInput formControlName="login">
         <mat-error *ngIf="!regForm.get('login')?.value">
           {{'signIn-form.login-errors.empty-login' | translate}}
@@ -22,7 +22,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>{{'signIn-form.password' | translate}}</mat-label>
+        <mat-label class="label">{{'signIn-form.password' | translate}}</mat-label>
         <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 
@@ -51,7 +51,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>{{'signUp-form.repeat-password' | translate}}</mat-label>
+        <mat-label class="label">{{'signUp-form.repeat-password' | translate}}</mat-label>
         <input matInput formControlName="repeatPassword" [type]="hide ? 'password' : 'text'">
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 

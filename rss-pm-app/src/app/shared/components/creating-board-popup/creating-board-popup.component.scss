@@ -1,4 +1,50 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
 .inputs {
   display: flex;
   flex-direction: column;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: $blue;
+    font-family: cursive;
+    height: 20px;
+  }
+  .mat-form-field-ripple {
+    background-color: $blue;
+    font-family: cursive;
+  }
+  .mat-form-field-required-marker {
+    color: $blue;
+    font-family: cursive;
+  }
+  .mat-input-element {
+    color: $blue;
+  }
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid {
+  .mat-input-element {
+    color: red;
+    font-family: cursive;
+  }
+  .mat-form-field-label {
+    color: red;
+    font-family: cursive;
+    height: 17px;
+    .mat-form-field-required-marker {
+      color: red;
+      font-family: cursive;
+    }
+  }
+  .mat-form-field-ripple {
+    color: red;
+    font-family: cursive;
+  }
 }
