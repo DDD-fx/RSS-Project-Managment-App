@@ -1,5 +1,5 @@
 <app-header class="header"></app-header>
 <app-loader *ngIf="isLoading$ | async"></app-loader>
-<router-outlet *ngIf="(isLoading$ | async) === false"></router-outlet>
+<router-outlet *ngIf="(isLoading$ | async) === false" ></router-outlet>
 <app-footer></app-footer>
 

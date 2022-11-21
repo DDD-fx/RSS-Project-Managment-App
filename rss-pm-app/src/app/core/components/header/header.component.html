@@ -2,31 +2,27 @@
     <a>
         <img class="header__logo" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/567/567014.png" alt="logo">
     </a>
-<!--    <a>-->
-<!--        <img class="header__home" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/1688/1688109.png" alt="home">-->
-<!--    </a>-->
-    <div class="header__create-button-area">
-      <a>
+
+    <div class="header__create-button-area" *ngIf="userName$ | async">
+      <a (click)="createBoard()">
         <button mat-raised-button color="primary" class="btn">
           {{'header.create-board-button' | translate}}
         </button>
       </a>
     </div>
 
+    <div class="header__toggle">
+      <span class="lang">RU</span>
+      <label class="switch" >
+        <input type="checkbox" (click)="changeLang()" checked>
+        <span class="slider round"></span>
+      </label>
+      <span class="lang" >EN</span>
+    </div>
+
     <div class="header__controls">
-        <div class="header__toggle">
-          <span class="lang">RU</span>
-          <label class="switch" >
-            <input type="checkbox" (click)="changeLang()" checked>
-            <span class="slider round"></span>
-          </label>
-            <span class="lang" >EN</span>
-        </div>
 
-
-        <ng-container *ngIf="(isLoggedStore$ | async ); then thenBlock else elseBlock">
-
-        </ng-container>
+        <ng-container *ngIf="(isLoggedStore$ | async ); then thenBlock else elseBlock"></ng-container>
         <ng-template  #elseBlock >
           <div class="header__buttons">
             <a [routerLink]="['signIn']" class="">
@@ -36,7 +32,6 @@
               <button mat-raised-button color="primary" class="btn">{{'header.signUp-btn' | translate}}</button>
             </a>
           </div>
-
         </ng-template>
 
         <ng-template #thenBlock class="header__exit">
@@ -53,10 +48,46 @@
               </div>
               <button mat-raised-button color="primary" (click)="logout()" class="btn">{{'header.exit-button' | translate}}</button>
             </div>
-
-
         </ng-template>
-
     </div>
+
+    <div id="nav-icon" [class.open]="isMenuOpen" (click)="toggleMenu()" >
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="link-tab" [class.is-open]="isMenuOpen">
+      <ng-container *ngIf="(isLoggedStore$ | async ); then firstBlock else secondBlock"></ng-container>
+      <ng-template #firstBlock>
+        <p class="header__user-name">{{'header.hi' | translate}}{{userName$ | async}}</p>
+        <a
+          (click)="createBoard()"
+          (click)="toggleMenu()"
+          class="menu-item link">{{'header.create-board-button' | translate}}</a>
+        <a class="menu-item link"
+           [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>
+        <a class="menu-item link"
+           (click)="logout()"
+           (click)="toggleMenu()"
+        >{{'header.exit-button' | translate}}</a>
+        <a class="menu-item link"
+           (click)="deleteUser()"
+           (click)="toggleMenu()">{{'header.delete-user' | translate}}</a>
+      </ng-template>
+      <ng-template #secondBlock>
+        <p class="name">{{'header.hi-stranger' | translate}}</p>
+        <a class="menu-item link"
+           [routerLink]="['signIn']"
+           (click)="toggleMenu()"
+        >{{'header.signIn-btn' | translate}}</a>
+        <a class="menu-item link"
+           [routerLink]="['signUp']"
+           (click)="toggleMenu()"
+        >{{'header.signUp-btn' | translate}}</a>
+      </ng-template>
+    </div>
+
 </header>
 
+<div class="area" (click)="toggleMenu()" [class.is-open-popup]="isMenuOpen"></div>

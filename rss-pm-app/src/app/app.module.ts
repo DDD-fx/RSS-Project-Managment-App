@@ -27,11 +27,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { CreateTaskPopupComponent } from './shared/components/create-task-popup/create-task-popup.component';
 import { CreateColumnPopupComponent } from './shared/components/create-column-popup/create-column-popup.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 import { UpdateBoardPopupComponent } from './shared/components/update-board-popup/update-board-popup.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
+const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,8 +78,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatInputModule,
     MatCardModule,
     ReactiveFormsModule,
+    uiModules,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],
+  exports: [uiModules],
 })
 export class AppModule {}
