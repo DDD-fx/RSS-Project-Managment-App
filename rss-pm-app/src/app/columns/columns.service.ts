@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
-import { ICreateColumnReq, ICreateTaskReq, IGetBoardResp } from '../api/models/api-board.model';
+import { ICreateColumnReq, ICreateTaskReq, IGetBoardResp, IUpdateTaskReq } from '../api/models/api-board.model';
 import { ApiTasksService } from '../api/services/api-tasks.service';
 import { ApiBoardService } from '../api/services/api-board.service';
 import { Router } from '@angular/router';
@@ -25,7 +25,7 @@ export class ColumnsService {
     private readonly loaderService: LoaderService
   ) {}
 
-  createNewColumn(body: ICreateColumnReq) {
+  createNewColumn(body: ICreateColumnReq): void {
     this.loaderService.enableLoader();
     this.apiColumnsService
       .createNewColumn(this.currBoardId$.value, body)
@@ -43,7 +43,7 @@ export class ColumnsService {
       .subscribe(() => this.loaderService.disableLoader());
   }
 
-  createNewTask(columnId: string, body: ICreateTaskReq) {
+  createNewTask(columnId: string, body: ICreateTaskReq): void {
     this.loaderService.enableLoader();
     this.apiTasksService
       .createNewTask(columnId, body)
@@ -56,15 +56,28 @@ export class ColumnsService {
       .subscribe(() => this.loaderService.disableLoader());
   }
 
-  getBoardId(id: string) {
+  updateTask(taskId: string, body: IUpdateTaskReq): void {
+    this.loaderService.enableLoader();
+    this.apiTasksService
+      .updateTask(taskId, body)
+      .pipe(
+        switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
+        tap((board) => {
+          this.board$.next(board);
+        })
+      )
+      .subscribe(() => this.loaderService.disableLoader());
+  }
+
+  getBoardId(id: string): void {
     this.currBoardId$.next(id);
   }
 
-  updatedBoard(data: IGetBoardResp) {
+  updatedBoard(data: IGetBoardResp): void {
     this.board$.next(data);
   }
 
-  updateConnectedLists(data: string[]) {
+  updateConnectedLists(data: string[]): void {
     this.connectedLists$.next(data);
   }
 }

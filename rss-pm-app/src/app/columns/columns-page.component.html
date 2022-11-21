@@ -6,8 +6,8 @@
          (cdkDropListDropped)="dropColumn($event)"
          class="columns">
       <div cdkDrag *ngFor="let column of columns | columnOrderSorting" class="column">
-        <div class="column-header">
-          <span class="column-title">{{column.title}}</span>
+        <div class="column__header">
+          <div class="column__title">{{column.title}}</div>
           <mat-icon (click)="onDeleteColumn(column.id)" title="Delete">delete</mat-icon>
         </div>
 

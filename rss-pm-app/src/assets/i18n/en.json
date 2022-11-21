@@ -127,6 +127,9 @@
     "add-task": "Add new task",
     "task-label": "Enter task title",
     "task-description": "Enter task description",
+    "edit-task": "Edit task",
+    "edit-task-btn": "Save changes",
+    "edit-after": "Edit",
     "errors": {
       "empty-title": "Task title can't be empty",
       "empty-description": "Task description can't be empty"

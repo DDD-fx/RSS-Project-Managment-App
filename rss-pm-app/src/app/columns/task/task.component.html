@@ -4,12 +4,9 @@
   </div>
 </ng-container>
 <ng-container *ngFor="let task of tasks | taskOrderSorting" class="tasks">
-  <mat-card class="task-card" cdkDrag>
+  <mat-card class="task-card" cdkDrag (click)="onEditTask(task.id)" [attr.data-after]="'tasks.edit-after' | translate">
     <div class="task-card__title">{{task.title}}</div>
     <div class="task-card__subtitle">{{task.description}}</div>
-    <div class="task-card__icons">
-      <mat-icon class="task-card__edit-btn" title="Edit">create</mat-icon>
-      <mat-icon class="task-card__delete-btn" title="Delete" (click)="onDeleteTask(task.id)">delete</mat-icon>
-    </div>
+    <mat-icon class="task-card__delete-btn" title="Delete" (click)="onDeleteTask(task.id, $event)">delete</mat-icon>
   </mat-card>
 </ng-container>
