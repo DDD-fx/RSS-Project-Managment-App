@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     if (localStorage.getItem(ELocalStorage.userId)) {
       return true;
     }
-    void this.router.navigate([ESiteUrls.signIn]);
+    void this.router.navigate([ESiteUrls.welcome]);
     return false;
   }
 }

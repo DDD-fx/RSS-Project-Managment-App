@@ -3,7 +3,7 @@
     <span class="arrow" (click)="onBack()">
       	<mat-icon>arrow_back</mat-icon>
     </span>
-    {{ (board.title) }}
+    {{ title$ | async }}
   </h2>
   <section class="columns">
     <app-columns-page></app-columns-page>

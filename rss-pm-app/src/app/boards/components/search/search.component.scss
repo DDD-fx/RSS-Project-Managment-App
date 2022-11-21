@@ -1,0 +1,18 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin: 1rem 0;
+}
+
+input {
+  border-radius: 5px;
+  border: 2px solid $blue;
+}
+
+.btn-bg {
+  color: $blue;
+}

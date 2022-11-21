@@ -6,7 +6,7 @@ import { WrongAddressPageComponent } from './shared/components/page404/page404.c
 
 const routes: Routes = [
   {
-    path: '',
+    path: ESiteUrls.welcome,
     loadChildren: () => import('./welcome/welcome.module').then((a) => a.WelcomeModule),
   },
   {
