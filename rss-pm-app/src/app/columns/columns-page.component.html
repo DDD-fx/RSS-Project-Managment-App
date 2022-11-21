@@ -7,7 +7,8 @@
          class="columns">
       <div cdkDrag *ngFor="let column of columns | columnOrderSorting" class="column">
         <div class="column__header">
-          <div class="column__title">{{column.title}}</div>
+          <div class="column__title" *ngIf="showColumnTitle" [attr.data-after]="'tasks.edit-after' | translate" (click)="showColumnTitle = !showColumnTitle">{{column.title}}</div>
+          <input class="column__title--input" *ngIf="!showColumnTitle" type="text" (blur)="onTitleBlur(column.id)">
           <mat-icon (click)="onDeleteColumn(column.id)" title="Delete">delete</mat-icon>
         </div>
 

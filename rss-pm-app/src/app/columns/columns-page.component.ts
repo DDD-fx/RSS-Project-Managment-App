@@ -29,6 +29,8 @@ export class ColumnsPageComponent implements OnInit {
 
   public connectedLists$ = this.columnsService.connectedLists$;
 
+  public showColumnTitle = true;
+
   constructor(
     private readonly store: Store,
     private readonly router: Router,
@@ -79,6 +81,10 @@ export class ColumnsPageComponent implements OnInit {
           .subscribe(() => this.loaderService.disableLoader());
       }
     });
+  }
+
+  onTitleBlur(columnId: string) {
+    //
   }
 
   dropColumn(event: CdkDragDrop<IColumn[]>) {
