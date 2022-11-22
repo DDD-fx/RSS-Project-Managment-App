@@ -43,7 +43,7 @@ export class ColumnsPageComponent implements OnInit {
 
   ngOnInit() {
     this.columnsService.updatedBoard({} as IGetBoardResp);
-    this.columnsService.getBoardId(this.router.url.split('/').pop()!);
+    this.columnsService.setBoardId(this.router.url.split('/').pop()!);
     this.apiBoardService
       .getBoard(this.currBoardId$.value)
       .pipe(

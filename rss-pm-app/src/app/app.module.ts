@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-// import { reducers, metaReducers } from './NgRx/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -25,11 +24,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { CreateTaskPopupComponent } from './shared/components/create-task-popup/create-task-popup.component';
-import { CreateColumnPopupComponent } from './shared/components/create-column-popup/create-column-popup.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateBoardPopupComponent } from './shared/components/update-board-popup/update-board-popup.component';
+import { ColumnsPageModule } from './columns/columns-page.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -43,16 +41,11 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
     LoaderComponent,
     WrongAddressPageComponent,
     CreatingBoardPopupComponent,
-    CreateTaskPopupComponent,
-    CreateColumnPopupComponent,
     UpdateBoardPopupComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    // StoreModule.forRoot(reducers, {
-    //   metaReducers,
-    // }),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
@@ -79,6 +72,7 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
     MatCardModule,
     ReactiveFormsModule,
     uiModules,
+    ColumnsPageModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],

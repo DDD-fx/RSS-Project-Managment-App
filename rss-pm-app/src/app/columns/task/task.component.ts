@@ -7,6 +7,7 @@ import { ApiBoardService } from '../../api/services/api-board.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../shared/components/deleting-popup/deleting-popup.component';
+import { EditTaskPopupComponent } from '../../shared/components/edit-task-popup/edit-task-popup.component';
 
 @Component({
   selector: 'app-task',
@@ -28,7 +29,8 @@ export class TaskComponent {
     private readonly dialogRef: MatDialog
   ) {}
 
-  onDeleteTask(taskId: string) {
+  onDeleteTask(taskId: string, event: Event) {
+    event.stopPropagation();
     let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-task' } });
     dialog.afterClosed().subscribe((result) => {
       if (result === 'true') {
@@ -41,6 +43,17 @@ export class TaskComponent {
           )
           .subscribe(() => this.loaderService.disableLoader());
       }
+    });
+  }
+
+  onEditTask(taskId: string) {
+    const taskOrder = this.columnsService.board$.value.columns
+      .find((column) => column.id === this.elRef.nativeElement.id)!
+      .tasks.find((task) => task.id === taskId)!.order;
+
+    this.dialogRef.open(EditTaskPopupComponent, {
+      data: { boardId: this.currBoardId$.value, columnId: this.elRef.nativeElement.id, taskId, taskOrder },
+      width: '350px',
     });
   }
 }

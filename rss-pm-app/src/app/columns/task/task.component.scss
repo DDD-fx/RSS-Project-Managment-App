@@ -19,6 +19,7 @@
 
 .task-card {
   width: 185px;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -26,14 +27,37 @@
   background-color: $task-background;
   cursor: pointer;
 
+  &:hover {
+    &::after {
+      content: attr(data-after);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
+  &__title {
+    .task-card:hover & {
+      opacity: 0.3;
+    }
+  }
+
   &__subtitle {
     font-size: 0.9em;
     color: $grey;
+
+    .task-card:hover & {
+      opacity: 0.3;
+    }
   }
 
-  &__icons {
-    display: flex;
-    gap: 15px;
+  &__title,
+  &__subtitle {
+    overflow-wrap: anywhere;
+  }
+
+  &__delete-btn {
     align-self: flex-end;
   }
 

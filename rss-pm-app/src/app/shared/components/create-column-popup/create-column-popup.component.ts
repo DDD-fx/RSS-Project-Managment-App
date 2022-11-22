@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ColumnsService } from '../../../columns/columns.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { ICreateColumnReq } from '../../../api/models/api-board.model';
   selector: 'app-create-column-popup',
   templateUrl: './create-column-popup.component.html',
   styleUrls: ['./create-column-popup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateColumnPopupComponent {
   constructor(

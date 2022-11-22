@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ColumnsService } from '../../../columns/columns.service';
@@ -9,22 +9,19 @@ import { ELocalStorage } from '../../shared.enums';
   selector: 'app-creating-board-popup',
   templateUrl: './create-task-popup.component.html',
   styleUrls: ['./create-task-popup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateTaskPopupComponent {
+  public taskForm: FormGroup = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+  });
+
   constructor(
     private dialogRef: MatDialogRef<CreateTaskPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string,
     private readonly columnsService: ColumnsService
   ) {}
-
-  onCancelClick(): void {
-    this.dialogRef.close();
-  }
-
-  public taskForm: FormGroup = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-  });
 
   createNewTask(): void {
     const body: ICreateTaskReq = {
@@ -33,6 +30,10 @@ export class CreateTaskPopupComponent {
       userId: localStorage.getItem(ELocalStorage.userId)!,
     };
     this.columnsService.createNewTask(this.data, body);
+    this.dialogRef.close();
+  }
+
+  onCancelClick(): void {
     this.dialogRef.close();
   }
 }
