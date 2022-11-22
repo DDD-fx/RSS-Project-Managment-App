@@ -31,10 +31,6 @@ export class BoardItemComponent {
     private readonly loaderService: LoaderService
   ) {}
 
-  onClick(color: string) {
-    this.customColor = color;
-  }
-
   saveCurrentBoard() {
     this.loaderService.enableLoader();
     this.store.dispatch(getCurrentBoard({ boardId: this.board.id }));

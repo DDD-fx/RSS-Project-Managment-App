@@ -85,9 +85,9 @@
       "9": "M"
     },
     "memberDescription": {
-      "d": "Team lead, front-end web developer",
-      "a": "Team member, front-end web developer",
-      "i": "Team member, front-end web developer"
+      "d": "Team lead, front-end web developer. Implementation of the logic of registration and user login pages (forms, validation, editing), the work with columns and tasks, including the drag-n-drop function.",
+      "a": "Team member, front-end web developer. Implementation of header and footer logic, burger menu, pop-up modal windows, design of the entire application.",
+      "i": "Team member, front-end web developer. Implementation of the logic of the welcome pages and the main page with all boards (create, delete, edit), search and sorting."
     }
   },
   "footer": {
@@ -106,7 +106,7 @@
       "empty-title": "Board name can't be empty",
       "long-title": "The title is too long",
       "empty-description": "Please enter a short description",
-      "long-description": "The title is too long"
+      "long-description": "The description is too long"
     },
     "btn": {
       "create": "Create",

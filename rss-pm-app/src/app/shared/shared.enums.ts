@@ -25,6 +25,7 @@ export enum ESiteUrls {
   'boards' = 'boards',
   'columns' = 'columns',
   'tasks' = 'tasks',
+  'welcome' = 'welcome',
 }
 
 export enum ELocalStorage {

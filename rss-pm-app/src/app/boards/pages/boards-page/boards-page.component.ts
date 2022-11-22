@@ -68,10 +68,8 @@ export class BoardsPageComponent implements OnInit, AfterViewInit {
   sortBoards() {
     if (this.order === 'desc') {
       this.order = 'asc';
-      console.log(this.order);
     } else {
       this.order = 'desc';
-      console.log(this.order);
     }
   }
 }

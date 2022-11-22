@@ -30,7 +30,7 @@ export class CreatingBoardPopupComponent {
   }
 
   public boardForm: FormGroup = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.maxLength(15)]),
+    title: new FormControl('', [Validators.required, Validators.maxLength(25)]),
     description: new FormControl('', [Validators.required]),
   });
 
