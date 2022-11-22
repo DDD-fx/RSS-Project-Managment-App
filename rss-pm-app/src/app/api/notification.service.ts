@@ -34,10 +34,6 @@ export class NotificationService {
     }
   }
 
-  // showInfo(message: string, title: string): void {
-  //   this.toastr.info(message, title);
-  // }
-
   showError(notificationSource: string, err: IHttpErrors): void {
     // TODO: заменить на обращение к ngrx
     const currLang = this.translate.currentLang;

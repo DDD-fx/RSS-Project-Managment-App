@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApiColumnsService } from '../api/services/api-colomns.service';
-import { map, tap } from 'rxjs';
+import { catchError, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { IColumn, IGetBoardResp, ITask, IUpdateColumnReq, IUpdateTaskReq } from '../api/models/api-board.model';
 import { LoaderService } from '../shared/components/loader/loader.service';
@@ -13,6 +13,9 @@ import { ApiBoardService } from '../api/services/api-board.service';
 import { ApiTasksService } from '../api/services/api-tasks.service';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 import { CreateColumnPopupComponent } from '../shared/components/create-column-popup/create-column-popup.component';
+import { IHttpErrors } from '../api/models/errors.model';
+import { ESiteUrls } from '../shared/shared.enums';
+import { NotificationService } from '../api/notification.service';
 
 @Component({
   selector: 'app-columns-page',
@@ -38,10 +41,11 @@ export class ColumnsPageComponent implements OnInit {
     private readonly columnsService: ColumnsService,
     private readonly apiColumnsService: ApiColumnsService,
     private readonly apiBoardService: ApiBoardService,
-    private readonly apiTasksService: ApiTasksService
+    private readonly apiTasksService: ApiTasksService,
+    private readonly notificationService: NotificationService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.columnsService.updatedBoard({} as IGetBoardResp);
     this.columnsService.setBoardId(this.router.url.split('/').pop()!);
     this.apiBoardService
@@ -59,7 +63,7 @@ export class ColumnsPageComponent implements OnInit {
       .subscribe();
   }
 
-  onDeleteColumn(columnId: string) {
+  onDeleteColumn(columnId: string): void {
     let connectedLists = this.connectedLists$.value;
     connectedLists = connectedLists.filter((id) => id !== columnId);
     this.columnsService.updateConnectedLists(connectedLists);
@@ -74,14 +78,18 @@ export class ColumnsPageComponent implements OnInit {
           .pipe(
             tap((board) => {
               this.columnsService.updatedBoard(board);
+            }),
+            catchError((err: IHttpErrors) => {
+              this.notificationService.showError(ESiteUrls.columns, err);
+              throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
             })
           )
-          .subscribe(() => this.loaderService.disableLoader());
+          .subscribe();
       }
     });
   }
 
-  dropColumn(event: CdkDragDrop<IColumn[]>) {
+  dropColumn(event: CdkDragDrop<IColumn[]>): void {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     const columns = event.container.data;
     const movedColumn = columns[event.currentIndex];
@@ -92,7 +100,7 @@ export class ColumnsPageComponent implements OnInit {
     this.apiColumnsService.updateColumn(this.currBoardId$.value, movedColumn.id, body).subscribe();
   }
 
-  dropTask(event: CdkDragDrop<ITask[]>, columnId: string) {
+  dropTask(event: CdkDragDrop<ITask[]>, columnId: string): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       const tasks = event.container.data;
@@ -126,12 +134,17 @@ export class ColumnsPageComponent implements OnInit {
     }
   }
 
-  createColumnPopup() {
+  createColumnPopup(): void {
     this.elRef.nativeElement.scroll(9999, 0);
     this.dialogRef.open(CreateColumnPopupComponent, { panelClass: 'custom' });
   }
 
-  createTaskPopup(columnId: string) {
+  createTaskPopup(columnId: string): void {
     this.dialogRef.open(CreateTaskPopupComponent, { data: columnId, width: '350px', panelClass: 'custom' });
+  }
+
+  disableLoader() {
+    console.log('ads');
+    this.loaderService.disableLoader();
   }
 }

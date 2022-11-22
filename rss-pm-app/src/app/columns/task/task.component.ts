@@ -2,12 +2,15 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/
 import { ITask } from '../../api/models/api-board.model';
 import { ApiTasksService } from '../../api/services/api-tasks.service';
 import { ColumnsService } from '../columns.service';
-import { switchMap, tap } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs';
 import { ApiBoardService } from '../../api/services/api-board.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../shared/components/deleting-popup/deleting-popup.component';
 import { EditTaskPopupComponent } from '../../shared/components/edit-task-popup/edit-task-popup.component';
+import { IHttpErrors } from '../../api/models/errors.model';
+import { ESiteUrls } from '../../shared/shared.enums';
+import { NotificationService } from '../../api/notification.service';
 
 @Component({
   selector: 'app-task',
@@ -26,7 +29,8 @@ export class TaskComponent {
     private readonly apiTasksService: ApiTasksService,
     private readonly loaderService: LoaderService,
     private readonly elRef: ElementRef,
-    private readonly dialogRef: MatDialog
+    private readonly dialogRef: MatDialog,
+    private readonly notificationService: NotificationService
   ) {}
 
   onDeleteTask(taskId: string, event: Event) {
@@ -39,7 +43,11 @@ export class TaskComponent {
           .deleteTask(this.currBoardId$.value, this.elRef.nativeElement.id, taskId)
           .pipe(
             switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
-            tap((board) => this.columnsService.updatedBoard(board))
+            tap((board) => this.columnsService.updatedBoard(board)),
+            catchError((err: IHttpErrors) => {
+              this.notificationService.showError(ESiteUrls.columns, err);
+              throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+            })
           )
           .subscribe(() => this.loaderService.disableLoader());
       }
