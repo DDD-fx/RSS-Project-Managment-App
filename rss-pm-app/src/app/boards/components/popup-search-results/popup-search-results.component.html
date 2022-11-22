@@ -1,0 +1,23 @@
+<h3>Search tasks result</h3>
+<p *ngIf="tasks$.length === 0">Search task not found!</p>
+
+<table *ngIf="tasks$.length > 0">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>User</th>
+    <th>Description</th>
+    <th>Open Board</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- <tr *ngFor="let task of tasks$">
+    <td>{{task.task.title}}</td>
+    <td>{{task.userId}}</td>
+    <td>{{task.task.description}}</td>
+    <th>
+      <button [routerLink]="['/boards', task.boardId]">Open Board</button>
+    </th>
+  </tr> -->
+  </tbody>
+</table>

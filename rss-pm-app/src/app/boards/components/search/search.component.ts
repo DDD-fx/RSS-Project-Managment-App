@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { debounceTime, Subject } from 'rxjs';
 import { SearchService } from '../../services/search.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { PopupSearchResultsComponent } from '../popup-search-results/popup-search-results.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-search',
@@ -9,13 +11,13 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  private searchText$ = new Subject<string>();
-
   searchInput = new FormGroup({
     search: new FormControl(['']),
   });
 
-  constructor(private searchService: SearchService) {}
+  searchText$ = new Subject<string>();
+
+  constructor(private searchService: SearchService, private dialogRef: MatDialog) {}
 
   ngOnInit(): void {
     this.searchText$.pipe(debounceTime(2000)).subscribe(() => {
@@ -24,11 +26,8 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  getValue(event: Event): string {
-    return (event.target as HTMLInputElement).value;
+  searchTasks() {
+    console.log(this.searchInput.get(['search'])?.value);
+    this.dialogRef.open(PopupSearchResultsComponent, { data: this.searchInput.get(['search'])?.value });
   }
-
-  search = (text: string) => {
-    this.searchText$.next(text);
-  };
 }
