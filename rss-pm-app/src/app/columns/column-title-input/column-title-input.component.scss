@@ -1,0 +1,36 @@
+@import "src/styles/variables";
+
+:host {
+  flex-basis: 130px;
+}
+
+.column__title {
+  position: relative;
+  overflow-wrap: anywhere;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.2);
+    border: 1px dashed $black;
+    border-radius: 5px;
+
+    &::after {
+      content: '🖉';
+      position: absolute;
+      right: 5px;
+      font-size: 0.9em;
+      text-align: center;
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+}
+
+.column__title-input {
+  width: 124px;
+  border: 1px dashed $black;
+  border-radius: 5px;
+}
+
+.column__title-error {
+  line-height: 1em;
+  font-size: 10px;
+}

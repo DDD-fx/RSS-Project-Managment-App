@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditTaskPopupComponent } from '../shared/components/edit-task-popup/edit-task-popup.component';
 import { CreateTaskPopupComponent } from '../shared/components/create-task-popup/create-task-popup.component';
 import { CreateColumnPopupComponent } from '../shared/components/create-column-popup/create-column-popup.component';
+import { ColumnTitleInputComponent } from './column-title-input/column-title-input.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CreateColumnPopupComponent } from '../shared/components/create-column-p
     EditTaskPopupComponent,
     CreateTaskPopupComponent,
     CreateColumnPopupComponent,
+    ColumnTitleInputComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,6 @@ import { CreateColumnPopupComponent } from '../shared/components/create-column-p
     DragDropModule,
     MatCardModule,
     MatDialogModule,
-    // MatDialogModule, // вроде не нужно
   ],
   exports: [ColumnsPageComponent],
 })

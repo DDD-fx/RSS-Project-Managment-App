@@ -5,11 +5,12 @@
          [cdkDropListData]="columns"
          (cdkDropListDropped)="dropColumn($event)"
          class="columns">
+
       <div cdkDrag *ngFor="let column of columns | columnOrderSorting" class="column">
         <div class="column__header">
-          <div class="column__title" *ngIf="showColumnTitle" [attr.data-after]="'tasks.edit-after' | translate" (click)="showColumnTitle = !showColumnTitle">{{column.title}}</div>
-          <input class="column__title--input" *ngIf="!showColumnTitle" type="text" (blur)="onTitleBlur(column.id)">
-          <mat-icon (click)="onDeleteColumn(column.id)" title="Delete">delete</mat-icon>
+          <app-column-title-input [column]="column"></app-column-title-input>
+          <span title="{{'columns.move' | translate}}">⇔</span>
+          <mat-icon (click)="onDeleteColumn(column.id)" title="{{'columns.delete' | translate}}">delete</mat-icon>
         </div>
 
           <app-task

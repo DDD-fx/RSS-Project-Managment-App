@@ -29,8 +29,6 @@ export class ColumnsPageComponent implements OnInit {
 
   public connectedLists$ = this.columnsService.connectedLists$;
 
-  public showColumnTitle = true;
-
   constructor(
     private readonly store: Store,
     private readonly router: Router,
@@ -45,7 +43,7 @@ export class ColumnsPageComponent implements OnInit {
 
   ngOnInit() {
     this.columnsService.updatedBoard({} as IGetBoardResp);
-    this.columnsService.getBoardId(this.router.url.split('/').pop()!);
+    this.columnsService.setBoardId(this.router.url.split('/').pop()!);
     this.apiBoardService
       .getBoard(this.currBoardId$.value)
       .pipe(
@@ -81,10 +79,6 @@ export class ColumnsPageComponent implements OnInit {
           .subscribe(() => this.loaderService.disableLoader());
       }
     });
-  }
-
-  onTitleBlur(columnId: string) {
-    //
   }
 
   dropColumn(event: CdkDragDrop<IColumn[]>) {

@@ -69,7 +69,7 @@ export class ColumnsService {
       .subscribe(() => this.loaderService.disableLoader());
   }
 
-  getBoardId(id: string): void {
+  setBoardId(id: string): void {
     this.currBoardId$.next(id);
   }
 

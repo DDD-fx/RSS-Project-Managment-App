@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ColumnsService } from '../../../columns/columns.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { getUserIdFromLs } from '../../shared.utils';
   selector: 'app-edit-task-popup',
   templateUrl: './edit-task-popup.component.html',
   styleUrls: ['./edit-task-popup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditTaskPopupComponent {
   public editTaskForm: FormGroup = new FormGroup({

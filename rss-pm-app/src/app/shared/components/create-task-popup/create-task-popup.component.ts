@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ColumnsService } from '../../../columns/columns.service';
@@ -9,6 +9,7 @@ import { ELocalStorage } from '../../shared.enums';
   selector: 'app-creating-board-popup',
   templateUrl: './create-task-popup.component.html',
   styleUrls: ['./create-task-popup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateTaskPopupComponent {
   public taskForm: FormGroup = new FormGroup({

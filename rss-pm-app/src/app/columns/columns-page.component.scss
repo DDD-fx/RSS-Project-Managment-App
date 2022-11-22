@@ -34,26 +34,6 @@
     justify-content: space-between;
     cursor: pointer;
   }
-
-  &__title {
-    position: relative;
-    flex-basis: 160px;
-    overflow-wrap: anywhere;
-
-    &:hover {
-      color: rgba(0, 0, 0, 0.1);
-
-      &::after {
-        content: attr(data-after);
-        position: absolute;
-        left: 0;
-        right: 0;
-        font-size: 0.9em;
-        text-align: center;
-        color: rgba(0, 0, 0, 1);
-      }
-    }
-  }
 }
 
 mat-form-field {
