@@ -4,9 +4,11 @@
   </div>
 </ng-container>
 <ng-container *ngFor="let task of tasks | taskOrderSorting" class="tasks">
-  <mat-card class="task-card" cdkDrag (click)="onEditTask(task.id)" [attr.data-after]="'tasks.edit-after' | translate">
-    <div class="task-card__title">{{task.title}}</div>
-    <div class="task-card__subtitle">{{task.description}}</div>
+  <mat-card class="task-card" cdkDrag (click)="onEditTask(task.id)">
+    <div class="task-card__title" title="{{task.title}}">{{task.title}}</div>
+    <div class="task-card__subtitle" title="{{task.description}}">{{task.description}}</div>
+    <span class="task-card__edit" title="{{'tasks.edit' | translate}}">🖉</span>
+    <span class="task-card__arrows" title="{{'columns.move' | translate}}">⇔</span>
     <mat-icon class="task-card__delete-btn" title="{{'columns.delete' | translate}}" (click)="onDeleteTask(task.id, $event)">delete</mat-icon>
   </mat-card>
 </ng-container>

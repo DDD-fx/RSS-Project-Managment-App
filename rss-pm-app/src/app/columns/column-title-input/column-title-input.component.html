@@ -1,4 +1,5 @@
 <div class="column__title"
+     title="{{'tasks.edit' | translate}}"
      *ngIf="showColumnTitle$ | async"
      (click)="toggleColumnTitleInput()">
   {{column.title}}
