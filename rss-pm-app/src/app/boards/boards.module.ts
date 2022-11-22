@@ -17,9 +17,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 import { SortPipe } from './pipes/sort.pipe';
 import { ColumnsPageModule } from '../columns/columns-page.module';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
-  declarations: [BoardItemComponent, BoardsPageComponent, NewBoardComponent, BoardComponent, SortPipe],
+  declarations: [BoardItemComponent, BoardsPageComponent, NewBoardComponent, BoardComponent, SortPipe, SearchComponent],
   imports: [
     CommonModule,
     BoardsRoutingModule,

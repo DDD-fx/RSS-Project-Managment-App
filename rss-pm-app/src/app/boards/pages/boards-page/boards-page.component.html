@@ -2,6 +2,7 @@
   <h2 class="title">{{'board.title' | translate}}
     <mat-icon class="sort"  (click)="sortBoards()">sort_by_alpha</mat-icon>
   </h2>
+  <app-search></app-search>
 
   <cdk-virtual-scroll-viewport #scroller appendOnly itemSize="30" class="content">
     <section class="boards-list">

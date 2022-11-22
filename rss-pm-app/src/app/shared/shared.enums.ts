@@ -23,6 +23,7 @@ export enum ESiteUrls {
   'signUp' = 'signUp',
   'userEdit' = 'userEdit',
   'boards' = 'boards',
+  'welcome' = 'welcome',
 }
 
 export enum ELocalStorage {
