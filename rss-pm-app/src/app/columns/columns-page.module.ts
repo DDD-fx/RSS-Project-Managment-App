@@ -13,9 +13,22 @@ import { MatCardModule } from '@angular/material/card';
 import { ColumnOrderSortingPipe } from './pipes/column-order-sorting.pipe';
 import { TaskOrderSortingPipe } from './pipes/task-order-sorting.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditTaskPopupComponent } from '../shared/components/edit-task-popup/edit-task-popup.component';
+import { CreateTaskPopupComponent } from '../shared/components/create-task-popup/create-task-popup.component';
+import { CreateColumnPopupComponent } from '../shared/components/create-column-popup/create-column-popup.component';
+import { ColumnTitleInputComponent } from './column-title-input/column-title-input.component';
 
 @NgModule({
-  declarations: [ColumnsPageComponent, TaskComponent, ColumnOrderSortingPipe, TaskOrderSortingPipe],
+  declarations: [
+    ColumnsPageComponent,
+    TaskComponent,
+    ColumnOrderSortingPipe,
+    TaskOrderSortingPipe,
+    EditTaskPopupComponent,
+    CreateTaskPopupComponent,
+    CreateColumnPopupComponent,
+    ColumnTitleInputComponent,
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -26,7 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     DragDropModule,
     MatCardModule,
-    MatDialogModule, // вроде не нужно
+    MatDialogModule,
   ],
   exports: [ColumnsPageComponent],
 })

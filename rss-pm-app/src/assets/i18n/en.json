@@ -121,6 +121,8 @@
     "add-column": "Create new column",
     "column-label": "Column title",
     "add-new-column": "Add new column",
+    "delete": "Delete",
+    "move": "Move",
     "errors": {
       "empty-title": "Column title can't be empty"
     }
@@ -129,6 +131,9 @@
     "add-task": "Add new task",
     "task-label": "Enter task title",
     "task-description": "Enter task description",
+    "edit-task": "Edit task",
+    "edit-task-btn": "Save changes",
+    "edit-after": "Edit",
     "errors": {
       "empty-title": "Task title can't be empty",
       "empty-description": "Task description can't be empty"

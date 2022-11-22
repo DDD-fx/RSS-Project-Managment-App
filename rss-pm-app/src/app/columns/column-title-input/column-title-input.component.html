@@ -1,0 +1,21 @@
+<div class="column__title"
+     *ngIf="showColumnTitle$ | async"
+     (click)="toggleColumnTitleInput()">
+  {{column.title}}
+</div>
+
+<div [formGroup]="newTitleForm">
+  <input
+    class="column__title-input"
+    type="text"
+    autocomplete="off"
+    maxlength="100"
+    formControlName="title"
+    *ngIf="(showColumnTitle$ | async) === false"
+    (blur)="onColumnTitleBlur()" #columnTitleInput>
+
+  <mat-error class="column__title-error"
+             *ngIf="!newTitleForm.get('title')?.value && newTitleForm.get('title')?.touched">
+    {{'columns.errors.empty-title' | translate}}
+  </mat-error>
+</div>
