@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{'board.updateBoard'|translate}}?</h2>
+<h2 class="title" mat-dialog-title>{{'board.updateBoard'|translate}}?</h2>
 
 <form class="update-form" [formGroup]="updateForm">
   <div class="inputs">
@@ -15,12 +15,17 @@
     </mat-form-field>
 
     <div class="board-btn-wrapper">
-      <button mat-button type="button" (click)="closeUpdateForm()">
-        {{'board.btn.cancel' | translate}}
-      </button>
-      <button mat-raised-button color="primary" type="submit" (click)="updateBoard()" [disabled]="updateForm.invalid">
-        {{'board.btn.update' | translate}}
-      </button>
+      <div class="button-area">
+        <button class="btn" mat-button type="button" (click)="closeUpdateForm()">
+          {{'board.btn.cancel' | translate}}
+        </button>
+      </div>
+      <div class="button-area">
+        <button  mat-raised-button color="primary" type="submit" (click)="updateBoard()" [disabled]="updateForm.invalid">
+          {{'board.btn.update' | translate}}
+        </button>
+      </div>
+
     </div>
   </div>
 </form>

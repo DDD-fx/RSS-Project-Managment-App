@@ -2,21 +2,29 @@
 @import "src/styles/mixins";
 
 .create-board-btn {
-  border: 2px solid $light-green;
+  border: none;
   border-radius: 4px;
   width: 200px;
   height: 200px;
-  background-color: $light-green;
+  background-color: transparent;
   cursor: pointer;
+  color: $grey;
 }
 
 .board {
-  border: 2px solid $lightgrey;
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
   width: 200px;
   height: 200px;
-  box-shadow: none;
-  // padding: 21px 0px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: pointer;
+  margin: 20px;
+  background-color: rgba(94, 119, 64, 0.3);
+  transition: 0.5s;
 }
 
 .mat-card-title {
@@ -32,4 +40,7 @@
     border: 1px solid $black;
   }
 }
-
+.board:hover {
+  box-shadow: none;
+  transition: 0.5s;
+}

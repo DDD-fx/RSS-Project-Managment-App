@@ -1,22 +1,30 @@
-.page{
-  width: 1000px;
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+:host {
+  background-color: $background;
+  height: 100vh;
+}
+.page {
+  width: 80%;
   display: flex;
   flex-direction: row;
   margin-left: auto;
   margin-right: auto;
+  color: $almost-black;
 
   &__cosmo {
     width: 70%;
   }
 
   &__info {
-    margin-top: 8%;
-    width: 400px;
+    margin-top: 10%;
+    width: 30%;
   }
 
   &__404 {
     font-size: 7.5em;
-    margin: 15px 0px;
+    margin: 15px 0;
     font-weight:bold;
     padding-bottom: 20px;
     font-family: cursive;
@@ -30,5 +38,34 @@
   &__text {
     font-family: cursive;
     font-size: 1.2em;
+    line-height: 1.2;
+    margin-bottom: 20px;
   }
+
+  button {
+    background-color: $blue;
+  }
+
+  button:hover {
+    border: 1px solid $blue;
+    color: $almost-black;
+    background-color: transparent;
+  }
+}
+
+@media (max-width: 787px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    &__info {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    &__cosmo {
+      width: 100%;
+    }
+  }
+
 }
