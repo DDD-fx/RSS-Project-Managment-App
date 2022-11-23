@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.onLogOut();
-    this.router.navigate([ESiteUrls.welcome]);
+    void this.router.navigate([ESiteUrls.welcome]);
   }
 
   deleteUser() {
