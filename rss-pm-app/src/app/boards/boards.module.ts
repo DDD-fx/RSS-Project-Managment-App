@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BoardsRoutingModule } from './boards-routing.module';
 import { BoardItemComponent } from './components/board-item/board-item.component';
 import { BoardsPageComponent } from './pages/boards-page/boards-page.component';
@@ -18,6 +18,7 @@ import { DeletingPopupComponent } from '../shared/components/deleting-popup/dele
 import { SortPipe } from './pipes/sort.pipe';
 import { ColumnsPageModule } from '../columns/columns-page.module';
 import { SearchComponent } from './components/search/search.component';
+import { LoaderComponent } from '../shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [BoardItemComponent, BoardsPageComponent, NewBoardComponent, BoardComponent, SortPipe, SearchComponent],
@@ -35,6 +36,7 @@ import { SearchComponent } from './components/search/search.component';
     ScrollingModule,
     MatDialogModule,
     ColumnsPageModule,
+    LoaderComponent,
   ],
   entryComponents: [DeletingPopupComponent],
 })

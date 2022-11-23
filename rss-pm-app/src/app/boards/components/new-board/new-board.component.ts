@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class NewBoardComponent {
   toggleForm() {
-    this.dialogRef.open(CreatingBoardPopupComponent);
+    this.dialogRef.open(CreatingBoardPopupComponent, { panelClass: 'custom' });
   }
 
   constructor(private apiBoardService: ApiBoardService, private store: Store, private dialogRef: MatDialog) {}

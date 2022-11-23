@@ -98,7 +98,21 @@
     }
   },
   "board": {
-    "title": "BOARDS",
+    "title": {
+      "1": " ",
+      "2": " ",
+      "3": "B",
+      "4": "O",
+      "5": "A",
+      "6": "R",
+      "7": "D",
+      "8": "S",
+      "9": " "
+    },
+    "sort": {
+      "a" : "A",
+      "z" : "Z"
+    },
     "label": "Enter board name",
     "description": "Description",
     "createBoard": "Create new board",

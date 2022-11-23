@@ -16,11 +16,12 @@ import { UpdateBoardPopupComponent } from 'src/app/shared/components/update-boar
 export class BoardItemComponent {
   @Input() board!: ICreateBoardResp;
 
-  private customColor: string = '#ffffff';
+  // private customColor: string = '#ffffff';
 
   openUpdateForm() {
     this.dialogRef.open(UpdateBoardPopupComponent, {
       data: { id: this.board.id },
+      panelClass: 'custom',
     });
   }
 
@@ -39,7 +40,10 @@ export class BoardItemComponent {
 
   deleteBoard(boardId: string) {
     this.loaderService.enableLoader();
-    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-board' } });
+    let dialog = this.dialogRef.open(DeletingPopupComponent, {
+      data: { name: 'deleting-popup.del-board' },
+      panelClass: 'custom',
+    });
     dialog.afterClosed().subscribe((result) => {
       if (result === 'true') {
         this.apiBoardService.deleteBoard(boardId);

@@ -74,7 +74,7 @@
 
     <div class="about-team-container">
       <div class="about-team">
-        <div  *ngFor="let member of team">
+        <div class="about-team__wrapper" *ngFor="let member of team">
           <app-team-member [member] = 'member'></app-team-member>
         </div>
       </div>

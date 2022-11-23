@@ -28,6 +28,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateBoardPopupComponent } from './shared/components/update-board-popup/update-board-popup.component';
 import { ColumnsPageModule } from './columns/columns-page.module';
+import { BoardsModule } from './boards/boards.module';
+import { MiniLoaderComponent } from './shared/components/mini-loader/mini-loader.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -38,10 +40,10 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
   declarations: [
     AppComponent,
     DeletingPopupComponent,
-    LoaderComponent,
     WrongAddressPageComponent,
     CreatingBoardPopupComponent,
     UpdateBoardPopupComponent,
+    MiniLoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +75,8 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
     ReactiveFormsModule,
     uiModules,
     ColumnsPageModule,
+    BoardsModule,
+    LoaderComponent,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],

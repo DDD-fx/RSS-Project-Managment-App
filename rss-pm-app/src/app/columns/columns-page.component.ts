@@ -73,7 +73,10 @@ export class ColumnsPageComponent implements OnInit {
     connectedLists = connectedLists.filter((id) => id !== columnId);
     this.columnsService.updateConnectedLists(connectedLists);
 
-    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-column' } });
+    let dialog = this.dialogRef.open(DeletingPopupComponent, {
+      data: { name: 'deleting-popup.del-column' },
+      panelClass: 'custom',
+    });
     dialog.afterClosed().subscribe((result) => {
       if (result === 'true') this.columnsService.deleteColumn(columnId);
     });
