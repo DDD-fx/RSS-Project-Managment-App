@@ -1,10 +1,15 @@
 @import "src/styles/variables";
 
 :host {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
   background: $background;
   color: var(--fg);
   font: 1em/1.5 sans-serif;
-  height: 100vh;
   display: grid;
   place-items: center;
   transition:

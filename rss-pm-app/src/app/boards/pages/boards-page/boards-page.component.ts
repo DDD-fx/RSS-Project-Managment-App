@@ -45,7 +45,7 @@ export class BoardsPageComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem(ELocalStorage.token)) {
       this.fetchData();
-      this.loaderService.disableLoader();
+      this.loaderService.disableLoader(); // а где enable?
     }
   }
 
