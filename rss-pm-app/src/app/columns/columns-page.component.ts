@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApiColumnsService } from '../api/services/api-colomns.service';
-import { map, tap } from 'rxjs';
+import { catchError, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { IColumn, IGetBoardResp, ITask, IUpdateColumnReq, IUpdateTaskReq } from '../api/models/api-board.model';
 import { LoaderService } from '../shared/components/loader/loader.service';
@@ -13,6 +13,9 @@ import { ApiBoardService } from '../api/services/api-board.service';
 import { ApiTasksService } from '../api/services/api-tasks.service';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 import { CreateColumnPopupComponent } from '../shared/components/create-column-popup/create-column-popup.component';
+import { IHttpErrors } from '../api/models/errors.model';
+import { ESiteUrls } from '../shared/shared.enums';
+import { NotificationService } from '../api/notification.service';
 
 @Component({
   selector: 'app-columns-page',
@@ -38,12 +41,14 @@ export class ColumnsPageComponent implements OnInit {
     private readonly columnsService: ColumnsService,
     private readonly apiColumnsService: ApiColumnsService,
     private readonly apiBoardService: ApiBoardService,
-    private readonly apiTasksService: ApiTasksService
+    private readonly apiTasksService: ApiTasksService,
+    private readonly notificationService: NotificationService
   ) {}
 
-  ngOnInit() {
-    this.columnsService.updatedBoard({} as IGetBoardResp);
+  ngOnInit(): void {
+    this.columnsService.updateBoard({} as IGetBoardResp);
     this.columnsService.setBoardId(this.router.url.split('/').pop()!);
+    this.loaderService.enableLoader();
     this.apiBoardService
       .getBoard(this.currBoardId$.value)
       .pipe(
@@ -53,35 +58,31 @@ export class ColumnsPageComponent implements OnInit {
             connectedLists.push(column.id);
           }
           this.columnsService.updateConnectedLists(connectedLists);
-          this.columnsService.updatedBoard(board);
+          this.columnsService.updateBoard(board);
+        }),
+        catchError((err: IHttpErrors) => {
+          this.notificationService.showError(ESiteUrls.columns, err);
+          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe();
+      .subscribe(() => this.loaderService.disableLoader());
   }
 
-  onDeleteColumn(columnId: string) {
+  onDeleteColumn(columnId: string): void {
     let connectedLists = this.connectedLists$.value;
     connectedLists = connectedLists.filter((id) => id !== columnId);
     this.columnsService.updateConnectedLists(connectedLists);
 
-    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-column' } });
+    let dialog = this.dialogRef.open(DeletingPopupComponent, {
+      data: { name: 'deleting-popup.del-column' },
+      panelClass: 'custom',
+    });
     dialog.afterClosed().subscribe((result) => {
-      if (result === 'true') {
-        this.loaderService.enableLoader();
-        this.apiColumnsService.deleteColumn(this.currBoardId$.value, columnId).subscribe();
-        this.apiBoardService
-          .getBoard(this.currBoardId$.value)
-          .pipe(
-            tap((board) => {
-              this.columnsService.updatedBoard(board);
-            })
-          )
-          .subscribe(() => this.loaderService.disableLoader());
-      }
+      if (result === 'true') this.columnsService.deleteColumn(columnId);
     });
   }
 
-  dropColumn(event: CdkDragDrop<IColumn[]>) {
+  dropColumn(event: CdkDragDrop<IColumn[]>): void {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     const columns = event.container.data;
     const movedColumn = columns[event.currentIndex];
@@ -92,7 +93,7 @@ export class ColumnsPageComponent implements OnInit {
     this.apiColumnsService.updateColumn(this.currBoardId$.value, movedColumn.id, body).subscribe();
   }
 
-  dropTask(event: CdkDragDrop<ITask[]>, columnId: string) {
+  dropTask(event: CdkDragDrop<ITask[]>, columnId: string): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       const tasks = event.container.data;
@@ -126,12 +127,16 @@ export class ColumnsPageComponent implements OnInit {
     }
   }
 
-  createColumnPopup() {
+  createColumnPopup(): void {
     this.elRef.nativeElement.scroll(9999, 0);
     this.dialogRef.open(CreateColumnPopupComponent, { panelClass: 'custom' });
   }
 
-  createTaskPopup(columnId: string) {
+  createTaskPopup(columnId: string): void {
     this.dialogRef.open(CreateTaskPopupComponent, { data: columnId, width: '350px', panelClass: 'custom' });
+  }
+
+  columnTrackByFn(index: number, column: IColumn): string {
+    return column.id;
   }
 }

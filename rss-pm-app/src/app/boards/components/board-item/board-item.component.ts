@@ -19,6 +19,7 @@ export class BoardItemComponent {
   openUpdateForm() {
     this.dialogRef.open(UpdateBoardPopupComponent, {
       data: { id: this.board.id },
+      panelClass: 'custom',
     });
   }
 
@@ -29,15 +30,18 @@ export class BoardItemComponent {
     private readonly loaderService: LoaderService
   ) {}
 
-  saveCurrentBoard() {
-    this.loaderService.enableLoader();
-    this.store.dispatch(getCurrentBoard({ boardId: this.board.id }));
-    this.loaderService.disableLoader();
-  }
+  // saveCurrentBoard() {
+  //   this.loaderService.enableLoader();
+  //   this.store.dispatch(getCurrentBoard({ boardId: this.board.id }));
+  //   this.loaderService.disableLoader();
+  // }
 
   deleteBoard(boardId: string) {
     this.loaderService.enableLoader();
-    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-board' } });
+    let dialog = this.dialogRef.open(DeletingPopupComponent, {
+      data: { name: 'deleting-popup.del-board' },
+      panelClass: 'custom',
+    });
     dialog.afterClosed().subscribe((result) => {
       if (result === 'true') {
         this.apiBoardService.deleteBoard(boardId);

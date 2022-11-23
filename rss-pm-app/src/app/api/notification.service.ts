@@ -34,10 +34,6 @@ export class NotificationService {
     }
   }
 
-  // showInfo(message: string, title: string): void {
-  //   this.toastr.info(message, title);
-  // }
-
   showError(notificationSource: string, err: IHttpErrors): void {
     // TODO: заменить на обращение к ngrx
     const currLang = this.translate.currentLang;
@@ -78,6 +74,7 @@ export class NotificationService {
       default:
         if (currLang === 'en') this.toastr.error('Something went wrong', 'Error');
         else this.toastr.error('Что-то пошло не так', 'Ошибка');
+        break;
     }
     this.loaderService.disableLoader();
   }

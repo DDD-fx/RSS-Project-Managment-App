@@ -13,7 +13,7 @@
   width: 185px;
   height: 50px;
   @include flex-center();
-  border: 1px dashed $grey;
+  border: $edit-border;
   color: $grey;
 }
 
@@ -27,33 +27,37 @@
   background-color: $task-background;
   cursor: pointer;
 
-  &:hover {
-    &::after {
-      content: attr(data-after);
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-    }
+  &__edit,
+  &__arrows {
+    display: none;
   }
 
-  &__title {
-    .task-card:hover & {
-      opacity: 0.3;
+  &:hover {
+    .task-card__edit,
+    .task-card__arrows {
+      display: block;
+      position: absolute;
+      font-size: 1.2em;
+      right: 5px;
+    }
+
+    .task-card__edit {
+      top: 3px;
+    }
+
+    .task-card__arrows {
+      top: 25px;
     }
   }
 
   &__subtitle {
     font-size: 0.9em;
     color: $grey;
-
-    .task-card:hover & {
-      opacity: 0.3;
-    }
   }
 
   &__title,
   &__subtitle {
+    max-width: 160px;
     overflow-wrap: anywhere;
   }
 

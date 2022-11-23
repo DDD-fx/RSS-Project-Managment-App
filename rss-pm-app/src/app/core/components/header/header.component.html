@@ -1,7 +1,9 @@
 <header class="header">
-    <a>
-        <img class="header__logo" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/567/567014.png" alt="logo">
+  <div class="logo-area">
+    <a >
+      <img class="header__logo" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/567/567014.png" alt="logo">
     </a>
+  </div>
 
     <div class="header__create-button-area" *ngIf="userName$ | async">
       <a (click)="createBoard()">
@@ -38,9 +40,12 @@
             <p class="header__user-name">{{userName$ | async}}</p>
             <div class="header__exit-buttons">
               <div class="dropdown">
-                <a>
-                  <img class="header__settings" alt="settings" src="https://cdn-icons-png.flaticon.com/512/54/54512.png">
-                </a>
+                <div class="settings-area">
+                  <a>
+                    <img class="header__settings" alt="settings" src="https://cdn-icons-png.flaticon.com/512/54/54512.png">
+                  </a>
+                </div>
+
                 <div class="dropdown-content">
                   <a mat-raised-button (click)="deleteUser()">{{'header.delete-user' | translate}}</a>
                   <a mat-raised-button [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>

@@ -1,19 +1,19 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, map, Observable, pairwise, throttleTime } from 'rxjs';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { getAllBoards } from 'src/app/NgRx/actions/storeActions';
 import { selectAllBoards, selectAllBoardsFailure, selectAllBoardsSuccess } from 'src/app/NgRx/selectors/storeSelectors';
 import { ELocalStorage } from 'src/app/shared/shared.enums';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-boards-page',
   templateUrl: './boards-page.component.html',
   styleUrls: ['./boards-page.component.scss'],
 })
-export class BoardsPageComponent implements OnInit, AfterViewInit {
+export class BoardsPageComponent implements OnInit {
   isLoadingBoard$: Observable<boolean>;
 
   boards$: Observable<ICreateBoardResp[] | []>;
@@ -39,24 +39,8 @@ export class BoardsPageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (localStorage.getItem(ELocalStorage.token)) {
       this.fetchData();
-      this.loaderService.disableLoader();
+      this.loaderService.disableLoader(); // а где enable?
     }
-  }
-
-  ngAfterViewInit() {
-    this.scroller
-      .elementScrolled()
-      .pipe(
-        map(() => this.scroller.measureViewportOffset('bottom')),
-        pairwise(),
-        filter(([y1, y2]) => y2 < y1 && y2 < 140),
-        throttleTime(200)
-      )
-      .subscribe(() => {
-        this.ngZone.run(() => {
-          this.fetchData();
-        });
-      });
   }
 
   sortBoards() {
