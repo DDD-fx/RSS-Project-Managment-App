@@ -20,9 +20,11 @@ export class PopupSearchResultsComponent implements OnInit {
 
   tasksArray: ITaskSearch[] = [];
 
+  sortedTasks: ITaskSearch[] = this.tasksArray;
+
   order: string = 'asc';
 
-  param!: string;
+  userName!: string;
 
   constructor(
     private store: Store,
@@ -43,14 +45,14 @@ export class PopupSearchResultsComponent implements OnInit {
               item.columns.forEach((column) => {
                 column.tasks.forEach((task) => {
                   if (task.title.includes(this.data.searchText) || task.description.includes(this.data.searchText)) {
-                    const userName = this.httpClient
-                      .get<ISignUpResp>(EApiUrls.users + `/${task.userId}`)
-                      .pipe(map((user) => user.name));
-                    this.tasksArray.push({
-                      boardId: board.id,
-                      boardName: board.title,
-                      task: task,
-                      user: userName,
+                    this.httpClient.get<ISignUpResp>(EApiUrls.users + `/${task.userId}`).subscribe((user) => {
+                      this.userName = user.name;
+                      this.tasksArray.push({
+                        boardId: board.id,
+                        boardName: board.title,
+                        task: task,
+                        user: this.userName,
+                      });
                     });
                   }
                 });
@@ -66,7 +68,7 @@ export class PopupSearchResultsComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  sortTasks() {
+  sortBoards() {
     if (this.order === 'desc') {
       this.order = 'asc';
     } else {
@@ -74,7 +76,43 @@ export class PopupSearchResultsComponent implements OnInit {
     }
   }
 
-  getParam(value: string) {
-    this.param = value;
+  sortByTitle(args: string) {
+    return this.sortedTasks.sort((a, b) => {
+      if (args === 'asc') {
+        return a.task.title.toLowerCase() > b.task.title.toLowerCase() ? 1 : -1;
+      } else {
+        return a.task.title.toLowerCase() > b.task.title.toLowerCase() ? -1 : 1;
+      }
+    });
+  }
+
+  sortByDescription(args: string) {
+    return this.sortedTasks.sort((a, b) => {
+      if (args === 'asc') {
+        return a.task.description.toLowerCase() > b.task.description.toLowerCase() ? 1 : -1;
+      } else {
+        return a.task.description.toLowerCase() > b.task.description.toLowerCase() ? -1 : 1;
+      }
+    });
+  }
+
+  sortByUser(args: string) {
+    return this.sortedTasks.sort((a, b) => {
+      if (args === 'asc') {
+        return a.boardName.toLowerCase() > b.boardName.toLowerCase() ? 1 : -1;
+      } else {
+        return a.boardName.toLowerCase() > b.boardName.toLowerCase() ? -1 : 1;
+      }
+    });
+  }
+
+  sortByBoard(args: string) {
+    return this.sortedTasks.sort((a, b) => {
+      if (args === 'asc') {
+        return a.boardName.toLowerCase() > b.boardName.toLowerCase() ? 1 : -1;
+      } else {
+        return a.boardName.toLowerCase() > b.boardName.toLowerCase() ? -1 : 1;
+      }
+    });
   }
 }

@@ -21,7 +21,15 @@ import { SearchComponent } from './components/search/search.component';
 import { PopupSearchResultsComponent } from './components/popup-search-results/popup-search-results.component';
 
 @NgModule({
-  declarations: [BoardItemComponent, BoardsPageComponent, NewBoardComponent, BoardComponent, SortPipe, SearchComponent, PopupSearchResultsComponent],
+  declarations: [
+    BoardItemComponent,
+    BoardsPageComponent,
+    NewBoardComponent,
+    BoardComponent,
+    SortPipe,
+    SearchComponent,
+    PopupSearchResultsComponent,
+  ],
   imports: [
     CommonModule,
     BoardsRoutingModule,

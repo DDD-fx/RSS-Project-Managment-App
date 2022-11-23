@@ -16,8 +16,6 @@ import { UpdateBoardPopupComponent } from 'src/app/shared/components/update-boar
 export class BoardItemComponent {
   @Input() board!: ICreateBoardResp;
 
-  private customColor: string = '#ffffff';
-
   openUpdateForm() {
     this.dialogRef.open(UpdateBoardPopupComponent, {
       data: { id: this.board.id },

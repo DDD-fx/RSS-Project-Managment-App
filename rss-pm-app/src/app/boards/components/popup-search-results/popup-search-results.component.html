@@ -8,30 +8,26 @@
   <thead>
   <tr>
     <th>№</th>
-    <th>Task title
-      <mat-icon (click)="sortTasks()">keyboard_arrow_down</mat-icon>
-      <mat-icon (click)="sortTasks()">keyboard_arrow_up</mat-icon>
+    <th (click)="sortBoards()" (click)="sortByTitle( order==='asc' ? 'asc' : 'desc')">Task title
+      <mat-icon>sort</mat-icon>
     </th>
-    <th>Task description
-      <mat-icon *ngIf="order === 'asc'" (click)="sortTasks()">keyboard_arrow_down</mat-icon>
-      <mat-icon *ngIf="order === 'desc'" (click)="sortTasks()">keyboard_arrow_up</mat-icon>
+    <th (click)="sortBoards()" (click)="sortByDescription( order==='asc' ? 'asc' : 'desc')">Task description
+      <mat-icon>sort</mat-icon>
     </th>
-    <th>User
-      <mat-icon *ngIf="order === 'asc'" (click)="sortTasks()">keyboard_arrow_down</mat-icon>
-      <mat-icon *ngIf="order === 'desc'" (click)="sortTasks()">keyboard_arrow_up</mat-icon>
+    <th (click)="sortBoards()" (click)="sortByUser( order==='asc' ? 'asc' : 'desc')">User
+      <mat-icon>sort</mat-icon>
     </th>
-    <th>Board
-      <mat-icon *ngIf="order === 'asc'" (click)="sortTasks()">keyboard_arrow_down</mat-icon>
-      <mat-icon *ngIf="order === 'desc'" (click)="sortTasks()">keyboard_arrow_up</mat-icon>
+    <th (click)="sortBoards()" (click)="sortByBoard( order==='asc' ? 'asc' : 'desc')">Board
+      <mat-icon>sort</mat-icon>
     </th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let task of tasksArray; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
+  <tr *ngFor="let task of sortedTasks; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
     <td>{{ indexElem + 1 }}</td>
     <td>{{task.task.title | titlecase}}</td>
     <td>{{task.task.description }}</td>
-    <td>{{task.user | async | titlecase}}</td>
+    <td>{{task.user | titlecase}}</td>
     <td>{{task.boardName | titlecase}}</td>
   </tr>
   </tbody>

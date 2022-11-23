@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, Subject } from 'rxjs';
-import { SearchService } from '../../services/search.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PopupSearchResultsComponent } from '../popup-search-results/popup-search-results.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +16,7 @@ export class SearchComponent implements OnInit {
 
   searchText$ = new Subject<string>();
 
-  constructor(private searchService: SearchService, private dialogRef: MatDialog) {}
+  constructor(private dialogRef: MatDialog) {}
 
   ngOnInit(): void {
     this.searchText$.pipe(debounceTime(2000)).subscribe(() => {
