@@ -74,6 +74,7 @@ export class NotificationService {
       default:
         if (currLang === 'en') this.toastr.error('Something went wrong', 'Error');
         else this.toastr.error('Что-то пошло не так', 'Ошибка');
+        break;
     }
     this.loaderService.disableLoader();
   }

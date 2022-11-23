@@ -16,16 +16,15 @@ export class ApiBoardService {
   }
 
   getBoard(id: string): Observable<IGetBoardResp> {
-    return this.httpClient
-      .get<IGetBoardResp>(EApiUrls.boards + `/${id}`)
-      .pipe
-      // catchError((err: HttpErrorResponse) => {
-      //   if (!err.ok) {
-      //     this.router.navigateByUrl('');
-      //   }
-      //   return [];
-      // })
-      ();
+    return this.httpClient.get<IGetBoardResp>(EApiUrls.boards + `/${id}`);
+    //   .pipe(
+    //   catchError((err: HttpErrorResponse) => {
+    //     if (!err.ok) {
+    //       this.router.navigateByUrl('');
+    //     }
+    //     return [];
+    //   })
+    // );
   }
 
   getBoards(): Observable<ICreateBoardResp[]> {

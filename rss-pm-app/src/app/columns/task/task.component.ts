@@ -55,13 +55,21 @@ export class TaskComponent {
   }
 
   onEditTask(taskId: string) {
-    const taskOrder = this.columnsService.board$.value.columns
+    const currTask = this.columnsService.board$.value.columns
       .find((column) => column.id === this.elRef.nativeElement.id)!
-      .tasks.find((task) => task.id === taskId)!.order;
+      .tasks.find((task) => task.id === taskId)!;
 
     this.dialogRef.open(EditTaskPopupComponent, {
-      data: { boardId: this.currBoardId$.value, columnId: this.elRef.nativeElement.id, taskId, taskOrder },
+      data: {
+        boardId: this.currBoardId$.value,
+        columnId: this.elRef.nativeElement.id,
+        currTask,
+      },
       width: '350px',
     });
+  }
+
+  taskTrackByFn(index: number, task: ITask): string {
+    return task.id;
   }
 }

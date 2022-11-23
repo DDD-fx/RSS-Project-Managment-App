@@ -46,7 +46,6 @@ export class ColumnsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('init');
     this.columnsService.updateBoard({} as IGetBoardResp);
     this.columnsService.setBoardId(this.router.url.split('/').pop()!);
     this.loaderService.enableLoader();
@@ -132,5 +131,9 @@ export class ColumnsPageComponent implements OnInit {
 
   createTaskPopup(columnId: string): void {
     this.dialogRef.open(CreateTaskPopupComponent, { data: columnId, width: '350px', panelClass: 'custom' });
+  }
+
+  columnTrackByFn(index: number, column: IColumn): string {
+    return column.id;
   }
 }

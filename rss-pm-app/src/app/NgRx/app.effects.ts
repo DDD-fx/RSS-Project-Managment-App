@@ -74,7 +74,7 @@ export class AppEffects {
       tap(() => {
         localStorage.removeItem(ELocalStorage.token);
         this.authService.onLogOut();
-        this.router.navigate(['']);
+        void this.router.navigate(['']);
       })
     );
   });
