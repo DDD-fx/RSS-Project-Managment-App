@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchTasks() {
-    console.log(this.searchInput.get(['search'])?.value);
-    this.dialogRef.open(PopupSearchResultsComponent, { data: this.searchInput.get(['search'])?.value });
+    this.dialogRef.open(PopupSearchResultsComponent, { data: { searchText: this.searchInput.get(['search'])?.value } });
+    this.searchInput.reset();
   }
 }

@@ -3,7 +3,6 @@ import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/co
 import { Store } from '@ngrx/store';
 import { filter, map, Observable, pairwise, throttleTime } from 'rxjs';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
-import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { getAllBoards } from 'src/app/NgRx/actions/storeActions';
 import { selectAllBoards, selectAllBoardsFailure, selectAllBoardsSuccess } from 'src/app/NgRx/selectors/storeSelectors';
 import { ELocalStorage } from 'src/app/shared/shared.enums';
@@ -23,12 +22,7 @@ export class BoardsPageComponent implements OnInit, AfterViewInit {
 
   isLoading$ = this.loaderService.isLoading$;
 
-  constructor(
-    private apiBoardService: ApiBoardService,
-    private store: Store,
-    private ngZone: NgZone,
-    private readonly loaderService: LoaderService
-  ) {
+  constructor(private store: Store, private ngZone: NgZone, private readonly loaderService: LoaderService) {
     this.isLoadingBoard$ = this.store.select(selectAllBoards);
     this.boards$ = this.store.select(selectAllBoardsSuccess);
     this.error$ = this.store.select(selectAllBoardsFailure);

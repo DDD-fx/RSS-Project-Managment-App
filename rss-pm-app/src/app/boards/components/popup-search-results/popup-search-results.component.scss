@@ -1,0 +1,13 @@
+table, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.close-window {
+ justify-self: end;
+}

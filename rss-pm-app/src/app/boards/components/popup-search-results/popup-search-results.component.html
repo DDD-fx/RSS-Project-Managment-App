@@ -1,23 +1,38 @@
-<h3>Search tasks result</h3>
-<p *ngIf="tasks$.length === 0">Search task not found!</p>
+<div class="container">
+  <h3>Search tasks result</h3>
+  <mat-icon class="close-window" (click)="closeSearchResult()">close</mat-icon>
+</div>
+<p *ngIf="tasksArray.length === 0">Search task not found!</p>
 
-<table *ngIf="tasks$.length > 0">
+<table *ngIf="tasksArray.length > 0">
   <thead>
   <tr>
-    <th>Title</th>
-    <th>User</th>
-    <th>Description</th>
-    <th>Open Board</th>
+    <th>№</th>
+    <th>Task title
+      <mat-icon (click)="sortTasks()">keyboard_arrow_down</mat-icon>
+      <mat-icon (click)="sortTasks()">keyboard_arrow_up</mat-icon>
+    </th>
+    <th>Task description
+      <mat-icon *ngIf="order === 'asc'" (click)="sortTasks()">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="order === 'desc'" (click)="sortTasks()">keyboard_arrow_up</mat-icon>
+    </th>
+    <th>User
+      <mat-icon *ngIf="order === 'asc'" (click)="sortTasks()">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="order === 'desc'" (click)="sortTasks()">keyboard_arrow_up</mat-icon>
+    </th>
+    <th>Board
+      <mat-icon *ngIf="order === 'asc'" (click)="sortTasks()">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="order === 'desc'" (click)="sortTasks()">keyboard_arrow_up</mat-icon>
+    </th>
   </tr>
   </thead>
   <tbody>
-  <!-- <tr *ngFor="let task of tasks$">
-    <td>{{task.task.title}}</td>
-    <td>{{task.userId}}</td>
-    <td>{{task.task.description}}</td>
-    <th>
-      <button [routerLink]="['/boards', task.boardId]">Open Board</button>
-    </th>
-  </tr> -->
+  <tr *ngFor="let task of tasksArray; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
+    <td>{{ indexElem + 1 }}</td>
+    <td>{{task.task.title | titlecase}}</td>
+    <td>{{task.task.description }}</td>
+    <td>{{task.user | async | titlecase}}</td>
+    <td>{{task.boardName | titlecase}}</td>
+  </tr>
   </tbody>
 </table>

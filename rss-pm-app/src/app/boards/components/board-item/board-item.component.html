@@ -1,5 +1,5 @@
 <mat-card  [routerLink]="['/boards', board.id]" (click)="saveCurrentBoard()" class="board">
-  <mat-card-title class="title">{{ board.title }}</mat-card-title>
+  <mat-card-title class="title">{{ board.title | titlecase }}</mat-card-title>
   <mat-card-content class="box-overflow" id="style">
     <p class="overflow">{{ board.description }}</p>
   </mat-card-content>
