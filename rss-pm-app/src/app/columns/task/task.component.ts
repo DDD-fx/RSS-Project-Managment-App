@@ -31,7 +31,10 @@ export class TaskComponent {
 
   onDeleteTask(taskId: string, event: Event) {
     event.stopPropagation();
-    let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-task' } });
+    let dialog = this.dialogRef.open(DeletingPopupComponent, {
+      data: { name: 'deleting-popup.del-task' },
+      panelClass: 'custom',
+    });
     dialog.afterClosed().subscribe((result) => {
       if (result === 'true') {
         this.loaderService.enableLoader();

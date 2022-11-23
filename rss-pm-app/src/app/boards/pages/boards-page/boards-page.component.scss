@@ -2,29 +2,116 @@
 @import "src/styles/variables";
 
 .main-container {
-  height: 80vh;
-  @include margin-center();
-  .title {
-    text-align: center;
-    color: $blue;
-    border-bottom: 2px solid $blue;
-    .sort {
-      position: absolute;
-      right: 10%;
-      color: $black;
-      &:hover {
-        color: $blue;
-      }
-    }
+
+  .sort:hover {
+    border: 1px solid $blue;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 15%) 0 5px 5px;
+    transition: 0.5s;
   }
-    .content {
-    height: calc(100% - 50px);
-    overflow-y: auto;
-    .boards-list {
-      @include flex-full-screen();
-      height: 90%;
-      gap: 1rem;
-    }
+
+  &__title {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  &__content {
+    width: 80%;
+    margin: 40px auto 30px auto;
+    border-radius: 20px;
+    background-color: $background;
+    box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+    padding: 20px 30px 20px 30px;
+  }
+
+  .boards-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
   }
 }
 
+.container {
+   display: flex;
+   justify-content: center;
+   font-size: 3rem;
+   list-style-type: none;
+   gap: 20px;
+   color: $dark-grey;
+ }
+
+.container .boards {
+  font-size: 2rem;
+  padding: 0;
+}
+
+.boards {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  animation-name: bubbly;
+  animation-duration: calc(var(--i) * 1s);
+  animation-fill-mode:forwards;
+  animation-timing-function:ease-in-out;
+}
+
+@keyframes bubbly {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sort {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 5px;
+  color: $almost-black;
+  border-color: transparent;
+  transition: 0.5s;
+}
+
+.sort-wrapper {
+  width: 60px;
+}
+
+.content {
+  padding: 20px 30px 20px 30px;
+}
+
+@media (max-width: 767px) {
+  .panel {
+    margin-left: 0;
+  }
+
+  .container {
+    font-size: 2rem;
+  }
+}
