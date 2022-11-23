@@ -46,8 +46,10 @@ export class ColumnsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.columnsService.updatedBoard({} as IGetBoardResp);
+    console.log('init');
+    this.columnsService.updateBoard({} as IGetBoardResp);
     this.columnsService.setBoardId(this.router.url.split('/').pop()!);
+    this.loaderService.enableLoader();
     this.apiBoardService
       .getBoard(this.currBoardId$.value)
       .pipe(
@@ -57,10 +59,14 @@ export class ColumnsPageComponent implements OnInit {
             connectedLists.push(column.id);
           }
           this.columnsService.updateConnectedLists(connectedLists);
-          this.columnsService.updatedBoard(board);
+          this.columnsService.updateBoard(board);
+        }),
+        catchError((err: IHttpErrors) => {
+          this.notificationService.showError(ESiteUrls.columns, err);
+          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe();
+      .subscribe(() => this.loaderService.disableLoader());
   }
 
   onDeleteColumn(columnId: string): void {
@@ -70,22 +76,7 @@ export class ColumnsPageComponent implements OnInit {
 
     let dialog = this.dialogRef.open(DeletingPopupComponent, { data: { name: 'deleting-popup.del-column' } });
     dialog.afterClosed().subscribe((result) => {
-      if (result === 'true') {
-        this.loaderService.enableLoader();
-        this.apiColumnsService.deleteColumn(this.currBoardId$.value, columnId).subscribe();
-        this.apiBoardService
-          .getBoard(this.currBoardId$.value)
-          .pipe(
-            tap((board) => {
-              this.columnsService.updatedBoard(board);
-            }),
-            catchError((err: IHttpErrors) => {
-              this.notificationService.showError(ESiteUrls.columns, err);
-              throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
-            })
-          )
-          .subscribe();
-      }
+      if (result === 'true') this.columnsService.deleteColumn(columnId);
     });
   }
 
@@ -141,10 +132,5 @@ export class ColumnsPageComponent implements OnInit {
 
   createTaskPopup(columnId: string): void {
     this.dialogRef.open(CreateTaskPopupComponent, { data: columnId, width: '350px', panelClass: 'custom' });
-  }
-
-  disableLoader() {
-    console.log('ads');
-    this.loaderService.disableLoader();
   }
 }

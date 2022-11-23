@@ -31,11 +31,11 @@ export class BoardItemComponent {
     private readonly loaderService: LoaderService
   ) {}
 
-  saveCurrentBoard() {
-    this.loaderService.enableLoader();
-    this.store.dispatch(getCurrentBoard({ boardId: this.board.id }));
-    this.loaderService.disableLoader();
-  }
+  // saveCurrentBoard() {
+  //   this.loaderService.enableLoader();
+  //   this.store.dispatch(getCurrentBoard({ boardId: this.board.id }));
+  //   this.loaderService.disableLoader();
+  // }
 
   deleteBoard(boardId: string) {
     this.loaderService.enableLoader();

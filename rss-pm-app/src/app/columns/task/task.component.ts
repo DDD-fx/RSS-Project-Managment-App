@@ -43,7 +43,7 @@ export class TaskComponent {
           .deleteTask(this.currBoardId$.value, this.elRef.nativeElement.id, taskId)
           .pipe(
             switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
-            tap((board) => this.columnsService.updatedBoard(board)),
+            tap((board) => this.columnsService.updateBoard(board)),
             catchError((err: IHttpErrors) => {
               this.notificationService.showError(ESiteUrls.columns, err);
               throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
