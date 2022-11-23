@@ -30,7 +30,7 @@
       <div class="content">
         <section class="boards-list">
           <app-new-board></app-new-board>
-          <div *ngFor="let board of boards$ | async | sort: order">
+          <div *ngFor="let board of boards$ | async | sort: order; trackBy: taskBoardByFn">
             <app-board-item [board]="board"></app-board-item>
           </div>
         </section>

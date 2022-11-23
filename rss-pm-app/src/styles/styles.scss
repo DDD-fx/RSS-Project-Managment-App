@@ -72,3 +72,9 @@ body {
 .custom .mat-form-field-flex {
   font-family: cursive;
 }
+
+.mat-tooltip.tips {
+  background-color: rgba(94, 119, 64, 0.7);
+  color: $black;
+  border: 1px solid $almost-black;
+}

@@ -38,6 +38,7 @@ export class BoardsPageComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem(ELocalStorage.token)) {
+      this.loaderService.enableLoader();
       this.fetchData();
       this.loaderService.disableLoader(); // а где enable?
     }
@@ -49,5 +50,9 @@ export class BoardsPageComponent implements OnInit {
     } else {
       this.order = 'desc';
     }
+  }
+
+  taskBoardByFn(index: number, board: ICreateBoardResp): string {
+    return board.id;
   }
 }

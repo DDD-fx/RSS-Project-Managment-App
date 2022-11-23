@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { ICreateBoardReq, ICreateBoardResp, IGetBoardResp } from '../models/api-board.model';
 import { EApiUrls } from '../../shared/shared.enums';
 import { Router } from '@angular/router';
@@ -17,14 +17,6 @@ export class ApiBoardService {
 
   getBoard(id: string): Observable<IGetBoardResp> {
     return this.httpClient.get<IGetBoardResp>(EApiUrls.boards + `/${id}`);
-    //   .pipe(
-    //   catchError((err: HttpErrorResponse) => {
-    //     if (!err.ok) {
-    //       this.router.navigateByUrl('');
-    //     }
-    //     return [];
-    //   })
-    // );
   }
 
   getBoards(): Observable<ICreateBoardResp[]> {

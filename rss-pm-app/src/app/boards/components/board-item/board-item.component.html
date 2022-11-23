@@ -4,10 +4,28 @@
     <p class="overflow">{{ board.description }}</p>
   </div>
   <div class="board-btn-wrapper">
-    <button mat-stroked-button color="primary" type="button" class="btn-bg" (click)="deleteBoard(board.id); $event.stopPropagation()">
+    <button mat-stroked-button
+            color="primary"
+            type="button"
+            class="btn-bg"
+            matTooltip="Delete"
+            matTooltipPosition="above"
+            [matTooltipClass]="{ 'tips': true }"
+            (click)="deleteBoard(board.id);
+            $event.stopPropagation()"
+    >
       <mat-icon>delete</mat-icon>
     </button>
-    <button mat-stroked-button color="primary" type="button" class="btn-bg" (click)="openUpdateForm(); $event.stopPropagation()">
+    <button mat-stroked-button
+            color="primary"
+            type="button"
+            class="btn-bg"
+            matTooltip="Edit"
+            matTooltipPosition="above"
+            [matTooltipClass]="{ 'tips': true }"
+            (click)="openUpdateForm();
+            $event.stopPropagation()"
+    >
       <mat-icon>border_color</mat-icon>
     </button>
   </div>

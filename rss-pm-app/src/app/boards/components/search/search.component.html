@@ -1,22 +1,11 @@
 <form class="search-form" [formGroup]="searchInput" appearance="fill">
-<<<<<<< HEAD
-  <!-- <mat-label>{{ "search" | translate }}</mat-label> -->
-  <input matInput formControlName="search" type="text" placeholder="{{'search.input' | translate}}" name="search" autocomplete="off"/>
-  <button mat-button color="primary">
-    <mat-icon class="btn-bg" (click)="searchTasks()">search</mat-icon>
-  </button>
-=======
   <div class="input-area">
-    <input formControlName="search" type="text" placeholder="Search task"
-           name="search" autocomplete="off"
-           (keyup)="search(getValue($event))"/>
+    <input matInput formControlName="search" type="text" placeholder="{{'search.input' | translate}}" name="search" autocomplete="off"/>
   </div>
 
   <div class="button-area">
     <button mat-raised-button>
-      <mat-icon class="btn-bg">search</mat-icon>
+      <mat-icon class="btn-bg" (click)="searchTasks()">search</mat-icon>
     </button>
   </div>
->>>>>>> develop
 </form>
-
