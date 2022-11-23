@@ -77,7 +77,7 @@ export class HeaderComponent implements OnInit {
 
   onLogoClick() {
     // this.router.navigate([getTokenFromLS() ? ESiteUrls.boards : ESiteUrls.welcome]);
-    this.router.navigate([ESiteUrls.welcome]);
+    void this.router.navigate([ESiteUrls.welcome]);
   }
 
   createBoard() {

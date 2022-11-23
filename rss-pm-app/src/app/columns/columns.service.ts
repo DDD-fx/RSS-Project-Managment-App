@@ -30,7 +30,7 @@ export class ColumnsService {
   ) {}
 
   createNewColumn(body: ICreateColumnReq): void {
-    this.loaderService.enableLoader();
+    // this.loaderService.enableLoader();
     this.apiColumnsService
       .createNewColumn(this.currBoardId$.value, body)
       .pipe(
@@ -46,7 +46,7 @@ export class ColumnsService {
           throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe(() => this.loaderService.disableLoader());
+      .subscribe(/*() => this.loaderService.disableLoader()*/);
   }
 
   deleteColumn(columnId: string): void {

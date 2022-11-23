@@ -35,7 +35,7 @@
       "nums": "has to contain at least one number"
     },
     "registration-btn": "Registration",
-    "login-btn": "Sign In"
+    "login-btn": "Log In"
   },
   "signUp-form": {
     "title": "Sign Up",

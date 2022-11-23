@@ -40,6 +40,7 @@ export class LoginFormComponent extends ValidationAbstract {
   }
 
   onLogIn() {
+    this.loaderService.enableLoader();
     this.authService
       .onSignIn({
         login: this.loginForm.get('login')!.value!,
