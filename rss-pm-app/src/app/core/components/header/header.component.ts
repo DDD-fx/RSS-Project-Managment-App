@@ -12,6 +12,7 @@ import { DeletingPopupComponent } from '../../../shared/components/deleting-popu
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { CreatingBoardPopupComponent } from '../../../shared/components/creating-board-popup/creating-board-popup.component';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { getTokenFromLS } from 'src/app/shared/shared.utils';
 
 @Component({
   selector: 'app-header',
@@ -76,8 +77,8 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogoClick() {
-    // this.router.navigate([getTokenFromLS() ? ESiteUrls.boards : ESiteUrls.welcome]);
-    this.router.navigate([ESiteUrls.welcome]);
+    this.router.navigate([getTokenFromLS() ? ESiteUrls.boards : ESiteUrls.welcome]);
+    // this.router.navigate([ESiteUrls.welcome]);
   }
 
   createBoard() {

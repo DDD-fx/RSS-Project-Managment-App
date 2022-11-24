@@ -1,8 +1,8 @@
 <div class="container">
-  <h3>Search tasks result</h3>
+  <h3>{{'search.title' | translate}}</h3>
   <mat-icon class="close-window" (click)="closeSearchResult()">close</mat-icon>
 </div>
-<p *ngIf="tasksArray.length === 0">Search task not found!</p>
+<p *ngIf="tasksArray.length === 0">{{'search.not-found' | translate}}</p>
 
 <table *ngIf="tasksArray.length > 0">
   <thead>

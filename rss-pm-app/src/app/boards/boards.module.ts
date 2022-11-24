@@ -20,7 +20,6 @@ import { ColumnsPageModule } from '../columns/columns-page.module';
 import { SearchComponent } from './components/search/search.component';
 import { LoaderComponent } from '../shared/components/loader/loader.component';
 import { PopupSearchResultsComponent } from './components/popup-search-results/popup-search-results.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -47,7 +46,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     ColumnsPageModule,
     LoaderComponent,
-    MatTooltipModule,
   ],
   entryComponents: [DeletingPopupComponent],
 })
