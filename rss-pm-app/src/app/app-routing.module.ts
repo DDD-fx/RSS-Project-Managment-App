@@ -4,6 +4,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { ESiteUrls } from './shared/shared.enums';
 import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
 import { getTokenFromLS } from './shared/shared.utils';
+import { WelcomeGuard } from './core/guards/welcome.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   {
     path: ESiteUrls.welcome,
     loadChildren: () => import('./welcome/welcome.module').then((a) => a.WelcomeModule),
+    canActivate: [WelcomeGuard],
   },
   {
     path: ESiteUrls.signIn,
