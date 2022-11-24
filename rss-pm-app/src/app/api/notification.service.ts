@@ -4,6 +4,7 @@ import { EHttpStatus, ESiteUrls } from '../shared/shared.enums';
 import { TranslateService } from '@ngx-translate/core';
 import { IHttpErrors } from './models/errors.model';
 import { LoaderService } from '../shared/components/loader/loader.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +13,11 @@ export class NotificationService {
   constructor(
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
-    private readonly loaderService: LoaderService
+    private readonly loaderService: LoaderService,
+    private readonly router: Router
   ) {}
 
   showSuccess(notificationSource: string): void {
-    // TODO: заменить на обращение к ngrx
     const currLang = this.translate.currentLang;
     switch (notificationSource) {
       case ESiteUrls.signIn:
@@ -35,7 +36,6 @@ export class NotificationService {
   }
 
   showError(notificationSource: string, err: IHttpErrors): void {
-    // TODO: заменить на обращение к ngrx
     const currLang = this.translate.currentLang;
     switch (notificationSource) {
       case ESiteUrls.signIn:
@@ -69,6 +69,15 @@ export class NotificationService {
       case ESiteUrls.boards:
         if (currLang === 'en') this.toastr.error('Board was not found!', `Error code: ${err.error.statusCode}`);
         else this.toastr.error('Доска не найдена', `Error code: ${err.error.statusCode}`);
+        break;
+
+      //TODO добавить ошибки
+      case ESiteUrls.columns:
+        if (err.error.statusCode === EHttpStatus.InternalServerError) {
+          if (currLang === 'en') this.toastr.error('Bad request', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Неверный запрос', `Error code: ${err.error.statusCode}`);
+          void this.router.navigate(['**']);
+        }
         break;
 
       default:
