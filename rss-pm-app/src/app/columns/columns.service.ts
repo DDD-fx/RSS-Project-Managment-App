@@ -30,7 +30,7 @@ export class ColumnsService {
   ) {}
 
   createNewColumn(body: ICreateColumnReq): void {
-    // this.loaderService.enableLoader();
+    this.loaderService.enableLoader(true);
     this.apiColumnsService
       .createNewColumn(this.currBoardId$.value, body)
       .pipe(
@@ -46,11 +46,11 @@ export class ColumnsService {
           throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe(/*() => this.loaderService.disableLoader()*/);
+      .subscribe(() => this.loaderService.disableLoader());
   }
 
   deleteColumn(columnId: string): void {
-    this.loaderService.enableLoader();
+    this.loaderService.enableLoader(true);
     this.apiColumnsService
       .deleteColumn(this.currBoardId$.value, columnId)
       .pipe(
@@ -65,7 +65,7 @@ export class ColumnsService {
   }
 
   createNewTask(columnId: string, body: ICreateTaskReq): void {
-    this.loaderService.enableLoader();
+    this.loaderService.enableLoader(true);
     this.apiTasksService
       .createNewTask(columnId, body)
       .pipe(
@@ -80,7 +80,7 @@ export class ColumnsService {
   }
 
   updateTask(taskId: string, body: IUpdateTaskReq): void {
-    this.loaderService.enableLoader();
+    this.loaderService.enableLoader(true);
     this.apiTasksService
       .updateTask(taskId, body)
       .pipe(

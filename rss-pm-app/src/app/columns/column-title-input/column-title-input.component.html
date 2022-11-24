@@ -13,7 +13,9 @@
     maxlength="100"
     formControlName="title"
     *ngIf="(showColumnTitle$ | async) === false"
-    (blur)="onColumnTitleBlur()" #columnTitleInput>
+    (blur)="updateColumnTitle()"
+    (keyup.enter)="updateColumnTitle()"
+    #columnTitleInput>
 
   <mat-error class="column__title-error"
              *ngIf="!newTitleForm.get('title')?.value && newTitleForm.get('title')?.touched">

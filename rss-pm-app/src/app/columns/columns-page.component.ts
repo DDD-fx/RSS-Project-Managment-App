@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApiColumnsService } from '../api/services/api-colomns.service';
-import { catchError, map, tap } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { IColumn, IGetBoardResp, ITask, IUpdateColumnReq, IUpdateTaskReq } from '../api/models/api-board.model';
 import { LoaderService } from '../shared/components/loader/loader.service';
@@ -110,6 +110,8 @@ export class ColumnsPageComponent implements OnInit {
       this.apiTasksService.updateTask(movedTask.id, body).subscribe();
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      this.loaderService.enableLoader(true);
+
       const tasks = event.container.data;
       const movedTask = tasks[event.currentIndex];
       const prevColumnId = event.previousContainer.id;
@@ -123,7 +125,13 @@ export class ColumnsPageComponent implements OnInit {
         boardId: this.currBoardId$.value,
         columnId: currColumnId,
       };
-      this.apiTasksService.updateTransferredTask(prevColumnId, movedTask.id, body).subscribe();
+      this.apiTasksService
+        .updateTransferredTask(prevColumnId, movedTask.id, body)
+        .pipe(
+          switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
+          tap((board) => this.columnsService.updateBoard(board))
+        )
+        .subscribe(() => this.loaderService.disableLoader());
     }
   }
 
