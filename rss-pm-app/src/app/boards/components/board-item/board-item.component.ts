@@ -20,7 +20,6 @@ export class BoardItemComponent {
     const currBoard = this.board;
     this.dialogRef.open(UpdateBoardPopupComponent, {
       data: {
-        id: this.board.id,
         currBoard,
       },
       panelClass: 'custom',

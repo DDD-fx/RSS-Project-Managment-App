@@ -23,7 +23,7 @@ export class UpdateBoardPopupComponent implements OnInit {
     private apiBoardService: ApiBoardService,
     private store: Store,
     private dialogRef: MatDialogRef<UpdateBoardPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string; currBoard: ICreateBoardResp }
+    @Inject(MAT_DIALOG_DATA) public data: { currBoard: ICreateBoardResp }
   ) {}
 
   ngOnInit(): void {
@@ -49,12 +49,12 @@ export class UpdateBoardPopupComponent implements OnInit {
       this.updateForm.get('description')?.value !== this.data.currBoard.description
     ) {
       const board: ICreateBoardResp = {
-        id: this.data.id,
+        id: this.data.currBoard.id,
         title: this.updateForm.controls['title'].value,
         description: this.updateForm.controls['description'].value,
       };
       this.store.dispatch(updateBoardSuccess({ board: board }));
-      this.apiBoardService.updateBoard(this.updateForm.value, this.data.id).subscribe();
+      this.apiBoardService.updateBoard(this.updateForm.value, this.data.currBoard.id).subscribe();
     }
     this.dialogRef.close();
   }
