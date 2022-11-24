@@ -8,8 +8,8 @@ import { IHttpErrors } from '../../../api/models/errors.model';
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { ApiUserService } from '../../../api/services/api-user.service';
-import { Location } from '@angular/common';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
+import { getUserIdFromLs } from '../../../shared/shared.utils';
 
 @Component({
   selector: 'app-reg-form',
@@ -41,7 +41,6 @@ export class EditFormComponent extends ValidationAbstract {
     private readonly authService: AuthService,
     private readonly apiUserService: ApiUserService,
     private readonly notificationService: NotificationService,
-    private readonly location: Location,
     private readonly loaderService: LoaderService
   ) {
     super();
@@ -60,6 +59,7 @@ export class EditFormComponent extends ValidationAbstract {
   }
 
   onUserUpdate() {
+    this.loaderService.enableLoader();
     this.authService
       .onSignIn({
         login: localStorage.getItem(ELocalStorage.login)!,
@@ -71,7 +71,7 @@ export class EditFormComponent extends ValidationAbstract {
             ? this.userEditForm.get('newPassword')?.value!
             : this.userEditForm.get('currentPassword')?.value!;
 
-          return this.apiUserService.updateUser({
+          return this.apiUserService.updateUser(getUserIdFromLs(), {
             name: this.userEditForm.get('newName')!.value!,
             login: this.userEditForm.get('newLogin')!.value!,
             password: pwToSend,
@@ -112,6 +112,6 @@ export class EditFormComponent extends ValidationAbstract {
   }
 
   goBack(): void {
-    this.location.back();
+    void this.router.navigate([ESiteUrls.boards]);
   }
 }

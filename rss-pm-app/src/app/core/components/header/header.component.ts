@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.onLogOut();
-    this.router.navigate([ESiteUrls.welcome]);
+    void this.router.navigate([ESiteUrls.welcome]);
   }
 
   deleteUser() {
@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
     });
     dialog.afterClosed().subscribe((result) => {
       if (result.toString() === 'true') {
-        this.apiService.deleteUser();
+        this.apiService.deleteUser(getUserIdFromLs());
         this.authService.onLogOut();
         void this.router.navigate([ESiteUrls.signUp]);
       }

@@ -7,7 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 export class LoaderService {
   isLoading$ = new BehaviorSubject(false);
 
-  enableLoader(): void {
+  isTransparent$ = new BehaviorSubject(false);
+
+  enableLoader(isTransparent = false): void {
+    if (isTransparent) this.isTransparent$.next(isTransparent);
     this.isLoading$.next(true);
   }
 

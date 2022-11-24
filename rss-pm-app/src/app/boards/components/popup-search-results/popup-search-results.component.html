@@ -8,16 +8,16 @@
   <thead>
   <tr>
     <th>№</th>
-    <th (click)="sortBoards()" (click)="sortByTitle( order==='asc' ? 'asc' : 'desc')">{{'search.task-title' | translate}}
+    <th (click)="sortBoards(); sortByTitle( order==='asc' ? 'asc' : 'desc')">{{'search.task-title' | translate}}
       <mat-icon>sort</mat-icon>
     </th>
-    <th (click)="sortBoards()" (click)="sortByDescription( order==='asc' ? 'asc' : 'desc')">{{'search.task-description' | translate}}
+    <th (click)="sortBoards(); sortByDescription( order==='asc' ? 'asc' : 'desc')">{{'search.task-description' | translate}}
       <mat-icon>sort</mat-icon>
     </th>
-    <th (click)="sortBoards()" (click)="sortByUser( order==='asc' ? 'asc' : 'desc')">{{'search.user' | translate}}
+    <th (click)="sortBoards(); sortByUser( order==='asc' ? 'asc' : 'desc')">{{'search.user' | translate}}
       <mat-icon>sort</mat-icon>
     </th>
-    <th (click)="sortBoards()" (click)="sortByBoard( order==='asc' ? 'asc' : 'desc')">{{'search.board' | translate}}
+    <th (click)="sortBoards(); sortByBoard( order==='asc' ? 'asc' : 'desc')">{{'search.board' | translate}}
       <mat-icon>sort</mat-icon>
     </th>
   </tr>

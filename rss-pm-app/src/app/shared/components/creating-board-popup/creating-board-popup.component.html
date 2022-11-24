@@ -1,7 +1,7 @@
 <div class="popup">
   <h2 class="title" mat-dialog-title>{{'board.createBoard'|translate}}?</h2>
   <mat-card class="board">
-    <form class="create-form" [formGroup]="boardForm">
+    <form class="create-form" [formGroup]="boardForm" (submit)="createBoard()">
       <div class="inputs">
         <mat-form-field class="form-input" appearance="fill">
           <mat-label class="label">{{'board.label' | translate}}</mat-label>
@@ -16,20 +16,18 @@
         </mat-form-field>
       </div>
 
-
       <div class="board-btn-wrapper">
         <div class="button-area">
-          <button mat-button type="submit" (click)="onCancelClick()">
-            {{'board.btn.cancel' | translate}}
-          </button>
-        </div>
-
-        <div class="button-area">
-          <button mat-raised-button color="primary" type="button" (click)="createBoard()" [disabled]="boardForm.invalid">
+          <button mat-raised-button color="primary" type="submit" [disabled]="boardForm.invalid">
             {{'board.btn.create' | translate}}
           </button>
         </div>
 
+        <div class="button-area">
+          <button mat-button type="button" (click)="onCancelClick()">
+            {{'board.btn.cancel' | translate}}
+          </button>
+        </div>
       </div>
     </form>
   </mat-card>
