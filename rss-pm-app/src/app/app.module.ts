@@ -17,7 +17,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from './shared/components/deleting-popup/deleting-popup.component';
 import { MatButtonModule } from '@angular/material/button';
-import { LoaderComponent } from './shared/components/loader/loader.component';
 import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
 import { CreatingBoardPopupComponent } from './shared/components/creating-board-popup/creating-board-popup.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,7 +26,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateBoardPopupComponent } from './shared/components/update-board-popup/update-board-popup.component';
-import { MiniLoaderComponent } from './shared/components/mini-loader/mini-loader.component';
+import { ColumnsPageModule } from './columns/columns-page.module';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -41,7 +41,7 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
     WrongAddressPageComponent,
     CreatingBoardPopupComponent,
     UpdateBoardPopupComponent,
-    MiniLoaderComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +72,7 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
     MatCardModule,
     ReactiveFormsModule,
     uiModules,
-    LoaderComponent,
+    ColumnsPageModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],

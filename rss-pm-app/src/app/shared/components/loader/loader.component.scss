@@ -7,24 +7,6 @@
   --trans-dur: 0.3s;
   font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
 }
-
-.loader {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 9999;
-  //background: $background;
-  color: var(--fg);
-  font: 1em/1.5 sans-serif;
-  display: grid;
-  place-items: center;
-  transition:
-    background-color var(--trans-dur),
-    color var(--trans-dur);
-}
-
 .loader-opaque {
   background-color: $background;
 }
@@ -32,7 +14,6 @@
 .loader-transparent {
   background-color: $loader-transparent-background;
 }
-
 .pl {
   display: block;
   width: 5em;

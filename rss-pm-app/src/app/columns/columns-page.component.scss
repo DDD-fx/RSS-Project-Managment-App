@@ -2,18 +2,18 @@
 @import "src/styles/mixins";
 
 :host {
-  height: 65vh;
   display: flex;
   gap: 10px;
   overflow: auto;
-  padding-bottom: 20px;
   align-items: flex-start;
+  overflow-y: auto;
 }
 
 .columns {
   display: flex;
   align-items: flex-start;
   gap: 10px;
+
 }
 
 .column {
