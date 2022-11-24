@@ -73,7 +73,6 @@ export class TaskComponent {
   }
 
   taskTrackByFn(index: number, task: ITask): string {
-    console.log('asd');
     return task.id;
   }
 }
