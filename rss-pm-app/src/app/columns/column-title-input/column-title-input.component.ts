@@ -34,7 +34,7 @@ export class ColumnTitleInputComponent {
     this.showColumnTitle$.next(!this.showColumnTitle$.value);
   }
 
-  onColumnTitleBlur(): void {
+  updateColumnTitle(): void {
     this.toggleColumnTitleInput();
     const newColumnTitle = this.newTitleForm.get('title')?.value;
     if (newColumnTitle !== this.column.title) {

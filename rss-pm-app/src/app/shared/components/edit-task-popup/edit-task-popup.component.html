@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>{{'tasks.edit-task'|translate}}?</h2>
-<form class="create-form" [formGroup]="editTaskForm">
+<form class="create-form" [formGroup]="editTaskForm" (submit)="editTask()">
   <div class="inputs">
     <mat-form-field class="form-input" appearance="fill">
       <mat-label>{{'tasks.task-label' | translate}}</mat-label>
@@ -15,10 +15,10 @@
   </div>
 
   <div class="board-btn-wrapper">
-    <button class="popup-add-btn" mat-raised-button color="primary" type="button" (click)="editTask()" [disabled]="editTaskForm.invalid">
+    <button class="popup-add-btn" mat-raised-button color="primary" type="submit" [disabled]="editTaskForm.invalid">
       {{'tasks.edit-task-btn' | translate}}
     </button>
-    <button mat-button type="submit" (click)="onCancelClick()">
+    <button mat-button type="button" (click)="onCancelClick()">
       {{'board.btn.cancel' | translate}}
     </button>
   </div>

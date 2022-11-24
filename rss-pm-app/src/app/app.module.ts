@@ -27,8 +27,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateBoardPopupComponent } from './shared/components/update-board-popup/update-board-popup.component';
-import { ColumnsPageModule } from './columns/columns-page.module';
-import { BoardsModule } from './boards/boards.module';
 import { MiniLoaderComponent } from './shared/components/mini-loader/mini-loader.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -74,8 +72,6 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
     MatCardModule,
     ReactiveFormsModule,
     uiModules,
-    ColumnsPageModule,
-    BoardsModule,
     LoaderComponent,
   ],
   providers: [interceptorProviders],

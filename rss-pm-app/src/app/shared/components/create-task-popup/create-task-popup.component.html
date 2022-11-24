@@ -1,5 +1,5 @@
 <h2 class="title" mat-dialog-title>{{'tasks.add-task'|translate}}?</h2>
-<form class="create-form" [formGroup]="taskForm">
+<form class="create-form" [formGroup]="taskForm" (submit)="createNewTask()">
   <div class="inputs">
     <mat-form-field class="form-input" appearance="fill">
       <mat-label>{{'tasks.task-label' | translate}}</mat-label>
@@ -16,12 +16,12 @@
 
   <div class="board-btn-wrapper">
     <div class="button-area">
-      <button class="popup-add-btn" mat-raised-button color="primary" type="button" (click)="createNewTask()" [disabled]="taskForm.invalid">
+      <button class="popup-add-btn" mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
         {{'board.btn.create' | translate}}
       </button>
     </div>
     <div class="button-area">
-      <button mat-button type="submit" (click)="onCancelClick()">
+      <button mat-button type="button" (click)="onCancelClick()">
         {{'board.btn.cancel' | translate}}
       </button>
     </div>
