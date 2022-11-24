@@ -1,6 +1,13 @@
-<form class="search-form" [formGroup]="searchInput" appearance="fill">
+<form class="search-form" [formGroup]="searchInput">
   <div class="input-area">
-    <input matInput formControlName="search" type="text" placeholder="{{'search.input' | translate}}" name="search" autocomplete="off"/>
+    <input
+      matInput
+      formControlName="search"
+      type="text"
+      placeholder="{{'search.input' | translate}}"
+      name="search"
+      autocomplete="off"
+      (keyup.enter)="searchTasks()">
   </div>
 
   <div class="button-area">
