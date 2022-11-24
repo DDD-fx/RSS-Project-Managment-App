@@ -12,6 +12,7 @@ import { DeletingPopupComponent } from '../../../shared/components/deleting-popu
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { CreatingBoardPopupComponent } from '../../../shared/components/creating-board-popup/creating-board-popup.component';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { getUserIdFromLs } from '../../../shared/shared.utils';
 
 @Component({
   selector: 'app-header',
@@ -68,7 +69,7 @@ export class HeaderComponent implements OnInit {
     });
     dialog.afterClosed().subscribe((result) => {
       if (result.toString() === 'true') {
-        this.apiService.deleteUser();
+        this.apiService.deleteUser(getUserIdFromLs());
         this.authService.onLogOut();
         void this.router.navigate([ESiteUrls.signUp]);
       }

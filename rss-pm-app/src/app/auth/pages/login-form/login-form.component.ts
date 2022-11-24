@@ -9,7 +9,7 @@ import { NotificationService } from '../../../api/notification.service';
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { IHttpErrors } from '../../../api/models/errors.model';
 import { ApiUserService } from '../../../api/services/api-user.service';
-import { saveUserDataToLS, setUserIdToLs } from '../../../shared/shared.utils';
+import { getUserIdFromLs, saveUserDataToLS, setUserIdToLs } from '../../../shared/shared.utils';
 import { addUserName, makeIsloggedTrue, saveToken } from 'src/app/NgRx/actions/storeActions';
 import { Store } from '@ngrx/store';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
@@ -55,7 +55,7 @@ export class LoginFormComponent extends ValidationAbstract {
           this.store.dispatch(makeIsloggedTrue());
           setUserIdToLs();
         }),
-        switchMap(() => this.apiUserService.getUser()),
+        switchMap(() => this.apiUserService.getUser(getUserIdFromLs())),
         tap((resp) => {
           saveUserDataToLS(resp);
           this.loaderService.disableLoader();

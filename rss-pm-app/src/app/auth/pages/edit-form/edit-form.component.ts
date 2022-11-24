@@ -9,6 +9,7 @@ import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { ApiUserService } from '../../../api/services/api-user.service';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
+import { getUserIdFromLs } from '../../../shared/shared.utils';
 
 @Component({
   selector: 'app-reg-form',
@@ -70,7 +71,7 @@ export class EditFormComponent extends ValidationAbstract {
             ? this.userEditForm.get('newPassword')?.value!
             : this.userEditForm.get('currentPassword')?.value!;
 
-          return this.apiUserService.updateUser({
+          return this.apiUserService.updateUser(getUserIdFromLs(), {
             name: this.userEditForm.get('newName')!.value!,
             login: this.userEditForm.get('newLogin')!.value!,
             password: pwToSend,

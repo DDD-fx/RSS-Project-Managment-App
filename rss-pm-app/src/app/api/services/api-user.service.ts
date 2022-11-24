@@ -4,7 +4,6 @@ import { EApiUrls } from '../../shared/shared.enums';
 import { Observable } from 'rxjs';
 import { IGetAllUsersResp } from '../models/api-user.model';
 import { ISignUpReq, ISignUpResp } from '../../auth/models/auth.model';
-import { getUserIdFromLs } from '../../shared/shared.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +15,15 @@ export class ApiUserService {
     return this.httpClient.get<IGetAllUsersResp>(EApiUrls.users);
   }
 
-  getUser(): Observable<ISignUpResp> {
-    return this.httpClient.get<ISignUpResp>(EApiUrls.users + `/${getUserIdFromLs()}`);
+  getUser(userId: string): Observable<ISignUpResp> {
+    return this.httpClient.get<ISignUpResp>(EApiUrls.users + `/${userId}`);
   }
 
-  deleteUser(): void {
-    this.httpClient.delete(EApiUrls.users + `/${getUserIdFromLs()}`).subscribe();
+  deleteUser(userId: string): void {
+    this.httpClient.delete(EApiUrls.users + `/${userId}`).subscribe();
   }
 
-  updateUser(body: ISignUpReq): Observable<ISignUpResp> {
-    return this.httpClient.put<ISignUpResp>(EApiUrls.users + `/${getUserIdFromLs()}`, body);
+  updateUser(userId: string, body: ISignUpReq): Observable<ISignUpResp> {
+    return this.httpClient.put<ISignUpResp>(EApiUrls.users + `/${userId}`, body);
   }
 }
