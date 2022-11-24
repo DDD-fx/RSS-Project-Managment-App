@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
-import { deleteBoardById, getCurrentBoard } from 'src/app/NgRx/actions/storeActions';
+import { deleteBoardById } from 'src/app/NgRx/actions/storeActions';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
@@ -16,11 +16,12 @@ import { UpdateBoardPopupComponent } from 'src/app/shared/components/update-boar
 export class BoardItemComponent {
   @Input() board!: ICreateBoardResp;
 
-  // private customColor: string = '#ffffff';
-
   openUpdateForm() {
+    const currBoard = this.board;
     this.dialogRef.open(UpdateBoardPopupComponent, {
-      data: { id: this.board.id },
+      data: {
+        currBoard,
+      },
       panelClass: 'custom',
     });
   }

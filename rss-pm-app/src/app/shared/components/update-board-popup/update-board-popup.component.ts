@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -16,15 +16,22 @@ export interface DialogData {
   templateUrl: './update-board-popup.component.html',
   styleUrls: ['./update-board-popup.component.scss'],
 })
-export class UpdateBoardPopupComponent {
+export class UpdateBoardPopupComponent implements OnInit {
   @Input() board!: ICreateBoardResp;
 
   constructor(
     private apiBoardService: ApiBoardService,
     private store: Store,
     private dialogRef: MatDialogRef<UpdateBoardPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string }
+    @Inject(MAT_DIALOG_DATA) public data: { currBoard: ICreateBoardResp }
   ) {}
+
+  ngOnInit(): void {
+    this.updateForm.setValue({
+      title: this.data.currBoard.title,
+      description: this.data.currBoard.description,
+    });
+  }
 
   public updateForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.maxLength(25)]),
@@ -37,13 +44,18 @@ export class UpdateBoardPopupComponent {
   }
 
   updateBoard() {
-    const board: ICreateBoardResp = {
-      id: this.data.id,
-      title: this.updateForm.controls['title'].value,
-      description: this.updateForm.controls['description'].value,
-    };
-    this.store.dispatch(updateBoardSuccess({ board: board }));
-    this.apiBoardService.updateBoard(this.updateForm.value, this.data.id).subscribe();
+    if (
+      this.updateForm.get('title')?.value !== this.data.currBoard.title ||
+      this.updateForm.get('description')?.value !== this.data.currBoard.description
+    ) {
+      const board: ICreateBoardResp = {
+        id: this.data.currBoard.id,
+        title: this.updateForm.controls['title'].value,
+        description: this.updateForm.controls['description'].value,
+      };
+      this.store.dispatch(updateBoardSuccess({ board: board }));
+      this.apiBoardService.updateBoard(this.updateForm.value, this.data.currBoard.id).subscribe();
+    }
     this.dialogRef.close();
   }
 }
