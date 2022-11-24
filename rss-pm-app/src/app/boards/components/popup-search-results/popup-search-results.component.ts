@@ -2,12 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { forkJoin, Observable, switchMap, tap } from 'rxjs';
+import { catchError, forkJoin, Observable, switchMap, tap } from 'rxjs';
 import { ICreateBoardResp, IGetBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { selectAllBoardsSuccess } from 'src/app/NgRx/selectors/storeSelectors';
 import { ITaskSearch } from '../../models/boards.models';
 import { ApiUserService } from '../../../api/services/api-user.service';
+import { IHttpErrors } from '../../../api/models/errors.model';
+import { ESiteUrls } from '../../../shared/shared.enums';
+import { NotificationService } from '../../../api/notification.service';
 
 @Component({
   selector: 'app-popup-search-results',
@@ -31,6 +34,7 @@ export class PopupSearchResultsComponent implements OnInit {
     private readonly apiBoardService: ApiBoardService,
     private readonly apiUserService: ApiUserService,
     private readonly dialogRef: MatDialogRef<PopupSearchResultsComponent>,
+    private readonly notificationService: NotificationService,
     @Inject(MAT_DIALOG_DATA) public data: { searchText: string }
   ) {}
 
@@ -62,6 +66,10 @@ export class PopupSearchResultsComponent implements OnInit {
               })
             )
           );
+        }),
+        catchError((err: IHttpErrors) => {
+          this.notificationService.showError(ESiteUrls.columns, err);
+          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe();
