@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
-import { ICreateBoardResp } from '../api/models/api-board.model';
+import { ICreateBoardResp, IGetBoardResp } from '../api/models/api-board.model';
 import { ApiBoardService } from '../api/services/api-board.service';
 import { AuthService } from '../auth/services/auth.service';
 import { ELocalStorage } from '../shared/shared.enums';
@@ -56,17 +56,17 @@ export class AppEffects {
     );
   });
 
-  // getBoard$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(StoreActions.getCurrentBoard),
-  //     mergeMap((actions) => {
-  //       return this.apiBoardService.getBoard(actions.boardId).pipe(
-  //         map((board: IGetBoardResp) => StoreActions.getCurrentBoardSuccess({ board })),
-  //         catchError((error) => of(StoreActions.getCurrentBoardFailure({ error: error.message })))
-  //       );
-  //     })
-  //   );
-  // });
+  getBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StoreActions.getCurrentBoard),
+      mergeMap((actions) => {
+        return this.apiBoardService.getBoard(actions.boardId).pipe(
+          map((board: IGetBoardResp) => StoreActions.getCurrentBoardSuccess({ board })),
+          catchError((error) => of(StoreActions.getCurrentBoardFailure({ error: error.message })))
+        );
+      })
+    );
+  });
 
   redirectIfTokenExpired$ = createEffect(() => {
     return this.actions$.pipe(

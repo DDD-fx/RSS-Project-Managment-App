@@ -19,6 +19,7 @@ export const Store: IStore = {
   isOpenBoard: false,
   boardId: '',
   currentBoard: { title: '', description: '', id: '', columns: [] },
+  tasks: [],
 };
 
 export const storeReducer = createReducer(
@@ -81,5 +82,10 @@ export const storeReducer = createReducer(
       ...state,
       boards: updateBoards,
     };
-  })
+  }),
+
+  // all tasks redusers
+  on(StoreActions.getAllTasks, (state): IStore => ({ ...state, isLoading: true })),
+  on(StoreActions.getAllTasksSuccess, (state, action): IStore => ({ ...state, isLoading: false, tasks: action.tasks })),
+  on(StoreActions.getAllTasksFailure, (state, action): IStore => ({ ...state, isLoading: false, error: action.error }))
 );

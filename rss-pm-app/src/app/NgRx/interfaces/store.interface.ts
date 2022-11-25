@@ -1,4 +1,5 @@
 import { ICreateBoardResp, IGetBoardResp } from 'src/app/api/models/api-board.model';
+import { ITaskSearch } from 'src/app/boards/models/boards.models';
 
 export interface IStore {
   isLogged: boolean;
@@ -10,4 +11,5 @@ export interface IStore {
   isOpenBoard: boolean;
   boardId: string;
   currentBoard: IGetBoardResp;
+  tasks: ITaskSearch[];
 }

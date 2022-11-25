@@ -2,6 +2,7 @@
 @import "src/styles/mixins";
 
 :host {
+
   max-height: 55vh;
 }
 
@@ -16,7 +17,8 @@
 
 .table-container {
   overflow-y: auto;
-  height: 40vh;
+  max-height: 40vh;
+  min-height: fit-content;
 }
 
 .table-container thead th {

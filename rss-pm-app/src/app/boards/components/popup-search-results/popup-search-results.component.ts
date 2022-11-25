@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { Component, DoCheck, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { catchError, forkJoin, Observable, switchMap, tap } from 'rxjs';
@@ -16,12 +16,14 @@ import { LoaderService } from 'src/app/shared/components/loader/loader.service';
   selector: 'app-popup-search-results',
   templateUrl: './popup-search-results.component.html',
   styleUrls: ['./popup-search-results.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PopupSearchResultsComponent implements OnInit {
+export class PopupSearchResultsComponent implements OnInit, DoCheck {
   public tasksArray: ITaskSearch[] = [];
 
-  public sortedTasks: ITaskSearch[] = this.tasksArray;
+  public sortedTasks!: ITaskSearch[];
+
+  public noTasks = false;
 
   public order: string = 'asc';
 
@@ -36,7 +38,6 @@ export class PopupSearchResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.loaderService.enableLoader();
     this.store
       .select(selectAllBoardsSuccess)
       .pipe(
@@ -71,7 +72,15 @@ export class PopupSearchResultsComponent implements OnInit {
         })
       )
       .subscribe();
-    // this.loaderService.disableLoader();
+  }
+
+  ngDoCheck(): void {
+    this.sortedTasks = this.tasksArray;
+    if (this.sortedTasks.length > 0) {
+      this.noTasks = false;
+    } else {
+      this.noTasks = true;
+    }
   }
 
   closeSearchResult() {

@@ -2,7 +2,6 @@
   <h3>{{'search.title' | translate}}</h3>
   <mat-icon class="close-window"  title="{{'search.close' | translate}}" (click)="closeSearchResult()">close</mat-icon>
 </div>
-<!-- <p *ngIf="tasksArray.length === 0">{{'search.not-found' | translate}}</p> -->
 
 <div class="table-container" *ngIf="tasksArray.length > 0;  else elseBlock">
   <table>
@@ -24,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let task of sortedTasks; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
+      <tr *ngFor="let task of tasksArray; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
         <td>{{ indexElem + 1 }}</td>
         <td>{{task.task.title | titlecase}}</td>
         <td>{{task.task.description }}</td>
@@ -35,6 +34,8 @@
   </table>
 </div>
 
-<ng-template  #elseBlock >
+<!-- <p *ngIf="noTasks">{{'search.not-found' | translate}}</p> -->
+
+<ng-template #elseBlock>
   <app-loader></app-loader>
 </ng-template>

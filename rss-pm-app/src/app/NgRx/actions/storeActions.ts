@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ICreateBoardReq, ICreateBoardResp, IGetBoardResp } from 'src/app/api/models/api-board.model';
+import { ITaskSearch } from 'src/app/boards/models/boards.models';
 
 export const makeIsloggedTrue = createAction('[Store] Make isLogged true');
 export const makeIsloggedFalse = createAction('[Store] Make isLogged false');
@@ -30,3 +31,7 @@ export const getCurrentBoardFailure = createAction('[Store] Get current board fa
 
 export const updateBoard = createAction('[Store] Update board', props<{ data: ICreateBoardReq; boardId: string }>());
 export const updateBoardSuccess = createAction('[Store] Update board success', props<{ board: ICreateBoardResp }>());
+
+export const getAllTasks = createAction('[Store] Get all tasks');
+export const getAllTasksSuccess = createAction('[Store] Get all tasks success', props<{ tasks: ITaskSearch[] }>());
+export const getAllTasksFailure = createAction('[Store] Get all tasks failure', props<{ error: string }>());

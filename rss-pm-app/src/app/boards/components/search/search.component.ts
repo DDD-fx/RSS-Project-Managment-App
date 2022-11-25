@@ -26,7 +26,6 @@ export class SearchComponent implements OnInit {
     if (this.searchInput.get(['search'])?.value.length > 0) {
       this.dialogRef.open(PopupSearchResultsComponent, {
         data: { searchText: this.searchInput.get(['search'])?.value },
-        panelClass: 'search-style',
       });
       this.searchInput.controls.search.setValue(['']);
     }
