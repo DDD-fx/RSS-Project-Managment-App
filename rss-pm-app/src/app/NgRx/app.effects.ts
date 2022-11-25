@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
-import { ICreateBoardResp, IGetBoardResp } from '../api/models/api-board.model';
+import { ICreateBoardResp } from '../api/models/api-board.model';
 import { ApiBoardService } from '../api/services/api-board.service';
 import { AuthService } from '../auth/services/auth.service';
 import { ELocalStorage } from '../shared/shared.enums';
@@ -62,7 +62,7 @@ export class AppEffects {
   //     mergeMap((actions) => {
   //       return this.apiBoardService.getBoard(actions.boardId).pipe(
   //         map((board: IGetBoardResp) => StoreActions.getCurrentBoardSuccess({ board })),
-  //         catchError((error) => of(StoreActions.getAllBoardsFailure({ error: error.message })))
+  //         catchError((error) => of(StoreActions.getCurrentBoardFailure({ error: error.message })))
   //       );
   //     })
   //   );

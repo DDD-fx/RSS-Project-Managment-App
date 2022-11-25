@@ -10,6 +10,7 @@ import { ApiUserService } from '../../../api/services/api-user.service';
 import { IHttpErrors } from '../../../api/models/errors.model';
 import { ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
+import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-popup-search-results',
@@ -26,6 +27,7 @@ export class PopupSearchResultsComponent implements OnInit {
 
   constructor(
     private readonly store: Store,
+    private readonly loaderService: LoaderService,
     private readonly apiBoardService: ApiBoardService,
     private readonly apiUserService: ApiUserService,
     private readonly dialogRef: MatDialogRef<PopupSearchResultsComponent>,
@@ -34,6 +36,7 @@ export class PopupSearchResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // this.loaderService.enableLoader();
     this.store
       .select(selectAllBoardsSuccess)
       .pipe(
@@ -68,6 +71,7 @@ export class PopupSearchResultsComponent implements OnInit {
         })
       )
       .subscribe();
+    // this.loaderService.disableLoader();
   }
 
   closeSearchResult() {
