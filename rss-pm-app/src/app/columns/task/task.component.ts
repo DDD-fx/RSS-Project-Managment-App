@@ -69,6 +69,7 @@ export class TaskComponent {
         currTask,
       },
       width: '350px',
+      panelClass: 'custom',
     });
   }
 

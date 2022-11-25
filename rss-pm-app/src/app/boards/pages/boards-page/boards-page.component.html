@@ -25,22 +25,21 @@
       </div>
     </div>
 
-    <ng-container *ngIf="(boards$ | async ); then thenBlock else elseBlock"></ng-container>
+    <ng-container *ngIf="(boards$ | async )?.length; then thenBlock else elseBlock"></ng-container>
     <ng-template  #thenBlock >
       <div class="content">
         <section class="boards-list">
-          <app-new-board></app-new-board>
-          <div *ngFor="let board of boards$ | async | sort: order; trackBy: taskBoardByFn">
+          <div class="board-area" *ngFor="let board of boards$ | async | sort: order">
             <app-board-item [board]="board"></app-board-item>
           </div>
+          <app-new-board></app-new-board>
         </section>
       </div>
     </ng-template>
 
     <ng-template  #elseBlock >
-<!--      <app-mini-loader></app-mini-loader>-->
+      <app-loader></app-loader>
     </ng-template>
-
 
   </div>
 </div>
