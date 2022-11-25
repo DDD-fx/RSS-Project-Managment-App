@@ -9,8 +9,8 @@
       <div cdkDrag *ngFor="let column of columns | columnOrderSorting; trackBy: columnTrackByFn" class="column">
         <div class="column__header">
           <app-column-title-input [column]="column"></app-column-title-input>
-          <span title="{{'columns.move' | translate}}">⇔</span>
-          <mat-icon (click)="onDeleteColumn(column.id)" title="{{'columns.delete' | translate}}">delete</mat-icon>
+          <span class="icon" title="{{'columns.move' | translate}}">⇔</span>
+          <mat-icon (click)="onDeleteColumn(column.id)" class="icon" title="{{'columns.delete' | translate}}">delete</mat-icon>
         </div>
 
           <app-task
@@ -19,8 +19,10 @@
             [tasks]="column.tasks"
             [cdkDropListConnectedTo]="(connectedLists$ | async)!"
             (cdkDropListDropped)="dropTask($event, column.id)"
-            id="{{column.id}}">
+            id="{{column.id}}"
+            class="all-tasks">
           </app-task>
+
 
         <button mat-stroked-button color="primary" class="add-task-btn" (click)="createTaskPopup(column.id)">
           <mat-icon>add</mat-icon>

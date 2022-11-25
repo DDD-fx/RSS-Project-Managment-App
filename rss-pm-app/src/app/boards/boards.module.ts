@@ -20,7 +20,7 @@ import { ColumnsPageModule } from '../columns/columns-page.module';
 import { SearchComponent } from './components/search/search.component';
 import { PopupSearchResultsComponent } from './components/popup-search-results/popup-search-results.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { LoaderComponent } from '../shared/components/loader/loader.component';
+import { LoaderModule } from '../shared/components/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import { LoaderComponent } from '../shared/components/loader/loader.component';
     SortPipe,
     SearchComponent,
     PopupSearchResultsComponent,
-    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +47,7 @@ import { LoaderComponent } from '../shared/components/loader/loader.component';
     MatDialogModule,
     ColumnsPageModule,
     MatTooltipModule,
+    LoaderModule,
   ],
   entryComponents: [DeletingPopupComponent],
 })

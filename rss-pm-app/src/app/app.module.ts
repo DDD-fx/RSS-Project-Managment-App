@@ -26,8 +26,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateBoardPopupComponent } from './shared/components/update-board-popup/update-board-popup.component';
-import { ColumnsPageModule } from './columns/columns-page.module';
-import { LoaderComponent } from './shared/components/loader/loader.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -41,7 +39,6 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
     WrongAddressPageComponent,
     CreatingBoardPopupComponent,
     UpdateBoardPopupComponent,
-    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +69,6 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
     MatCardModule,
     ReactiveFormsModule,
     uiModules,
-    ColumnsPageModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],

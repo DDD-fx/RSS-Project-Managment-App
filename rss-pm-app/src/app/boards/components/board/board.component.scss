@@ -3,15 +3,46 @@
 
 .main-container {
   height: calc(100vh - 210px);
-  margin: 1rem 2%;
+  //margin: 1rem 2%;
+  background-color: $background;
+  padding: 20px 10px 20px 20px;
 
   .title {
     text-align: center;
     color: $blue;
+    font-family: cursive;
+    font-size: xx-large;
+
   }
+
   .arrow {
     position: absolute;
     left: 10%;
   }
 
+  .arrow:hover {
+    cursor: pointer;
+    color: $green;
+  }
+
 }
+//@media (min-width:768px) and (max-width: 1279px){
+//  .main-container {
+//    height: calc(100vh - 170px);
+//  }
+//}
+@media (max-width: 767px) {
+  .main-container {
+    height: calc(100vh - 242px);
+    padding: 0;
+
+    .title {
+      font-size: large;
+      margin-bottom: 0;
+    }
+  }
+
+
+}
+
+
