@@ -163,6 +163,8 @@
     "task-title": "Task title",
     "task-description": "Task description",
     "user": "User",
-    "board": "Board"
+    "board": "Board",
+    "title": "Search tasks result",
+    "not-found": "Search task not found!"
   }
 }

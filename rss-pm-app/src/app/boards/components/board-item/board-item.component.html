@@ -8,9 +8,7 @@
             color="primary"
             type="button"
             class="btn-bg"
-            matTooltip="{{'columns.delete' | translate}}"
-            matTooltipPosition="above"
-            [matTooltipClass]="{ 'tips': true }"
+            title="{{'columns.delete' | translate}}"
             (click)="deleteBoard(board.id);
             $event.stopPropagation()"
     >
@@ -20,9 +18,7 @@
             color="primary"
             type="button"
             class="btn-bg"
-            matTooltip="{{'tasks.edit' | translate}}"
-            matTooltipPosition="above"
-            [matTooltipClass]="{ 'tips': true }"
+            title="{{'tasks.edit' | translate}}"
             (click)="openUpdateForm();
             $event.stopPropagation()"
     >
