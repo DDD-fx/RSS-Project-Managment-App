@@ -165,6 +165,7 @@
     "user": "User",
     "board": "Board",
     "title": "Search tasks result",
-    "not-found": "Search task not found!"
+    "not-found": "Search task not found!",
+    "close": "Close"
   }
 }
