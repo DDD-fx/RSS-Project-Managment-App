@@ -8,7 +8,10 @@ import { IHttpErrors } from '../../../api/models/errors.model';
 import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { ApiUserService } from '../../../api/services/api-user.service';
+import { Location } from '@angular/common';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
+import { addUserName } from '../../../NgRx/actions/storeActions';
+import { Store } from '@ngrx/store';
 import { getUserIdFromLs } from '../../../shared/shared.utils';
 
 @Component({
@@ -41,7 +44,9 @@ export class EditFormComponent extends ValidationAbstract {
     private readonly authService: AuthService,
     private readonly apiUserService: ApiUserService,
     private readonly notificationService: NotificationService,
-    private readonly loaderService: LoaderService
+    private readonly location: Location,
+    private readonly loaderService: LoaderService,
+    private store: Store
   ) {
     super();
   }
@@ -81,6 +86,7 @@ export class EditFormComponent extends ValidationAbstract {
           this.notificationService.showSuccess(ESiteUrls.userEdit);
           localStorage.setItem(ELocalStorage.login, resp.login);
           localStorage.setItem(ELocalStorage.userName, resp.name);
+          this.store.dispatch(addUserName());
           this.setForm();
           this.loaderService.disableLoader();
         }),

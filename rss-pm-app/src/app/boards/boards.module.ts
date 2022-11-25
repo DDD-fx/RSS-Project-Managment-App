@@ -18,9 +18,9 @@ import { DeletingPopupComponent } from '../shared/components/deleting-popup/dele
 import { SortPipe } from './pipes/sort.pipe';
 import { ColumnsPageModule } from '../columns/columns-page.module';
 import { SearchComponent } from './components/search/search.component';
-import { LoaderComponent } from '../shared/components/loader/loader.component';
 import { PopupSearchResultsComponent } from './components/popup-search-results/popup-search-results.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoaderModule } from '../shared/components/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -46,8 +46,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ScrollingModule,
     MatDialogModule,
     ColumnsPageModule,
-    LoaderComponent,
     MatTooltipModule,
+    LoaderModule,
   ],
   entryComponents: [DeletingPopupComponent],
 })

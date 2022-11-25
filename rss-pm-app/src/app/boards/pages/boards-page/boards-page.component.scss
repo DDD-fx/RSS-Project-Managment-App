@@ -25,11 +25,15 @@
   }
 
   .boards-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+    height: min-content;
+  }
+
+  .board-area {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
