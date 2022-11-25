@@ -69,7 +69,7 @@ export class PopupSearchResultsComponent implements OnInit {
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.columns, err);
-          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+          throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe();

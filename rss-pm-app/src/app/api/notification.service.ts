@@ -67,16 +67,35 @@ export class NotificationService {
         break;
 
       case ESiteUrls.boards:
-        if (currLang === 'en') this.toastr.error('Board was not found!', `Error code: ${err.error.statusCode}`);
-        else this.toastr.error('Доска не найдена', `Error code: ${err.error.statusCode}`);
-        break;
-
-      //TODO добавить ошибки
-      case ESiteUrls.columns:
-        if (err.error.statusCode === EHttpStatus.InternalServerError) {
+        if (err.error.statusCode === EHttpStatus.BadRequest) {
           if (currLang === 'en') this.toastr.error('Bad request', `Error code: ${err.error.statusCode}`);
           else this.toastr.error('Неверный запрос', `Error code: ${err.error.statusCode}`);
           void this.router.navigate(['**']);
+        } else if (err.error.statusCode === EHttpStatus.NotFound) {
+          if (currLang === 'en') this.toastr.error('Board was not found!', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Доска не найдена', `Error code: ${err.error.statusCode}`);
+        }
+        break;
+
+      case ESiteUrls.columns:
+        if (err.error.statusCode === EHttpStatus.BadRequest) {
+          if (currLang === 'en') this.toastr.error('Bad request', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Неверный запрос', `Error code: ${err.error.statusCode}`);
+          void this.router.navigate(['**']);
+        } else if (err.error.statusCode === EHttpStatus.NotFound) {
+          if (currLang === 'en') this.toastr.error('Column was not found!', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Колонка не найдена', `Error code: ${err.error.statusCode}`);
+          void this.router.navigate([ESiteUrls.boards]);
+        }
+        break;
+
+      case ESiteUrls.tasks:
+        if (err.error.statusCode === EHttpStatus.BadRequest) {
+          if (currLang === 'en') this.toastr.error("Incorrect task's order", `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Неверный порядок заданий', `Error code: ${err.error.statusCode}`);
+        } else if (err.error.statusCode === EHttpStatus.NotFound) {
+          if (currLang === 'en') this.toastr.error('Task was not found!', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Задание не найдено', `Error code: ${err.error.statusCode}`);
         }
         break;
 

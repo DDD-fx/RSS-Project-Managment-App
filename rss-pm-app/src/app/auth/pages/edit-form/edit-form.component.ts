@@ -87,7 +87,7 @@ export class EditFormComponent extends ValidationAbstract {
         catchError((err: IHttpErrors) => {
           this.setForm();
           this.notificationService.showError(ESiteUrls.userEdit, err);
-          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+          throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe();
