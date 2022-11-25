@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -27,7 +26,6 @@ export class PopupSearchResultsComponent implements OnInit {
 
   constructor(
     private readonly store: Store,
-    private readonly httpClient: HttpClient,
     private readonly apiBoardService: ApiBoardService,
     private readonly apiUserService: ApiUserService,
     private readonly dialogRef: MatDialogRef<PopupSearchResultsComponent>,
