@@ -39,6 +39,15 @@ export class NotificationService {
 
   showError(notificationSource: string, err: IHttpErrors): void {
     const currLang = this.translate.currentLang;
+
+    switch (err.error.statusCode) {
+      case EHttpStatus.Unauthorized:
+        if (currLang === 'en') this.toastr.error('Authorization required', `Error code: ${err.error.statusCode}`);
+        else this.toastr.error('Требуется авторизация', `Error code: ${err.error.statusCode}`);
+        this.authService.onLogOut();
+        void this.router.navigate([ESiteUrls.signIn]);
+    }
+
     switch (notificationSource) {
       case ESiteUrls.signIn:
         if (currLang === 'en')
@@ -106,15 +115,6 @@ export class NotificationService {
         else this.toastr.error('Что-то пошло не так', 'Ошибка');
         break;
     }
-
-    switch (err.error.statusCode) {
-      case EHttpStatus.Unauthorized:
-        if (currLang === 'en') this.toastr.error('Authorization required', `Error code: ${err.error.statusCode}`);
-        else this.toastr.error('Требуется авторизация', `Error code: ${err.error.statusCode}`);
-        this.authService.onLogOut();
-        void this.router.navigate([ESiteUrls.signIn]);
-    }
-
     this.loaderService.disableLoader();
   }
 }
