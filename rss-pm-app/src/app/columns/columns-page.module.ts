@@ -5,18 +5,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TaskComponent } from './task/task.component';
 import { MatCardModule } from '@angular/material/card';
 import { ColumnOrderSortingPipe } from './pipes/column-order-sorting.pipe';
 import { TaskOrderSortingPipe } from './pipes/task-order-sorting.pipe';
-import { MatDialogModule } from '@angular/material/dialog';
-import { EditTaskPopupComponent } from '../shared/components/edit-task-popup/edit-task-popup.component';
-import { CreateTaskPopupComponent } from '../shared/components/create-task-popup/create-task-popup.component';
-import { CreateColumnPopupComponent } from '../shared/components/create-column-popup/create-column-popup.component';
 import { ColumnTitleInputComponent } from './column-title-input/column-title-input.component';
+import { DeletingPopupModule } from '../shared/components/deleting-popup/deleting-popup.module';
+import { CreateColumnPopupModule } from '../shared/components/create-column-popup/create-column-popup.module';
+import { CreateTaskPopupModule } from '../shared/components/create-task-popup/create-task-popup.module';
+import { EditTaskPopupModule } from '../shared/components/edit-task-popup/edit-task-popup.module';
 
 @NgModule({
   declarations: [
@@ -24,22 +23,21 @@ import { ColumnTitleInputComponent } from './column-title-input/column-title-inp
     TaskComponent,
     ColumnOrderSortingPipe,
     TaskOrderSortingPipe,
-    EditTaskPopupComponent,
-    CreateTaskPopupComponent,
-    CreateColumnPopupComponent,
     ColumnTitleInputComponent,
   ],
   imports: [
     CommonModule,
-    MatButtonModule,
-    TranslateModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    ReactiveFormsModule,
     DragDropModule,
+    TranslateModule,
+    MatIconModule,
+    MatButtonModule,
     MatCardModule,
-    MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    DeletingPopupModule,
+    CreateColumnPopupModule,
+    CreateTaskPopupModule,
+    EditTaskPopupModule,
   ],
   exports: [ColumnsPageComponent],
 })

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ESiteUrls } from './shared/shared.enums';
-import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
 import { getTokenFromLS } from './shared/shared.utils';
 import { WelcomeGuard } from './core/guards/welcome.guard';
 
@@ -34,7 +33,14 @@ const routes: Routes = [
     loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
     canActivate: [AuthGuard],
   },
-  { path: '**', component: WrongAddressPageComponent },
+  {
+    path: ESiteUrls.p404,
+    loadChildren: () => import('./shared/components/page404/page404.module').then((m) => m.Page404Module),
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./shared/components/page404/page404.module').then((m) => m.Page404Module),
+  },
 ];
 
 @NgModule({

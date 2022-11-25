@@ -43,7 +43,7 @@ export class ColumnsService {
         tap((board) => this.board$.next(board)),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.tasks, err);
-          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+          throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe(() => this.loaderService.disableLoader());
@@ -58,7 +58,7 @@ export class ColumnsService {
         tap((board) => this.board$.next(board)),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.columns, err);
-          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+          throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe(() => this.loaderService.disableLoader());
@@ -73,7 +73,7 @@ export class ColumnsService {
         tap((board) => this.board$.next(board)),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.tasks, err);
-          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+          throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe(() => this.loaderService.disableLoader());
@@ -88,7 +88,7 @@ export class ColumnsService {
         tap((board) => this.board$.next(board)),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.tasks, err);
-          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+          throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe(() => this.loaderService.disableLoader());
