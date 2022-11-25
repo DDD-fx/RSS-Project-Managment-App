@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{'tasks.edit-task'|translate}}?</h2>
+<h2 class="title" mat-dialog-title>{{'tasks.edit-task'|translate}}?</h2>
 <form class="create-form" [formGroup]="editTaskForm" (submit)="editTask()">
   <div class="inputs">
     <mat-form-field class="form-input" appearance="fill">
@@ -15,12 +15,17 @@
   </div>
 
   <div class="board-btn-wrapper">
-    <button class="popup-add-btn" mat-raised-button color="primary" type="submit" [disabled]="editTaskForm.invalid">
-      {{'tasks.edit-task-btn' | translate}}
-    </button>
-    <button mat-button type="button" (click)="onCancelClick()">
-      {{'board.btn.cancel' | translate}}
-    </button>
+    <div class="button-area">
+      <button class="popup-add-btn" mat-raised-button color="primary" type="submit" [disabled]="editTaskForm.invalid">
+        {{'tasks.edit-task-btn' | translate}}
+      </button>
+    </div>
+    <div class="button-area">
+      <button mat-button type="button" (click)="onCancelClick()">
+        {{'board.btn.cancel' | translate}}
+      </button>
+    </div>
+
   </div>
 </form>
 

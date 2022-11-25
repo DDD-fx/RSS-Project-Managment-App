@@ -7,6 +7,7 @@
 .column__title {
   position: relative;
   overflow-wrap: anywhere;
+  color: $darkest-grey;
 
   &:hover {
     color: rgba(0, 0, 0, 0.6);
