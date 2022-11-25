@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IHttpErrors } from './models/errors.model';
 import { LoaderService } from '../shared/components/loader/loader.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class NotificationService {
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
     private readonly loaderService: LoaderService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) {}
 
   showSuccess(notificationSource: string): void {
@@ -104,6 +106,15 @@ export class NotificationService {
         else this.toastr.error('Что-то пошло не так', 'Ошибка');
         break;
     }
+
+    switch (err.error.statusCode) {
+      case EHttpStatus.Unauthorized:
+        if (currLang === 'en') this.toastr.error('Authorization required', `Error code: ${err.error.statusCode}`);
+        else this.toastr.error('Требуется авторизация', `Error code: ${err.error.statusCode}`);
+        this.authService.onLogOut();
+        void this.router.navigate([ESiteUrls.signIn]);
+    }
+
     this.loaderService.disableLoader();
   }
 }
