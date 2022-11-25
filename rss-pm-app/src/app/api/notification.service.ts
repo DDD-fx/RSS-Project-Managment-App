@@ -81,7 +81,7 @@ export class NotificationService {
         if (err.error.statusCode === EHttpStatus.BadRequest) {
           if (currLang === 'en') this.toastr.error('Bad request', `Error code: ${err.error.statusCode}`);
           else this.toastr.error('Неверный запрос', `Error code: ${err.error.statusCode}`);
-          void this.router.navigate(['**']);
+          void this.router.navigate(['404']);
         } else if (err.error.statusCode === EHttpStatus.NotFound) {
           if (currLang === 'en') this.toastr.error('Board was not found!', `Error code: ${err.error.statusCode}`);
           else this.toastr.error('Доска не найдена', `Error code: ${err.error.statusCode}`);
@@ -92,7 +92,7 @@ export class NotificationService {
         if (err.error.statusCode === EHttpStatus.BadRequest) {
           if (currLang === 'en') this.toastr.error('Bad request', `Error code: ${err.error.statusCode}`);
           else this.toastr.error('Неверный запрос', `Error code: ${err.error.statusCode}`);
-          void this.router.navigate(['**']);
+          void this.router.navigate(['404']);
         } else if (err.error.statusCode === EHttpStatus.NotFound) {
           if (currLang === 'en') this.toastr.error('Column was not found!', `Error code: ${err.error.statusCode}`);
           else this.toastr.error('Колонка не найдена', `Error code: ${err.error.statusCode}`);

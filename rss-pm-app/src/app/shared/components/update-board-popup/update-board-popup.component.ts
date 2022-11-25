@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
@@ -20,9 +20,9 @@ export class UpdateBoardPopupComponent implements OnInit {
   @Input() board!: ICreateBoardResp;
 
   constructor(
-    private apiBoardService: ApiBoardService,
-    private store: Store,
-    private dialogRef: MatDialogRef<UpdateBoardPopupComponent>,
+    private readonly apiBoardService: ApiBoardService,
+    private readonly store: Store,
+    private readonly dialogRef: MatDialogRef<UpdateBoardPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { currBoard: ICreateBoardResp }
   ) {}
 

@@ -27,6 +27,7 @@ export enum ESiteUrls {
   'columns' = 'columns',
   'tasks' = 'tasks',
   'welcome' = 'welcome',
+  'p404' = 'p404',
 }
 
 export enum ELocalStorage {
