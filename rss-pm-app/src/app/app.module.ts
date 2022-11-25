@@ -14,32 +14,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CoreModule } from './core/core.module';
 import { interceptorProviders } from './api/interceptors/interceptors';
 import { ToastrModule } from 'ngx-toastr';
-import { MatDialogModule } from '@angular/material/dialog';
-import { DeletingPopupComponent } from './shared/components/deleting-popup/deleting-popup.component';
-import { MatButtonModule } from '@angular/material/button';
-import { WrongAddressPageComponent } from './shared/components/page404/page404.component';
-import { CreatingBoardPopupComponent } from './shared/components/creating-board-popup/creating-board-popup.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { UpdateBoardPopupComponent } from './shared/components/update-board-popup/update-board-popup.component';
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
-const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DeletingPopupComponent,
-    WrongAddressPageComponent,
-    CreatingBoardPopupComponent,
-    UpdateBoardPopupComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -56,22 +37,13 @@ const uiModules = [MatSidenavModule, MatIconModule, MatButtonModule];
         deps: [HttpClient],
       },
     }),
-    CoreModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-    MatDialogModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    uiModules,
+    CoreModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],
-  exports: [uiModules],
 })
 export class AppModule {}

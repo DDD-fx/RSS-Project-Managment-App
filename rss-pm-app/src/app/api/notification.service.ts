@@ -4,6 +4,8 @@ import { EHttpStatus, ESiteUrls } from '../shared/shared.enums';
 import { TranslateService } from '@ngx-translate/core';
 import { IHttpErrors } from './models/errors.model';
 import { LoaderService } from '../shared/components/loader/loader.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +14,12 @@ export class NotificationService {
   constructor(
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
-    private readonly loaderService: LoaderService
+    private readonly loaderService: LoaderService,
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) {}
 
   showSuccess(notificationSource: string): void {
-    // TODO: заменить на обращение к ngrx
     const currLang = this.translate.currentLang;
     switch (notificationSource) {
       case ESiteUrls.signIn:
@@ -35,8 +38,16 @@ export class NotificationService {
   }
 
   showError(notificationSource: string, err: IHttpErrors): void {
-    // TODO: заменить на обращение к ngrx
     const currLang = this.translate.currentLang;
+
+    switch (err.error.statusCode) {
+      case EHttpStatus.Unauthorized:
+        if (currLang === 'en') this.toastr.error('Authorization required', `Error code: ${err.error.statusCode}`);
+        else this.toastr.error('Требуется авторизация', `Error code: ${err.error.statusCode}`);
+        this.authService.onLogOut();
+        void this.router.navigate([ESiteUrls.signIn]);
+    }
+
     switch (notificationSource) {
       case ESiteUrls.signIn:
         if (currLang === 'en')
@@ -67,8 +78,36 @@ export class NotificationService {
         break;
 
       case ESiteUrls.boards:
-        if (currLang === 'en') this.toastr.error('Board was not found!', `Error code: ${err.error.statusCode}`);
-        else this.toastr.error('Доска не найдена', `Error code: ${err.error.statusCode}`);
+        if (err.error.statusCode === EHttpStatus.BadRequest) {
+          if (currLang === 'en') this.toastr.error('Bad request', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Неверный запрос', `Error code: ${err.error.statusCode}`);
+          void this.router.navigate(['404']);
+        } else if (err.error.statusCode === EHttpStatus.NotFound) {
+          if (currLang === 'en') this.toastr.error('Board was not found!', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Доска не найдена', `Error code: ${err.error.statusCode}`);
+        }
+        break;
+
+      case ESiteUrls.columns:
+        if (err.error.statusCode === EHttpStatus.BadRequest) {
+          if (currLang === 'en') this.toastr.error('Bad request', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Неверный запрос', `Error code: ${err.error.statusCode}`);
+          void this.router.navigate(['404']);
+        } else if (err.error.statusCode === EHttpStatus.NotFound) {
+          if (currLang === 'en') this.toastr.error('Column was not found!', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Колонка не найдена', `Error code: ${err.error.statusCode}`);
+          void this.router.navigate([ESiteUrls.boards]);
+        }
+        break;
+
+      case ESiteUrls.tasks:
+        if (err.error.statusCode === EHttpStatus.BadRequest) {
+          if (currLang === 'en') this.toastr.error("Incorrect task's order", `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Неверный порядок заданий', `Error code: ${err.error.statusCode}`);
+        } else if (err.error.statusCode === EHttpStatus.NotFound) {
+          if (currLang === 'en') this.toastr.error('Task was not found!', `Error code: ${err.error.statusCode}`);
+          else this.toastr.error('Задание не найдено', `Error code: ${err.error.statusCode}`);
+        }
         break;
 
       default:

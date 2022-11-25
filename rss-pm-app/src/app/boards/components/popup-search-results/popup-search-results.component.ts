@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { catchError, forkJoin, Observable, switchMap, tap } from 'rxjs';
-import { ICreateBoardResp, IGetBoardResp } from 'src/app/api/models/api-board.model';
+import { IGetBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { selectAllBoardsSuccess } from 'src/app/NgRx/selectors/storeSelectors';
 import { ITaskSearch } from '../../models/boards.models';
@@ -16,17 +16,14 @@ import { NotificationService } from '../../../api/notification.service';
   selector: 'app-popup-search-results',
   templateUrl: './popup-search-results.component.html',
   styleUrls: ['./popup-search-results.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopupSearchResultsComponent implements OnInit {
-  boards!: ICreateBoardResp[] | [];
+  public tasksArray: ITaskSearch[] = [];
 
-  tasksArray: ITaskSearch[] = [];
+  public sortedTasks: ITaskSearch[] = this.tasksArray;
 
-  sortedTasks: ITaskSearch[] = this.tasksArray;
-
-  order: string = 'asc';
-
-  userName!: string;
+  public order: string = 'asc';
 
   constructor(
     private readonly store: Store,
@@ -69,7 +66,7 @@ export class PopupSearchResultsComponent implements OnInit {
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.columns, err);
-          throw new Error(`Error ${err.error.statusCode} ${err.error.message}`);
+          throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
       .subscribe();
