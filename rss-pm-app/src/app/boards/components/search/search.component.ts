@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { debounceTime, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PopupSearchResultsComponent } from '../popup-search-results/popup-search-results.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,14 +19,15 @@ export class SearchComponent implements OnInit {
   constructor(private dialogRef: MatDialog) {}
 
   ngOnInit(): void {
-    this.searchText$.pipe(debounceTime(2000)).subscribe(() => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      this.searchInput.get(['search'])?.value.length >= 3;
-    });
+    this.searchText$.pipe().subscribe();
   }
 
   searchTasks() {
-    this.dialogRef.open(PopupSearchResultsComponent, { data: { searchText: this.searchInput.get(['search'])?.value } });
-    this.searchInput.controls.search.setValue(['']);
+    if (this.searchInput.get(['search'])?.value.length > 0) {
+      this.dialogRef.open(PopupSearchResultsComponent, {
+        data: { searchText: this.searchInput.get(['search'])?.value },
+      });
+      this.searchInput.controls.search.setValue(['']);
+    }
   }
 }
