@@ -5,7 +5,7 @@
   {{column.title}}
 </div>
 
-<div [formGroup]="newTitleForm">
+<form [formGroup]="newTitleForm" (submit)="updateColumnTitle()">
   <input
     class="column__title-input"
     type="text"
@@ -13,12 +13,22 @@
     maxlength="100"
     formControlName="title"
     *ngIf="(showColumnTitle$ | async) === false"
-    (blur)="updateColumnTitle()"
-    (keyup.enter)="updateColumnTitle()"
     #columnTitleInput>
 
   <mat-error class="column__title-error"
              *ngIf="!newTitleForm.get('title')?.value && newTitleForm.get('title')?.touched">
     {{'columns.errors.empty-title' | translate}}
   </mat-error>
-</div>
+  <div class="column__title-input-btns">
+    <button type="submit"
+            *ngIf="(showColumnTitle$ | async) === false"
+            [disabled]="newTitleForm.invalid">
+      {{'columns.save-title' | translate}}
+    </button>
+    <button type="button"
+            *ngIf="(showColumnTitle$ | async) === false"
+            (click)="toggleColumnTitleInput()">
+      {{'columns.cancel-title' | translate}}
+    </button>
+  </div>
+</form>

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { catchError, forkJoin, Observable, switchMap, tap } from 'rxjs';
@@ -16,7 +16,7 @@ import { NotificationService } from '../../../api/notification.service';
   selector: 'app-popup-search-results',
   templateUrl: './popup-search-results.component.html',
   styleUrls: ['./popup-search-results.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopupSearchResultsComponent implements OnInit {
   public tasksArray: ITaskSearch[] = [];
@@ -52,14 +52,19 @@ export class PopupSearchResultsComponent implements OnInit {
                   task.title.toLowerCase().includes(this.data.searchText.toLowerCase()) ||
                   task.description.toLowerCase().includes(this.data.searchText.toLowerCase())
                 )
-                  this.apiUserService.getUser(task.userId).subscribe((user) => {
-                    this.tasksArray.push({
-                      boardId: board.id,
-                      boardName: board.title,
-                      task: task,
-                      user: user.name,
-                    });
-                  });
+                  this.apiUserService
+                    .getUser(task.userId)
+                    .pipe(
+                      tap((user) =>
+                        this.tasksArray.push({
+                          boardId: board.id,
+                          boardName: board.title,
+                          task: task,
+                          user: user.name,
+                        })
+                      )
+                    )
+                    .subscribe();
               })
             )
           );
