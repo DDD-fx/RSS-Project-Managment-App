@@ -56,17 +56,17 @@ export class AppEffects {
     );
   });
 
-  // getBoard$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(StoreActions.getCurrentBoard),
-  //     mergeMap((actions) => {
-  //       return this.apiBoardService.getBoard(actions.boardId).pipe(
-  //         map((board: IGetBoardResp) => StoreActions.getCurrentBoardSuccess({ board })),
-  //         catchError((error) => of(StoreActions.getAllBoardsFailure({ error: error.message })))
-  //       );
-  //     })
-  //   );
-  // });
+  getBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StoreActions.getCurrentBoard),
+      mergeMap((actions) => {
+        return this.apiBoardService.getBoard(actions.boardId).pipe(
+          map((board: IGetBoardResp) => StoreActions.getCurrentBoardSuccess({ board })),
+          catchError((error) => of(StoreActions.getCurrentBoardFailure({ error: error.message })))
+        );
+      })
+    );
+  });
 
   redirectIfTokenExpired$ = createEffect(() => {
     return this.actions$.pipe(

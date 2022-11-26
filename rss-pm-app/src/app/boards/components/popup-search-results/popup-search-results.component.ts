@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { Component, DoCheck, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { catchError, forkJoin, Observable, switchMap, tap } from 'rxjs';
@@ -11,23 +10,26 @@ import { ApiUserService } from '../../../api/services/api-user.service';
 import { IHttpErrors } from '../../../api/models/errors.model';
 import { ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
+import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-popup-search-results',
   templateUrl: './popup-search-results.component.html',
   styleUrls: ['./popup-search-results.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PopupSearchResultsComponent implements OnInit {
+export class PopupSearchResultsComponent implements OnInit, DoCheck {
   public tasksArray: ITaskSearch[] = [];
 
-  public sortedTasks: ITaskSearch[] = this.tasksArray;
+  public sortedTasks!: ITaskSearch[];
+
+  public noTasks = false;
 
   public order: string = 'asc';
 
   constructor(
     private readonly store: Store,
-    private readonly httpClient: HttpClient,
+    private readonly loaderService: LoaderService,
     private readonly apiBoardService: ApiBoardService,
     private readonly apiUserService: ApiUserService,
     private readonly dialogRef: MatDialogRef<PopupSearchResultsComponent>,
@@ -70,6 +72,15 @@ export class PopupSearchResultsComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  ngDoCheck(): void {
+    this.sortedTasks = this.tasksArray;
+    if (this.sortedTasks.length > 0) {
+      this.noTasks = false;
+    } else {
+      this.noTasks = true;
+    }
   }
 
   closeSearchResult() {

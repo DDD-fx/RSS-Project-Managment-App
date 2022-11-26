@@ -13,3 +13,7 @@ export const selectAllBoardsFailure = createSelector(selectFeature, (state) => s
 export const selectCurrentBoard = createSelector(selectFeature, (state) => state.currentBoard);
 export const selectUpdateBoard = (props: { boardId: string }) =>
   createSelector(selectAllBoardsSuccess, (boards) => boards.find((board) => board.id === props.boardId));
+
+export const selectAllTasks = createSelector(selectFeature, (state) => state.isLoading);
+export const selectAllTasksSuccess = createSelector(selectFeature, (state) => state.tasks);
+export const selectAllTasksFailure = createSelector(selectFeature, (state) => state.error);

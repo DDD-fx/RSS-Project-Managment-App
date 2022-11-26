@@ -1,34 +1,41 @@
 <div class="container">
   <h3>{{'search.title' | translate}}</h3>
-  <mat-icon class="close-window" (click)="closeSearchResult()">close</mat-icon>
+  <mat-icon class="close-window"  title="{{'search.close' | translate}}" (click)="closeSearchResult()">close</mat-icon>
 </div>
-<p *ngIf="tasksArray.length === 0">{{'search.not-found' | translate}}</p>
 
-<table *ngIf="tasksArray.length > 0">
-  <thead>
-  <tr>
-    <th>№</th>
-    <th (click)="sortBoards(); sortByTitle( order==='asc' ? 'asc' : 'desc')">{{'search.task-title' | translate}}
-      <mat-icon>sort</mat-icon>
-    </th>
-    <th (click)="sortBoards(); sortByDescription( order==='asc' ? 'asc' : 'desc')">{{'search.task-description' | translate}}
-      <mat-icon>sort</mat-icon>
-    </th>
-    <th (click)="sortBoards(); sortByUser( order==='asc' ? 'asc' : 'desc')">{{'search.user' | translate}}
-      <mat-icon>sort</mat-icon>
-    </th>
-    <th (click)="sortBoards(); sortByBoard( order==='asc' ? 'asc' : 'desc')">{{'search.board' | translate}}
-      <mat-icon>sort</mat-icon>
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let task of sortedTasks; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
-    <td>{{ indexElem + 1 }}</td>
-    <td>{{task.task.title | titlecase}}</td>
-    <td>{{task.task.description }}</td>
-    <td>{{task.user | titlecase}}</td>
-    <td>{{task.boardName | titlecase}}</td>
-  </tr>
-  </tbody>
-</table>
+<div class="table-container" *ngIf="tasksArray.length > 0;  else elseBlock">
+  <table>
+    <thead>
+      <tr>
+        <th>№</th>
+        <th (click)="sortBoards(); sortByTitle( order==='asc' ? 'asc' : 'desc')">{{'search.task-title' | translate}}
+          <mat-icon class="sort-icon">swap_vert</mat-icon>
+        </th>
+        <th (click)="sortBoards(); sortByDescription( order==='asc' ? 'asc' : 'desc')">{{'search.task-description' | translate}}
+          <mat-icon class="sort-icon">swap_vert</mat-icon>
+        </th>
+        <th (click)="sortBoards(); sortByUser( order==='asc' ? 'asc' : 'desc')">{{'search.user' | translate}}
+          <mat-icon class="sort-icon">swap_vert</mat-icon>
+        </th>
+        <th (click)="sortBoards(); sortByBoard( order==='asc' ? 'asc' : 'desc')">{{'search.board' | translate}}
+          <mat-icon class="sort-icon">swap_vert</mat-icon>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasksArray; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
+        <td>{{ indexElem + 1 }}</td>
+        <td>{{task.task.title | titlecase}}</td>
+        <td>{{task.task.description }}</td>
+        <td>{{task.user | titlecase}}</td>
+        <td>{{task.boardName | titlecase}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <p *ngIf="noTasks">{{'search.not-found' | translate}}</p> -->
+
+<ng-template #elseBlock>
+  <app-loader></app-loader>
+</ng-template>
