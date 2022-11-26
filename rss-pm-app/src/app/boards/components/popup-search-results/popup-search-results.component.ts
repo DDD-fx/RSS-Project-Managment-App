@@ -81,11 +81,7 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     this.sortedTasks = this.tasksArray;
-    if (this.sortedTasks.length > 0) {
-      this.noTasks = false;
-    } else {
-      this.noTasks = true;
-    }
+    this.noTasks = this.sortedTasks.length <= 0;
   }
 
   closeSearchResult() {

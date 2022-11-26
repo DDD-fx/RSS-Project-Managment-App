@@ -16,6 +16,8 @@ import { DeletingPopupModule } from '../shared/components/deleting-popup/deletin
 import { CreateColumnPopupModule } from '../shared/components/create-column-popup/create-column-popup.module';
 import { CreateTaskPopupModule } from '../shared/components/create-task-popup/create-task-popup.module';
 import { EditTaskPopupModule } from '../shared/components/edit-task-popup/edit-task-popup.module';
+import { ColumnsPageHeaderComponent } from './columns-page-header/columns-page-header.component';
+import { LoaderModule } from '../shared/components/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { EditTaskPopupModule } from '../shared/components/edit-task-popup/edit-t
     ColumnOrderSortingPipe,
     TaskOrderSortingPipe,
     ColumnTitleInputComponent,
+    ColumnsPageHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +41,7 @@ import { EditTaskPopupModule } from '../shared/components/edit-task-popup/edit-t
     CreateColumnPopupModule,
     CreateTaskPopupModule,
     EditTaskPopupModule,
+    LoaderModule,
   ],
   exports: [ColumnsPageComponent],
 })

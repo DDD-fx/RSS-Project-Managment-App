@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NewBoardComponent } from './components/new-board/new-board.component';
-import { BoardComponent } from './components/board/board.component';
 import { SortPipe } from './pipes/sort.pipe';
 import { ColumnsPageModule } from '../columns/columns-page.module';
 import { SearchComponent } from './components/search/search.component';
@@ -24,7 +23,6 @@ import { UpdateBoardPopupModule } from '../shared/components/update-board-popup/
     BoardItemComponent,
     BoardsPageComponent,
     NewBoardComponent,
-    BoardComponent,
     SortPipe,
     SearchComponent,
     PopupSearchResultsComponent,

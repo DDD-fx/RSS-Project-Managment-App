@@ -24,9 +24,9 @@ import { NotificationService } from '../api/notification.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnsPageComponent implements OnInit {
-  public board$ = this.columnsService.board$;
+  // public board$ = this.columnsService.board$;
 
-  public columns$ = this.board$.pipe(map((board) => board.columns));
+  public columns$ = this.columnsService.board$.pipe(map((board) => board.columns));
 
   private readonly currBoardId$ = this.columnsService.currBoardId$;
 
@@ -48,15 +48,17 @@ export class ColumnsPageComponent implements OnInit {
   ngOnInit(): void {
     this.columnsService.updateBoard({} as IGetBoardResp);
     this.columnsService.setBoardId(this.router.url.split('/').pop()!);
-    this.loaderService.enableLoader();
+    // this.loaderService.enableLoader();
     this.apiBoardService
       .getBoard(this.currBoardId$.value)
       .pipe(
+        // delay(1000000),
         tap((board) => {
           const connectedLists = [];
           for (let column of board.columns) {
             connectedLists.push(column.id);
           }
+          // this.columns$.next(board.columns);
           this.columnsService.updateConnectedLists(connectedLists);
           this.columnsService.updateBoard(board);
         }),
@@ -65,7 +67,7 @@ export class ColumnsPageComponent implements OnInit {
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe(() => this.loaderService.disableLoader());
+      .subscribe(/*() => this.loaderService.disableLoader()*/);
   }
 
   onDeleteColumn(columnId: string): void {

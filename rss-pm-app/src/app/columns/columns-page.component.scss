@@ -1,12 +1,30 @@
 @import "src/styles/variables";
 @import "src/styles/mixins";
 
-:host {
+.main-container {
+  height: calc(100vh - 210px);
+  //margin: 1rem 2%;
+  background-color: $background;
+  padding: 20px 10px 20px 20px;
+}
+//@media (min-width:768px) and (max-width: 1279px){
+//  .main-container {
+//    height: calc(100vh - 170px);
+//  }
+//}
+@media (max-width: 767px) {
+  .main-container {
+    height: calc(100vh - 242px);
+    padding: 0;
+  }
+}
+
+.columns-container {
   display: flex;
   gap: 10px;
   align-items: flex-start;
   overflow-y: hidden;
-  height: 60vh;
+  //height: 60vh;
 }
 
 .icon {
