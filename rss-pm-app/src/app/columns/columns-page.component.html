@@ -1,7 +1,7 @@
 <div class="main-container">
   <app-columns-page-header></app-columns-page-header>
 
-  <div class="columns-container">
+  <div class="columns-container" id="style">
     <ng-container *ngIf="(columns$ | async) as columns; else elseBlock">
       <ng-container *ngIf="columns.length > 0">
         <div cdkDropList
@@ -44,6 +44,9 @@
   </div>
 </div>
 
-<ng-template #elseBlock>
-  <app-loader></app-loader>
+<ng-template class="loader" #elseBlock>
+  <div class="loader-area">
+    <app-loader class="loader-im"></app-loader>
+  </div>
+
 </ng-template>

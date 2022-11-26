@@ -2,8 +2,8 @@
 @import "src/styles/mixins";
 
 :host {
-
-  max-height: 55vh;
+  font-family: 'Patrick Hand', cursive;
+  //max-height: 55vh;
 }
 
 ::ng-deep.mat-dialog-container {
@@ -16,6 +16,7 @@
 }
 
 .table-container {
+  background-color: yellow;
   overflow-y: auto;
   max-height: 40vh;
   min-height: fit-content;
@@ -37,14 +38,25 @@ table {
   color: $blue;
 }
 
+.angle1 {
+  border-radius: 20px 0 0 0;
+}
+
+.angle2 {
+  border-radius: 0 20px 0 0 ;
+}
+
 th,
 td,
 th {
+  cursor: pointer;
   border: 1px solid $background;
 }
+
 th {
+  min-width: 150px;
   background-color: $green;
-  color: $almost-black;
+  color: $antiquewhite;
 }
 
 .container {
@@ -58,12 +70,13 @@ th {
 
 .close-window:hover {
   color: $blue;
+  cursor: pointer;
 }
 
 h3 {
-  color: #222b2f;
+  color: $almost-black;
   font-size: x-large;
-  font-style: italic;
+  font-family: 'Patrick Hand', cursive;
 }
 
 .sort-icon{
@@ -73,6 +86,7 @@ h3 {
 
 .sort-icon:hover {
   color: $blue;
+  cursor: pointer;
 }
 
 th {
@@ -120,4 +134,18 @@ th {
     75% 84%,
     from($blue),
   )
+}
+
+.table {
+  border-radius: 20px;
+}
+
+@media (max-width: 767px) {
+  th {
+    min-width: 0;
+  }
+
+  .sort-icon {
+    display: none;
+  }
 }

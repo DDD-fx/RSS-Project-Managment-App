@@ -1,5 +1,6 @@
 @import "src/styles/mixins";
 @import "src/styles/variables";
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 .background {
   background-color: $green;
@@ -8,6 +9,7 @@
   margin-left: auto;
   margin-right: auto;
   box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+  font-family: 'Patrick Hand', cursive;
 }
 
 .about-container{
@@ -100,7 +102,7 @@ li {
     font-size: 25px;
     text-align: center;
     margin: 1rem 1rem 2rem;
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
   }
 
   p {

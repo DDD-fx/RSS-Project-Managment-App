@@ -101,7 +101,11 @@ li {
   border-color: transparent;
   transition: 0.5s;
 }
-
+.loader-area {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .sort-wrapper {
   width: 60px;
 }

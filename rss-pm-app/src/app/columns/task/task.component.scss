@@ -18,7 +18,7 @@
 }
 
 .task-card {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
   width: 185px;
   display: flex;
   flex-direction: column;
@@ -63,14 +63,14 @@
   }
 
   &__subtitle {
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
     font-size: 0.9em;
     color: $grey;
   }
 
   &__title,
   &__subtitle {
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
     max-width: 160px;
     overflow-wrap: anywhere;
   }
@@ -98,7 +98,7 @@
 }
 
 .cdk-drag-preview {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
   box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
@@ -107,12 +107,12 @@
 }
 
 .cdk-drag-placeholder {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
   opacity: 0;
 }
 
 .cdk-drag-animating {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -155,4 +155,10 @@
     75% 84%,
     from($blue),
   )
+}
+
+@media (max-width: 768px) {
+  :host::-webkit-scrollbar {
+    width: 15px;
+  }
 }
