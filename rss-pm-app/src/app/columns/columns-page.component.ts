@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApiColumnsService } from '../api/services/api-colomns.service';
 import { catchError, map, switchMap, tap } from 'rxjs';
@@ -25,6 +25,7 @@ import { NotificationService } from '../api/notification.service';
 })
 export class ColumnsPageComponent implements OnInit {
   // public board$ = this.columnsService.board$;
+  public isNotDataColumns = true;
 
   public columns$ = this.columnsService.board$.pipe(map((board) => board.columns));
 
@@ -42,7 +43,8 @@ export class ColumnsPageComponent implements OnInit {
     private readonly apiColumnsService: ApiColumnsService,
     private readonly apiBoardService: ApiBoardService,
     private readonly apiTasksService: ApiTasksService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +63,10 @@ export class ColumnsPageComponent implements OnInit {
           // this.columns$.next(board.columns);
           this.columnsService.updateConnectedLists(connectedLists);
           this.columnsService.updateBoard(board);
+        }),
+        tap(() => {
+          this.isNotDataColumns = false;
+          this.cdr.detectChanges();
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.columns, err);
