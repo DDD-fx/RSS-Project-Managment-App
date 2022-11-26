@@ -27,6 +27,8 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
 
   public order: string = 'asc';
 
+  public disableLoader = false;
+
   constructor(
     private readonly store: Store,
     private readonly loaderService: LoaderService,
@@ -76,12 +78,15 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe();
+      .subscribe(() => {
+        this.noTasks = this.tasksArray.length === 0;
+        if (this.noTasks) this.disableLoader = true;
+      });
   }
 
   ngDoCheck(): void {
     this.sortedTasks = this.tasksArray;
-    this.noTasks = this.sortedTasks.length <= 0;
+    // this.noTasks = this.sortedTasks.length === 0;
   }
 
   closeSearchResult() {

@@ -3,7 +3,7 @@
   <mat-icon class="close-window"  title="{{'search.close' | translate}}" (click)="closeSearchResult()">close</mat-icon>
 </div>
 
-<ng-container class="table-container" *ngIf="tasksArray.length > 0;  else elseBlock">
+<ng-container class="table-container" *ngIf="tasksArray.length > 0; else elseBlock">
   <table>
     <thead>
       <tr>
@@ -34,8 +34,10 @@
   </table>
 </ng-container>
 
-<!-- <p *ngIf="noTasks">{{'search.not-found' | translate}}</p> -->
+<ng-container *ngIf="noTasks">
+  <p>{{'search.not-found' | translate}}</p>
+</ng-container>
 
 <ng-template #elseBlock>
-  <app-loader></app-loader>
+  <app-loader *ngIf="!disableLoader"></app-loader>
 </ng-template>
