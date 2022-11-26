@@ -54,14 +54,19 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
                   task.title.toLowerCase().includes(this.data.searchText.toLowerCase()) ||
                   task.description.toLowerCase().includes(this.data.searchText.toLowerCase())
                 )
-                  this.apiUserService.getUser(task.userId).subscribe((user) => {
-                    this.tasksArray.push({
-                      boardId: board.id,
-                      boardName: board.title,
-                      task: task,
-                      user: user.name,
-                    });
-                  });
+                  this.apiUserService
+                    .getUser(task.userId)
+                    .pipe(
+                      tap((user) =>
+                        this.tasksArray.push({
+                          boardId: board.id,
+                          boardName: board.title,
+                          task: task,
+                          user: user.name,
+                        })
+                      )
+                    )
+                    .subscribe();
               })
             )
           );
@@ -76,11 +81,7 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     this.sortedTasks = this.tasksArray;
-    if (this.sortedTasks.length > 0) {
-      this.noTasks = false;
-    } else {
-      this.noTasks = true;
-    }
+    this.noTasks = this.sortedTasks.length <= 0;
   }
 
   closeSearchResult() {

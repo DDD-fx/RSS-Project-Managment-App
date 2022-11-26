@@ -137,6 +137,8 @@
     "add-new-column": "Add new column",
     "delete": "Delete",
     "move": "Move",
+    "save-title": "Save",
+    "cancel-title": "Cancel",
     "errors": {
       "empty-title": "Column title can't be empty"
     }

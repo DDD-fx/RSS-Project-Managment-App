@@ -14,6 +14,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CoreModule } from './core/core.module';
 import { interceptorProviders } from './api/interceptors/interceptors';
 import { ToastrModule } from 'ngx-toastr';
+import { LoaderModule } from './shared/components/loader/loader.module';
 
 function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -42,6 +43,7 @@ function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       preventDuplicates: true,
     }),
     CoreModule,
+    LoaderModule,
   ],
   providers: [interceptorProviders],
   bootstrap: [AppComponent],

@@ -26,3 +26,12 @@
   line-height: 1em;
   font-size: 10px;
 }
+
+.column__title-input-btns {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 5px;
+  padding-top: 5px;
+  margin-right: -55px;
+}
