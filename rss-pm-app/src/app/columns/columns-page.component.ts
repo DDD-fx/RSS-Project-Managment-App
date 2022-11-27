@@ -102,6 +102,7 @@ export class ColumnsPageComponent implements OnInit {
   }
 
   dropTask(event: CdkDragDrop<ITask[]>, columnId: string): void {
+    this.loaderService.enableLoader(true);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       const tasks = event.container.data;
@@ -115,7 +116,7 @@ export class ColumnsPageComponent implements OnInit {
         boardId: this.currBoardId$.value,
         columnId: columnId,
       };
-      this.apiTasksService.updateTask(movedTask.id, body).subscribe();
+      this.apiTasksService.updateTask(movedTask.id, body).subscribe(() => this.loaderService.disableLoader());
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       this.loaderService.enableLoader(true);
