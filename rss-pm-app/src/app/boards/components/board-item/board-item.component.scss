@@ -13,7 +13,7 @@
   justify-content: space-around;
   cursor: pointer;
   background-color: rgba(94, 119, 64, 0.7);
-  transition: 1s;
+  transition: 0.5s;
   .overflow {
     color: $almost-black;
   }
@@ -37,7 +37,7 @@
 .btn-bg {
   color: $almost-white;
   background-color: $blue;
-  transition: 1s;
+  transition: 0.5s;
 }
 
 .btn-bg:hover {
@@ -106,5 +106,5 @@
 
 .board:hover {
   box-shadow: none;
-  transition: 1s;
+  transition: 0.5s;
 }

@@ -1,35 +1,32 @@
 @import "../../node_modules/normalize.css/normalize.css";
 @import "src/styles/mixins";
 @import "src/styles/variables";
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 html,
 body {
   height: 100%;
+  font-family: 'Patrick Hand', cursive;
 }
 
 body {
   margin: 0;
-  font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
-
-//.loader-container {
-//  position: relative;
-//}
 
 .custom .mat-dialog-container {
   border-radius: 20px;
 }
 
 .custom .title {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
 }
 
 .custom .mat-label {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
 }
 
 .custom .mat-error {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
   height: 17px;
 }
 
@@ -42,7 +39,7 @@ body {
 }
 
 .custom .label {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
   height: 17px;
 }
 
@@ -70,6 +67,20 @@ body {
 }
 
 .custom .mat-form-field-flex {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.customSearch .mat-dialog-container{
+  overflow: auto;
+}
+
+@media (max-width: 767px) {
+  .customSearch .mat-dialog-container{
+    max-height: 70vh;
+    min-width: 0;
+    border-radius: 20px;
+    overflow: auto;
+    padding: 0;
+  }
 }
 

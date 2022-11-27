@@ -4,10 +4,10 @@
 </div>
 
 <ng-container class="table-container" *ngIf="tasksArray.length > 0; else elseBlock">
-  <table>
+  <table class="table">
     <thead>
       <tr>
-        <th>№</th>
+        <th class="angle1">№</th>
         <th (click)="sortBoards(); sortByTitle( order==='asc' ? 'asc' : 'desc')">{{'search.task-title' | translate}}
           <mat-icon class="sort-icon">swap_vert</mat-icon>
         </th>
@@ -17,7 +17,7 @@
         <th (click)="sortBoards(); sortByUser( order==='asc' ? 'asc' : 'desc')">{{'search.user' | translate}}
           <mat-icon class="sort-icon">swap_vert</mat-icon>
         </th>
-        <th (click)="sortBoards(); sortByBoard( order==='asc' ? 'asc' : 'desc')">{{'search.board' | translate}}
+        <th class="angle2" (click)="sortBoards(); sortByBoard( order==='asc' ? 'asc' : 'desc')">{{'search.board' | translate}}
           <mat-icon class="sort-icon">swap_vert</mat-icon>
         </th>
       </tr>

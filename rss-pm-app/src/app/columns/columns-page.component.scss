@@ -1,32 +1,25 @@
 @import "src/styles/variables";
 @import "src/styles/mixins";
 
+
+
 .main-container {
   height: calc(100vh - 210px);
-  //margin: 1rem 2%;
   background-color: $background;
   padding: 20px 10px 20px 20px;
 }
-//@media (min-width:768px) and (max-width: 1279px){
-//  .main-container {
-//    height: calc(100vh - 170px);
-//  }
-//}
+
 @media (max-width: 767px) {
   .main-container {
     height: calc(100vh - 242px);
     padding: 0;
   }
 }
-
 .columns-container {
   display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  overflow-y: hidden;
-  //height: 60vh;
+  flex-direction: row;
+  overflow: auto;
 }
-
 .icon {
   color: $darkest-grey;
 }
@@ -36,7 +29,7 @@
 }
 
 .columns {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -44,7 +37,7 @@
 }
 
 .all-tasks {
-  font-family: cursive;
+  font-family: 'Patrick Hand', cursive;
   display: block;
   overflow-y: auto;
 }
@@ -97,6 +90,8 @@ mat-icon {
   margin-right: 5px;
   background-color: $blue;
   color: $almost-white;
+  margin-left: 10px;
+;
 }
 
 .create-column-btn:hover {
@@ -108,6 +103,15 @@ mat-icon {
 .add-column-btn,
 .delete-column-btn {
   top: -10px;
+}
+
+.loader-area {
+  width: 100%;
+}
+
+.loader-im {
+  margin-right: auto;
+  margin-right: auto;
 }
 
 .cdk-drag-preview {
@@ -129,16 +133,16 @@ mat-icon {
 ::ng-deep .mat-form-field.mat-focused {
   .mat-form-field-label {
     color: $blue;
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
     height: 20px;
   }
   .mat-form-field-ripple {
     background-color: $blue;
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
   }
   .mat-form-field-required-marker {
     color: $blue;
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
   }
   .mat-input-element {
     color: $blue;
@@ -148,20 +152,20 @@ mat-icon {
 ::ng-deep .mat-form-field.mat-form-field-invalid {
   .mat-input-element {
     color: red;
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
   }
   .mat-form-field-label {
     color: red;
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
     height: 17px;
     .mat-form-field-required-marker {
       color: red;
-      font-family: cursive;
+      font-family: 'Patrick Hand', cursive;
     }
   }
   .mat-form-field-ripple {
     color: red;
-    font-family: cursive;
+    font-family: 'Patrick Hand', cursive;
   }
 }
 
@@ -205,6 +209,47 @@ mat-icon {
     from($blue),
   )
 }
+
+#style::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px;
+
+}
+
+#style::-webkit-scrollbar {
+  width: 5px;
+  background-color: $light-green;
+  border-radius: 10px;
+  height: 5px;
+}
+
+#style::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  width: 25px;
+  background-color: #FFF;
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($light-blue),
+  )
+}
+
+#style::-webkit-scrollbar-thumb:active {
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($blue),
+  )
+}
+
+#style::-webkit-scrollbar-thumb:hover {
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($blue),
+  )
+}
 //@media (min-width:768px) and (max-width: 1279px) {
 //  :host {
 //    height: 50vh;
@@ -221,14 +266,19 @@ mat-icon {
 
 @media (max-width: 768px) {
   :host {
-    height: 50vh;
+    height: calc(100vh - 170px);
   }
 
   .column {
     max-height: calc(49vh - 36px);
+    width: 210px;
   }
 
   .columns {
     margin-left: 10px;
+  }
+
+  .all-tasks {
+    padding-right: 5px;
   }
 }
