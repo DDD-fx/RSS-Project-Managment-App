@@ -14,7 +14,7 @@
       </ul>
     </div>
 
-    <div class="panel">
+    <div class="panel" *ngIf="(boards$ | async)?.length">
       <app-search></app-search>
       <div class="sort-wrapper">
         <div class="sort" (click)="sortBoards()">

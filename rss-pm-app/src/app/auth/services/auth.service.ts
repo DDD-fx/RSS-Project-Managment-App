@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ISignInReq, ISignInResp, ISignUpReq, ISignUpResp } from '../models/auth.model';
 import { HttpClient } from '@angular/common/http';
-import { EApiUrls } from '../../shared/shared.enums';
+import { EApiUrls, ELocalStorage } from '../../shared/shared.enums';
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -31,7 +31,10 @@ export class AuthService {
   }
 
   onLogOut(): void {
-    localStorage.clear();
+    localStorage.removeItem(ELocalStorage.token);
+    localStorage.removeItem(ELocalStorage.login);
+    localStorage.removeItem(ELocalStorage.userName);
+    localStorage.removeItem(ELocalStorage.userId);
     this.store.dispatch(removeUserName());
     this.store.dispatch(makeIsloggedFalse());
   }

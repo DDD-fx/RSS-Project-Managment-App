@@ -5,7 +5,7 @@ import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
   name: 'sort',
 })
 export class SortPipe implements PipeTransform {
-  transform(boards: ICreateBoardResp[] | [] | null, args: string): ICreateBoardResp[] | [] | null {
+  transform(boards: ICreateBoardResp[] | null | undefined, args: string): ICreateBoardResp[] | null | undefined {
     if (!boards || boards.length === 0) {
       return boards;
     }
