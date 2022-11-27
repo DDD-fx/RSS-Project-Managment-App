@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class BoardsPageComponent implements OnInit {
   isLoadingBoard$: Observable<boolean>;
 
-  boards$: Observable<ICreateBoardResp[] | []>;
+  boards$: Observable<ICreateBoardResp[] | undefined>;
 
   error$: Observable<string | null>;
 

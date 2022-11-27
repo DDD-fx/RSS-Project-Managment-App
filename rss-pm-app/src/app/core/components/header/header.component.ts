@@ -52,8 +52,10 @@ export class HeaderComponent implements OnInit {
   changeLang(): void {
     if (this.translate.currentLang === 'en') {
       this.translate.use('ru');
+      localStorage.setItem('lang', 'ru');
     } else {
       this.translate.use('en');
+      localStorage.setItem('lang', 'eng');
     }
   }
 

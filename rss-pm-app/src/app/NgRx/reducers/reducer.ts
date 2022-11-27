@@ -52,7 +52,7 @@ export const storeReducer = createReducer(
     StoreActions.deleteBoardById,
     (state, { boardId }): IStore => ({
       ...state,
-      boards: state.boards.filter((el) => el.id !== boardId),
+      boards: state.boards?.filter((el) => el.id !== boardId),
     })
   ),
   on(StoreActions.createBoardSuccess, (state, { board }): IStore => {
@@ -75,9 +75,11 @@ export const storeReducer = createReducer(
 
   // update board redusers
   on(StoreActions.updateBoardSuccess, (state, { board }): IStore => {
-    const boardIndex = state.boards.findIndex((item) => item.id === board.id);
+    const boardIndex = state.boards?.findIndex((item) => item.id === board.id);
     const updateBoards = [...state.boards];
+
     updateBoards[boardIndex] = board;
+
     return {
       ...state,
       boards: updateBoards,

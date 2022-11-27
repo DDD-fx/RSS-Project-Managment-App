@@ -10,6 +10,7 @@
 
 .btn-bg {
   color: $almost-white;
+  cursor: pointer;
 }
 
 button {
@@ -25,6 +26,7 @@ button:hover {
     color: $almost-black;
   }
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .button-area {

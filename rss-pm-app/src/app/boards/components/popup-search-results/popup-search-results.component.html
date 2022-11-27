@@ -34,7 +34,7 @@
   </table>
 </ng-container>
 
-<ng-container *ngIf="noTasks">
+<ng-container *ngIf="noTasks && disableLoader">
   <p>{{'search.not-found' | translate}}</p>
 </ng-container>
 
