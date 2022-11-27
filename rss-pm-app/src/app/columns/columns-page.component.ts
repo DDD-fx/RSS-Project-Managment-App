@@ -50,7 +50,7 @@ export class ColumnsPageComponent implements OnInit {
   ngOnInit(): void {
     this.columnsService.updateBoard({} as IGetBoardResp);
     this.columnsService.setBoardId(this.router.url.split('/').pop()!);
-    // this.loaderService.enableLoader();
+    this.loaderService.enableLoader();
     this.apiBoardService
       .getBoard(this.currBoardId$.value)
       .pipe(
@@ -73,7 +73,7 @@ export class ColumnsPageComponent implements OnInit {
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe(/*() => this.loaderService.disableLoader()*/);
+      .subscribe(() => this.loaderService.disableLoader());
   }
 
   onDeleteColumn(columnId: string): void {

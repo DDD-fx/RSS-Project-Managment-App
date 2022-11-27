@@ -11,7 +11,7 @@
   </div>
 
   <div class="button-area">
-    <button mat-raised-button>
+    <button mat-raised-button [disabled]="searchInput.get('search')?.pristine">
       <mat-icon class="btn-bg" (click)="searchTasks()">search</mat-icon>
     </button>
   </div>
