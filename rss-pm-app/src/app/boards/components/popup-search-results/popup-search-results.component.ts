@@ -1,16 +1,17 @@
-import { Component, DoCheck, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { catchError, forkJoin, Observable, switchMap, tap } from 'rxjs';
+import { catchError, forkJoin, Observable, of, switchMap, tap } from 'rxjs';
 import { IGetBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { selectAllBoardsSuccess } from 'src/app/NgRx/selectors/storeSelectors';
-import { ITaskSearch } from '../../models/boards.models';
+import { ITaskSearch, ITaskSearchWithoutUser } from '../../models/boards.models';
 import { ApiUserService } from '../../../api/services/api-user.service';
 import { IHttpErrors } from '../../../api/models/errors.model';
 import { ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
+import { ISignUpResp } from '../../../auth/models/auth.model';
 
 @Component({
   selector: 'app-popup-search-results',
@@ -36,10 +37,12 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
     private readonly apiUserService: ApiUserService,
     private readonly dialogRef: MatDialogRef<PopupSearchResultsComponent>,
     private readonly notificationService: NotificationService,
+    private cdr: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: { searchText: string }
   ) {}
 
   ngOnInit(): void {
+    const taskData: ITaskSearchWithoutUser[] = [];
     this.store
       .select(selectAllBoardsSuccess)
       .pipe(
@@ -48,45 +51,51 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
           boards.forEach((board) => observables.push(this.apiBoardService.getBoard(board.id)));
           return forkJoin(observables);
         }),
-        tap((boards) => {
+        switchMap((boards) => {
+          const observables: Observable<ISignUpResp>[] = [];
           boards.forEach((board) =>
             board.columns.forEach((column) =>
               column.tasks.forEach((task) => {
                 if (
                   task.title.toLowerCase().includes(this.data.searchText.toLowerCase()) ||
                   task.description.toLowerCase().includes(this.data.searchText.toLowerCase())
-                )
-                  this.apiUserService
-                    .getUser(task.userId)
-                    .pipe(
-                      tap((user) =>
-                        this.tasksArray.push({
-                          boardId: board.id,
-                          boardName: board.title,
-                          task: task,
-                          user: user.name,
-                        })
-                      )
-                    )
-                    .subscribe();
+                ) {
+                  observables.push(this.apiUserService.getUser(task.userId));
+                  taskData.push({
+                    boardId: board.id,
+                    boardName: board.title,
+                    task: task,
+                  });
+                }
               })
             )
           );
+          return forkJoin(observables.length ? observables : of(null));
+        }),
+        tap((users) => {
+          if (taskData.length) {
+            this.tasksArray = taskData.map((task, index) => ({
+              ...task,
+              // @ts-ignore
+              user: users[index]?.name,
+            }));
+          } else {
+            this.noTasks = true;
+          }
+          this.disableLoader = true;
+          this.cdr.detectChanges();
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.columns, err);
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe(() => {
-        this.noTasks = this.tasksArray.length === 0;
-        if (this.noTasks) this.disableLoader = true;
-      });
+      .subscribe();
   }
 
   ngDoCheck(): void {
     this.sortedTasks = this.tasksArray;
-    // this.noTasks = this.sortedTasks.length === 0;
+    this.cdr.detectChanges();
   }
 
   closeSearchResult() {

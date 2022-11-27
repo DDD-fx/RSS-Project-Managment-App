@@ -25,8 +25,8 @@
       </div>
     </div>
 
-    <ng-container *ngIf="(boards$ | async )?.length; then thenBlock else elseBlock"></ng-container>
-    <ng-template  #thenBlock >
+    <ng-container *ngIf="(isLoadingBoard$ | async ); then loaderBlock else contentBlock"></ng-container>
+    <ng-template  #contentBlock >
       <div class="content">
         <section class="boards-list">
           <div class="board-area" *ngFor="let board of boards$ | async | sort: order">
@@ -37,7 +37,7 @@
       </div>
     </ng-template>
 
-    <ng-template  #elseBlock class="loader-area">
+    <ng-template  #loaderBlock class="loader-area">
       <app-loader></app-loader>
     </ng-template>
 
