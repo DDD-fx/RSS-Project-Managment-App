@@ -21,19 +21,21 @@ import { getTokenFromLS, getUserIdFromLs } from 'src/app/shared/shared.utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  public isMenuOpen: boolean = false;
+  isMenuOpen: boolean = false;
 
-  public isLoggedStore$: Observable<boolean> | undefined;
+  isLoggedStore$: Observable<boolean> | undefined;
 
-  public userName$: Observable<string | null> | undefined;
+  userName$: Observable<string | null> | undefined;
+
+  checked: string = '';
 
   constructor(
-    private readonly translate: TranslateService,
-    private readonly store: Store,
-    private readonly router: Router,
-    private readonly apiService: ApiUserService,
-    private readonly authService: AuthService,
-    private readonly dialogRef: MatDialog
+    private translate: TranslateService,
+    private store: Store,
+    private router: Router,
+    private apiService: ApiUserService,
+    private authService: AuthService,
+    private dialogRef: MatDialog
   ) {
     translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');
@@ -47,6 +49,19 @@ export class HeaderComponent implements OnInit {
       this.store.dispatch(makeIsloggedTrue());
       this.store.dispatch(addUserName());
     }
+    if (localStorage.getItem('lang') === 'en') {
+      this.translate.use('en');
+    } else if (localStorage.getItem('lang') === 'ru') {
+      this.translate.use('ru');
+    } else {
+      this.translate.use('en');
+      localStorage.setItem('lang', 'en');
+    }
+    if (localStorage.getItem('lang') === 'en') {
+      this.checked = 'checked';
+    } else {
+      this.checked = '';
+    }
   }
 
   changeLang(): void {
@@ -55,7 +70,7 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('lang', 'ru');
     } else {
       this.translate.use('en');
-      localStorage.setItem('lang', 'eng');
+      localStorage.setItem('lang', 'en');
     }
   }
 

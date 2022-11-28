@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../shared/components/deleting-popup/deleting-popup.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -28,6 +29,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatDialogModule,
     MatIconModule,
     MatSidenavModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [],

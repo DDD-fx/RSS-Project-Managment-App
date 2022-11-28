@@ -16,7 +16,7 @@
     <div class="header__toggle">
       <span class="lang">RU</span>
       <label class="switch" >
-        <input type="checkbox" (click)="changeLang()" checked>
+        <input type="checkbox" id="input" (click)="changeLang()" [(ngModel)]="checked">
         <span class="slider round"></span>
       </label>
       <span class="lang">EN</span>
