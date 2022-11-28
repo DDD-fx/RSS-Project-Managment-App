@@ -2,12 +2,6 @@
 @import "src/styles/variables";
 
 .main-container {
-  .sort:hover {
-    border: 1px solid $blue;
-    border-radius: 5px;
-    box-shadow: rgb(0 0 0 / 15%) 0 5px 5px;
-    transition: 0.5s;
-  }
 
   &__title {
     margin-top: 20px;
@@ -17,10 +11,10 @@
   &__content {
     width: 80%;
     margin: 40px auto 30px auto;
-    border-radius: 20px;
+    border-radius: $box-radius;
     background-color: $background;
     min-height: 400px;
-    box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+    box-shadow: $shadow;
     padding: 20px 30px 20px 30px;
   }
 
@@ -44,6 +38,13 @@
    list-style-type: none;
    gap: 20px;
    color: $dark-grey;
+
+  .li {
+    animation-name: bubbly;
+    animation-duration: calc(var(--i) * 1s);
+    animation-fill-mode:forwards;
+    animation-timing-function:ease-in-out;
+  }
  }
 
 .container .boards {
@@ -54,13 +55,6 @@
 .boards {
   margin: 0;
   padding: 0;
-}
-
-li {
-  animation-name: bubbly;
-  animation-duration: calc(var(--i) * 1s);
-  animation-fill-mode:forwards;
-  animation-timing-function:ease-in-out;
 }
 
 @keyframes bubbly {
@@ -88,28 +82,35 @@ li {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-}
 
-.sort {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 5px;
-  color: $almost-black;
-  border-color: transparent;
-  transition: 0.5s;
+  &__sort-wrapper {
+    width: 60px;
+  }
+
+  &__sort {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 5px;
+    color: $almost-black;
+    border-color: transparent;
+    transition: $transition;
+  }
+
+  &__sort:hover {
+    border: $small-border;
+    border-radius: $button-radius;
+    box-shadow: $shadow;
+    transition: $transition;
+  }
 }
 
 .loader-area {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-}
-
-.sort-wrapper {
-  width: 60px;
 }
 
 .content {
@@ -123,5 +124,9 @@ li {
 
   .container {
     font-size: 2rem;
+  }
+
+  .content {
+    padding: 20px 0 0 0;
   }
 }

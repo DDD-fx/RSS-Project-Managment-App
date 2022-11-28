@@ -72,15 +72,22 @@ body {
 
 .customSearch .mat-dialog-container{
   overflow: auto;
+  min-height: 260px;
 }
 
 @media (max-width: 767px) {
   .customSearch .mat-dialog-container{
     max-height: 70vh;
-    min-width: 0;
     border-radius: 20px;
     overflow: auto;
-    padding: 0;
+    padding: 10px;
+    max-width: 100%;
+    min-width: 320px;
+    min-height: 260px;
+  }
+
+  .customSearch#cdk-overlay-0 {
+    max-width: 100% !important;
   }
 }
 

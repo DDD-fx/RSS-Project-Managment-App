@@ -2,22 +2,22 @@
   <div class="main-container__content">
     <div class="main-container__title">
       <ul class="container boards">
-        <li style="--i:1">{{ 'board.title.1' | translate }}</li>
-        <li style="--i:1.3">{{ 'board.title.2' | translate }}</li>
-        <li style="--i:1.6">{{ 'board.title.3' | translate }}</li>
-        <li style="--i:1.9">{{ 'board.title.4' | translate }}</li>
-        <li style="--i:2.2">{{ 'board.title.5' | translate }}</li>
-        <li style="--i:2.5">{{ 'board.title.6' | translate }}</li>
-        <li style="--i:2.8">{{ 'board.title.7' | translate }}</li>
-        <li style="--i:3.1">{{ 'board.title.8' | translate }}</li>
-        <li style="--i:3.4">{{ 'board.title.9' | translate }}</li>
+        <li class="li" style="--i:1">{{ 'board.title.1' | translate }}</li>
+        <li class="li" style="--i:1.3">{{ 'board.title.2' | translate }}</li>
+        <li class="li" style="--i:1.6">{{ 'board.title.3' | translate }}</li>
+        <li class="li" style="--i:1.9">{{ 'board.title.4' | translate }}</li>
+        <li class="li" style="--i:2.2">{{ 'board.title.5' | translate }}</li>
+        <li class="li" style="--i:2.5">{{ 'board.title.6' | translate }}</li>
+        <li class="li" style="--i:2.8">{{ 'board.title.7' | translate }}</li>
+        <li class="li" style="--i:3.1">{{ 'board.title.8' | translate }}</li>
+        <li class="li" style="--i:3.4">{{ 'board.title.9' | translate }}</li>
       </ul>
     </div>
 
     <div class="panel" *ngIf="(boards$ | async)?.length">
       <app-search></app-search>
-      <div class="sort-wrapper">
-        <div class="sort" (click)="sortBoards()">
+      <div class="panel__sort-wrapper">
+        <div class="panel__sort" (click)="sortBoards()">
           <div>{{ 'board.sort.a' | translate }}</div>
           <mat-icon>swap_vert</mat-icon>
           <div>{{ 'board.sort.z' | translate }}</div>

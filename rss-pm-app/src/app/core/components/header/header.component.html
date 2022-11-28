@@ -69,7 +69,7 @@
         <a
           (click)="createBoard(); toggleMenu()"
           class="menu-item link">{{'header.create-board-button' | translate}}</a>
-        <a class="menu-item link"
+        <a class="menu-item link" (click)="toggleMenu()"
            [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>
         <a class="menu-item link"
            (click)="logout(); toggleMenu()"

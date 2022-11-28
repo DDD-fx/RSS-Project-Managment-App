@@ -14,9 +14,12 @@
 
 .header {
     width: 100%;
-    //z-index: 99999;
 }
 
 .loader-container {
   position: relative;
+}
+
+.toast-top-right {
+  z-index: 999999;
 }
