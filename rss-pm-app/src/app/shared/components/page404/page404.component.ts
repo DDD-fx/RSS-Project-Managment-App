@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./page404.component.scss'],
 })
 export class WrongAddressPageComponent implements OnInit {
-  constructor(private router: Router, private translate: TranslateService) {
+  constructor(private readonly router: Router, private readonly translate: TranslateService) {
     translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');
     translate.use('en');

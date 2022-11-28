@@ -18,11 +18,11 @@ export interface DialogData {
 })
 export class CreatingBoardPopupComponent {
   constructor(
-    private dialogRef: MatDialogRef<CreatingBoardPopupComponent>,
+    private readonly dialogRef: MatDialogRef<CreatingBoardPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private apiBoardService: ApiBoardService,
-    private store: Store,
-    private loaderService: LoaderService
+    private readonly apiBoardService: ApiBoardService,
+    private readonly store: Store,
+    private readonly loaderService: LoaderService
   ) {}
 
   onCancelClick(): void {

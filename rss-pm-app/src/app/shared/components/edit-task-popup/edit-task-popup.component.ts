@@ -17,7 +17,7 @@ export class EditTaskPopupComponent implements OnInit {
   });
 
   constructor(
-    private dialogRef: MatDialogRef<EditTaskPopupComponent>,
+    private readonly dialogRef: MatDialogRef<EditTaskPopupComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: { boardId: string; columnId: string; currTask: ITask },
     private readonly columnsService: ColumnsService

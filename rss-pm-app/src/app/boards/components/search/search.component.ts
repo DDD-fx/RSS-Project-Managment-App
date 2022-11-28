@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
 
   searchText$ = new Subject<string>();
 
-  constructor(private dialogRef: MatDialog) {}
+  constructor(private readonly dialogRef: MatDialog) {}
 
   ngOnInit(): void {
     this.searchText$.pipe().subscribe();

@@ -5,13 +5,14 @@
   font-family: 'Patrick Hand', cursive;
 }
 
-
 button:disabled {
   pointer-events: none;
 }
+
 .mat-raised-button {
   background-color: $blue;
 }
+
 .mat-raised-button:hover{
   @include button-hover();
   cursor: pointer;
