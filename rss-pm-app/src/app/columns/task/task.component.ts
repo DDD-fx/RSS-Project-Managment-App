@@ -48,7 +48,7 @@ export class TaskComponent {
             switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
             tap((board) => this.columnsService.updateBoard(board)),
             catchError((err: IHttpErrors) => {
-              this.notificationService.showError(ESiteUrls.columns, err);
+              this.notificationService.showError(ESiteUrls.tasks, err);
               throw new Error(`${err.error.statusCode} ${err.error.message}`);
             })
           )

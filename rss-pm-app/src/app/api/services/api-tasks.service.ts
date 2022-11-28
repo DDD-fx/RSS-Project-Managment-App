@@ -9,13 +9,12 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ApiTasksService {
-  private readonly currBoardId = this.router.url.split('/').pop()!;
-
   constructor(private readonly httpClient: HttpClient, private readonly router: Router) {}
 
   createNewTask(columnId: string, body: ICreateTaskReq): Observable<ICreateTaskResp> {
+    const currBoardId = this.router.url.split('/').pop();
     return this.httpClient.post<ICreateTaskResp>(
-      EApiUrls.boards + `/${this.currBoardId}` + `/${EApiUrls.columns}` + `/${columnId}` + `/${EApiUrls.tasks}`,
+      EApiUrls.boards + `/${currBoardId}` + `/${EApiUrls.columns}` + `/${columnId}` + `/${EApiUrls.tasks}`,
       body
     );
   }
