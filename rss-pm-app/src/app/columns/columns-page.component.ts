@@ -24,8 +24,7 @@ import { NotificationService } from '../api/notification.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnsPageComponent implements OnInit {
-  // public board$ = this.columnsService.board$;
-  public isNotDataColumns = true;
+  public isNoColumnsData = true;
 
   public columns$ = this.columnsService.board$.pipe(map((board) => board.columns));
 
@@ -44,28 +43,25 @@ export class ColumnsPageComponent implements OnInit {
     private readonly apiBoardService: ApiBoardService,
     private readonly apiTasksService: ApiTasksService,
     private readonly notificationService: NotificationService,
-    private cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.columnsService.updateBoard({} as IGetBoardResp);
     this.columnsService.setBoardId(this.router.url.split('/').pop()!);
-    this.loaderService.enableLoader();
     this.apiBoardService
       .getBoard(this.currBoardId$.value)
       .pipe(
-        // delay(1000000),
         tap((board) => {
           const connectedLists = [];
           for (let column of board.columns) {
             connectedLists.push(column.id);
           }
-          // this.columns$.next(board.columns);
           this.columnsService.updateConnectedLists(connectedLists);
           this.columnsService.updateBoard(board);
         }),
         tap(() => {
-          this.isNotDataColumns = false;
+          this.isNoColumnsData = false;
           this.cdr.detectChanges();
         }),
         catchError((err: IHttpErrors) => {
@@ -73,7 +69,7 @@ export class ColumnsPageComponent implements OnInit {
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe(() => this.loaderService.disableLoader());
+      .subscribe();
   }
 
   onDeleteColumn(columnId: string): void {
@@ -92,13 +88,24 @@ export class ColumnsPageComponent implements OnInit {
 
   dropColumn(event: CdkDragDrop<IColumn[]>): void {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    if (event.currentIndex === event.previousIndex) return;
+
+    this.loaderService.enableLoader(true);
     const columns = event.container.data;
     const movedColumn = columns[event.currentIndex];
     const body: IUpdateColumnReq = {
       title: movedColumn.title,
       order: event.currentIndex + 1,
     };
-    this.apiColumnsService.updateColumn(this.currBoardId$.value, movedColumn.id, body).subscribe();
+    this.apiColumnsService
+      .updateColumn(this.currBoardId$.value, movedColumn.id, body)
+      .pipe(
+        catchError((err: IHttpErrors) => {
+          this.notificationService.showError(ESiteUrls.columns, err);
+          throw new Error(`${err.error.statusCode} ${err.error.message}`);
+        })
+      )
+      .subscribe(() => this.loaderService.disableLoader());
   }
 
   dropTask(event: CdkDragDrop<ITask[]>, columnId: string): void {

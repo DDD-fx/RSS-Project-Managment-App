@@ -22,11 +22,12 @@ button {
 button:hover {
   border: 1px solid $blue;
   background-color: transparent;
+  transition: 0.5s;
+  cursor: pointer;
+
   .mat-icon {
     color: $almost-black;
   }
-  transition: 0.5s;
-  cursor: pointer;
 }
 
 .button-area {

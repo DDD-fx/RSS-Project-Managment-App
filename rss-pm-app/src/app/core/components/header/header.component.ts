@@ -21,19 +21,19 @@ import { getTokenFromLS, getUserIdFromLs } from 'src/app/shared/shared.utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  isMenuOpen: boolean = false;
+  public isMenuOpen: boolean = false;
 
-  isLoggedStore$: Observable<boolean> | undefined;
+  public isLoggedStore$: Observable<boolean> | undefined;
 
-  userName$: Observable<string | null> | undefined;
+  public userName$: Observable<string | null> | undefined;
 
   constructor(
-    private translate: TranslateService,
-    private store: Store,
-    private router: Router,
-    private apiService: ApiUserService,
-    private authService: AuthService,
-    private dialogRef: MatDialog
+    private readonly translate: TranslateService,
+    private readonly store: Store,
+    private readonly router: Router,
+    private readonly apiService: ApiUserService,
+    private readonly authService: AuthService,
+    private readonly dialogRef: MatDialog
   ) {
     translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');
@@ -79,8 +79,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogoClick() {
-    this.router.navigate([getTokenFromLS() ? ESiteUrls.boards : ESiteUrls.welcome]);
-    // this.router.navigate([ESiteUrls.welcome]);
+    void this.router.navigate([getTokenFromLS() ? ESiteUrls.boards : ESiteUrls.welcome]);
   }
 
   createBoard() {

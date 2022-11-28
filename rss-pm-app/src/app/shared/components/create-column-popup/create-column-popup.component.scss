@@ -20,14 +20,17 @@ mat-form-field {
     font-family: 'Patrick Hand', cursive;
     height: 20px;
   }
+
   .mat-form-field-ripple {
     background-color: $blue;
     font-family: 'Patrick Hand', cursive;
   }
+
   .mat-form-field-required-marker {
     color: $blue;
     font-family: 'Patrick Hand', cursive;
   }
+
   .mat-input-element {
     color: $blue;
   }
@@ -38,6 +41,7 @@ mat-form-field {
     color: red;
     font-family: 'Patrick Hand', cursive;
   }
+
   .mat-form-field-label {
     color: red;
     font-family: 'Patrick Hand', cursive;
@@ -47,6 +51,7 @@ mat-form-field {
       font-family: 'Patrick Hand', cursive;
     }
   }
+
   .mat-form-field-ripple {
     color: red;
     font-family: 'Patrick Hand', cursive;

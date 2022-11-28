@@ -18,7 +18,7 @@ export class CreateTaskPopupComponent {
   });
 
   constructor(
-    private dialogRef: MatDialogRef<CreateTaskPopupComponent>,
+    private readonly dialogRef: MatDialogRef<CreateTaskPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string,
     private readonly columnsService: ColumnsService
   ) {}
