@@ -145,27 +145,23 @@ th {
 }
 
 p {
-padding-left: 30px;
+  padding-left: 30px;
 }
 
 
 
 @media (max-width: 767px) {
-th {
-min-width: 0;
-}
 
-.sort-icon {
-display: none;
-}
+  th {
+    min-width: 0;
+  }
 
-.mat-dialog-container {
-max-width: 100vw;
-}
+  .sort-icon {
+    display: none;
+  }
 
-.customSearch.cdk-global-overlay-wrapper {
-justify-content: left !important;
-}
-
+  .mat-dialog-container {
+    max-width: 100vw;
+  }
 
 }
