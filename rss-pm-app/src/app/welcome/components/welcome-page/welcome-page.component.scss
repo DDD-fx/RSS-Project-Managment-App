@@ -4,11 +4,11 @@
 
 .background {
   background-color: $green;
-  border-radius: 20px;
+  border-radius: $box-radius;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+  box-shadow: $shadow;
   font-family: 'Patrick Hand', cursive;
 }
 
@@ -28,10 +28,10 @@
   width: 50%;
   position: relative;
 
-  img {
+  .img {
     width: 400px;
     border-radius: 20px;
-    box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+    box-shadow: $shadow;
     position: absolute;
     left: 0;
     top: 0;
@@ -57,7 +57,7 @@
   color: $dark-grey;
 }
 
-li {
+.li {
   animation-name: bubbly;
   animation-duration: calc(var(--i) * 1s);
   animation-fill-mode:forwards;
@@ -105,7 +105,7 @@ li {
     font-family: 'Patrick Hand', cursive;
   }
 
-  p {
+  .p {
     color: $almost-black;
     line-height: 1.5;
     text-align: justify;
@@ -118,6 +118,7 @@ li {
   margin-bottom: 20px;
   margin-top: 20px;
 }
+
 .animation-box {
   flex-direction: column;
   gap: 2rem;
@@ -241,9 +242,6 @@ li {
 }
 
 @media (min-width:768px) and (max-width: 1279px) {
-  //.background {
-  //  background-color: yellow;
-  //}
 
   .about-team {
     display: flex;
@@ -257,6 +255,7 @@ li {
 }
 
 @media (max-width: 767px) {
+
   .background {
     width: 100%;
   }
@@ -281,7 +280,7 @@ li {
   .img-container-phone {
     display: block;
     margin: 0 auto;
-    img {
+    .pic {
       width: 100%;
       border-radius: 20px;
     }
