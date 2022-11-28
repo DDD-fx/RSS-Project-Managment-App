@@ -209,13 +209,18 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 767px) {
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
   #nav-icon {
     display: block;
-    z-index: 999999;
+    z-index: 4;
   }
 
   .header__toggle {
-    z-index: 999999;
+    z-index: 4;
   }
 
   .header__create-button-area {
@@ -233,7 +238,7 @@ input:checked + .slider:before {
     width: 100%;
     height: 100%;
     background-color: rgba(107, 105, 105, 0.5);
-    z-index: 99999;
+    z-index: 2;
   }
 
   .link-tab {
@@ -246,7 +251,7 @@ input:checked + .slider:before {
     top: 0;
     right: -100%;
     background-color: $green;
-    z-index: 1100000;
+    z-index: 3;
   }
 
   .is-open {
@@ -257,7 +262,7 @@ input:checked + .slider:before {
   .menu-item {
     color:black;
     display: block;
-    z-index: 9999;
+    z-index: 4;
     margin-top: 20px;
     font-size: 1.5rem;
     padding-bottom: 5px;
