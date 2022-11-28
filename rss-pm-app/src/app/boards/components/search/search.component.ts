@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class SearchComponent implements OnInit {
   searchInput = new FormGroup({
-    search: new FormControl(['']),
+    search: new FormControl(''),
   });
 
   searchText$ = new Subject<string>();
@@ -23,12 +23,9 @@ export class SearchComponent implements OnInit {
   }
 
   searchTasks() {
-    if (this.searchInput.get(['search'])?.value.length > 0) {
-      this.dialogRef.open(PopupSearchResultsComponent, {
-        data: { searchText: this.searchInput.get(['search'])?.value },
-        panelClass: 'customSearch',
-      });
-      this.searchInput.controls.search.setValue(['']);
-    }
+    this.dialogRef.open(PopupSearchResultsComponent, {
+      data: { searchText: this.searchInput.get(['search'])?.value },
+      panelClass: 'customSearch',
+    });
   }
 }

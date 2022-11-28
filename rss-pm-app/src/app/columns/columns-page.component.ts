@@ -102,8 +102,10 @@ export class ColumnsPageComponent implements OnInit {
   }
 
   dropTask(event: CdkDragDrop<ITask[]>, columnId: string): void {
-    this.loaderService.enableLoader(true);
     if (event.previousContainer === event.container) {
+      if (event.currentIndex === event.previousIndex) return;
+
+      this.loaderService.enableLoader(true);
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       const tasks = event.container.data;
       const movedTask = tasks[event.currentIndex];
@@ -116,7 +118,15 @@ export class ColumnsPageComponent implements OnInit {
         boardId: this.currBoardId$.value,
         columnId: columnId,
       };
-      this.apiTasksService.updateTask(movedTask.id, body).subscribe(() => this.loaderService.disableLoader());
+      this.apiTasksService
+        .updateTask(movedTask.id, body)
+        .pipe(
+          catchError((err: IHttpErrors) => {
+            this.notificationService.showError(ESiteUrls.tasks, err);
+            throw new Error(`${err.error.statusCode} ${err.error.message}`);
+          })
+        )
+        .subscribe(() => this.loaderService.disableLoader());
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       this.loaderService.enableLoader(true);
@@ -138,7 +148,11 @@ export class ColumnsPageComponent implements OnInit {
         .updateTransferredTask(prevColumnId, movedTask.id, body)
         .pipe(
           switchMap(() => this.apiBoardService.getBoard(this.currBoardId$.value)),
-          tap((board) => this.columnsService.updateBoard(board))
+          tap((board) => this.columnsService.updateBoard(board)),
+          catchError((err: IHttpErrors) => {
+            this.notificationService.showError(ESiteUrls.tasks, err);
+            throw new Error(`${err.error.statusCode} ${err.error.message}`);
+          })
         )
         .subscribe(() => this.loaderService.disableLoader());
     }
