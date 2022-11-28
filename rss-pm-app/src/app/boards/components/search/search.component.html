@@ -11,8 +11,11 @@
   </div>
 
   <div class="button-area">
-    <button mat-raised-button [disabled]="searchInput.get('search')?.pristine">
-      <mat-icon class="btn-bg" (click)="searchTasks()">search</mat-icon>
+    <button mat-raised-button
+            class="btn-bg"
+            [disabled]="searchInput.get('search')?.value?.length === 0"
+            (click)="searchTasks()">
+      <mat-icon>search</mat-icon>
     </button>
   </div>
 </form>

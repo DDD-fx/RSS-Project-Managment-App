@@ -26,13 +26,11 @@
   transition: 0.5s;
   margin-right: auto;
   margin-left: auto;
-
 }
 
 .mat-card-title {
   text-align: center;
 }
-
 
 .board-btn-wrapper {
   @include flex-center();
@@ -42,6 +40,7 @@
     border: 1px solid $black;
   }
 }
+
 .board:hover {
   box-shadow: none;
   transition: 0.5s;
