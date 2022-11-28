@@ -1,6 +1,6 @@
 <header class="header">
   <div class="logo-area">
-    <a >
+    <a>
       <img class="header__logo" (click)="onLogoClick()" src="https://cdn-icons-png.flaticon.com/512/567/567014.png" alt="logo">
     </a>
   </div>
@@ -19,7 +19,7 @@
         <input type="checkbox" id="input" (click)="changeLang()" [(ngModel)]="checked">
         <span class="slider round"></span>
       </label>
-      <span class="lang" >EN</span>
+      <span class="lang">EN</span>
     </div>
 
     <div class="header__controls">
@@ -67,18 +67,16 @@
       <ng-template #firstBlock>
         <p class="header__user-name">{{'header.hi' | translate}}{{userName$ | async}}</p>
         <a
-          (click)="createBoard()"
-          (click)="toggleMenu()"
+          (click)="createBoard(); toggleMenu()"
           class="menu-item link">{{'header.create-board-button' | translate}}</a>
         <a class="menu-item link"
            [routerLink]="['userEdit']">{{'header.edit-profile' | translate}}</a>
         <a class="menu-item link"
-           (click)="logout()"
-           (click)="toggleMenu()"
+           (click)="logout(); toggleMenu()"
         >{{'header.exit-button' | translate}}</a>
         <a class="menu-item link"
-           (click)="deleteUser()"
-           (click)="toggleMenu()">{{'header.delete-user' | translate}}</a>
+           (click)="deleteUser(); toggleMenu()">
+          {{'header.delete-user' | translate}}</a>
       </ng-template>
       <ng-template #secondBlock>
         <p class="name">{{'header.hi-stranger' | translate}}</p>

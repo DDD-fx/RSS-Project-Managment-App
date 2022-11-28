@@ -51,6 +51,7 @@
     &__settings:hover {
         width: 22px;
     }
+
     .settings-area {
       width: 50px;
       cursor: pointer;
@@ -208,7 +209,6 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 767px) {
-
   #nav-icon {
     display: block;
     z-index: 9999999999999;

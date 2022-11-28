@@ -2,7 +2,6 @@
 @import "src/styles/variables";
 
 .main-container {
-
   .sort:hover {
     border: 1px solid $blue;
     border-radius: 5px;
@@ -102,11 +101,13 @@ li {
   border-color: transparent;
   transition: 0.5s;
 }
+
 .loader-area {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
+
 .sort-wrapper {
   width: 60px;
 }

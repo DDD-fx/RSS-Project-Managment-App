@@ -1,5 +1,5 @@
 <div class="main-container">
-  <app-columns-page-header></app-columns-page-header>
+  <app-columns-page-header *ngIf="!isNoColumnsData"></app-columns-page-header>
 
   <div class="columns-container" id="style">
     <ng-container *ngIf="(columns$ | async) as columns">
@@ -28,7 +28,6 @@
                 class="all-tasks">
               </app-task>
 
-
               <button mat-stroked-button color="primary" class="add-task-btn" (click)="createTaskPopup(column.id)">
                 <mat-icon>add</mat-icon>
                 {{'tasks.add-task' | translate}}
@@ -37,7 +36,7 @@
           </div>
       </ng-container>
     </ng-container>
-    <button *ngIf="!isNotDataColumns" mat-stroked-button (click)="createColumnPopup()" class="create-column-btn">
+    <button *ngIf="!isNoColumnsData" mat-stroked-button (click)="createColumnPopup()" class="create-column-btn">
       <mat-icon>add</mat-icon>
       {{'columns.add-column' | translate}}
     </button>

@@ -40,7 +40,6 @@ export class UpdateBoardPopupComponent implements OnInit {
 
   closeUpdateForm() {
     this.dialogRef.close();
-    // this.loaderService.disableLoader();
   }
 
   updateBoard() {

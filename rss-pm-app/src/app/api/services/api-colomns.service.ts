@@ -10,10 +10,6 @@ import { ICreateColumnReq, ICreateColumnResp, IUpdateColumnReq } from '../models
 export class ApiColumnsService {
   constructor(private readonly httpClient: HttpClient) {}
 
-  getAllColumns(boardId: string): Observable<ICreateColumnResp[]> {
-    return this.httpClient.get<ICreateColumnResp[]>(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}`);
-  }
-
   createNewColumn(boardId: string, body: ICreateColumnReq): Observable<ICreateColumnResp> {
     return this.httpClient.post<ICreateColumnResp>(EApiUrls.boards + `/${boardId}` + `/${EApiUrls.columns}`, body);
   }

@@ -20,9 +20,11 @@ export class BoardsPageComponent implements OnInit {
 
   error$: Observable<string | null>;
 
-  isLoading$ = this.loaderService.isLoading$;
-
-  constructor(private store: Store, private ngZone: NgZone, private readonly loaderService: LoaderService) {
+  constructor(
+    private readonly store: Store,
+    private readonly ngZone: NgZone,
+    private readonly loaderService: LoaderService
+  ) {
     this.isLoadingBoard$ = this.store.select(selectAllBoards);
     this.boards$ = this.store.select(selectAllBoardsSuccess);
     this.error$ = this.store.select(selectAllBoardsFailure);
@@ -52,7 +54,7 @@ export class BoardsPageComponent implements OnInit {
     }
   }
 
-  taskBoardByFn(index: number, board: ICreateBoardResp): string {
+  trackByFn(index: number, board: ICreateBoardResp): string {
     return board.id;
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DoCheck, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { catchError, forkJoin, Observable, of, switchMap, tap } from 'rxjs';
@@ -17,7 +17,7 @@ import { ISignUpResp } from '../../../auth/models/auth.model';
   selector: 'app-popup-search-results',
   templateUrl: './popup-search-results.component.html',
   styleUrls: ['./popup-search-results.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopupSearchResultsComponent implements OnInit, DoCheck {
   public tasksArray: ITaskSearch[] = [];
@@ -37,7 +37,7 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
     private readonly apiUserService: ApiUserService,
     private readonly dialogRef: MatDialogRef<PopupSearchResultsComponent>,
     private readonly notificationService: NotificationService,
-    private cdr: ChangeDetectorRef,
+    private readonly cdr: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: { searchText: string }
   ) {}
 
@@ -70,13 +70,13 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
               })
             )
           );
-          return forkJoin(observables.length ? observables : of(null));
+          if (observables.length) return forkJoin(observables);
+          else return of(null);
         }),
         tap((users) => {
-          if (taskData.length) {
+          if (users) {
             this.tasksArray = taskData.map((task, index) => ({
               ...task,
-              // @ts-ignore
               user: users[index]?.name,
             }));
           } else {

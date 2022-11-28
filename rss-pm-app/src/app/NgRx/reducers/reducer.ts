@@ -3,12 +3,6 @@ import { ELocalStorage } from 'src/app/shared/shared.enums';
 import * as StoreActions from '../actions/storeActions';
 import { IStore } from '../interfaces/store.interface';
 
-// export interface State {}
-//
-// export const reducers: ActionReducerMap<State> = {};
-//
-// export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
-
 export const Store: IStore = {
   isLogged: false,
   userName: null,
@@ -36,7 +30,7 @@ export const storeReducer = createReducer(
   on(StoreActions.saveToken, (state, action): IStore => ({ ...state, token: action.token })),
   on(StoreActions.tokenExpired, (state): IStore => ({ ...state, userName: null, isLogged: false, token: '' })),
 
-  // all boards redusers
+  // all boards reducers
   on(StoreActions.getAllBoards, (state): IStore => ({ ...state, isLoading: true })),
   on(
     StoreActions.getAllBoardsSuccess,
@@ -47,7 +41,7 @@ export const storeReducer = createReducer(
     (state, action): IStore => ({ ...state, isLoading: false, error: action.error })
   ),
 
-  // detete board reduser
+  // delete board reducer
   on(
     StoreActions.deleteBoardById,
     (state, { boardId }): IStore => ({
@@ -62,7 +56,7 @@ export const storeReducer = createReducer(
       boards: newBoards,
     };
   }),
-  // current board redusers
+  // current board reducers
   on(StoreActions.getCurrentBoard, (state): IStore => ({ ...state, isOpenBoard: true })),
   on(
     StoreActions.getCurrentBoardFailure,
@@ -73,7 +67,7 @@ export const storeReducer = createReducer(
     (state, action): IStore => ({ ...state, isOpenBoard: false, currentBoard: action.board })
   ),
 
-  // update board redusers
+  // update board reducers
   on(StoreActions.updateBoardSuccess, (state, { board }): IStore => {
     const boardIndex = state.boards?.findIndex((item) => item.id === board.id);
     const updateBoards = [...state.boards];
@@ -86,7 +80,7 @@ export const storeReducer = createReducer(
     };
   }),
 
-  // all tasks redusers
+  // all tasks reducers
   on(StoreActions.getAllTasks, (state): IStore => ({ ...state, isLoading: true })),
   on(StoreActions.getAllTasksSuccess, (state, action): IStore => ({ ...state, isLoading: false, tasks: action.tasks })),
   on(StoreActions.getAllTasksFailure, (state, action): IStore => ({ ...state, isLoading: false, error: action.error }))

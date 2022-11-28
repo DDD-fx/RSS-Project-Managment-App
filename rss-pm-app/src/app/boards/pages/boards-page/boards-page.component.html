@@ -29,7 +29,7 @@
     <ng-template  #contentBlock >
       <div class="content">
         <section class="boards-list">
-          <div class="board-area" *ngFor="let board of boards$ | async | sort: order">
+          <div class="board-area" *ngFor="let board of boards$ | async | sort: order; trackBy: trackByFn">
             <app-board-item [board]="board"></app-board-item>
           </div>
           <app-new-board></app-new-board>

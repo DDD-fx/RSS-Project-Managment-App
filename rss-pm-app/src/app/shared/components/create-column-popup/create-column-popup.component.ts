@@ -12,7 +12,7 @@ import { ICreateColumnReq } from '../../../api/models/api-board.model';
 })
 export class CreateColumnPopupComponent {
   constructor(
-    private dialogRef: MatDialogRef<CreateColumnPopupComponent>,
+    private readonly dialogRef: MatDialogRef<CreateColumnPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string,
     private readonly columnsService: ColumnsService
   ) {}

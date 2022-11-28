@@ -1,8 +1,6 @@
 @import "src/styles/variables";
 @import "src/styles/mixins";
 
-
-
 .main-container {
   height: calc(100vh - 210px);
   background-color: $background;
@@ -15,12 +13,14 @@
     padding: 0;
   }
 }
+
 .columns-container {
   display: flex;
   flex-direction: row;
   overflow: auto;
   padding-bottom: 20px;
 }
+
 .icon {
   color: $darkest-grey;
 }
@@ -112,7 +112,6 @@ mat-icon {
 
 .loader-im {
   margin-right: auto;
-  margin-right: auto;
 }
 
 .cdk-drag-preview {
@@ -137,14 +136,17 @@ mat-icon {
     font-family: 'Patrick Hand', cursive;
     height: 20px;
   }
+
   .mat-form-field-ripple {
     background-color: $blue;
     font-family: 'Patrick Hand', cursive;
   }
+
   .mat-form-field-required-marker {
     color: $blue;
     font-family: 'Patrick Hand', cursive;
   }
+
   .mat-input-element {
     color: $blue;
   }
@@ -155,15 +157,18 @@ mat-icon {
     color: red;
     font-family: 'Patrick Hand', cursive;
   }
+
   .mat-form-field-label {
     color: red;
     font-family: 'Patrick Hand', cursive;
     height: 17px;
+
     .mat-form-field-required-marker {
       color: red;
       font-family: 'Patrick Hand', cursive;
     }
   }
+
   .mat-form-field-ripple {
     color: red;
     font-family: 'Patrick Hand', cursive;
@@ -174,7 +179,6 @@ mat-icon {
   box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
   background-color: #F5F5F5;
   border-radius: 10px;
-
 }
 
 :host::-webkit-scrollbar {
@@ -215,7 +219,6 @@ mat-icon {
   box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
   background-color: #F5F5F5;
   border-radius: 10px;
-
 }
 
 #style::-webkit-scrollbar {
@@ -251,19 +254,6 @@ mat-icon {
     from($blue),
   )
 }
-//@media (min-width:768px) and (max-width: 1279px) {
-//  :host {
-//    height: 50vh;
-//  }
-//
-//  .column {
-//    max-height: calc(49vh - 36px);
-//  }
-//
-//  .columns {
-//    margin-left: 10px;
-//  }
-//}
 
 @media (max-width: 768px) {
   :host {
