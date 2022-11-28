@@ -211,12 +211,13 @@ input:checked + .slider:before {
 @media (max-width: 767px) {
   #nav-icon {
     display: block;
-    z-index: 9999999999999;
+    z-index: 999999;
   }
 
   .header__toggle {
-    z-index: 9999999999999;
+    z-index: 999999;
   }
+
   .header__create-button-area {
     display: none;
   }
@@ -236,7 +237,7 @@ input:checked + .slider:before {
   }
 
   .link-tab {
-    padding-top: 40px;
+    padding-top: 70px;
     padding-left: 20px;
     display: block;
     position: fixed;

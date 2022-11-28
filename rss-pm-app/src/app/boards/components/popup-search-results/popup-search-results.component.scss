@@ -39,11 +39,11 @@ table {
 }
 
 .angle1 {
-  border-radius: 20px 0 0 0;
+  border-radius: 5px 0 0 0;
 }
 
 .angle2 {
-  border-radius: 0 20px 0 0 ;
+  border-radius: 0 5px 0 0 ;
 }
 
 th,
@@ -138,15 +138,34 @@ th {
 }
 
 .table {
-  border-radius: 20px;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90vw;
 }
 
-@media (max-width: 767px) {
-  th {
-    min-width: 0;
-  }
+p {
+padding-left: 30px;
+}
 
-  .sort-icon {
-    display: none;
-  }
+
+
+@media (max-width: 767px) {
+th {
+min-width: 0;
+}
+
+.sort-icon {
+display: none;
+}
+
+.mat-dialog-container {
+max-width: 100vw;
+}
+
+.customSearch.cdk-global-overlay-wrapper {
+justify-content: left !important;
+}
+
+
 }

@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit {
     this.dialogRef.open(PopupSearchResultsComponent, {
       data: { searchText: this.searchInput.get(['search'])?.value },
       panelClass: 'customSearch',
+      backdropClass: 'customSearchBackdrop',
     });
   }
 }
