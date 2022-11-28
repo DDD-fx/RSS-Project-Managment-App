@@ -27,6 +27,8 @@ export class HeaderComponent implements OnInit {
 
   userName$: Observable<string | null> | undefined;
 
+  checked: string = '';
+
   constructor(
     private translate: TranslateService,
     private store: Store,
@@ -47,6 +49,19 @@ export class HeaderComponent implements OnInit {
       this.store.dispatch(makeIsloggedTrue());
       this.store.dispatch(addUserName());
     }
+    if (localStorage.getItem('lang') === 'en') {
+      this.translate.use('en');
+    } else if (localStorage.getItem('lang') === 'ru') {
+      this.translate.use('ru');
+    } else {
+      this.translate.use('en');
+      localStorage.setItem('lang', 'en');
+    }
+    if (localStorage.getItem('lang') === 'en') {
+      this.checked = 'checked';
+    } else {
+      this.checked = '';
+    }
   }
 
   changeLang(): void {
@@ -55,7 +70,7 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('lang', 'ru');
     } else {
       this.translate.use('en');
-      localStorage.setItem('lang', 'eng');
+      localStorage.setItem('lang', 'en');
     }
   }
 
@@ -80,7 +95,6 @@ export class HeaderComponent implements OnInit {
 
   onLogoClick() {
     this.router.navigate([getTokenFromLS() ? ESiteUrls.boards : ESiteUrls.welcome]);
-    // this.router.navigate([ESiteUrls.welcome]);
   }
 
   createBoard() {

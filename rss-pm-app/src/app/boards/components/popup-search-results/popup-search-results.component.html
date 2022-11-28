@@ -24,7 +24,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let task of tasksArray; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
-        <td>{{ indexElem + 1 }}</td>
+        <td class="number">{{ indexElem + 1 }}</td>
         <td>{{task.task.title | titlecase}}</td>
         <td>{{task.task.description }}</td>
         <td>{{task.user | titlecase}}</td>

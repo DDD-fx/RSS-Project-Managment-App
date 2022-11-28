@@ -29,7 +29,7 @@
   position: relative;
 
   img {
-    width: 100%;
+    width: 400px;
     border-radius: 20px;
     box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
     position: absolute;
@@ -259,7 +259,6 @@ li {
 @media (max-width: 767px) {
   .background {
     width: 100%;
-    background-color: green;
   }
 
   .rss-content {
