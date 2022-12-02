@@ -5,6 +5,10 @@ import { Store } from '@ngrx/store';
 import { ICreateBoardResp } from 'src/app/api/models/api-board.model';
 import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { updateBoardSuccess } from 'src/app/NgRx/actions/storeActions';
+import { catchError } from 'rxjs';
+import { IHttpErrors } from '../../../api/models/errors.model';
+import { ESiteUrls } from '../../shared.enums';
+import { NotificationService } from '../../../api/notification.service';
 
 export interface DialogData {
   title: string;
@@ -23,6 +27,7 @@ export class UpdateBoardPopupComponent implements OnInit {
     private readonly apiBoardService: ApiBoardService,
     private readonly store: Store,
     private readonly dialogRef: MatDialogRef<UpdateBoardPopupComponent>,
+    private readonly notificationService: NotificationService,
     @Inject(MAT_DIALOG_DATA) public data: { currBoard: ICreateBoardResp }
   ) {}
 
@@ -53,7 +58,15 @@ export class UpdateBoardPopupComponent implements OnInit {
         description: this.updateForm.controls['description'].value,
       };
       this.store.dispatch(updateBoardSuccess({ board: board }));
-      this.apiBoardService.updateBoard(this.updateForm.value, this.data.currBoard.id).subscribe();
+      this.apiBoardService
+        .updateBoard(this.updateForm.value, this.data.currBoard.id)
+        .pipe(
+          catchError((err: IHttpErrors) => {
+            this.notificationService.showError(ESiteUrls.boards, err);
+            throw new Error(`${err.error.statusCode} ${err.error.message}`);
+          })
+        )
+        .subscribe();
     }
     this.dialogRef.close();
   }

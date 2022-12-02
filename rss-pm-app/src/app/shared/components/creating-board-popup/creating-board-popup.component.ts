@@ -5,6 +5,10 @@ import { ApiBoardService } from '../../../api/services/api-board.service';
 import { Store } from '@ngrx/store';
 import { getAllBoards } from '../../../NgRx/actions/storeActions';
 import { LoaderService } from '../loader/loader.service';
+import { catchError } from 'rxjs';
+import { IHttpErrors } from '../../../api/models/errors.model';
+import { ESiteUrls } from '../../shared.enums';
+import { NotificationService } from '../../../api/notification.service';
 
 export interface DialogData {
   title: string;
@@ -22,7 +26,8 @@ export class CreatingBoardPopupComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private readonly apiBoardService: ApiBoardService,
     private readonly store: Store,
-    private readonly loaderService: LoaderService
+    private readonly loaderService: LoaderService,
+    private readonly notificationService: NotificationService
   ) {}
 
   onCancelClick(): void {
@@ -37,7 +42,15 @@ export class CreatingBoardPopupComponent {
   createBoard() {
     if (this.boardForm.valid) {
       this.loaderService.enableLoader();
-      this.apiBoardService.createBoard(this.boardForm.value).subscribe(() => this.store.dispatch(getAllBoards()));
+      this.apiBoardService
+        .createBoard(this.boardForm.value)
+        .pipe(
+          catchError((err: IHttpErrors) => {
+            this.notificationService.showError(ESiteUrls.boards, err);
+            throw new Error(`${err.error.statusCode} ${err.error.message}`);
+          })
+        )
+        .subscribe(() => this.store.dispatch(getAllBoards()));
       this.dialogRef.close();
       this.loaderService.disableLoader();
     }

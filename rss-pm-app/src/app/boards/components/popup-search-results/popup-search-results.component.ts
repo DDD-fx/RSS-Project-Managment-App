@@ -86,7 +86,8 @@ export class PopupSearchResultsComponent implements OnInit, DoCheck {
           this.cdr.detectChanges();
         }),
         catchError((err: IHttpErrors) => {
-          this.notificationService.showError(ESiteUrls.columns, err);
+          this.dialogRef.close();
+          this.notificationService.showError(ESiteUrls.boards, err);
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )

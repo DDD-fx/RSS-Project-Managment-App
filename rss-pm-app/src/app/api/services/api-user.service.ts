@@ -19,8 +19,8 @@ export class ApiUserService {
     return this.httpClient.get<ISignUpResp>(EApiUrls.users + `/${userId}`);
   }
 
-  deleteUser(userId: string): void {
-    this.httpClient.delete(EApiUrls.users + `/${userId}`).subscribe();
+  deleteUser(userId: string): Observable<Object> {
+    return this.httpClient.delete(EApiUrls.users + `/${userId}`);
   }
 
   updateUser(userId: string, body: ISignUpReq): Observable<ISignUpResp> {
