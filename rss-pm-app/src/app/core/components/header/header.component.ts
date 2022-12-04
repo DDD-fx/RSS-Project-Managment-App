@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { ApiUserService } from 'src/app/api/services/api-user.service';
 import { addUserName, makeIsloggedTrue } from 'src/app/NgRx/actions/storeActions';
 import { selectIsLogged, selectUserName } from 'src/app/NgRx/selectors/storeSelectors';
@@ -13,6 +13,9 @@ import { ELocalStorage, ESiteUrls } from '../../../shared/shared.enums';
 import { CreatingBoardPopupComponent } from '../../../shared/components/creating-board-popup/creating-board-popup.component';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { getTokenFromLS, getUserIdFromLs } from 'src/app/shared/shared.utils';
+import { IHttpErrors } from '../../../api/models/errors.model';
+import { NotificationService } from '../../../api/notification.service';
+import { LoaderService } from '../../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-header',
@@ -30,12 +33,14 @@ export class HeaderComponent implements OnInit {
   checked: string = '';
 
   constructor(
-    private translate: TranslateService,
-    private store: Store,
-    private router: Router,
-    private apiService: ApiUserService,
-    private authService: AuthService,
-    private dialogRef: MatDialog
+    private readonly translate: TranslateService,
+    private readonly store: Store,
+    private readonly router: Router,
+    private readonly apiService: ApiUserService,
+    private readonly authService: AuthService,
+    private readonly dialogRef: MatDialog,
+    private readonly notificationService: NotificationService,
+    private readonly loaderService: LoaderService
   ) {
     translate.addLangs(['en', 'ru']);
     translate.setDefaultLang('en');
@@ -86,9 +91,20 @@ export class HeaderComponent implements OnInit {
     });
     dialog.afterClosed().subscribe((result) => {
       if (result.toString() === 'true') {
-        this.apiService.deleteUser(getUserIdFromLs());
-        this.authService.onLogOut();
-        void this.router.navigate([ESiteUrls.signUp]);
+        this.loaderService.enableLoader();
+        this.apiService
+          .deleteUser(getUserIdFromLs())
+          .pipe(
+            catchError((err: IHttpErrors) => {
+              this.notificationService.showError(ESiteUrls.boards, err);
+              throw new Error(`${err.error.statusCode} ${err.error.message}`);
+            })
+          )
+          .subscribe(() => {
+            this.authService.onLogOut();
+            void this.router.navigate([ESiteUrls.signUp]);
+            this.loaderService.disableLoader();
+          });
       }
     });
   }

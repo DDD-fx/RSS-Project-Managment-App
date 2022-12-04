@@ -42,7 +42,7 @@ export class BoardsPageComponent implements OnInit {
     if (localStorage.getItem(ELocalStorage.token)) {
       this.loaderService.enableLoader();
       this.fetchData();
-      this.loaderService.disableLoader(); // а где enable?
+      this.loaderService.disableLoader();
     }
   }
 

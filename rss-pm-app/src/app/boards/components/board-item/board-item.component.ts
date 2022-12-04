@@ -7,6 +7,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
 import { LoaderService } from '../../../shared/components/loader/loader.service';
 import { UpdateBoardPopupComponent } from 'src/app/shared/components/update-board-popup/update-board-popup.component';
+import { catchError } from 'rxjs';
+import { IHttpErrors } from '../../../api/models/errors.model';
+import { ESiteUrls } from '../../../shared/shared.enums';
+import { NotificationService } from '../../../api/notification.service';
 
 @Component({
   selector: 'app-board-item',
@@ -15,6 +19,14 @@ import { UpdateBoardPopupComponent } from 'src/app/shared/components/update-boar
 })
 export class BoardItemComponent {
   @Input() board!: ICreateBoardResp;
+
+  constructor(
+    private readonly apiBoardService: ApiBoardService,
+    private readonly store: Store,
+    private readonly dialogRef: MatDialog,
+    private readonly loaderService: LoaderService,
+    private readonly notificationService: NotificationService
+  ) {}
 
   openUpdateForm() {
     const currBoard = this.board;
@@ -26,25 +38,23 @@ export class BoardItemComponent {
     });
   }
 
-  constructor(
-    private apiBoardService: ApiBoardService,
-    private store: Store,
-    private dialogRef: MatDialog,
-    private readonly loaderService: LoaderService
-  ) {}
-
   deleteBoard(boardId: string) {
-    this.loaderService.enableLoader();
     let dialog = this.dialogRef.open(DeletingPopupComponent, {
       data: { name: 'deleting-popup.del-board' },
       panelClass: 'custom',
     });
     dialog.afterClosed().subscribe((result) => {
       if (result === 'true') {
-        this.apiBoardService.deleteBoard(boardId);
-        this.store.dispatch(deleteBoardById({ boardId }));
+        this.apiBoardService
+          .deleteBoard(boardId)
+          .pipe(
+            catchError((err: IHttpErrors) => {
+              this.notificationService.showError(ESiteUrls.boards, err);
+              throw new Error(`${err.error.statusCode} ${err.error.message}`);
+            })
+          )
+          .subscribe(() => this.store.dispatch(deleteBoardById({ boardId })));
       }
     });
-    this.loaderService.disableLoader();
   }
 }

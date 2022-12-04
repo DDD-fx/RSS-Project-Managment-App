@@ -3,13 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICreateBoardReq, ICreateBoardResp, IGetBoardResp } from '../models/api-board.model';
 import { EApiUrls } from '../../shared/shared.enums';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiBoardService {
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient) {}
 
   createBoard(data: ICreateBoardReq): Observable<ICreateBoardResp> {
     return this.httpClient.post<ICreateBoardResp>(EApiUrls.boards, data);
@@ -23,8 +22,8 @@ export class ApiBoardService {
     return this.httpClient.get(EApiUrls.boards) as Observable<ICreateBoardResp[]>;
   }
 
-  deleteBoard(id: string): void {
-    this.httpClient.delete(EApiUrls.boards + `/${id}`).subscribe();
+  deleteBoard(id: string): Observable<Object> {
+    return this.httpClient.delete(EApiUrls.boards + `/${id}`);
   }
 
   updateBoard(body: ICreateBoardReq, id: string): Observable<ICreateBoardResp> {

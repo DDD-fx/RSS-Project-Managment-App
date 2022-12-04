@@ -6,17 +6,19 @@ import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { ICreateBoardResp, IGetBoardResp } from '../api/models/api-board.model';
 import { ApiBoardService } from '../api/services/api-board.service';
 import { AuthService } from '../auth/services/auth.service';
-import { ELocalStorage } from '../shared/shared.enums';
+import { ELocalStorage, ESiteUrls } from '../shared/shared.enums';
 import * as StoreActions from './../NgRx/actions/storeActions';
+import { NotificationService } from '../api/notification.service';
 
 @Injectable()
 export class AppEffects {
   constructor(
-    private actions$: Actions,
-    private apiBoardService: ApiBoardService,
-    private authService: AuthService,
-    private store: Store,
-    private router: Router
+    private readonly actions$: Actions,
+    private readonly apiBoardService: ApiBoardService,
+    private readonly authService: AuthService,
+    private readonly store: Store,
+    private readonly router: Router,
+    private readonly notificationService: NotificationService
   ) {
     const token = localStorage.getItem('token');
     if (token) {
@@ -30,7 +32,10 @@ export class AppEffects {
       mergeMap(() => {
         return this.apiBoardService.getBoards().pipe(
           map((boards: ICreateBoardResp[]) => StoreActions.getAllBoardsSuccess({ boards })),
-          catchError((error) => of(StoreActions.getAllBoardsFailure({ error: error.message })))
+          catchError((error) => {
+            this.notificationService.showError(ESiteUrls.columns, error);
+            return of(StoreActions.getAllBoardsFailure({ error: error.message }));
+          })
         );
       })
     );
