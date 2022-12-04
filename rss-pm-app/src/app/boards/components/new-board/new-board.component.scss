@@ -1,0 +1,47 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.create-board-btn {
+  border: none;
+  border-radius: 4px;
+  width: 200px;
+  height: 200px;
+  background-color: transparent;
+  cursor: pointer;
+  color: $grey;
+}
+
+.board {
+  text-align: center;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: pointer;
+  background-color: rgba(94, 119, 64, 0.3);
+  transition: 0.5s;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.mat-card-title {
+  text-align: center;
+}
+
+.board-btn-wrapper {
+  @include flex-center();
+  gap: 10px;
+
+  .mat-button:hover {
+    border: 1px solid $black;
+  }
+}
+
+.board:hover {
+  box-shadow: none;
+  transition: 0.5s;
+}

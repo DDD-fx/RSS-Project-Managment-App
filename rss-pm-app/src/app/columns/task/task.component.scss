@@ -1,0 +1,166 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+:host {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.empty-task-box {
+  width: 185px;
+  height: 50px;
+  @include flex-center();
+  border: $edit-border;
+  color: $grey;
+}
+
+.task-card {
+  font-family: 'Patrick Hand', cursive;
+  width: 185px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 5px;
+  background-color: $almost-white;
+  cursor: pointer;
+  margin-bottom: 10px;
+  max-height: 250px;
+  overflow-y: auto;
+
+  &__edit,
+  &__arrows {
+    display: none;
+    color: $blue;
+  }
+
+  &__edit:hover {
+    color: $green;
+    cursor: pointer;
+  }
+
+  &__arrows:hover {
+    color: $green;
+    cursor: pointer;
+  }
+
+  &:hover {
+    .task-card__edit,
+    .task-card__arrows {
+      display: block;
+      position: absolute;
+      font-size: 1.2em;
+      right: 5px;
+    }
+
+    .task-card__edit {
+      top: 3px;
+    }
+
+    .task-card__arrows {
+      top: 25px;
+    }
+  }
+
+  &__subtitle {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 0.9em;
+    color: $grey;
+  }
+
+  &__title,
+  &__subtitle {
+    font-family: 'Patrick Hand', cursive;
+    max-width: 160px;
+    overflow-wrap: anywhere;
+  }
+
+  &__delete-btn {
+    color: $blue;
+    align-self: flex-end;
+  }
+
+  &__delete-btn,
+  &__edit-btn {
+    color: $blue;
+    cursor: pointer;
+  }
+
+  &__delete-btn:hover {
+    color: $green;
+    cursor: pointer;
+  }
+
+  &__edit-btn:hover {
+    color: $green;
+    cursor: pointer;
+  }
+}
+
+.cdk-drag-preview {
+  font-family: 'Patrick Hand', cursive;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  font-family: 'Patrick Hand', cursive;
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  font-family: 'Patrick Hand', cursive;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+:host::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px;
+
+}
+
+:host::-webkit-scrollbar {
+  width: 5px;
+  background-color: $light-green;
+  border-radius: 10px;
+  height: 5px;
+}
+
+:host::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  width: 25px;
+  background-color: #FFF;
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($light-blue),
+  )
+}
+
+:host::-webkit-scrollbar-thumb:active {
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($blue),
+  )
+}
+
+:host::-webkit-scrollbar-thumb:hover {
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($blue),
+  )
+}
+
+@media (max-width: 768px) {
+  :host::-webkit-scrollbar {
+    width: 15px;
+  }
+}

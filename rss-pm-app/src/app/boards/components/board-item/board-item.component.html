@@ -1,0 +1,26 @@
+<div [routerLink]="['/boards', board.id]" class="board">
+  <div class="title">{{ board.title | titlecase }}</div>
+  <div class="box-overflow" id="style">
+    <p class="overflow">{{ board.description }}</p>
+  </div>
+  <div class="board-btn-wrapper">
+    <button mat-stroked-button
+            color="primary"
+            type="button"
+            class="btn-bg"
+            title="{{'columns.delete' | translate}}"
+            (click)="deleteBoard(board.id);
+            $event.stopPropagation()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-stroked-button
+            color="primary"
+            type="button"
+            class="btn-bg"
+            title="{{'tasks.edit' | translate}}"
+            (click)="openUpdateForm();
+            $event.stopPropagation()">
+      <mat-icon>border_color</mat-icon>
+    </button>
+  </div>
+</div>

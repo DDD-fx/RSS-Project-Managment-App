@@ -1,0 +1,93 @@
+@import "../../node_modules/normalize.css/normalize.css";
+@import "src/styles/mixins";
+@import "src/styles/variables";
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+html,
+body {
+  height: 100%;
+  font-family: 'Patrick Hand', cursive;
+}
+
+body {
+  margin: 0;
+}
+
+.custom .mat-dialog-container {
+  border-radius: 20px;
+}
+
+.custom .title {
+  font-family: 'Patrick Hand', cursive;
+}
+
+.custom .mat-label {
+  font-family: 'Patrick Hand', cursive;
+}
+
+.custom .mat-error {
+  font-family: 'Patrick Hand', cursive;
+  height: 17px;
+}
+
+.custom a {
+  color: $green;
+}
+
+.custom a:hover {
+  color: $blue;
+}
+
+.custom .label {
+  font-family: 'Patrick Hand', cursive;
+  height: 17px;
+}
+
+.custom .mat-raised-button {
+  background-color: $blue;
+}
+
+.custom button:disabled {
+  pointer-events: none;
+}
+
+.custom .mat-raised-button:hover{
+  @include button-hover();
+  cursor: pointer;
+}
+
+.custom .button-area {
+  width: 100px;
+}
+
+.custom .board-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+}
+
+.custom .mat-form-field-flex {
+  font-family: 'Patrick Hand', cursive;
+}
+
+.customSearch .mat-dialog-container{
+  overflow: auto;
+  min-height: 260px;
+}
+
+@media (max-width: 767px) {
+  .customSearch .mat-dialog-container{
+    max-height: 70vh;
+    border-radius: 20px;
+    overflow: auto;
+    padding: 10px;
+    max-width: 100%;
+    min-width: 320px;
+    min-height: 260px;
+  }
+
+  .customSearch#cdk-overlay-0 {
+    max-width: 100% !important;
+  }
+}
+

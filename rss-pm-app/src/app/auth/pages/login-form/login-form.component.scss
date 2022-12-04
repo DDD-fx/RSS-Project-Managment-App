@@ -1,0 +1,124 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+:host {
+  background-color: $background;
+  min-height: 100%;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 4em auto;
+  text-align: center;
+  ::ng-deep {
+    .mat-form-field-underline,
+    .mat-form-field-subscript-wrapper {
+      position: static;
+    }
+  }
+}
+
+.mat-form-field {
+  display: block;
+}
+
+.login-btn-wrapper {
+  @include flex-center;
+  gap: 20px;
+  height: 50px;
+}
+
+.card {
+  @include card();
+}
+
+.form {
+  font-family: 'Patrick Hand', cursive;
+}
+
+.title {
+  font-family: 'Patrick Hand', cursive;
+}
+
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: $blue;
+    font-family: 'Patrick Hand', cursive;
+    height: 20px;
+  }
+  .mat-form-field-ripple {
+    background-color: $blue;
+    font-family: 'Patrick Hand', cursive;
+  }
+  .mat-form-field-required-marker {
+    color: $blue;
+    font-family: 'Patrick Hand', cursive;
+  }
+  .mat-input-element {
+    color: $blue;
+  }
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid {
+  .mat-input-element {
+    color: red;
+    font-family: 'Patrick Hand', cursive;
+  }
+  .mat-form-field-label {
+    color: red;
+    font-family: 'Patrick Hand', cursive;
+    height: 17px;
+    .mat-form-field-required-marker {
+      color: red;
+      font-family: 'Patrick Hand', cursive;
+    }
+  }
+  .mat-form-field-ripple {
+    color: red;
+    font-family: 'Patrick Hand', cursive;
+  }
+}
+
+.mat-label {
+  font-family: 'Patrick Hand', cursive;
+}
+
+.mat-error {
+  font-family: 'Patrick Hand', cursive;
+  min-height: 17px;
+}
+
+a {
+  color: $green;
+}
+
+a:hover {
+  color: $blue;
+}
+
+.label {
+  font-family: 'Patrick Hand', cursive;
+  height: 17px;
+}
+
+.mat-raised-button {
+  background-color: $blue;
+  color: $almost-white;
+}
+
+button:disabled {
+  pointer-events: none;
+}
+
+.mat-raised-button:hover{
+  @include button-hover();
+  cursor: pointer;
+}
+
+.button-area {
+  width: 100px;
+}
+
+.mat-card-content {
+  width: 305px;
+}

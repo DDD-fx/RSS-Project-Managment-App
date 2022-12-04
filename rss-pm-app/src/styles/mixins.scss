@@ -1,0 +1,66 @@
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin margin-center {
+  margin: 2rem 10%;
+}
+
+@mixin flex-full-screen {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+@mixin link {
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+}
+
+@mixin link-after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: $green-text;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+@mixin link-hover-after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+@mixin link-hover {
+  transform: scaleX(1)
+}
+
+@mixin button-hover {
+  background-color: transparent;
+  border: $blue 1px solid;
+  color: $darkest-grey;
+}
+
+@mixin card {
+  border: 1px solid $lightgrey;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: $almost-white;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+

@@ -1,0 +1,32 @@
+<h2 class="title" mat-dialog-title>{{'tasks.edit-task' | translate}}?</h2>
+<form class="create-form" [formGroup]="editTaskForm" (submit)="editTask()">
+  <div class="inputs">
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'tasks.task-label' | translate}}</mat-label>
+      <input matInput autocomplete="off" type="text" formControlName="title" maxlength="100">
+      <mat-error *ngIf="!editTaskForm.get('title')?.value">{{'tasks.errors.empty-title' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'tasks.task-description' | translate}}</mat-label>
+      <textarea matInput autocomplete="off" type="text" formControlName="description"></textarea>
+      <mat-error
+        *ngIf="!editTaskForm.get('description')?.value">{{'tasks.errors.empty-description' | translate}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="board-btn-wrapper">
+    <div class="button-area">
+      <button class="popup-add-btn" mat-raised-button color="primary" type="submit" [disabled]="editTaskForm.invalid">
+        {{'tasks.edit-task-btn' | translate}}
+      </button>
+    </div>
+    <div class="button-area">
+      <button mat-button type="button" (click)="onCancelClick()">
+        {{'board.btn.cancel' | translate}}
+      </button>
+    </div>
+
+  </div>
+</form>
+
+

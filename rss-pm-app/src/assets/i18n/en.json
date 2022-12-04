@@ -1,0 +1,173 @@
+{
+  "header": {
+    "signIn-btn": "Log In",
+    "signUp-btn": "Sign Up",
+    "edit-profile": "Edit profile",
+    "create-board-button": "Create new board",
+    "exit-button": "Exit",
+    "delete-user": "Delete user",
+    "hi-stranger": "Hi, stranger",
+    "hi": "Hi, "
+  },
+  "deleting-popup": {
+    "yes-option": "Yes",
+    "no-option": "No",
+    "question": "Are you sure you want to delete ",
+    "del-acc": "account",
+    "del-board": "board",
+    "del-column": "column",
+    "del-task": "task"
+  },
+  "signIn-form": {
+    "title": "Log In",
+    "login": "Login",
+    "login-errors": {
+      "empty-login": "Please enter a login",
+      "short-login": "The login must contain at least 3 symbols"
+    },
+    "password": "Password",
+    "password-errors": {
+      "empty-password": "Please enter a password",
+      "not-strong": "Your password isn't strong enough:",
+      "8-chars": "has to contain at least 8 characters",
+      "mixture": "has to be a mixture of both uppercase and lowercase letters",
+      "special-chars": "has to contain at least one special character, e.g., ! @ # ? $",
+      "nums": "has to contain at least one number"
+    },
+    "registration-btn": "Registration",
+    "login-btn": "Log In"
+  },
+  "signUp-form": {
+    "title": "Sign Up",
+    "name": "Name",
+    "no-name-error": "Please enter your name",
+    "repeat-password": "Repeat Password",
+    "password-errors": {
+      "repeat-password": "Please repeat the password",
+      "no-match":"Passwords do not match"
+    },
+    "signUp-btn": "Sign Up"
+  },
+  "userEdit-form": {
+    "title": "Edit User",
+    "new-pw": "New Password",
+    "repeat-new-pw": "Repeat New Password",
+    "current-pw": "Current Password",
+    "password-errors": {
+      "empty-password": "Please enter the current password"
+    },
+    "save-btn": "Save Changes",
+    "back-btn": "Back"
+  },
+  "welcome": {
+    "aboutTitle": "is an application that helps people achieve their goals. RSS PM is great for organizing your to-do lists, ideas, and is very easy to use. You can create several boards to use for various projects.",
+    "button": "Try it",
+    "rssTitle": "Online Angular Course from the community ",
+    "rssAbout": {
+      "1": "RS School is free-of-charge and community-based education program conducted by The Rolling Scopes developer community since 2013.",
+      "2": "Required before the start:",
+      "3": "understanding the concept of "
+      },
+    "rssBenefits": {
+      "1": "Free-of-charge learning",
+      "2": "Open to everyone",
+      "3": "Certificate"
+    },
+    "team": {
+      "1": "O",
+      "2": "U",
+      "3": "R",
+      "4": " ",
+      "5": " ",
+      "6": "T",
+      "7": "E",
+      "8": "A",
+      "9": "M"
+    },
+    "memberDescription": {
+      "d": "Team lead, front-end web developer. Implementation of the logic of registration and user login pages (forms, validation, editing), the work with columns and tasks, including the drag-n-drop function.",
+      "a": "Team member, front-end web developer. Implementation of header and footer logic, burger menu, pop-up modal windows, design of the entire application.",
+      "i": "Team member, front-end web developer. Implementation of the logic of the welcome pages and the main page with all boards (create, delete, edit), search and sorting."
+    }
+  },
+  "footer": {
+    "names": {
+      "d": "Dmitry Khoroshkin",
+      "a": "Aleksandra Smirnova",
+      "i": "Iryna Kolhanova"
+    }
+  },
+  "board": {
+    "title": {
+      "1": " ",
+      "2": " ",
+      "3": "B",
+      "4": "O",
+      "5": "A",
+      "6": "R",
+      "7": "D",
+      "8": "S",
+      "9": " "
+    },
+    "sort": {
+      "a" : "A",
+      "z" : "Z"
+    },
+    "label": "Enter board name",
+    "description": "Description",
+    "createBoard": "Create new board",
+    "boardErrors": {
+      "empty-title": "Board name can't be empty",
+      "long-title": "The title is too long",
+      "empty-description": "Please enter a short description",
+      "long-description": "The description is too long"
+    },
+    "btn": {
+      "create": "Create",
+      "cancel": "Cancel",
+      "update": "Update"
+    },
+    "updateBoard": "Update board",
+    "newLabel": "Enter new board name",
+    "newDescription": "Enter new description"
+  },
+  "columns": {
+    "add-column": "Create new column",
+    "column-label": "Column title",
+    "add-new-column": "Add new column",
+    "delete": "Delete",
+    "move": "Move",
+    "save-title": "Save",
+    "cancel-title": "Cancel",
+    "errors": {
+      "empty-title": "Column title can't be empty"
+    }
+  },
+  "tasks": {
+    "add-task": "Add new task",
+    "task-label": "Enter task title",
+    "task-description": "Enter task description",
+    "edit-task": "Edit task",
+    "edit-task-btn": "Save changes",
+    "edit": "Edit",
+    "errors": {
+      "empty-title": "Task title can't be empty",
+      "empty-description": "Task description can't be empty"
+    }
+  },
+  "page404": {
+    "home": "Home",
+    "title": "UH OH! You're lost.",
+    "text": "The page you are looking for does not exist.\nHow you got here is a mystery. But you can click the button below\nto go back to the homepage."
+  },
+  "search": {
+    "input": "Search task",
+    "task-title": "Task title",
+    "task-description": "Task description",
+    "user": "User",
+    "board": "Board",
+    "title": "Search tasks result",
+    "not-found": "No tasks found",
+    "close": "Close"
+  }
+}

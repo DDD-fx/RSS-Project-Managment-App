@@ -1,0 +1,43 @@
+<div class="container">
+  <h3>{{'search.title' | translate}}</h3>
+  <mat-icon class="close-window"  title="{{'search.close' | translate}}" (click)="closeSearchResult()">close</mat-icon>
+</div>
+
+<ng-container class="table-container" *ngIf="tasksArray.length > 0; else elseBlock">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="angle1">№</th>
+        <th (click)="sortBoards(); sortByTitle( order==='asc' ? 'asc' : 'desc')">{{'search.task-title' | translate}}
+          <mat-icon class="sort-icon">swap_vert</mat-icon>
+        </th>
+        <th (click)="sortBoards(); sortByDescription( order==='asc' ? 'asc' : 'desc')">{{'search.task-description' | translate}}
+          <mat-icon class="sort-icon">swap_vert</mat-icon>
+        </th>
+        <th (click)="sortBoards(); sortByUser( order==='asc' ? 'asc' : 'desc')">{{'search.user' | translate}}
+          <mat-icon class="sort-icon">swap_vert</mat-icon>
+        </th>
+        <th class="angle2" (click)="sortBoards(); sortByBoard( order==='asc' ? 'asc' : 'desc')">{{'search.board' | translate}}
+          <mat-icon class="sort-icon">swap_vert</mat-icon>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasksArray; let indexElem = index;" [routerLink]="['/boards', task.boardId]" (click)="closeSearchResult()">
+        <td class="number">{{ indexElem + 1 }}</td>
+        <td>{{task.task.title | titlecase}}</td>
+        <td>{{task.task.description }}</td>
+        <td>{{task.user | titlecase}}</td>
+        <td>{{task.boardName | titlecase}}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-container *ngIf="noTasks && disableLoader">
+  <p>{{'search.not-found' | translate}}</p>
+</ng-container>
+
+<ng-template #elseBlock>
+  <app-loader *ngIf="!disableLoader"></app-loader>
+</ng-template>

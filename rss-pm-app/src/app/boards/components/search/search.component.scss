@@ -1,0 +1,63 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 1rem 0;
+}
+
+.btn-bg {
+  color: $almost-white;
+  cursor: pointer;
+}
+
+button {
+  border-color: transparent;
+  background-color: $blue;
+  transition: 0.5s;
+}
+
+button:hover {
+  border: 1px solid $blue;
+  background-color: transparent;
+  transition: 0.5s;
+  cursor: pointer;
+
+  .mat-icon {
+    color: $almost-black;
+  }
+}
+
+.button-area {
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+}
+
+input {
+  border:none;
+  height: 32px;
+  border-radius: 5px;
+}
+
+input:focus {
+  outline-color: $blue;
+}
+
+@media (max-width: 767px) {
+  input {
+    width: 130px;
+  }
+}

@@ -1,0 +1,32 @@
+<h2 class="title" mat-dialog-title>{{'board.updateBoard' | translate}}?</h2>
+
+<form class="update-form" [formGroup]="updateForm" (submit)="updateBoard()">
+  <div class="inputs">
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'board.newLabel' | translate}}</mat-label>
+      <input matInput autocomplete="off" type="text" formControlName="title" >
+      <mat-error *ngIf="!updateForm.get('title')?.value">{{'board.boardErrors.empty-title' | translate}}</mat-error>
+      <mat-error *ngIf="updateForm.get('title')?.invalid && updateForm.get('title')?.value">{{'board.boardErrors.long-title' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'board.newDescription' | translate}}</mat-label>
+      <input matInput autocomplete="off" type="text" formControlName="description">
+      <mat-error *ngIf="!updateForm.get('description')?.value">{{'board.boardErrors.empty-description' | translate}}</mat-error>
+    </mat-form-field>
+
+    <div class="board-btn-wrapper">
+      <div class="button-area">
+        <button  mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid">
+          {{'board.btn.update' | translate}}
+        </button>
+      </div>
+
+      <div class="button-area">
+        <button class="btn" mat-button type="button" (click)="closeUpdateForm()">
+          {{'board.btn.cancel' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+

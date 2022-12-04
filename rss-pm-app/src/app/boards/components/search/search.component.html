@@ -1,0 +1,21 @@
+<form class="search-form" [formGroup]="searchInput">
+  <div class="input-area">
+    <input
+      matInput
+      formControlName="search"
+      type="text"
+      placeholder="{{'search.input' | translate}}"
+      name="search"
+      autocomplete="off"
+      (keyup.enter)="searchTasks()">
+  </div>
+
+  <div class="button-area">
+    <button mat-raised-button
+            class="btn-bg"
+            [disabled]="searchInput.get('search')?.value?.length === 0"
+            (click)="searchTasks()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</form>

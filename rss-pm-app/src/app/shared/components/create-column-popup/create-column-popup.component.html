@@ -1,0 +1,23 @@
+<h2 class="title" mat-dialog-title>{{'columns.add-column'|translate}}?</h2>
+<form class="create-form" [formGroup]="newColumnForm" (submit)="createNewColumn()">
+  <div class="inputs">
+    <mat-form-field class="form-input" appearance="fill">
+      <mat-label>{{'columns.column-label' | translate}}</mat-label>
+      <input matInput autocomplete="off" type="text" formControlName="title" maxlength="100">
+      <mat-error *ngIf="!newColumnForm.get('title')?.value">{{'columns.errors.empty-title' | translate}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="board-btn-wrapper">
+    <div class="button-area">
+      <button class="popup-add-btn" mat-raised-button color="primary" type="submit" [disabled]="newColumnForm.invalid">
+        {{'board.btn.create' | translate}}
+      </button>
+    </div>
+    <div class="button-area">
+      <button mat-button type="button" (click)="onCancelClick()">
+        {{'board.btn.cancel' | translate}}
+      </button>
+    </div>
+  </div>
+</form>

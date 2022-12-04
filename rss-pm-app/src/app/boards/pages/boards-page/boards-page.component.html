@@ -1,0 +1,45 @@
+<div class="main-container">
+  <div class="main-container__content">
+    <div class="main-container__title">
+      <ul class="container boards">
+        <li class="li" style="--i:1">{{ 'board.title.1' | translate }}</li>
+        <li class="li" style="--i:1.3">{{ 'board.title.2' | translate }}</li>
+        <li class="li" style="--i:1.6">{{ 'board.title.3' | translate }}</li>
+        <li class="li" style="--i:1.9">{{ 'board.title.4' | translate }}</li>
+        <li class="li" style="--i:2.2">{{ 'board.title.5' | translate }}</li>
+        <li class="li" style="--i:2.5">{{ 'board.title.6' | translate }}</li>
+        <li class="li" style="--i:2.8">{{ 'board.title.7' | translate }}</li>
+        <li class="li" style="--i:3.1">{{ 'board.title.8' | translate }}</li>
+        <li class="li" style="--i:3.4">{{ 'board.title.9' | translate }}</li>
+      </ul>
+    </div>
+
+    <div class="panel" *ngIf="(boards$ | async)?.length">
+      <app-search></app-search>
+      <div class="panel__sort-wrapper">
+        <div class="panel__sort" (click)="sortBoards()">
+          <div>{{ 'board.sort.a' | translate }}</div>
+          <mat-icon>swap_vert</mat-icon>
+          <div>{{ 'board.sort.z' | translate }}</div>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="(isLoadingBoard$ | async ); then loaderBlock else contentBlock"></ng-container>
+    <ng-template  #contentBlock >
+      <div class="content">
+        <section class="boards-list">
+          <div class="board-area" *ngFor="let board of boards$ | async | sort: order; trackBy: trackByFn">
+            <app-board-item [board]="board"></app-board-item>
+          </div>
+          <app-new-board></app-new-board>
+        </section>
+      </div>
+    </ng-template>
+
+    <ng-template  #loaderBlock class="loader-area">
+      <app-loader></app-loader>
+    </ng-template>
+
+  </div>
+</div>

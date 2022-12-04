@@ -1,0 +1,21 @@
+@import "src/styles/variables";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    height: 100vh;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.2em;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.header {
+    width: 100%;
+}
+
+.loader-container {
+  position: relative;
+}

@@ -1,0 +1,23 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.title {
+  font-family: 'Patrick Hand', cursive;
+}
+
+button:disabled {
+  pointer-events: none;
+}
+
+.mat-raised-button {
+  background-color: $blue;
+}
+
+.mat-raised-button:hover{
+  @include button-hover();
+  cursor: pointer;
+}
+
+.mat-dialog-actions.mat-dialog-actions-align-center {
+  justify-content: space-evenly;
+}

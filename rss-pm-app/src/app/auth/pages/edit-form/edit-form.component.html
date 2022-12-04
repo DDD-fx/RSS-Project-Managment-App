@@ -1,0 +1,86 @@
+<mat-card class="card">
+  <mat-card-content>
+    <form (submit)="onUserUpdate()" [formGroup]="userEditForm">
+      <h2 class="title">{{'userEdit-form.title' | translate}}</h2>
+      <mat-form-field (click)="enableNameInput()">
+        <mat-label class="label">{{'signUp-form.name' | translate}}</mat-label>
+        <input matInput formControlName="newName">
+        <mat-error *ngIf="!userEditForm.get('newName')?.value">
+          {{'signUp-form.no-name-error' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field (click)="enableLoginInput()">
+        <mat-label class="label">{{'signIn-form.login' | translate}}</mat-label>
+        <input matInput formControlName="newLogin">
+        <mat-error *ngIf="!userEditForm.get('newLogin')?.value">
+          {{'signIn-form.login-errors.empty-login' | translate}}
+        </mat-error>
+        <mat-error *ngIf="userEditForm.get('newLogin')?.invalid && userEditForm.get('newLogin')?.value">
+          {{'signIn-form.login-errors.short-login' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field (click)="enablePwInput()">
+        <mat-label class="label">{{'userEdit-form.new-pw' | translate}}</mat-label>
+        <input matInput formControlName="newPassword" [type]="hideNewPw ? 'password' : 'text'" autocomplete="new-password">
+        <mat-icon matSuffix (click)="hideNewPw = !hideNewPw">{{hideNewPw ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="userEditForm.get('newPassword')?.value">
+          <div *ngIf="checkErrorsLength(userEditForm.get('newPassword')?.errors) > 0">
+            {{'signIn-form.password-errors.not-strong' | translate}}
+            <ul>
+              <li *ngIf="userEditForm.get('newPassword')?.errors?.['invalidLength']">
+                {{'signIn-form.password-errors.8-chars' | translate}}
+              </li>
+              <li *ngIf="userEditForm.get('newPassword')?.errors?.['invalidUpperLower']">
+                {{'signIn-form.password-errors.mixture' | translate}}
+              </li>
+              <li *ngIf="userEditForm.get('newPassword')?.errors?.['invalidSpecialSymbol']">
+                {{'signIn-form.password-errors.special-chars' | translate}}
+              </li>
+              <li *ngIf="userEditForm.get('newPassword')?.errors?.['invalidNums']">
+                {{'signIn-form.password-errors.nums' | translate}}
+              </li>
+            </ul>
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="label">{{'userEdit-form.repeat-new-pw' | translate}}</mat-label>
+        <input matInput formControlName="repeatNewPassword" [type]="hideNewPw ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hideNewPw = !hideNewPw">{{hideNewPw ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="userEditForm.get('repeatNewPassword')?.errors?.['invalidMatch'] && userEditForm.get('repeatNewPassword')?.value">
+          {{'signUp-form.password-errors.no-match' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="label">{{'userEdit-form.current-pw' | translate}}</mat-label>
+        <input matInput formControlName="currentPassword" [type]="hideCurrPw ? 'password' : 'text'" autocomplete="new-password">
+        <mat-icon matSuffix (click)="hideCurrPw = !hideCurrPw">{{hideCurrPw ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="!userEditForm.get('currentPassword')?.value">
+          {{'userEdit-form.password-errors.empty-password' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="login-btn-wrapper">
+        <div class="button-area">
+          <button mat-raised-button
+                  (click)="goBack()">
+            {{'userEdit-form.back-btn' | translate}}
+          </button>
+        </div>
+
+        <button mat-raised-button color="primary"
+                type="submit"
+                [disabled]="userEditForm.invalid">
+          {{'userEdit-form.save-btn' | translate}}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

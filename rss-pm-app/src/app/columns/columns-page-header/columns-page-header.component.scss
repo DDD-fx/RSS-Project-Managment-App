@@ -1,0 +1,26 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.title {
+  text-align: center;
+  color: $blue;
+  font-family: 'Patrick Hand', cursive;
+  font-size: xx-large;
+}
+
+.arrow {
+  position: absolute;
+  left: 10%;
+}
+
+.arrow:hover {
+  cursor: pointer;
+  color: $green;
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 24px;
+    padding: 0 60px;
+  }
+}

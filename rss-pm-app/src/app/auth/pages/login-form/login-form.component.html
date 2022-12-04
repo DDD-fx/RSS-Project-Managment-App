@@ -1,0 +1,60 @@
+<mat-card class="card">
+  <mat-card-content>
+    <form (submit)="onLogIn()" [formGroup]="loginForm" class="form">
+      <h2 class="title">{{'signIn-form.title' | translate}}</h2>
+      <mat-form-field>
+        <mat-label class="label">{{'signIn-form.login' | translate}}</mat-label>
+        <input class="input" matInput formControlName="login">
+        <mat-error *ngIf="!loginForm.get('login')?.value">
+          {{'signIn-form.login-errors.empty-login' | translate}}
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('login')?.invalid && loginForm.get('login')?.value">
+          {{'signIn-form.login-errors.short-login' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="label">{{'signIn-form.password' | translate}}</mat-label>
+        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="!loginForm.get('password')?.value">
+          {{'signIn-form.password-errors.empty-password' | translate}}
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.value">
+          <div *ngIf="checkErrorsLength(loginForm.get('password')?.errors) > 0">
+            {{'signIn-form.password-errors.not-strong' | translate}}
+            <ul>
+              <li *ngIf="loginForm.get('password')?.errors?.['invalidLength']">
+                {{'signIn-form.password-errors.8-chars' | translate}}
+              </li>
+              <li *ngIf="loginForm.get('password')?.errors?.['invalidUpperLower']">
+                {{'signIn-form.password-errors.mixture' | translate}}
+              </li>
+              <li *ngIf="loginForm.get('password')?.errors?.['invalidSpecialSymbol']">
+                {{'signIn-form.password-errors.special-chars' | translate}}
+              </li>
+              <li *ngIf="loginForm.get('password')?.errors?.['invalidNums']">
+                {{'signIn-form.password-errors.nums' | translate}}
+              </li>
+            </ul>
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="login-btn-wrapper">
+        <a [routerLink]="['/signUp']" class="registration-link">{{'signIn-form.registration-btn' | translate}}</a>
+        <div class="button-area">
+          <button mat-raised-button color="primary"
+                  type="submit"
+                  [disabled]="loginForm.invalid">
+            {{'signIn-form.login-btn' | translate}}
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+

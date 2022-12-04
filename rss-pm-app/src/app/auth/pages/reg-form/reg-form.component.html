@@ -1,0 +1,75 @@
+<mat-card class="card">
+  <mat-card-content>
+    <form class="form" (submit)="onSignUp()" [formGroup]="regForm">
+      <h2 class="title">{{'signUp-form.title' | translate}}</h2>
+      <mat-form-field>
+        <mat-label class="label">{{'signUp-form.name' | translate}}</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="!regForm.get('name')?.value">
+          {{'signUp-form.no-name-error' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="label">{{'signIn-form.login' | translate}}</mat-label>
+        <input matInput formControlName="login">
+        <mat-error *ngIf="!regForm.get('login')?.value">
+          {{'signIn-form.login-errors.empty-login' | translate}}
+        </mat-error>
+        <mat-error *ngIf="regForm.get('login')?.invalid && regForm.get('login')?.value">
+          {{'signIn-form.login-errors.short-login' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="label">{{'signIn-form.password' | translate}}</mat-label>
+        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="!regForm.get('password')?.value">
+          {{'signIn-form.password-errors.empty-password' | translate}}
+        </mat-error>
+        <mat-error *ngIf="regForm.get('password')?.value">
+          <div *ngIf="checkErrorsLength(regForm.get('password')?.errors) > 0">
+            {{'signIn-form.password-errors.not-strong' | translate}}
+            <ul>
+              <li *ngIf="regForm.get('password')?.errors?.['invalidLength']">
+                {{'signIn-form.password-errors.8-chars' | translate}}
+              </li>
+              <li *ngIf="regForm.get('password')?.errors?.['invalidUpperLower']">
+                {{'signIn-form.password-errors.mixture' | translate}}
+              </li>
+              <li *ngIf="regForm.get('password')?.errors?.['invalidSpecialSymbol']">
+                {{'signIn-form.password-errors.special-chars' | translate}}
+              </li>
+              <li *ngIf="regForm.get('password')?.errors?.['invalidNums']">
+                {{'signIn-form.password-errors.nums' | translate}}
+              </li>
+            </ul>
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="label">{{'signUp-form.repeat-password' | translate}}</mat-label>
+        <input matInput formControlName="repeatPassword" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+
+        <mat-error *ngIf="!regForm.get('repeatPassword')?.value">
+          {{'signUp-form.password-errors.repeat-password' | translate}}
+        </mat-error>
+        <mat-error *ngIf="regForm.get('repeatPassword')?.errors?.['invalidMatch'] && regForm.get('repeatPassword')?.value">
+          {{'signUp-form.password-errors.no-match' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="login-btn-wrapper">
+        <button mat-raised-button color="primary"
+                type="submit"
+                [disabled]="regForm.invalid">
+          {{'signUp-form.signUp-btn' | translate}}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

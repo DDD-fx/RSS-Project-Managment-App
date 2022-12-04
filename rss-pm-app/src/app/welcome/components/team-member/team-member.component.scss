@@ -1,0 +1,114 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.member-card {
+  @include card();
+
+  &__img {
+    width: 200px;
+    margin: 20px 0 20px 0;
+    border-radius: 50%;
+  }
+}
+
+.link {
+  @include link();
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: $darkest-grey;
+}
+
+.link::after {
+  @include link-after();
+}
+
+.link:hover::after {
+  @include link-hover-after();
+}
+
+.link:hover {
+  @include link-hover
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px 20px 10px;
+  width: 300px;
+  margin-bottom: 10px;
+
+  .p {
+    color: $darkest-grey;
+    text-align: center;
+  }
+
+}
+
+.card__text {
+  text-align: center;
+  width: 250px;
+  height: 180px;
+  overflow: auto;
+}
+
+#style::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+#style::-webkit-scrollbar {
+  width: 5px;
+  background-color: $white-team;
+}
+
+#style::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  width: 25px;
+  background-color: $white;
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($light-blue),
+  )
+}
+
+#style::-webkit-scrollbar-thumb:hover {
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($green),
+  )
+}
+
+#style::-webkit-scrollbar-thumb:active {
+  background-image: -webkit-gradient(linear,
+    40% 0%,
+    75% 84%,
+    from($blue),
+  )
+}
+
+@media (min-width:768px) and (max-width: 1279px) {
+  .member-card {
+    width: 95%;
+    margin-bottom: 20px;
+  }
+
+  .card-info {
+    width: 80%;
+  }
+
+  .card__text {
+    width: 80%;
+  }
+}
+
+@media (max-width: 767px) {
+  .member-card {
+    margin-bottom: 20px;
+    max-width: 95%;
+  }
+}

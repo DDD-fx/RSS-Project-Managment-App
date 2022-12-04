@@ -1,0 +1,34 @@
+<div class="column__title"
+     title="{{'tasks.edit' | translate}}"
+     *ngIf="showColumnTitle$ | async"
+     (click)="toggleColumnTitleInput()">
+  {{column.title}}
+</div>
+
+<form [formGroup]="newTitleForm" (submit)="updateColumnTitle()">
+  <input
+    class="column__title-input"
+    type="text"
+    autocomplete="off"
+    maxlength="100"
+    formControlName="title"
+    *ngIf="(showColumnTitle$ | async) === false"
+    #columnTitleInput>
+
+  <mat-error class="column__title-error"
+             *ngIf="!newTitleForm.get('title')?.value && newTitleForm.get('title')?.touched">
+    {{'columns.errors.empty-title' | translate}}
+  </mat-error>
+  <div class="column__title-input-btns">
+    <button type="submit"
+            *ngIf="(showColumnTitle$ | async) === false"
+            [disabled]="newTitleForm.invalid">
+      {{'columns.save-title' | translate}}
+    </button>
+    <button type="button"
+            *ngIf="(showColumnTitle$ | async) === false"
+            (click)="toggleColumnTitleInput()">
+      {{'columns.cancel-title' | translate}}
+    </button>
+  </div>
+</form>
