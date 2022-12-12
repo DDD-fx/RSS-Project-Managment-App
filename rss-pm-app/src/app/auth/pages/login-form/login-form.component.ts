@@ -33,7 +33,7 @@ export class LoginFormComponent extends ValidationAbstract {
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
     private readonly apiUserService: ApiUserService,
-    private store: Store,
+    private readonly store: Store,
     private readonly loaderService: LoaderService
   ) {
     super();
@@ -58,7 +58,6 @@ export class LoginFormComponent extends ValidationAbstract {
         switchMap(() => this.apiUserService.getUser(getUserIdFromLs())),
         tap((resp) => {
           saveUserDataToLS(resp);
-          this.loaderService.disableLoader();
           this.store.dispatch(addUserName());
         }),
         catchError((err: IHttpErrors) => {
@@ -66,6 +65,6 @@ export class LoginFormComponent extends ValidationAbstract {
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe();
+      .subscribe(() => this.loaderService.disableLoader());
   }
 }

@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { EApiUrls, ELocalStorage } from '../../shared/shared.enums';
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
 import { makeIsloggedFalse, removeUserName } from 'src/app/NgRx/actions/storeActions';
 
 @Injectable({
@@ -14,19 +13,16 @@ import { makeIsloggedFalse, removeUserName } from 'src/app/NgRx/actions/storeAct
 })
 export class AuthService {
   constructor(
-    private httpClient: HttpClient,
+    private readonly httpClient: HttpClient,
     private readonly loaderService: LoaderService,
-    private store: Store,
-    private router: Router
+    private readonly store: Store,
   ) {}
 
   onSignIn(data: ISignInReq): Observable<ISignInResp> {
-    this.loaderService.enableLoader();
     return this.httpClient.post<ISignInResp>(EApiUrls.signin, data);
   }
 
   onSignUp(data: ISignUpReq): Observable<ISignUpResp> {
-    this.loaderService.enableLoader();
     return this.httpClient.post<ISignUpResp>(EApiUrls.signup, data);
   }
 
