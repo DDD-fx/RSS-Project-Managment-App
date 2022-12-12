@@ -36,13 +36,14 @@ export class RegFormComponent extends ValidationAbstract {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly notificationService: NotificationService,
-    private store: Store,
+    private readonly store: Store,
     private readonly loaderService: LoaderService
   ) {
     super();
   }
 
   onSignUp() {
+    this.loaderService.enableLoader();
     this.authService
       .onSignUp({
         name: this.regForm.get('name')!.value!,
@@ -59,13 +60,12 @@ export class RegFormComponent extends ValidationAbstract {
           void this.router.navigate(['']);
           this.store.dispatch(addUserName());
           this.store.dispatch(makeIsloggedTrue());
-          this.loaderService.disableLoader();
         }),
         catchError((err: IHttpErrors) => {
           this.notificationService.showError(ESiteUrls.signUp, err);
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe();
+      .subscribe(() => this.loaderService.disableLoader());
   }
 }

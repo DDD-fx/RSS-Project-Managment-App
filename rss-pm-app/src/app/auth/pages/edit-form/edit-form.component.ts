@@ -46,7 +46,7 @@ export class EditFormComponent extends ValidationAbstract {
     private readonly notificationService: NotificationService,
     private readonly location: Location,
     private readonly loaderService: LoaderService,
-    private store: Store
+    private readonly store: Store
   ) {
     super();
   }
@@ -88,7 +88,6 @@ export class EditFormComponent extends ValidationAbstract {
           localStorage.setItem(ELocalStorage.userName, resp.name);
           this.store.dispatch(addUserName());
           this.setForm();
-          this.loaderService.disableLoader();
         }),
         catchError((err: IHttpErrors) => {
           this.setForm();
@@ -96,7 +95,7 @@ export class EditFormComponent extends ValidationAbstract {
           throw new Error(`${err.error.statusCode} ${err.error.message}`);
         })
       )
-      .subscribe();
+      .subscribe(() => this.loaderService.disableLoader())
   }
 
   enableNameInput(): void {
