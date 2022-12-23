@@ -1,6 +1,5 @@
 export const environment = {
   production: true,
-  API_URL: 'https://rss-pm-app-node.onrender.com',
+  API_URL: 'https://kanban-rest-production-2811.up.railway.app',
 };
-
-//'https://kanban-production-24cf.up.railway.app',
+//'https://rss-pm-app-node.onrender.com',
