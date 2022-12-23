@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://kanban-production-24cf.up.railway.app',
+  API_URL: 'https://rss-pm-app-node.onrender.com',
 };
+
+// 'https://kanban-production-24cf.up.railway.app',
 
 /*
  * For easier debugging in development mode, you can import the following file
