@@ -1,4 +1,4 @@
-<div [routerLink]="['/boards', board.id]" class="board">
+<a [routerLink]="['./', board.id]" class="board">
   <div class="title">{{ board.title | titlecase }}</div>
   <div class="box-overflow" id="style">
     <p class="overflow">{{ board.description }}</p>
@@ -23,4 +23,4 @@
       <mat-icon>border_color</mat-icon>
     </button>
   </div>
-</div>
+</a>
