@@ -7,7 +7,7 @@ import { EApiUrls, ELocalStorage } from '../../shared/shared.enums';
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (request.url.includes('custody')) {
+    if (request.url.includes('localhost:8080')) {
       return next.handle(request);
     }
 
