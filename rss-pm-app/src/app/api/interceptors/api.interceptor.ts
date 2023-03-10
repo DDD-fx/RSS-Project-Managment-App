@@ -7,6 +7,10 @@ import { EApiUrls, ELocalStorage } from '../../shared/shared.enums';
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    if (request.url.includes('custody')) {
+      return next.handle(request);
+    }
+
     if (!request.url.includes('assets')) {
       if (request.url.includes(EApiUrls.users) || request.url.includes(EApiUrls.boards)) {
         const newReq = request.clone({

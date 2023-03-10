@@ -34,13 +34,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'custody',
+    loadChildren: () => import('./shared/custody/custody.module').then((m) => m.CustodyModule),
+  },
+  {
     path: ESiteUrls.p404,
     loadChildren: () => import('./shared/components/page404/page404.module').then((m) => m.Page404Module),
   },
   {
     path: '**',
     loadChildren: () => import('./shared/components/page404/page404.module').then((m) => m.Page404Module),
-  },
+  }
 ];
 
 @NgModule({
