@@ -56,7 +56,7 @@ export class CustodyComponent {
     }
 
     return this.http
-      .post('https://test-custody.jusan.kz:8556/api/v1/sub-account/draft', formData)
+      .post('http://localhost:8080/api/v1/sub-account/draft', formData)
       .pipe(catchError((error: Error) => {
         console.error(error);
         return of(null);
