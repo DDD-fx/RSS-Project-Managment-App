@@ -1,4 +1,4 @@
-<a [routerLink]="['./', board.id]" class="board">
+<div [routerLink]="['./', board.id]" class="board">
   <div class="title">{{ board.title | titlecase }}</div>
   <div class="box-overflow" id="style">
     <p class="overflow">{{ board.description }}</p>
@@ -9,7 +9,7 @@
             type="button"
             class="btn-bg"
             title="{{'columns.delete' | translate}}"
-            (click)="deleteBoard(board.id);
+            (click)="requestBoardDeletion(board.id);
             $event.stopPropagation()">
       <mat-icon>delete</mat-icon>
     </button>
@@ -23,4 +23,4 @@
       <mat-icon>border_color</mat-icon>
     </button>
   </div>
-</a>
+</div>

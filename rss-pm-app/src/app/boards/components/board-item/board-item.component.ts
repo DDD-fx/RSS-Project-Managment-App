@@ -5,9 +5,8 @@ import { ApiBoardService } from 'src/app/api/services/api-board.service';
 import { deleteBoardById } from 'src/app/NgRx/actions/storeActions';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletingPopupComponent } from '../../../shared/components/deleting-popup/deleting-popup.component';
-import { LoaderService } from '../../../shared/components/loader/loader.service';
 import { UpdateBoardPopupComponent } from 'src/app/shared/components/update-board-popup/update-board-popup.component';
-import { catchError } from 'rxjs';
+import { catchError, filter, switchMap, tap } from 'rxjs';
 import { IHttpErrors } from '../../../api/models/errors.model';
 import { ESiteUrls } from '../../../shared/shared.enums';
 import { NotificationService } from '../../../api/notification.service';
@@ -24,7 +23,6 @@ export class BoardItemComponent {
     private readonly apiBoardService: ApiBoardService,
     private readonly store: Store,
     private readonly dialogRef: MatDialog,
-    private readonly loaderService: LoaderService,
     private readonly notificationService: NotificationService
   ) {}
 
@@ -38,23 +36,27 @@ export class BoardItemComponent {
     });
   }
 
-  deleteBoard(boardId: string) {
+  requestBoardDeletion(boardId: string) {
     let dialog = this.dialogRef.open(DeletingPopupComponent, {
       data: { name: 'deleting-popup.del-board' },
       panelClass: 'custom',
     });
-    dialog.afterClosed().subscribe((result) => {
-      if (result === 'true') {
-        this.apiBoardService
-          .deleteBoard(boardId)
-          .pipe(
-            catchError((err: IHttpErrors) => {
-              this.notificationService.showError(ESiteUrls.boards, err);
-              throw new Error(`${err.error.statusCode} ${err.error.message}`);
-            })
-          )
-          .subscribe(() => this.store.dispatch(deleteBoardById({ boardId })));
-      }
-    });
+    dialog
+      .afterClosed()
+      .pipe(
+        filter((result) => result),
+        switchMap(() => this.deleteBoard(boardId))
+      )
+      .subscribe();
+  }
+
+  deleteBoard(boardId: string) {
+    return this.apiBoardService.deleteBoard(boardId).pipe(
+      tap(() => this.store.dispatch(deleteBoardById({ boardId }))),
+      catchError((err: IHttpErrors) => {
+        this.notificationService.showError(ESiteUrls.boards, err);
+        throw new Error(`${err.error.statusCode} ${err.error.message}`);
+      })
+    );
   }
 }
