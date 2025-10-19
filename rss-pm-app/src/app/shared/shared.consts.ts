@@ -1,5 +1,7 @@
 import { IMember } from '../welcome/models/welcome.models';
 
+export const BASE_URL = '/projects/rss-pm-app';
+
 export const specialSymbols = /[!@#$%^&*()_+\-=<>?{}\[\]|\\/]/;
 export const upperCaseSymbols = /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/;
 export const lowerCaseSymbols = /[abcdefghijklmnopqrstuvwxyz]/;
@@ -24,7 +26,7 @@ export const team: IMember[] = [
     img: 'ira.png',
   },
 ].map((member: IMember) => {
-  const assetsPath: string = '../../../../assets/img/';
+  const assetsPath: string = `${BASE_URL}/assets/img/`;
   return {
     ...member,
     img: `${assetsPath}${member.img}`,

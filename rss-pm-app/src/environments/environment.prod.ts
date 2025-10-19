@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://rss-pm-app-node.onrender.com',
+  API_URL: 'https://exochemi.ru/projects/rss-pm-app/api',
 };
-//'https://rss-pm-app-node.onrender.com',

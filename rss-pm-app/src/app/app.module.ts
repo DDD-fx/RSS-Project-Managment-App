@@ -15,9 +15,10 @@ import { CoreModule } from './core/core.module';
 import { interceptorProviders } from './api/interceptors/interceptors';
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderModule } from './shared/components/loader/loader.module';
+import { BASE_URL } from './shared/shared.consts';
 
 function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, `${BASE_URL}/assets/i18n/`, '.json');
 }
 
 @NgModule({
